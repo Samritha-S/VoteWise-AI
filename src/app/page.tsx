@@ -1,65 +1,241 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
+import { 
+  CheckCircle2, 
+  Circle, 
+  ArrowRight, 
+  AlertCircle,
+  FileText,
+  MapPin,
+  Clock,
+  ShieldAlert,
+  ShieldCheck
+} from "lucide-react";
+import { useAppContext } from "@/context/AppContext";
+import { useTranslation } from "@/lib/i18n";
+import OnboardingModal from "@/components/OnboardingModal";
+import Link from "next/link";
+
+const JOURNEY_STEPS = [
+  { id: "eligibility", title: "Eligibility Check", desc: "Verify if you can vote" },
+  { id: "registration", title: "Registration", desc: "Get on the voter list" },
+  { id: "documents", title: "Documents Ready", desc: "Gather required IDs" },
+  { id: "polling", title: "Polling Booth", desc: "Know where and when" }
+];
+
+export default function Dashboard() {
+  const { userData } = useAppContext();
+  const t = useTranslation(userData.language);
+
+  // "What Should I Do Next?" Engine Logic
+  const nextAction = useMemo(() => {
+    if (!userData.onboardingComplete) return { text: "Complete your profile to get started", link: "#", type: "info" };
+    
+    if (userData.age && userData.age < 18) {
+      return { text: "You are not yet eligible to vote. Learn about future registration.", link: "/assistant", type: "warning" };
+    }
+
+    if (userData.voterStatus === "Not Registered" || userData.voterStatus === "Unsure") {
+      return { text: "Your highest priority: Register to vote.", link: "/assistant", type: "alert" };
+    }
+
+    if (userData.voterStatus === "Registered") {
+      return { text: "Verify your polling booth and gather documents.", link: "/assistant", type: "success" };
+    }
+
+    return { text: "Explore the AI assistant for guidance.", link: "/assistant", type: "info" };
+  }, [userData]);
+
+  // Determine progress based on logic
+  const progressSteps = useMemo(() => {
+    return [
+      { id: "eligibility", ...t.journey.steps[0] },
+      { id: "registration", ...t.journey.steps[1] },
+      { id: "documents", ...t.journey.steps[2] },
+      { id: "polling", ...t.journey.steps[3] }
+    ].map(step => {
+      let isComplete = false;
+      let isActive = false;
+
+      if (!userData.onboardingComplete) return { ...step, isComplete, isActive };
+
+      if (step.id === "eligibility") {
+        isComplete = userData.age ? userData.age >= 18 : false;
+        isActive = !isComplete;
+      } else if (step.id === "registration") {
+        isComplete = userData.voterStatus === "Registered";
+        isActive = userData.age ? userData.age >= 18 && !isComplete : false;
+      } else if (step.id === "documents") {
+        isActive = userData.voterStatus === "Registered";
+      }
+
+      return { ...step, isComplete, isActive };
+    });
+  }, [userData, t]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen p-6 md:p-10 max-w-6xl mx-auto space-y-8">
+      <OnboardingModal />
+
+      <header className="space-y-2">
+        <motion.h1 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-3xl md:text-5xl font-extrabold tracking-tight"
+        >
+          {t.journey.title} <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-400">VoteWise</span>
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1 }}
+          className="text-muted-foreground text-lg"
+        >
+          {t.journey.desc}
+        </motion.p>
+      </header>
+
+      {/* What Should I Do Next? */}
+      {userData.onboardingComplete && (
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className={`p-6 rounded-2xl border ${
+            nextAction.type === 'alert' ? 'bg-destructive/10 border-destructive/20 text-destructive' :
+            nextAction.type === 'warning' ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-600 dark:text-yellow-400' :
+            nextAction.type === 'success' ? 'bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400' :
+            'bg-card border-border text-foreground'
+          } shadow-sm relative overflow-hidden`}
+        >
+          <div className="absolute top-0 right-0 p-4 opacity-10">
+            <ShieldAlert className="w-24 h-24" />
+          </div>
+          <div className="relative z-10 space-y-3">
+            <div className="flex items-center gap-2 font-semibold">
+              <AlertCircle className="w-5 h-5" />
+              <span>{t.journey.nextAction}</span>
+            </div>
+            <p className="text-xl font-medium">{nextAction.text}</p>
+            <Link 
+              href={nextAction.link}
+              className="inline-flex items-center gap-2 px-4 py-2 mt-2 bg-background/50 hover:bg-background/80 rounded-xl font-medium transition-colors border border-border/50"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+              {t.journey.getHelp} <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </motion.div>
+      )}
+
+      <div className="grid md:grid-cols-3 gap-8">
+        {/* Journey Timeline */}
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+          className="md:col-span-2 space-y-6"
+        >
+          <h2 className="text-2xl font-bold">{t.journey.yourProgress}</h2>
+          <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
+            <div className="relative">
+              {/* Vertical line connecting steps */}
+              <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-border -z-10" />
+              
+              <div className="space-y-8">
+                {progressSteps.map((step, index) => (
+                  <div key={step.id} className="flex gap-4 items-start relative bg-card">
+                    <div className="bg-card py-2">
+                      {step.isComplete ? (
+                        <CheckCircle2 className="w-8 h-8 text-green-500 bg-card rounded-full" />
+                      ) : step.isActive ? (
+                        <div className="relative">
+                          <Circle className="w-8 h-8 text-primary bg-card rounded-full" />
+                          <div className="absolute inset-0 border-2 border-primary rounded-full animate-ping opacity-20" />
+                        </div>
+                      ) : (
+                        <Circle className="w-8 h-8 text-muted-foreground/50 bg-card rounded-full" />
+                      )}
+                    </div>
+                    <div className="pt-2 flex-1">
+                      <div className={`font-semibold text-lg ${step.isActive ? 'text-primary' : step.isComplete ? 'text-foreground' : 'text-muted-foreground'}`}>
+                        {index + 1}. {step.title}
+                      </div>
+                      <div className="text-muted-foreground text-sm mt-1">{step.desc}</div>
+                      
+                      {step.isActive && (
+                        <motion.div 
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          className="mt-4"
+                        >
+                          <Link href="/assistant" className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline">
+                            Start this step <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        </motion.div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Quick Actions */}
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+          className="space-y-4"
+        >
+          <h2 className="text-xl font-bold flex items-center gap-2">
+            <FileText className="w-5 h-5 text-muted-foreground" /> {t.journey.quickLinks}
+          </h2>
+          <div className="grid gap-4">
+            <Link href="/documents" className="group p-4 bg-card border border-border rounded-xl hover:border-primary/50 hover:shadow-md transition-all flex items-center gap-4">
+              <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:scale-110 transition-transform">
+                <FileText className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="font-semibold">{t.journey.quickLinkCards.documents.title}</div>
+                <div className="text-xs text-muted-foreground">{t.journey.quickLinkCards.documents.desc}</div>
+              </div>
+            </Link>
+            
+            <a href="https://electoralsearch.eci.gov.in/" target="_blank" rel="noopener noreferrer" className="group p-4 bg-card border border-border rounded-xl hover:border-primary/50 hover:shadow-md transition-all flex items-center gap-4">
+              <div className="p-3 bg-blue-500/10 rounded-lg text-blue-500 group-hover:scale-110 transition-transform">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="font-semibold">{t.journey.quickLinkCards.booth.title}</div>
+                <div className="text-xs text-muted-foreground">{t.journey.quickLinkCards.booth.desc}</div>
+              </div>
+            </a>
+            
+            <Link href="/deadlines" className="group p-4 bg-card border border-border rounded-xl hover:border-primary/50 hover:shadow-md transition-all flex items-center gap-4">
+              <div className="p-3 bg-red-500/10 rounded-lg text-red-500 group-hover:scale-110 transition-transform">
+                <Clock className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="font-semibold">{t.journey.quickLinkCards.deadlines.title}</div>
+                <div className="text-xs text-muted-foreground">{t.journey.quickLinkCards.deadlines.desc}</div>
+              </div>
+            </Link>
+
+            <Link href="/myths" className="group p-4 bg-card border border-border rounded-xl hover:border-primary/50 hover:shadow-md transition-all flex items-center gap-4">
+              <div className="p-3 bg-purple-500/10 rounded-lg text-purple-500 group-hover:scale-110 transition-transform">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="font-semibold">{t.journey.quickLinkCards.mythBuster.title}</div>
+                <div className="text-xs text-muted-foreground">{t.journey.quickLinkCards.mythBuster.desc}</div>
+              </div>
+            </Link>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }

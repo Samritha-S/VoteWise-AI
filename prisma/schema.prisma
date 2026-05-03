@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Candidate {
+  id                   String   @id @default(uuid())
+  name                 String
+  party                String
+  constituency         String
+  state                String
+  photo                String
+  age                  Int
+  education            String
+  profession           String
+  
+  totalAssets          String
+  totalLiabilities     String
+  assetBreakdown       String   
+  liabilityBreakdown   String   
+  
+  criminalCases        Int
+  seriousCriminalCases Int
+  caseDetails          String   
+  
+  performance          String?  
+  electionHistory      String?  
+  scamsOrControversies String?  
+  
+  sourceUrl            String
+  confidence           String
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model CandidateFeedback {
+  id               String   @id @default(uuid())
+  candidateId      String
+  isAccurate       String   // e.g. "Yes", "No", "Partially"
+  inaccurateFields String?  // e.g. "Assets, Criminal Records"
+  comments         String?
+  createdAt        DateTime @default(now())
+}
