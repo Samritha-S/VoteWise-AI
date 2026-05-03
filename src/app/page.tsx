@@ -213,7 +213,7 @@ export default function Dashboard() {
                           animate={{ opacity: 1, height: 'auto' }}
                           className="mt-4"
                         >
-                          <Link href="/assistant" className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline">
+                          <Link href={step.id === "documents" ? "/documents" : step.id === "polling" ? "/deadlines" : "/assistant"} className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline">
                             Start this step <ArrowRight className="w-4 h-4" />
                           </Link>
                         </motion.div>
