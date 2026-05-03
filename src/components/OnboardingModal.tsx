@@ -6,7 +6,14 @@ import { useAppContext, VoterStatus } from "@/context/AppContext";
 import { useTranslation } from "@/lib/i18n";
 import { ChevronRight, ShieldCheck, MapPin } from "lucide-react";
 
-const languages = ["English", "Hindi", "Marathi", "Tamil", "Telugu", "Bengali"];
+const languages = [
+  { id: "English", name: "English" },
+  { id: "Hindi", name: "हिन्दी" },
+  { id: "Marathi", name: "मराठी" },
+  { id: "Tamil", name: "தமிழ்" },
+  { id: "Telugu", name: "తెలుగు" },
+  { id: "Bengali", name: "বাংলা" }
+];
 const states = [
   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", 
   "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", 
