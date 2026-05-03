@@ -42,7 +42,7 @@ export default function Dashboard() {
     }
 
     if (userData.voterStatus === "Registered") {
-      return { text: "Verify your polling booth and gather documents.", link: "/assistant", type: "success" };
+      return { text: "Polling is TOMORROW! Double check your booth location and carry your Voter ID.", link: "/deadlines", type: "urgent" };
     }
 
     return { text: "Explore the AI assistant for guidance.", link: "/assistant", type: "info" };
@@ -97,6 +97,40 @@ export default function Dashboard() {
         </motion.p>
       </header>
 
+      {/* Polling Tomorrow Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        className="relative group overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-indigo-600 p-8 text-white shadow-xl"
+      >
+        <div className="absolute top-0 right-0 -mt-8 -mr-8 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute bottom-0 left-0 -mb-8 -ml-8 h-48 w-48 rounded-full bg-primary-foreground/10 blur-3xl" />
+        
+        <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider">
+              <Clock className="w-3 h-3" /> Election Countdown
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black">POLLING TOMORROW</h2>
+            <p className="text-primary-foreground/80 font-medium">May 4, 2026 • 7:00 AM - 6:00 PM</p>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <div className="flex flex-col items-center justify-center h-20 w-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+               <span className="text-3xl font-bold">1</span>
+               <span className="text-[10px] font-bold uppercase opacity-60">Day Left</span>
+            </div>
+            <Link 
+              href="/deadlines"
+              className="px-6 py-3 bg-white text-primary rounded-2xl font-bold hover:bg-primary-foreground transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+            >
+              Check Booth Info
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+
       {/* What Should I Do Next? */}
       {userData.onboardingComplete && (
         <motion.div 
@@ -105,11 +139,20 @@ export default function Dashboard() {
           transition={{ delay: 0.2 }}
           className={`p-6 rounded-2xl border ${
             nextAction.type === 'alert' ? 'bg-destructive/10 border-destructive/20 text-destructive' :
+            nextAction.type === 'urgent' ? 'bg-primary/10 border-primary/20 text-primary shadow-lg shadow-primary/5' :
             nextAction.type === 'warning' ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-600 dark:text-yellow-400' :
             nextAction.type === 'success' ? 'bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400' :
             'bg-card border-border text-foreground'
           } shadow-sm relative overflow-hidden`}
         >
+          {nextAction.type === 'urgent' && (
+             <div className="absolute top-0 right-0 p-2">
+                <span className="flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                </span>
+             </div>
+          )}
           <div className="absolute top-0 right-0 p-4 opacity-10">
             <ShieldAlert className="w-24 h-24" />
           </div>
