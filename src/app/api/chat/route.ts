@@ -1,20 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
-import { z } from "zod";
-
-const chatSchema = z.object({
-  message: z.string().min(1).max(2000),
-  history: z.array(z.object({
-    role: z.enum(["user", "assistant"]),
-    content: z.string()
-  })),
-  context: z.object({
-    age: z.number().nullable().optional(),
-    state: z.string().optional(),
-    voterStatus: z.string().optional(),
-    language: z.string().optional()
-  })
-});
+import { chatSchema } from "@/lib/validations";
 
 export async function POST(req: Request) {
   try {

@@ -1,13 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { z } from "zod";
-
-const feedbackSchema = z.object({
-  candidateId: z.string().min(1),
-  isAccurate: z.string().min(1),
-  inaccurateFields: z.string().optional(),
-  comments: z.string().max(1000).optional()
-});
+import { feedbackSchema } from "@/lib/validations";
 
 export async function POST(req: Request) {
   try {
