@@ -77,7 +77,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen p-6 md:p-10 max-w-6xl mx-auto space-y-8">
-      <OnboardingModal />
+
 
       <header className="space-y-2">
         <motion.h1 

@@ -43,29 +43,25 @@ export default function OnboardingModal() {
       state: formData.state,
       voterStatus: formData.voterStatus,
       rememberDevice: formData.rememberDevice,
+      isAuthenticated: true,
       onboardingComplete: true
     });
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background">
+    <div className="fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-center overflow-y-auto">
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="bg-card w-full max-w-lg rounded-2xl shadow-2xl border border-border/50 overflow-hidden flex flex-col"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-lg bg-card md:rounded-3xl shadow-2xl border border-border/50 flex flex-col my-auto"
       >
-        <div className="p-6 bg-secondary/50 border-b border-border/50">
+        <div className="p-6 bg-secondary/30 border-b border-border/50">
           <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-400">
             Welcome to VoteWise AI
           </h2>
           <p className="text-muted-foreground mt-1 text-sm">
             Let's personalize your election journey.
           </p>
-          <div className="mt-3">
-            <a href="/auth" className="text-primary text-sm font-medium hover:underline flex items-center gap-1">
-              Already have an account? Sign in <ChevronRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
           
           {/* Progress bar */}
           <div className="flex gap-2 mt-6">
@@ -78,7 +74,7 @@ export default function OnboardingModal() {
           </div>
         </div>
 
-        <div className="p-6 flex-1 min-h-[300px]">
+        <div className="p-6 min-h-[300px]">
           <AnimatePresence mode="wait">
             {step === 1 && (
               <motion.div

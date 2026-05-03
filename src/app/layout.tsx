@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 import ScreenReaderAnnouncer from "@/components/ScreenReaderAnnouncer";
 import { AppProvider } from "@/context/AppContext";
+import OnboardingModal from "@/components/OnboardingModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <AppProvider>
           <div className="flex h-screen overflow-hidden">
             <ScreenReaderAnnouncer />
+            <OnboardingModal />
             <Navigation />
             <main className="flex-1 overflow-y-auto bg-background">
               {children}
