@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppContext, VoterStatus } from "@/context/AppContext";
+import { useTranslation } from "@/lib/i18n";
 import { ChevronRight, ShieldCheck, MapPin } from "lucide-react";
 
 const languages = ["English", "Hindi", "Marathi", "Tamil", "Telugu", "Bengali"];
