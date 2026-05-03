@@ -4,8 +4,16 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Database, Plus, Trash2, Edit, Search, Upload } from "lucide-react";
 
+interface Candidate {
+  id: string;
+  name: string;
+  party: string;
+  constituency: string;
+  photoUrl: string;
+}
+
 export default function CandidatesData() {
-  const [candidates, setCandidates] = useState<any[]>([]);
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 

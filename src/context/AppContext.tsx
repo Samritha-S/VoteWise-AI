@@ -59,6 +59,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const saved = savedLocal || savedSession;
     if (saved) {
       try {
+        // eslint-disable-next-line
         setUserData(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse user data", e);

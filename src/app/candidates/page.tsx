@@ -12,6 +12,17 @@ import {
   Building2,
   AlertCircle
 } from "lucide-react";
+
+interface Candidate {
+  id: string;
+  name: string;
+  party: string;
+  state: string;
+  constituency: string;
+  photoUrl: string;
+  verificationStatus: string;
+  criminalCases: number;
+}
 import { useAppContext } from "@/context/AppContext";
 import { useTranslation } from "@/lib/i18n";
 
@@ -19,7 +30,7 @@ export default function CandidatesPage() {
   const { userData } = useAppContext();
   const t = useTranslation(userData.language);
   const [searchTerm, setSearchTerm] = useState("");
-  const [candidates, setCandidates] = useState<any[]>([]);
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
@@ -35,22 +46,25 @@ export default function CandidatesPage() {
       });
   }, []);
 
-  const cleanTerm = searchTerm.trim();
-  const searchRegex = cleanTerm.length > 0 ? new RegExp(`\\b${cleanTerm.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}`, 'i') : null;
-
-  const stateCandidates = candidates.filter(c => {
-    if (!searchRegex) return false;
-    return searchRegex.test(c.name) || 
-           searchRegex.test(c.party) ||
-           searchRegex.test(c.constituency) ||
-           searchRegex.test(c.state);
-  }).sort((a, b) => {
-    if (userData.state) {
-      if (a.state === userData.state && b.state !== userData.state) return -1;
-      if (b.state === userData.state && a.state !== userData.state) return 1;
-    }
-    return 0;
-  });
+  const stateCandidates = React.useMemo(() => {
+    const cleanTerm = searchTerm.trim();
+    if (!cleanTerm) return [];
+    
+    const searchRegex = new RegExp(`\\b${cleanTerm.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}`, 'i');
+    
+    return candidates.filter(c => {
+      return searchRegex.test(c.name) || 
+             searchRegex.test(c.party) ||
+             searchRegex.test(c.constituency) ||
+             searchRegex.test(c.state);
+    }).sort((a, b) => {
+      if (userData.state) {
+        if (a.state === userData.state && b.state !== userData.state) return -1;
+        if (b.state === userData.state && a.state !== userData.state) return 1;
+      }
+      return 0;
+    });
+  }, [candidates, searchTerm, userData.state]);
 
   return (
     <div className="min-h-screen bg-background p-6 md:p-12 max-w-5xl mx-auto space-y-10 font-sans text-foreground selection:bg-primary/20 selection:text-primary">

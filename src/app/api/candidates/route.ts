@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+// Optimal Use of Resources: Cache this heavy database query and JSON parsing for 1 hour (3600 seconds)
+export const revalidate = 3600;
+
 export async function GET() {
   try {
     const candidates = await prisma.candidate.findMany({

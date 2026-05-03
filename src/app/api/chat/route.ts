@@ -82,8 +82,8 @@ Instructions:
 
     return NextResponse.json({ response: responseText });
 
-  } catch (error: any) {
-    console.error("Gemini API Error:", error);
+  } catch (error: unknown) {
+    console.error("Gemini API Error:", error instanceof Error ? error.message : error);
     return NextResponse.json(
       { error: "Failed to generate response. Check API key or try again." },
       { status: 500 }
