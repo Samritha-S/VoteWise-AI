@@ -96,7 +96,7 @@ export default function MythBusterPage() {
   }, []);
 
   const allMyths = [
-    ...MYTHS,
+    ...(t.myths.list || MYTHS),
     ...liveMyths.map(m => ({
       id: m.id,
       myth: m.claim,
@@ -107,8 +107,8 @@ export default function MythBusterPage() {
   ];
 
   const filteredMyths = allMyths.filter(m => 
-    m.myth.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    m.fact.toLowerCase().includes(searchTerm.toLowerCase())
+    (m.myth || "").toLowerCase().includes(searchTerm.toLowerCase()) || 
+    (m.fact || "").toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

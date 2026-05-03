@@ -44,14 +44,22 @@ const DOCUMENTS_DATA = [
   }
 ];
 
+import { useAppContext } from "@/context/AppContext";
+
 export default function DocumentsChecklistPage() {
+  const { userData, updateUserData } = useAppContext();
   const [completedDocs, setCompletedDocs] = useState<Record<string, boolean>>({});
 
   const toggleDoc = (id: string) => {
-    setCompletedDocs(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
+    const newState = {
+      ...completedDocs,
+      [id]: !completedDocs[id]
+    };
+    setCompletedDocs(newState);
+    
+    // Sync with global state
+    const isNowReady = Object.values(newState).some(Boolean);
+    updateUserData({ documentsReady: isNowReady });
   };
 
   const completedCount = Object.values(completedDocs).filter(Boolean).length;

@@ -25,10 +25,10 @@ export default function AssistantPage() {
       role: "assistant",
       content: t.assistant.greeting.replace("{state}", userData.state || "India").replace("{status}", userData.voterStatus || ""),
       options: [
-        "Am I eligible to vote?",
-        "How do I register?",
-        "What documents do I need?",
-        "Find my polling booth"
+        t.assistant.options.eligibility,
+        t.assistant.options.registration,
+        t.assistant.options.documents,
+        t.assistant.options.booth
       ]
     }
   ]);

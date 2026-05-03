@@ -220,9 +220,9 @@ export default function ProfilePage() {
 
         <div className="space-y-6">
           <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-4">
-            <h3 className="font-bold flex items-center gap-2"><Bell className="w-4 h-4" /> Notifications</h3>
+            <h3 className="font-bold flex items-center gap-2"><Bell className="w-4 h-4" /> {t.profile.notifications}</h3>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">Deadlines Alerts</span>
+              <span className="text-sm font-medium text-muted-foreground">{t.profile.deadlinesAlerts}</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.deadlinesAlerts ?? true} 
@@ -231,7 +231,7 @@ export default function ProfilePage() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">Polling Day Reminders</span>
+              <span className="text-sm font-medium text-muted-foreground">{t.profile.pollingReminders}</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.pollingReminders ?? true} 
@@ -242,9 +242,9 @@ export default function ProfilePage() {
           </div>
 
           <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-4">
-            <h3 className="font-bold flex items-center gap-2"><Accessibility className="w-4 h-4" /> Accessibility</h3>
+            <h3 className="font-bold flex items-center gap-2"><Accessibility className="w-4 h-4" /> {t.profile.accessibility}</h3>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">High Contrast</span>
+              <span className="text-sm font-medium text-muted-foreground">{t.profile.highContrast}</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.highContrast ?? false} 
@@ -253,7 +253,7 @@ export default function ProfilePage() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">Screen Reader Mode</span>
+              <span className="text-sm font-medium text-muted-foreground">{t.profile.screenReader}</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.screenReaderMode ?? false} 
@@ -262,7 +262,7 @@ export default function ProfilePage() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">Voice Output</span>
+              <span className="text-sm font-medium text-muted-foreground">{t.profile.voiceOutput}</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.voiceOutput ?? true} 
@@ -289,7 +289,7 @@ export default function ProfilePage() {
             onClick={() => { resetUser(); window.location.href = "/"; }}
             className="w-full py-3 bg-destructive/10 text-destructive rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-destructive/20 transition-colors"
           >
-            <LogOut className="w-4 h-4" /> Sign Out
+            <LogOut className="w-4 h-4" /> {t.profile.signOut}
           </button>
         </div>
       </div>

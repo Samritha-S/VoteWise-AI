@@ -75,7 +75,10 @@ export default function Dashboard() {
         isComplete = userData.voterStatus === "Registered";
         isActive = userData.age ? userData.age >= 18 && !isComplete : false;
       } else if (step.id === "documents") {
-        isActive = userData.voterStatus === "Registered";
+        isComplete = !!userData.documentsReady;
+        isActive = userData.voterStatus === "Registered" && !isComplete;
+      } else if (step.id === "polling") {
+        isActive = !!userData.documentsReady;
       }
 
       return { ...step, isComplete, isActive };
@@ -117,16 +120,16 @@ export default function Dashboard() {
         <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider">
-              <Clock className="w-3 h-3" /> Election Countdown
+              <Clock className="w-3 h-3" /> {t.journey.banner.countdown}
             </div>
-            <h2 className="text-3xl md:text-4xl font-black">POLLING TOMORROW</h2>
-            <p className="text-primary-foreground/80 font-medium">May 4, 2026 • 7:00 AM - 6:00 PM</p>
+            <h2 className="text-3xl md:text-4xl font-black">{t.journey.banner.title}</h2>
+            <p className="text-primary-foreground/80 font-medium">{t.journey.banner.date}</p>
           </div>
           
           <div className="flex items-center gap-4">
             <div className="flex flex-col items-center justify-center h-20 w-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
                <span className="text-3xl font-bold">1</span>
-               <span className="text-[10px] font-bold uppercase opacity-60">Day Left</span>
+               <span className="text-[10px] font-bold uppercase opacity-60">{t.journey.banner.dayLeft}</span>
             </div>
             <a 
               href="https://electoralsearch.eci.gov.in/"
@@ -134,7 +137,7 @@ export default function Dashboard() {
               rel="noopener noreferrer"
               className="px-6 py-3 bg-white text-primary rounded-2xl font-bold hover:bg-primary-foreground transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
-              Check Booth Info
+              {t.journey.banner.checkBooth}
             </a>
           </div>
         </div>
@@ -229,14 +232,14 @@ export default function Dashboard() {
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline"
                             >
-                              Start this step <ArrowRight className="w-4 h-4" />
+                              {t.journey.startStep} <ArrowRight className="w-4 h-4" />
                             </a>
                           ) : (
                             <Link 
                               href={step.id === "documents" ? "/documents" : "/assistant"} 
                               className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline"
                             >
-                              Start this step <ArrowRight className="w-4 h-4" />
+                              {t.journey.startStep} <ArrowRight className="w-4 h-4" />
                             </Link>
                           )}
                         </motion.div>
