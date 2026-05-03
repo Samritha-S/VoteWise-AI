@@ -35,7 +35,7 @@ const defaultUserData: UserContextData = {
   voterStatus: "",
   language: "English",
   onboardingComplete: false,
-  avatar: "1",
+  avatar: "🐅",
   rememberDevice: false,
   preferences: {
     deadlinesAlerts: true,

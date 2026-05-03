@@ -76,6 +76,9 @@ export default function MythBusterPage() {
   const { userData } = useAppContext();
   const t = useTranslation(userData.language);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isReporting, setIsReporting] = useState(false);
+  const [reportDetails, setReportDetails] = useState("");
+  const [reportQuestion, setReportQuestion] = useState("");
 
   const filteredMyths = MYTHS.filter(m => 
     m.myth.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -111,8 +114,93 @@ export default function MythBusterPage() {
 
       <div className="grid gap-6">
         {filteredMyths.length === 0 ? (
-          <div className="p-8 text-center bg-card border border-border rounded-2xl">
-            <p className="text-muted-foreground">{t.myths.noMyths}</p>
+          <div className="p-10 text-center bg-card border border-border rounded-3xl space-y-5 shadow-sm">
+            {!isReporting ? (
+              <>
+                <div className="w-16 h-16 bg-muted/50 text-muted-foreground rounded-2xl flex items-center justify-center mx-auto mb-2 border border-border/50">
+                  <Search className="w-8 h-8 opacity-50" />
+                </div>
+                <h3 className="text-2xl font-bold text-foreground tracking-tight">No fact-checks found</h3>
+                <p className="text-muted-foreground text-lg max-w-md mx-auto">We couldn't find anything matching "<span className="font-medium text-foreground">{searchTerm}</span>".</p>
+                
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+                  <a 
+                    href={`/assistant?q=${encodeURIComponent(searchTerm)}`} 
+                    className="px-6 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:scale-105 hover:bg-primary/90 transition-all shadow-md shadow-primary/20 w-full sm:w-auto flex items-center justify-center gap-2"
+                  >
+                    Ask AI Assistant <ExternalLink className="w-4 h-4" />
+                  </a>
+                  <button 
+                    onClick={() => {
+                      setReportQuestion(searchTerm);
+                      setIsReporting(true);
+                    }} 
+                    className="px-6 py-3 bg-secondary text-foreground font-medium rounded-xl hover:bg-secondary/80 transition-colors w-full sm:w-auto border border-border flex items-center justify-center gap-2"
+                  >
+                    Send to Fact-Check Team
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="text-left space-y-4 max-w-lg mx-auto">
+                <h3 className="text-xl font-bold">Request a Fact-Check</h3>
+                <p className="text-muted-foreground text-sm">Send this question to our research team. We'll verify it and get back to you.</p>
+                
+                <div className="space-y-3">
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">Your Question or Claim</label>
+                    <textarea 
+                      value={reportQuestion}
+                      onChange={(e) => setReportQuestion(e.target.value)}
+                      className="w-full p-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary outline-none min-h-[100px]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">Contact Details</label>
+                    <input 
+                      type="text"
+                      placeholder="Email or phone to get back to you"
+                      value={reportDetails}
+                      onChange={(e) => setReportDetails(e.target.value)}
+                      className="w-full p-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-3 pt-2">
+                  <button onClick={() => setIsReporting(false)} className="px-4 py-2 text-muted-foreground hover:bg-secondary rounded-lg font-medium transition-colors">
+                    Cancel
+                  </button>
+                  <button 
+                    onClick={async () => {
+                      if (!reportQuestion) return;
+                      try {
+                        await fetch('/api/feedback', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            candidateId: "MYTH_QUERY",
+                            isAccurate: "Fact Check Request",
+                            inaccurateFields: reportDetails || "No contact info",
+                            comments: reportQuestion
+                          })
+                        });
+                        alert("Fact-check request sent to the team!");
+                        setIsReporting(false);
+                        setSearchTerm("");
+                        setReportQuestion("");
+                        setReportDetails("");
+                      } catch (e) {
+                        alert("Failed to send. Please try again.");
+                      }
+                    }}
+                    className="px-6 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
+                  >
+                    Submit Request
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           filteredMyths.map((item, index) => (

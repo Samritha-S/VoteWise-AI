@@ -31,7 +31,7 @@ export default function ProfilePage() {
     avatar: userData.avatar || "1"
   });
 
-  const avatars = ["1", "2", "3", "4", "5", "6"];
+  const avatars = ["🐅", "🦚", "🥭", "🏑", "🦁"];
 
   const handleSave = () => {
     updateUserData({
@@ -90,8 +90,8 @@ export default function ProfilePage() {
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{t.profile.headerTitle}</h1>
           <p className="text-muted-foreground text-lg">{t.profile.headerDesc}</p>
         </div>
-        <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-primary overflow-hidden border-2 border-primary/20">
-          <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${userData.avatar || "1"}`} alt="Avatar" className="w-full h-full object-cover" />
+        <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-4xl overflow-hidden border-2 border-primary/20 shadow-sm">
+          {userData.avatar && avatars.includes(userData.avatar) ? userData.avatar : "🐅"}
         </div>
       </header>
 
@@ -121,15 +121,19 @@ export default function ProfilePage() {
 
             {isEditing && (
               <div className="mb-6 space-y-3">
-                <label className="text-sm font-medium text-muted-foreground">Select Avatar</label>
-                <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                <label className="text-sm font-medium text-muted-foreground">Select Avatar Design</label>
+                <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide px-1">
                   {avatars.map((a) => (
                     <button
                       key={a}
                       onClick={() => setFormData({ ...formData, avatar: a })}
-                      className={`relative w-16 h-16 rounded-full overflow-hidden shrink-0 transition-transform ${formData.avatar === a ? 'ring-2 ring-primary scale-110' : 'hover:scale-105 opacity-70'}`}
+                      className={`relative w-16 h-16 rounded-full flex items-center justify-center text-3xl shrink-0 transition-all ${
+                        formData.avatar === a 
+                          ? 'ring-4 ring-primary scale-110 bg-primary/10 shadow-md' 
+                          : 'hover:scale-105 opacity-70 bg-secondary/50 border border-border hover:opacity-100 hover:border-primary/50'
+                      }`}
                     >
-                      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${a}`} alt={`Avatar ${a}`} className="w-full h-full bg-muted/50" />
+                      {a}
                     </button>
                   ))}
                 </div>
