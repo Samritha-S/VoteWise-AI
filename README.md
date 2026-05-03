@@ -5,7 +5,7 @@
 [![Gemini AI](https://img.shields.io/badge/Powered%20by-Google%20Gemini-8E75B2?style=for-the-badge&logo=google-gemini&logoColor=white)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](#)
 
-VoteWise AI is a comprehensive, context-aware civic assistant and electoral transparency platform. It is designed to empower voters with verifiable data, combat electoral misinformation, and make the voting journey seamless, secure, and accessible for everyone.
+VoteWise AI is a comprehensive, **Mobile-First**, context-aware civic assistant and electoral transparency platform. Designed for maximum user ease and accessibility, it empowers voters with verifiable data, combats electoral misinformation, and makes the voting journey seamless and secure for everyone.
 
 **🌐 Live Demo:** [https://votewise-ai-327636706757.us-central1.run.app](https://votewise-ai-327636706757.us-central1.run.app)
 
@@ -56,6 +56,7 @@ We chose this vertical because navigating Indian elections can be daunting due t
 * **Privacy First**: User context is stored securely in `sessionStorage` by default, protecting privacy on shared devices.
 
 ### Accessibility
+* **Mobile-First Design**: Engineered specifically for ease of use on smartphones—the primary device for the majority of Indian voters—ensuring a frictionless and responsive experience.
 * **Screen Reader Announcer**: A custom `aria-live` announcer narrates page changes automatically for low-vision users.
 * **WCAG Compliance**: High-contrast modes, focus management, and semantic HTML ensure a premium experience for everyone.
 * **Native Assets**: OS-level emojis used for avatars to ensure 0ms render latency and 0kb network payload.
