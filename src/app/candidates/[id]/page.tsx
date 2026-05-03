@@ -429,7 +429,7 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
                     <div className="space-y-3 border-l-2 border-amber-200 ml-2 pl-4">
                       {candidate.pastControversies.map((controversy, idx) => (
                         <div key={idx} className="relative">
-                          <div className="absolute -left-[23px] top-1.5 w-2 h-2 rounded-full bg-amber-400"></div>
+                          <div className="absolute -left-[21px] top-1.5 w-2 h-2 rounded-full bg-amber-400"></div>
                           <p className="text-sm font-semibold text-foreground">{controversy.date}</p>
                           <p className="text-sm text-secondary-foreground mt-0.5">{controversy.description}</p>
                           <p className="text-xs font-medium text-amber-600 mt-1">Status: {controversy.status}</p>
