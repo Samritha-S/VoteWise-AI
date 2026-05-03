@@ -39,6 +39,9 @@ export default function Navigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const { userData, isLoaded, resetUser } = useAppContext();
+  
+  if (!isLoaded || !userData.isAuthenticated) return null;
+  
   const t = useTranslation(userData.language);
 
   return (

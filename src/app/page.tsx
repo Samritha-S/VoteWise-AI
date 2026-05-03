@@ -25,8 +25,15 @@ const JOURNEY_STEPS = [
   { id: "polling", title: "Polling Booth", desc: "Know where and when" }
 ];
 
+import AuthPage from "./auth/page";
+
 export default function Dashboard() {
   const { userData } = useAppContext();
+  
+  if (!userData.isAuthenticated) {
+    return <AuthPage />;
+  }
+  
   const t = useTranslation(userData.language);
 
   // "What Should I Do Next?" Engine Logic
