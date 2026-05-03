@@ -21,7 +21,8 @@ export default function OnboardingModal() {
     language: "English",
     age: "",
     state: "",
-    voterStatus: "" as VoterStatus
+    voterStatus: "" as VoterStatus,
+    rememberDevice: false
   });
 
   if (userData.onboardingComplete) return null;
@@ -37,6 +38,7 @@ export default function OnboardingModal() {
       age: parseInt(formData.age),
       state: formData.state,
       voterStatus: formData.voterStatus,
+      rememberDevice: formData.rememberDevice,
       onboardingComplete: true
     });
   };
@@ -168,6 +170,18 @@ export default function OnboardingModal() {
                       {formData.voterStatus === status && <div className="w-2 h-2 rounded-full bg-primary" />}
                     </button>
                   ))}
+                </div>
+                <div className="pt-4 border-t border-border/50">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      checked={formData.rememberDevice}
+                      onChange={(e) => setFormData({...formData, rememberDevice: e.target.checked})}
+                      className="w-5 h-5 rounded border-border text-primary focus:ring-primary"
+                    />
+                    <span className="text-sm font-medium">Remember me on this device</span>
+                  </label>
+                  <p className="text-xs text-muted-foreground mt-1 ml-8">If unchecked, you will be prompted to setup again next time.</p>
                 </div>
               </motion.div>
             )}

@@ -27,15 +27,20 @@ export default function ProfilePage() {
     language: userData.language || "English",
     age: userData.age?.toString() || "",
     state: userData.state || "",
-    voterStatus: userData.voterStatus || ""
+    voterStatus: userData.voterStatus || "",
+    avatar: userData.avatar || "1"
   });
+
+  const avatars = ["1", "2", "3", "4", "5", "6"];
 
   const handleSave = () => {
     updateUserData({
       language: formData.language,
       age: parseInt(formData.age),
       state: formData.state,
-      voterStatus: formData.voterStatus as VoterStatus | undefined
+      state: formData.state,
+      voterStatus: formData.voterStatus as VoterStatus | undefined,
+      avatar: formData.avatar
     });
     setIsEditing(false);
   };
@@ -86,8 +91,8 @@ export default function ProfilePage() {
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{t.profile.headerTitle}</h1>
           <p className="text-muted-foreground text-lg">{t.profile.headerDesc}</p>
         </div>
-        <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-          <UserCircle className="w-10 h-10" />
+        <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-primary overflow-hidden border-2 border-primary/20">
+          <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${userData.avatar || "1"}`} alt="Avatar" className="w-full h-full object-cover" />
         </div>
       </header>
 
@@ -114,6 +119,23 @@ export default function ProfilePage() {
                 </button>
               )}
             </div>
+
+            {isEditing && (
+              <div className="mb-6 space-y-3">
+                <label className="text-sm font-medium text-muted-foreground">Select Avatar</label>
+                <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                  {avatars.map((a) => (
+                    <button
+                      key={a}
+                      onClick={() => setFormData({ ...formData, avatar: a })}
+                      className={`relative w-16 h-16 rounded-full overflow-hidden shrink-0 transition-transform ${formData.avatar === a ? 'ring-2 ring-primary scale-110' : 'hover:scale-105 opacity-70'}`}
+                    >
+                      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${a}`} alt={`Avatar ${a}`} className="w-full h-full bg-muted/50" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -261,10 +283,10 @@ export default function ProfilePage() {
           </div>
 
           <button 
-            onClick={resetUser}
+            onClick={() => { resetUser(); window.location.href = "/"; }}
             className="w-full py-3 bg-destructive/10 text-destructive rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-destructive/20 transition-colors"
           >
-            <LogOut className="w-4 h-4" /> {t.profile.resetProfile}
+            <LogOut className="w-4 h-4" /> Sign Out
           </button>
         </div>
       </div>

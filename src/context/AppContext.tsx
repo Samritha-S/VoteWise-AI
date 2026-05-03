@@ -18,6 +18,8 @@ export interface UserContextData {
   voterStatus: VoterStatus;
   language: string;
   onboardingComplete: boolean;
+  avatar: string;
+  rememberDevice: boolean;
   preferences: UserPreferences;
 }
 
@@ -33,6 +35,8 @@ const defaultUserData: UserContextData = {
   voterStatus: "",
   language: "English",
   onboardingComplete: false,
+  avatar: "1",
+  rememberDevice: false,
   preferences: {
     deadlinesAlerts: true,
     pollingReminders: true,
@@ -48,9 +52,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [userData, setUserData] = useState<UserContextData>(defaultUserData);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load from localStorage on mount
+  // Load from storage on mount
   useEffect(() => {
-    const saved = localStorage.getItem("votewise_user_data");
+    const savedLocal = localStorage.getItem("votewise_user_data");
+    const savedSession = sessionStorage.getItem("votewise_user_data");
+    const saved = savedLocal || savedSession;
     if (saved) {
       try {
         setUserData(JSON.parse(saved));
@@ -61,10 +67,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setIsLoaded(true);
   }, []);
 
-  // Save to localStorage when changed
+  // Save to storage when changed
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("votewise_user_data", JSON.stringify(userData));
+      if (userData.rememberDevice) {
+        localStorage.setItem("votewise_user_data", JSON.stringify(userData));
+        sessionStorage.removeItem("votewise_user_data");
+      } else {
+        sessionStorage.setItem("votewise_user_data", JSON.stringify(userData));
+        localStorage.removeItem("votewise_user_data");
+      }
     }
   }, [userData, isLoaded]);
 
@@ -75,6 +87,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const resetUser = () => {
     setUserData(defaultUserData);
     localStorage.removeItem("votewise_user_data");
+    sessionStorage.removeItem("votewise_user_data");
   };
 
   return (
