@@ -77,6 +77,13 @@
   * {
     @apply border-border;
   }
+  
+  /* Global Accessibility Focus States */
+  *:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;

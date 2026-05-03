@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import ScreenReaderAnnouncer from "@/components/ScreenReaderAnnouncer";
 import { AppProvider } from "@/context/AppContext";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground`}>
         <AppProvider>
           <div className="flex h-screen overflow-hidden">
+            <ScreenReaderAnnouncer />
             <Navigation />
             <main className="flex-1 overflow-y-auto bg-background">
               {children}

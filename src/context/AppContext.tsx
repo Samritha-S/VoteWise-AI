@@ -60,13 +60,27 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     if (saved) {
       try {
         // eslint-disable-next-line
-        setUserData(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        setUserData(parsed);
       } catch (e) {
         console.error("Failed to parse user data", e);
       }
     }
     setIsLoaded(true);
   }, []);
+
+  // Apply Accessibility Preferences globally
+  useEffect(() => {
+    if (isLoaded && userData.preferences) {
+      if (userData.preferences.highContrast) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.style.setProperty('--contrast-mode', 'high');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.style.removeProperty('--contrast-mode');
+      }
+    }
+  }, [userData.preferences?.highContrast, isLoaded]);
 
   // Save to storage when changed
   useEffect(() => {
