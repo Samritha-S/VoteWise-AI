@@ -121,12 +121,14 @@ export default function Dashboard() {
                <span className="text-3xl font-bold">1</span>
                <span className="text-[10px] font-bold uppercase opacity-60">Day Left</span>
             </div>
-            <Link 
-              href="/deadlines"
+            <a 
+              href="https://electoralsearch.eci.gov.in/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 bg-white text-primary rounded-2xl font-bold hover:bg-primary-foreground transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
               Check Booth Info
-            </Link>
+            </a>
           </div>
         </div>
       </motion.div>
@@ -213,9 +215,23 @@ export default function Dashboard() {
                           animate={{ opacity: 1, height: 'auto' }}
                           className="mt-4"
                         >
-                          <Link href={step.id === "documents" ? "/documents" : step.id === "polling" ? "/deadlines" : "/assistant"} className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline">
-                            Start this step <ArrowRight className="w-4 h-4" />
-                          </Link>
+                          {step.id === "polling" ? (
+                            <a 
+                              href="https://electoralsearch.eci.gov.in/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline"
+                            >
+                              Start this step <ArrowRight className="w-4 h-4" />
+                            </a>
+                          ) : (
+                            <Link 
+                              href={step.id === "documents" ? "/documents" : "/assistant"} 
+                              className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline"
+                            >
+                              Start this step <ArrowRight className="w-4 h-4" />
+                            </Link>
+                          )}
                         </motion.div>
                       )}
                     </div>
