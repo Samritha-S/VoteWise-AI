@@ -140,6 +140,27 @@ export default function AuthPage() {
                     />
                   </div>
                 </div>
+
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="address">
+                    Full Residential Address
+                  </label>
+                  <div className="relative">
+                    <div className="absolute top-3 left-3 pointer-events-none">
+                      <MapPin className="h-4 w-4 text-muted-foreground" />
+                    </div>
+                    <textarea
+                      id="address"
+                      name="address"
+                      required
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      rows={2}
+                      className="block w-full pl-10 pr-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all resize-none"
+                      placeholder="House No, Street, Locality, City"
+                    />
+                  </div>
+                </div>
               </div>
             )}
 
@@ -195,22 +216,6 @@ export default function AuthPage() {
                   </h3>
                   
                   <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="address">
-                        Full Residential Address
-                      </label>
-                      <input
-                        id="address"
-                        name="address"
-                        type="text"
-                        required
-                        value={formData.address}
-                        onChange={handleInputChange}
-                        className="block w-full px-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
-                        placeholder="House No, Street, Locality"
-                      />
-                    </div>
-
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="state">

@@ -23,6 +23,7 @@ export default function OnboardingModal() {
     language: "English",
     age: "",
     state: "",
+    address: "",
     voterStatus: "" as VoterStatus,
     rememberDevice: false
   });
@@ -41,6 +42,7 @@ export default function OnboardingModal() {
       language: formData.language,
       age: parseInt(formData.age),
       state: formData.state,
+      address: formData.address,
       voterStatus: formData.voterStatus,
       rememberDevice: formData.rememberDevice,
       isAuthenticated: true,
@@ -189,6 +191,18 @@ export default function OnboardingModal() {
                     ))}
                   </select>
                 </div>
+                <div className="mt-4">
+                  <label className="block text-sm font-medium text-foreground mb-1.5">
+                    Full Residential Address
+                  </label>
+                  <textarea
+                    value={formData.address}
+                    onChange={(e) => setFormData({...formData, address: e.target.value})}
+                    placeholder="House No, Street, Locality"
+                    rows={2}
+                    className="w-full p-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:outline-none resize-none"
+                  />
+                </div>
               </motion.div>
             )}
 
@@ -243,7 +257,7 @@ export default function OnboardingModal() {
             disabled={
               (step === 1 && (!formData.name || !formData.phone)) ||
               (step === 3 && !formData.age) || 
-              (step === 4 && !formData.state) || 
+              (step === 4 && (!formData.state || !formData.address)) || 
               (step === 5 && !formData.voterStatus)
             }
             className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

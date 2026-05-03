@@ -27,6 +27,7 @@ export default function ProfilePage() {
     language: userData.language || "English",
     age: userData.age?.toString() || "",
     state: userData.state || "",
+    address: userData.address || "",
     voterStatus: userData.voterStatus || "",
     avatar: userData.avatar || "1"
   });
@@ -38,6 +39,7 @@ export default function ProfilePage() {
       language: formData.language,
       age: parseInt(formData.age),
       state: formData.state,
+      address: formData.address,
       voterStatus: formData.voterStatus as VoterStatus | undefined,
       avatar: formData.avatar
     });
@@ -156,20 +158,34 @@ export default function ProfilePage() {
                   )}
                 </div>
                 
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-muted-foreground">{t.profile.state}</label>
+                    {isEditing ? (
+                      <input 
+                        type="text" 
+                        value={formData.state}
+                        onChange={e => setFormData({...formData, state: e.target.value})}
+                        className="w-full p-3 rounded-xl border border-border bg-background focus:ring-primary outline-none"
+                      />
+                    ) : (
+                      <div className="p-3 rounded-xl bg-secondary/50 font-medium">{userData.state || t.profile.notSet}</div>
+                    )}
+                  </div>
+                </div>
+
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">{t.profile.state}</label>
+                  <label className="text-sm font-medium text-muted-foreground">Full Address</label>
                   {isEditing ? (
-                    <input 
-                      type="text" 
-                      value={formData.state}
-                      onChange={e => setFormData({...formData, state: e.target.value})}
-                      className="w-full p-3 rounded-xl border border-border bg-background focus:ring-primary outline-none"
+                    <textarea 
+                      value={formData.address}
+                      onChange={e => setFormData({...formData, address: e.target.value})}
+                      className="w-full p-3 rounded-xl border border-border bg-background focus:ring-primary outline-none resize-none"
+                      rows={2}
                     />
                   ) : (
-                    <div className="p-3 rounded-xl bg-secondary/50 font-medium">{userData.state || t.profile.notSet}</div>
+                    <div className="p-3 rounded-xl bg-secondary/50 font-medium">{userData.address || t.profile.notSet}</div>
                   )}
                 </div>
-              </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-muted-foreground">{t.profile.voterStatus}</label>
