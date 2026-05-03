@@ -97,7 +97,9 @@ export default function Navigation() {
                   />
                 )}
                 <Icon className={`w-5 h-5 ${isActive ? "text-primary-foreground" : "group-hover:text-primary transition-colors"}`} />
-                <span className="font-medium">{itemName}</span>
+                <span className="font-medium">
+                  {(!userData.isAuthenticated && item.name === "Profile") ? "Sign up / Login" : itemName}
+                </span>
               </Link>
             );
           })}
