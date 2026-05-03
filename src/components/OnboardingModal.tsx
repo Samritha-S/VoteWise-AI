@@ -38,7 +38,10 @@ export default function OnboardingModal() {
 
   const t = useTranslation(formData.language);
 
-  if (!isLoaded || userData.onboardingComplete) return null;
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+  const isCandidatePage = pathname.includes('/candidates');
+
+  if (!isLoaded || userData.onboardingComplete || isCandidatePage) return null;
 
   const handleNext = () => {
     if (step < 5) setStep(step + 1);

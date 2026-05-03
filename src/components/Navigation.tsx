@@ -39,8 +39,9 @@ export default function Navigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const { userData, isLoaded, resetUser } = useAppContext();
+  const isCandidatePage = pathname.includes('/candidates');
   
-  if (!isLoaded || !userData.isAuthenticated) return null;
+  if (!isLoaded || (!userData.isAuthenticated && !isCandidatePage)) return null;
   
   const t = useTranslation(userData.language);
 
