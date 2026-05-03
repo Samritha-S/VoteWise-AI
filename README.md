@@ -1,6 +1,13 @@
 # VoteWise AI 🇮🇳
+> **Your Intelligent, Accessible, and Transparent Civic Assistant**
+
+[![Google Cloud Run](https://img.shields.io/badge/Deployed%20to-Google%20Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://votewise-ai-327636706757.us-central1.run.app)
+[![Gemini AI](https://img.shields.io/badge/Powered%20by-Google%20Gemini-8E75B2?style=for-the-badge&logo=google-gemini&logoColor=white)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](#)
 
 VoteWise AI is a comprehensive, context-aware civic assistant and electoral transparency platform. It is designed to empower voters with verifiable data, combat electoral misinformation, and make the voting journey seamless, secure, and accessible for everyone.
+
+**🌐 Live Demo:** [https://votewise-ai-327636706757.us-central1.run.app](https://votewise-ai-327636706757.us-central1.run.app)
 
 ---
 
@@ -11,65 +18,95 @@ We chose this vertical because navigating Indian elections can be daunting due t
 
 ---
 
-## 🧠 Approach and Logic
+## 🌟 Key Features
 
-Our approach is centered around four logical pillars:
-1. **Context-Driven Personalization**: The application does not offer generic advice. During onboarding, it captures the user's Age, State, Voter Status, and Language. This context is injected into every interaction—from sorting candidates by the user's home state to the AI assistant refusing to provide voting booth details to an underage user.
-2. **Transparency & Truth Verification**: We built a "Candidates Hub" combining financial affidavits, criminal records, and legislative performance into an easily digestible format. A "Myth Buster" module directly targets viral electoral rumors.
-3. **Frictionless Inclusivity**: Civic tech must be usable by *everyone*. We prioritized WCAG accessibility standards and a custom `i18n` engine supporting 6 regional languages (English, Hindi, Marathi, Tamil, Telugu, Bengali) with instantaneous UI switching.
-4. **Uncompromising Security & Performance**: We implemented strict data validation firewalls, Edge API caching, and robust security headers to ensure the platform is enterprise-grade and tamper-proof.
+### 🤖 Intelligent AI Assistant
+* **Context-Aware Guidance**: Powered by **Google Gemini 1.5 Flash**, the assistant tailors advice based on the user's age, state, and voter status. It dynamically shifts between 6 regional languages.
+* **Proactive Logic**: If a 17-year-old asks for their polling booth, the AI intelligently guides them on future registration instead of providing irrelevant booth details.
+
+### 🛡️ Myth Buster & Fact-Checking
+* **Gemini Deep Dive**: Users can request AI-powered "Deep Dives" into viral electoral rumors, receiving educational explanations backed by verified data.
+* **Community Vigilance**: Crowd-sourced reporting allows users to flag suspicious claims for moderator verification.
+
+### 🔍 Candidate Transparency Hub
+* **Unified Data**: Financial affidavits, criminal records, and legislative history in one searchable interface.
+* **Google Integration**: Deep links to **Google Search** for affidavit verification and **Google Maps** for constituency boundary visualization.
+
+### 🆔 AI-Powered Verification
+* **Google Cloud Vision AI**: A dedicated identity verification module (mocked) that demonstrates how AI can automatically extract and validate details from Voter ID or Aadhaar cards.
 
 ---
 
-## ⚙️ How the Solution Works
+## 🛠️ Technology Stack
 
-VoteWise AI is built on a modern **Next.js (App Router)** architecture using React Server Components.
-1. **Onboarding**: Users complete a localized onboarding flow to set their global context (saved securely via Session Storage fallback to prevent shared-device data leaks).
-2. **Navigation**: Users interact with four main modules: Candidate Profiles, The Myth Buster, The Journey Checklist, and the AI Assistant.
-3. **AI Interaction**: When a user queries the AI, their prompt is intercepted by a strict `Zod` validation schema on the backend. It is then securely transmitted to the **Google Gemini API**, which has been systematically prompted with the user's exact state, age, and preferred language to formulate a localized, fact-based response.
-4. **Administration**: A secure `/admin` dashboard allows verified moderators to review crowdsourced fact-checks and monitor platform feedback.
+* **Framework**: Next.js 15+ (App Router)
+* **Intelligence**: Google Gemini AI (SDK), Google Cloud Vision AI (Integration Concept)
+* **Database**: Prisma ORM with SQLite (Production-ready for PostgreSQL)
+* **Styling**: Tailwind CSS & Framer Motion (Glassmorphism UI)
+* **Services**: Google Cloud Run (Deployment), Google Analytics, Google Maps
+* **Testing**: Jest & React Testing Library
 
 ---
 
-## 🛡️ Security & Accessibility 
-
-We engineered VoteWise AI to be a shining example of secure, inclusive web design:
+## 🛡️ Security & Accessibility (A11y)
 
 ### Security
-* **Prompt Injection Protection**: The Gemini API system prompt is fortified with strict `SECURITY CRITICAL` directives, ensuring the AI firmly rejects off-topic queries, jailbreak attempts, or roleplay scenarios, keeping the platform safe and focused.
-* **Schema Validation Firewall**: Every single API route (`/api/chat`, `/api/feedback`) is protected by strict **Zod** schema validations. Malformed payloads are instantly rejected before hitting the database or Google APIs.
-* **Strict HTTP Headers**: The Next.js configuration is hardened with `Strict-Transport-Security (HSTS)`, `X-Frame-Options: DENY` (anti-clickjacking), and `X-XSS-Protection`.
-* **Safe State Persistence**: User profiles default to `sessionStorage` (clearing on close) to protect voter privacy on shared computers, unless the user explicitly checks "Remember Me" to elevate to `localStorage`.
+* **Zod Validation Firewall**: Every API route (`/api/chat`, `/api/candidates`) is protected by strict schema validation.
+* **Prompt Injection Protection**: Fortified system instructions ensure the AI remains focused on civic guidance and rejects malicious jailbreak attempts.
+* **Privacy First**: User context is stored securely in `sessionStorage` by default, protecting privacy on shared devices.
 
-### Efficiency & Accessibility (A11y)
-* **Zero-Payload Native Avatars**: The application uses scalable, native OS-level emojis (🐅, 🦚) for avatars. This eliminates external image API requests, resulting in 0ms render latency and 0kb network payload for profile graphics.
-* **Global Screen Reader Announcer**: We built a custom hidden React component that uses `aria-live="assertive"`. Whenever the user changes pages, it narrates the route automatically to blind or low-vision users.
-* **Keyboard Navigation**: We injected highly visible `focus-visible:ring` CSS across the entire DOM, ensuring users who rely on keyboards or switch-devices can easily track their screen location.
-* **Dynamic High Contrast**: A global toggle instantly injects `.dark` high-contrast CSS variables across the entire application to aid visually impaired voters.
-* **Semantic DOM**: All components use strict ARIA roles (e.g., `<nav aria-label="...">`, `role="log"` for chat streams, and comprehensive `aria-label`s on all inputs).
+### Accessibility
+* **Screen Reader Announcer**: A custom `aria-live` announcer narrates page changes automatically for low-vision users.
+* **WCAG Compliance**: High-contrast modes, focus management, and semantic HTML ensure a premium experience for everyone.
+* **Native Assets**: OS-level emojis used for avatars to ensure 0ms render latency and 0kb network payload.
 
 ---
 
-## 🤖 Effective Use of Google Services
+## 🚀 Getting Started
 
-**Google Gemini Flash (GenAI)** is the intelligent engine powering VoteWise AI. 
-Instead of a simple chatbot wrapper, we utilized Gemini dynamically:
-* **Context Injection**: The system prompt actively injects the user's React Context (Age, State, Language). If a 17-year-old asks "Where do I vote?", Gemini logically deduces their age and guides them on *prospective registration* instead of providing polling booths.
-* **Zero-Shot Localization**: We rely on Gemini's vast multilingual capabilities to converse fluently in the user's selected regional language without requiring heavy, hardcoded translation databases for the chat logic.
+### Prerequisites
+* Node.js 20+
+* Google Gemini API Key
+* Google Cloud Project (for deployment)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Samritha-S/VoteWise-AI.git
+   cd votewise-ai
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   Create a `.env.local` file:
+   ```env
+   GEMINI_API_KEY=your_key_here
+   NEXT_PUBLIC_GA_ID=your_ga_id_here
+   DATABASE_URL="file:./prisma/dev.db"
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
 ---
 
-## 🏆 Challenge Expectations Check
+## 🏆 Challenge Highlights
 
-* ✅ **Smart, Dynamic Assistant**: The Gemini AI dynamically alters its personality and advice based on the voter's demographic and geographic state.
-* ✅ **Logical Decision Making**: State filtering uses React `useMemo` to optimally sort candidate arrays based on the user's location, preventing unnecessary CPU recalculations.
-* ✅ **Effective use of Google Services**: Heavy integration with Google GenAI SDK to drive the core educational loop of the platform.
-* ✅ **Practical and Real-World Usability**: Designed with a stunning, glassmorphism UI, offline-pack download options, and heavily optimized `next/image` lazy loading for low-bandwidth environments.
-* ✅ **Clean and Maintainable Code**: The repository boasts a completely perfect ESLint pass (`0 errors`, no `any` types), strict TypeScript interfaces, modular API route architecture, and a fully functional Jest Integration Test suite (`npm test`).
+* ✅ **Production Ready**: Deployed to Google Cloud Run with automated CI/CD readiness.
+* ✅ **Zero-Any Policy**: Strict TypeScript enforcement across the entire codebase.
+* ✅ **High Performance**: Optimized Core Web Vitals with efficient caching and asset management.
+* ✅ **Meaningful AI**: Gemini is not just a wrapper; it's a decision-making engine integrated into the core user journey.
 
 ---
 
 ## ❓ Assumptions Made
 
-* **Data Sources**: We assume that in a production environment, the platform would be connected to the official Election Commission API. Currently, we are using a highly structured Prisma-ready mock database.
-* **Offline Mode**: The "Offline Pack Download" feature assumes that users will have the foresight to download the pack before heading to a low-connectivity polling booth.
+* **Data Sources**: Assumes integration with official Election Commission of India (ECI) APIs for live production data.
+* **Verification**: Identity verification demonstrates the integration of Google Cloud Vision AI but uses mocked extraction for privacy during evaluation.
+
+---
+
+*Built with ❤️ for the Google Gemini Hackathon.*
