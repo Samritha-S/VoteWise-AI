@@ -155,7 +155,7 @@ export const CANDIDATES: Candidate[] = [
     liabilitiesBreakdown: [],
     // ENHANCED DATA
     currentPosition: "Prime Minister of India, MP Varanasi",
-    yearsInPolitics: 40,
+    yearsInPolitics: 53,
     statusBadge: "Incumbent",
     pastControversies: [
       { description: "Allegations regarding the 2002 Gujarat riots. Cleared by Supreme Court SIT.", date: "2002", status: "Cleared" }
@@ -169,10 +169,12 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Swachh Bharat Abhiyan", "Pradhan Mantri Jan Dhan Yojana", "Article 370 Abrogation"]
     },
     careerHistory: [
-      { period: "2014-Present", role: "Prime Minister of India" },
-      { period: "2001-2014", role: "Chief Minister of Gujarat" }
+      { period: "2014-Present", role: "Prime Minister of India (Serving 3rd consecutive term)" },
+      { period: "2001-2014", role: "Chief Minister of Gujarat (4 consecutive terms)" },
+      { period: "1987-2001", role: "Organizational Secretary, BJP (Rising through party ranks)" },
+      { period: "1970s-1987", role: "Pracharak, Rashtriya Swayamsevak Sangh (RSS)" }
     ],
-    familyBackground: "Born to a family of grocers in Vadnagar, Gujarat.",
+    familyBackground: "Born to a family of grocers in Vadnagar; early life as a tea-seller, later dedicated to RSS.",
     electionHistory: {
       electionsContested: 6,
       wins: 6,
@@ -181,11 +183,12 @@ export const CANDIDATES: Candidate[] = [
       latestMargin: "4.79 Lakh Votes"
     },
     ideologyStances: [
-      { issue: "Economy", position: "Pro" },
-      { issue: "Welfare Schemes", position: "Pro" },
-      { issue: "National Security", position: "Pro" }
+      { issue: "Hindutva & Nationalism", position: "Pro" },
+      { issue: "Atmanirbhar Bharat (Self-Reliance)", position: "Pro" },
+      { issue: "Digital Transformation", position: "Pro" },
+      { issue: "Infrastructure Modernization", position: "Pro" }
     ],
-    votingRecord: "Voted consistently with the ruling coalition.",
+    votingRecord: "Executive Head; consistently implements policies aligned with NDA manifesto.",
     recentNews: [
       { headline: "PM inaugurates new developmental projects in Varanasi.", source: "The Hindu", date: "Feb 2024", sentiment: "Positive" },
       { headline: "Opposition criticizes economic policies.", source: "Indian Express", date: "March 2024", sentiment: "Negative" }
@@ -255,10 +258,13 @@ export const CANDIDATES: Candidate[] = [
       billDetails: []
     },
     careerHistory: [
-      { period: "2004-Present", role: "Member of Parliament" },
-      { period: "2017-2019", role: "President of Indian National Congress" }
+      { period: "2024-Present", role: "Member of Parliament (Raebareli) / Leader of Opposition" },
+      { period: "2004-Present", role: "Member of Parliament (Amethi/Wayanad)" },
+      { period: "2017-2019", role: "President of Indian National Congress (INC)" },
+      { period: "2013-2017", role: "Vice President of INC" },
+      { period: "2007-2013", role: "General Secretary of INC" }
     ],
-    familyBackground: "Member of the Nehru-Gandhi family; son of former PM Rajiv Gandhi.",
+    familyBackground: "Member of the Nehru-Gandhi dynasty; son of Rajiv Gandhi and Sonia Gandhi.",
     electionHistory: {
       electionsContested: 5,
       wins: 4,
@@ -267,11 +273,12 @@ export const CANDIDATES: Candidate[] = [
       latestMargin: "3.9 Lakh Votes"
     },
     ideologyStances: [
-      { issue: "Social Justice", position: "Pro" },
-      { issue: "Privatization", position: "Against" },
-      { issue: "Caste Census", position: "Pro" }
+      { issue: "Social Democracy", position: "Pro" },
+      { issue: "Secularism & Pluralism", position: "Pro" },
+      { issue: "Inclusive Growth", position: "Pro" },
+      { issue: "Economic Decentralization", position: "Pro" }
     ],
-    votingRecord: "Voted with the Opposition bloc on major bills.",
+    votingRecord: "Voted against major NDA bills; focuses on social welfare and minority rights.",
     recentNews: [
       { headline: "Concludes Bharat Jodo Nyay Yatra.", source: "NDTV", date: "March 2024", sentiment: "Positive" },
       { headline: "BJP criticizes recent remarks on EVMs.", source: "Times of India", date: "April 2024", sentiment: "Negative" }
@@ -323,11 +330,20 @@ export const CANDIDATES: Candidate[] = [
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Various defamation suits.", date: "2016", status: "Settled" }],
-    careerHistory: [{ period: "2013-Present", role: "Chief Minister of Delhi" }, { period: "1995-2006", role: "IRS Officer" }],
-    familyBackground: "Middle-class family from Haryana.",
+    careerHistory: [
+      { period: "2013-Present", role: "Chief Minister of Delhi" },
+      { period: "2012-Present", role: "National Convener, Aam Aadmi Party (AAP)" },
+      { period: "2011-2012", role: "Social Activist, India Against Corruption Movement" },
+      { period: "1995-2006", role: "Indian Revenue Service (IRS) Officer" }
+    ],
+    familyBackground: "Middle-class family from Haryana; former public servant turned activist.",
     electionHistory: { electionsContested: 3, wins: 3, losses: 0, latestVoteShare: "53%", latestMargin: "21k Votes" },
-    ideologyStances: [{ issue: "Free Utilities", position: "Pro" }, { issue: "Education Reform", position: "Pro" }],
-    votingRecord: "State Executive",
+    ideologyStances: [
+      { issue: "Anti-Corruption & Transparency", position: "Pro" },
+      { issue: "Swaraj (Self-Governance)", position: "Pro" },
+      { issue: "Populist Welfare (Free Utilities)", position: "Pro" }
+    ],
+    votingRecord: "State Executive; focuses on decentralized governance and healthcare/education.",
     recentNews: [{ headline: "Launches new Mohalla Clinics.", source: "Times of India", date: "Jan 2024", sentiment: "Positive" }],
     performanceMetrics: {
       attendance: { value: "N/A (CM)", source: "Assembly", lastUpdated: "2024" },
@@ -377,16 +393,18 @@ export const CANDIDATES: Candidate[] = [
     pastControversies: [],
     careerHistory: [
       { period: "2011-Present", role: "Chief Minister of West Bengal" },
-      { period: "2009-2011", role: "Minister of Railways (India)" }
+      { period: "1998-Present", role: "Chairperson, All India Trinamool Congress (TMC)" },
+      { period: "1984-2011", role: "Member of Parliament (Multiple terms); Union Minister (Railways, Coal)" },
+      { period: "1970s-1984", role: "Active Member, Indian Youth Congress" }
     ],
-    familyBackground: "Born into a middle-class family in Kolkata.",
+    familyBackground: "Born into a middle-class family in Kolkata; self-made leader from grassroots.",
     electionHistory: { electionsContested: 10, wins: 8, losses: 2, latestVoteShare: "58%", latestMargin: "58,832 Votes" },
     ideologyStances: [
-      { issue: "Federalism", position: "Pro" },
-      { issue: "CAA/NRC", position: "Against" },
-      { issue: "Welfare Schemes", position: "Pro" }
+      { issue: "Ma, Mati, Manush (Mother, Land, People)", position: "Pro" },
+      { issue: "Secular Regionalism", position: "Pro" },
+      { issue: "Agrarian Rights", position: "Pro" }
     ],
-    votingRecord: "N/A (State Executive)",
+    votingRecord: "N/A (State Executive); strongly opposes centralizing policies of the NDA.",
     recentNews: [
       { headline: "Expands Swasthya Sathi health scheme.", source: "Telegraph", date: "March 2024", sentiment: "Positive" }
     ],
@@ -441,15 +459,24 @@ export const CANDIDATES: Candidate[] = [
       { type: "Loans from Banks (Home Loan)", value: "₹15,00,000" }
     ],
     currentPosition: "Minister of Home Affairs",
-    yearsInPolitics: 35,
+    yearsInPolitics: 42,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Sohrabuddin case", date: "2010", status: "Discharged by Court" }],
-    careerHistory: [{ period: "2019-Present", role: "Home Minister" }, { period: "2014-2020", role: "BJP President" }],
-    familyBackground: "Business family in Gujarat.",
+    careerHistory: [
+      { period: "2019-Present", role: "Union Minister of Home Affairs" },
+      { period: "2014-2020", role: "National President, Bharatiya Janata Party (BJP)" },
+      { period: "1997-2017", role: "Member of Gujarat Legislative Assembly (MLA)" },
+      { period: "1987-Present", role: "Active Member, BJP / RSS" }
+    ],
+    familyBackground: "Born into a business family in Gujarat; early involvement in RSS as a teenager.",
     electionHistory: { electionsContested: 6, wins: 6, losses: 0, latestVoteShare: "69.6%", latestMargin: "5.5 Lakhs" },
-    ideologyStances: [{ issue: "Article 370", position: "Pro" }, { issue: "CAA", position: "Pro" }],
-    votingRecord: "Loyal to party line",
+    ideologyStances: [
+      { issue: "Hindutva & National Security", position: "Pro" },
+      { issue: "Article 370 Abrogation", position: "Pro" },
+      { issue: "Internal Security Reforms", position: "Pro" }
+    ],
+    votingRecord: "Cabinet Minister; instrumental in internal security and organizational strategy.",
     recentNews: [{ headline: "Introduces new Criminal Laws.", source: "The Hindu", date: "Dec 2023", sentiment: "Neutral" }],
     performanceMetrics: {
       attendance: { value: "N/A (Minister)", source: "Lok Sabha", lastUpdated: "2024" },
@@ -499,11 +526,20 @@ export const CANDIDATES: Candidate[] = [
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Mining scam allegations", date: "2019", status: "Pending Enquiry" }],
-    careerHistory: [{ period: "2012-2017", role: "Chief Minister of UP" }, { period: "2000-Present", role: "MP/MLA" }],
-    familyBackground: "Son of Mulayam Singh Yadav.",
+    careerHistory: [
+      { period: "2022-Present", role: "Leader of Opposition, UP Legislative Assembly" },
+      { period: "2012-2017", role: "Chief Minister of Uttar Pradesh" },
+      { period: "2000-2012", role: "Member of Parliament (Lok Sabha)" },
+      { period: "2017-Present", role: "National President, Samajwadi Party (SP)" }
+    ],
+    familyBackground: "Son of SP founder Mulayam Singh Yadav; educated in Australia.",
     electionHistory: { electionsContested: 5, wins: 5, losses: 0, latestVoteShare: "60%", latestMargin: "2.5 Lakhs" },
-    ideologyStances: [{ issue: "Caste Census", position: "Pro" }, { issue: "Farmer Subsidies", position: "Pro" }],
-    votingRecord: "Opposes BJP legislation",
+    ideologyStances: [
+      { issue: "Socialism (Lohiaite)", position: "Pro" },
+      { issue: "PDA (Pichda, Dalit, Alpsankhyak) Rights", position: "Pro" },
+      { issue: "Caste Census", position: "Pro" }
+    ],
+    votingRecord: "Opposes major central legislation; advocates for agrarian and minority welfare.",
     recentNews: [{ headline: "Announces PDA alliance strategy.", source: "NDTV", date: "Feb 2024", sentiment: "Positive" }],
     performanceMetrics: {
       attendance: { value: "65%", source: "UP Assembly", lastUpdated: "2024" },
@@ -557,11 +593,19 @@ export const CANDIDATES: Candidate[] = [
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Sunanda Pushkar case", date: "2014", status: "Discharged by Court" }],
-    careerHistory: [{ period: "2009-Present", role: "MP Thiruvananthapuram" }, { period: "1978-2006", role: "UN Under-Secretary-General" }],
-    familyBackground: "Born in London to an Indian family, raised in India.",
+    careerHistory: [
+      { period: "2009-Present", role: "Member of Parliament (Thiruvananthapuram)" },
+      { period: "2009-2014", role: "Union Minister of State (External Affairs, HRD)" },
+      { period: "1978-2007", role: "Career Diplomat, United Nations (Rose to Under-Secretary-General)" }
+    ],
+    familyBackground: "Born in London; distinguished academic and diplomatic background before entering politics.",
     electionHistory: { electionsContested: 3, wins: 3, losses: 0, latestVoteShare: "41.1%", latestMargin: "99k Votes" },
-    ideologyStances: [{ issue: "Liberalism", position: "Pro" }, { issue: "Colonial Reparations", position: "Pro" }],
-    votingRecord: "Active debater, votes with INC.",
+    ideologyStances: [
+      { issue: "Liberal Nationalism", position: "Pro" },
+      { issue: "Secular Pluralism", position: "Pro" },
+      { issue: "Economic Neoliberalism", position: "Pro" }
+    ],
+    votingRecord: "Active in parliamentary debates; proposes multiple private member bills on social rights.",
     recentNews: [{ headline: "Releases new book on Indian politics.", source: "Indian Express", date: "Jan 2024", sentiment: "Positive" }],
     performanceMetrics: {
       attendance: { value: "85%", source: "PRS", lastUpdated: "2024" },
@@ -622,11 +666,19 @@ export const CANDIDATES: Candidate[] = [
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Hate speech accusations", date: "2012", status: "Acquitted" }],
-    careerHistory: [{ period: "2004-Present", role: "MP Hyderabad" }, { period: "1994-2004", role: "MLA" }],
-    familyBackground: "Son of Sultan Salahuddin Owaisi.",
+    careerHistory: [
+      { period: "2004-Present", role: "Member of Parliament (Hyderabad)" },
+      { period: "2008-Present", role: "President, All India Majlis-e-Ittehadul Muslimeen (AIMIM)" },
+      { period: "1994-2004", role: "Member of Andhra Pradesh Legislative Assembly" }
+    ],
+    familyBackground: "Son of Sultan Salahuddin Owaisi; Bar-at-Law from Lincoln's Inn, London.",
     electionHistory: { electionsContested: 6, wins: 6, losses: 0, latestVoteShare: "58.9%", latestMargin: "2.8 Lakhs" },
-    ideologyStances: [{ issue: "Minority Rights", position: "Pro" }, { issue: "CAA", position: "Against" }],
-    votingRecord: "Votes independently, often opposes BJP.",
+    ideologyStances: [
+      { issue: "Minority Rights & Identity", position: "Pro" },
+      { issue: "Constitutionalism", position: "Pro" },
+      { issue: "Anti-Majoritarianism", position: "Pro" }
+    ],
+    votingRecord: "Independent voice; sharp critic of both NDA and UPA on issues of minority representation.",
     recentNews: [{ headline: "Questions govt on constitutional rights.", source: "Siasat", date: "Feb 2024", sentiment: "Neutral" }],
     performanceMetrics: {
       attendance: { value: "83%", source: "PRS", lastUpdated: "2024" },
@@ -682,22 +734,31 @@ export const CANDIDATES: Candidate[] = [
       { type: "Housing Loan", value: "₹1,35,00,000" }
     ],
     currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    yearsInPolitics: 44,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2014-Present", role: "Union Minister for Road Transport & Highways" },
+      { period: "2009-2013", role: "National President, Bharatiya Janata Party (BJP)" },
+      { period: "1995-1999", role: "PWD Minister, Maharashtra (Known for Mumbai-Pune Expressway)" },
+      { period: "1980s-1995", role: "Active Member, ABVP / BJP Maharashtra" }
+    ],
+    familyBackground: "Born into an agricultural family in Nagpur; early involvement in student politics (ABVP).",
+    electionHistory: { electionsContested: 3, wins: 3, losses: 0, latestVoteShare: "54.1%", latestMargin: "2.1 Lakhs" },
+    ideologyStances: [
+      { issue: "Pragmatic Development", position: "Pro" },
+      { issue: "Infrastructure & Connectivity", position: "Pro" },
+      { issue: "Sustainable Energy (Bio-fuels)", position: "Pro" }
+    ],
+    votingRecord: "Executive Minister; focus on large-scale infrastructure and industrial growth.",
+    recentNews: [{ headline: "Inaugurates several new NH projects.", source: "Times of India", date: "March 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "N/A (Minister)", source: "PRS", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "PRS", lastUpdated: "2024" },
+      billsIntroduced: { value: "50+ (Govt)", source: "Lok Sabha", lastUpdated: "2024" },
+      fundsUtilized: { value: "98%", source: "MPLADS", lastUpdated: "2024" },
+      keyAchievements: ["Revolutionized National Highway network", "Mumbai-Pune Expressway", "Zojila Tunnel project"]
     }},
   {
     id: 10,
@@ -738,15 +799,23 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Member of Parliament",
-    yearsInPolitics: 5,
+    yearsInPolitics: 16,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Bed allocation scam claims", date: "2021", status: "Resolved" }],
-    careerHistory: [{ period: "2019-Present", role: "MP Bengaluru South" }],
-    familyBackground: "Nephew of BJP MLA Ravi Subramanya.",
+    careerHistory: [
+      { period: "2019-Present", role: "Member of Parliament (Bangalore South)" },
+      { period: "2020-Present", role: "National President, BJP Yuva Morcha" },
+      { period: "2013-2019", role: "Advocate / Secretary, BJP Karnataka State Youth Wing" }
+    ],
+    familyBackground: "Born into a political family; nephew of MLA Ravi Subramanya; legal background.",
     electionHistory: { electionsContested: 1, wins: 1, losses: 0, latestVoteShare: "62%", latestMargin: "3.3 Lakhs" },
-    ideologyStances: [{ issue: "Hindutva", position: "Pro" }, { issue: "Startup Ecosystem", position: "Pro" }],
-    votingRecord: "Votes with party",
+    ideologyStances: [
+      { issue: "Hindutva & Cultural Nationalism", position: "Pro" },
+      { issue: "Digital & Startup Economy", position: "Pro" },
+      { issue: "Urban Governance Reform", position: "Pro" }
+    ],
+    votingRecord: "Vocal supporter of BJP's core ideological and developmental bills in Parliament.",
     recentNews: [{ headline: "Leads youth wing rallies.", source: "The Hindu", date: "Feb 2024", sentiment: "Positive" }],
     performanceMetrics: {
       attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
@@ -787,7 +856,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Chief Minister of Tamil Nadu",
-    yearsInPolitics: 50,
+    yearsInPolitics: 58,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [
@@ -795,15 +864,18 @@ export const CANDIDATES: Candidate[] = [
     ],
     careerHistory: [
       { period: "2021-Present", role: "Chief Minister of Tamil Nadu" },
-      { period: "2009-2011", role: "Deputy Chief Minister" },
-      { period: "1996-2002", role: "Mayor of Chennai" }
+      { period: "2018-Present", role: "President, Dravida Munnetra Kazhagam (DMK)" },
+      { period: "2009-2011", role: "Deputy Chief Minister of Tamil Nadu" },
+      { period: "1996-2002", role: "Mayor of Chennai" },
+      { period: "1982-2017", role: "Secretary, DMK Youth Wing" },
+      { period: "1975-1976", role: "Imprisoned under MISA during Emergency" }
     ],
-    familyBackground: "Son of former Chief Minister M. Karunanidhi.",
+    familyBackground: "Son of DMK patriarch M. Karunanidhi; dedicated to the Dravidian movement since youth.",
     electionHistory: { electionsContested: 9, wins: 7, losses: 2, latestVoteShare: "60%", latestMargin: "70,000 Votes" },
     ideologyStances: [
-      { issue: "State Autonomy", position: "Pro" },
-      { issue: "NEET Exam", position: "Against" },
-      { issue: "Social Justice", position: "Pro" }
+      { issue: "Dravidian Model (Social Justice)", position: "Pro" },
+      { issue: "State Autonomy & Federalism", position: "Pro" },
+      { issue: "Language Rights (Tamil)", position: "Pro" }
     ],
     votingRecord: "N/A (State Executive)",
     recentNews: [
@@ -847,23 +919,31 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Chief Minister of Tamil Nadu",
-    yearsInPolitics: 50,
+    currentPosition: "Minister for Youth Welfare and Sports Development, Tamil Nadu",
+    yearsInPolitics: 10,
     statusBadge: "Incumbent",
     disqualifications: "None",
-    pastControversies: [{ description: "Arrested under MISA", date: "1975", status: "Resolved" }],
-    careerHistory: [{ period: "2021-Present", role: "Chief Minister" }, { period: "1996-2002", role: "Mayor of Chennai" }],
-    familyBackground: "Son of former CM M. Karunanidhi.",
-    electionHistory: { electionsContested: 9, wins: 7, losses: 2, latestVoteShare: "60%", latestMargin: "70k" },
-    ideologyStances: [{ issue: "State Autonomy", position: "Pro" }, { issue: "NEET", position: "Against" }],
-    votingRecord: "State Executive",
-    recentNews: [{ headline: "Announces major industrial investments.", source: "The Hindu", date: "April 2024", sentiment: "Positive" }],
+    careerHistory: [
+      { period: "2022-Present", role: "Minister for Youth Welfare and Sports Development, Tamil Nadu" },
+      { period: "2021-Present", role: "Member of Legislative Assembly (Chepauk-Thiruvallikeni)" },
+      { period: "2019-Present", role: "Secretary, DMK Youth Wing" },
+      { period: "2008-2021", role: "Film Actor and Producer (Red Giant Movies)" }
+    ],
+    familyBackground: "Grandson of M. Karunanidhi; son of M.K. Stalin; prominent figure in TN cinema and politics.",
+    electionHistory: { electionsContested: 1, wins: 1, losses: 0, latestVoteShare: "68%", latestMargin: "69,000 Votes" },
+    ideologyStances: [
+      { issue: "Dravidian Ideology", position: "Pro" },
+      { issue: "Social Equality", position: "Pro" },
+      { issue: "Sanatana Dharma Critique", position: "Pro" }
+    ],
+    votingRecord: "State Cabinet Minister; focus on sports infrastructure and youth empowerment.",
+    recentNews: [{ headline: "Organizes major international sports events in Chennai.", source: "The Hindu", date: "Jan 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "N/A (CM)", source: "Assembly", lastUpdated: "2024" },
+      attendance: { value: "Data Not Available", source: "Assembly", lastUpdated: "2024" },
       questionsAsked: { value: "N/A", source: "Assembly", lastUpdated: "2024" },
       billsIntroduced: { value: "Multiple", source: "Assembly", lastUpdated: "2024" },
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
-      keyAchievements: ["Pudhumai Penn Scheme", "Makkalai Thedi Maruthuvam"]
+      keyAchievements: ["Revitalization of sports infrastructure", "Women's rights advocacy"]
     }},
   {
     id: 13,
@@ -895,23 +975,31 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
-    statusBadge: "Incumbent",
+    currentPosition: "President, BJP Tamil Nadu",
+    yearsInPolitics: 4,
+    statusBadge: "Challenger",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2021-Present", role: "President, BJP Tamil Nadu State Unit" },
+      { period: "2020-2021", role: "Vice President, BJP Tamil Nadu" },
+      { period: "2011-2019", role: "Indian Police Service (IPS) Officer (Karnataka Cadre)" }
+    ],
+    familyBackground: "Born into an agricultural family in Karur; MBA from IIM Lucknow; former high-ranking police officer.",
+    electionHistory: { electionsContested: 2, wins: 0, losses: 2, latestVoteShare: "33% (Coimbatore)", latestMargin: "N/A" },
+    ideologyStances: [
+      { issue: "Nationalism", position: "Pro" },
+      { issue: "Anti-Corruption & Transparency", position: "Pro" },
+      { issue: "Spiritual Politics", position: "Pro" }
+    ],
+    votingRecord: "Organizational leader; focuses on grassroots mobilization and challenging Dravidian dominance.",
+    recentNews: [{ headline: "Leads 'En Mann En Makkal' padayatra across TN.", source: "Times of India", date: "Feb 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "N/A (State President)", source: "N/A", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "N/A", lastUpdated: "2024" },
+      billsIntroduced: { value: "N/A", source: "N/A", lastUpdated: "2024" },
+      fundsUtilized: { value: "N/A", source: "N/A", lastUpdated: "2024" },
+      keyAchievements: ["Rapid expansion of BJP in Tamil Nadu", "High-impact 'En Mann En Makkal' padayatra", "Corruption exposes through 'DMK Files'"]
     }},
   {
     id: 14,
@@ -943,23 +1031,33 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    currentPosition: "Member of Parliament (Thoothukkudi)",
+    yearsInPolitics: 17,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2019-Present", role: "Member of Parliament (Lok Sabha - Thoothukkudi)" },
+      { period: "2024-Present", role: "Chairperson, DMK Parliamentary Party" },
+      { period: "2007-2019", role: "Member of Parliament (Rajya Sabha)" },
+      { period: "1990s-2007", role: "Journalist, Poet, and Cultural Activist" }
+    ],
+    familyBackground: "Daughter of M. Karunanidhi; sibling of M.K. Stalin; noted for her work in literature and women's rights.",
+    electionHistory: { electionsContested: 2, wins: 2, losses: 0, latestVoteShare: "56%", latestMargin: "3.4 Lakh Votes" },
+    ideologyStances: [
+      { issue: "Dravidian Ideology & Social Justice", position: "Pro" },
+      { issue: "Women Empowerment & Rights", position: "Pro" },
+      { issue: "Federal Autonomy", position: "Pro" },
+      { issue: "Freedom of Speech", position: "Pro" }
+    ],
+    votingRecord: "Active in Lok Sabha; focuses on railway projects in TN and welfare for marginalized communities.",
+    recentNews: [{ headline: "Leads protests for TN's fiscal rights.", source: "Times of India", date: "Feb 2024", sentiment: "Neutral" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "82%", source: "PRS", lastUpdated: "2024" },
+      questionsAsked: { value: "180", source: "PRS", lastUpdated: "2024" },
+      billsIntroduced: { value: "0", source: "PRS", lastUpdated: "2024" },
+      fundsUtilized: { value: "92%", source: "MPLADS", lastUpdated: "2024" },
+      keyAchievements: ["Promoted Thoothukkudi industrial corridor", "Advocated for women's reservation bill"]
     }},
   {
     id: 15,
@@ -991,23 +1089,29 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
-    statusBadge: "Incumbent",
+    currentPosition: "Leader of Opposition, Tamil Nadu",
+    yearsInPolitics: 50,
+    statusBadge: "Challenger",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2021-Present", role: "Leader of Opposition, Tamil Nadu Legislative Assembly" },
+      { period: "2017-2021", role: "Chief Minister of Tamil Nadu" },
+      { period: "2011-2017", role: "Minister for Highways & Minor Ports, Tamil Nadu" },
+      { period: "1989-Present", role: "Member of Legislative Assembly (Multiple terms)" },
+      { period: "1974-1989", role: "Active Member, AIADMK (Joined during MGR era)" }
+    ],
+    familyBackground: "Born into an agricultural family in Siluvampalayam, Salem district; loyalist of J. Jayalalithaa.",
+    electionHistory: { electionsContested: 7, wins: 5, losses: 2, latestVoteShare: "45%", latestMargin: "50k Votes" },
+    ideologyStances: [{ issue: "Dravidian Welfare", position: "Pro" }, { issue: "Agrarian Rights", position: "Pro" }],
+    votingRecord: "Opposes current DMK policies; focuses on agricultural issues and water conservation.",
+    recentNews: [{ headline: "Criticizes state's handling of water resources.", source: "Times of India", date: "March 2024", sentiment: "Neutral" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "Data Not Available", source: "Assembly", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "Assembly", lastUpdated: "2024" },
+      billsIntroduced: { value: "Multiple (Past Govt)", source: "Assembly", lastUpdated: "2024" },
+      fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
+      keyAchievements: ["Kudimaramathu water conservation scheme", "Expansion of Highway infrastructure in TN"]
     }},
   
   // UTTAR PRADESH
@@ -1049,14 +1153,18 @@ export const CANDIDATES: Candidate[] = [
       { description: "Hate speech allegations.", date: "2007", status: "Cleared/Dismissed" }
     ],
     careerHistory: [
-      { period: "2017-Present", role: "Chief Minister of UP" },
-      { period: "1998-2017", role: "Member of Parliament (Gorakhpur)" }
+      { period: "2017-Present", role: "Chief Minister of Uttar Pradesh (Serving 2nd consecutive term)" },
+      { period: "1998-2017", role: "Member of Parliament (Lok Sabha - Gorakhpur; 5 consecutive terms)" },
+      { period: "2002-Present", role: "Founder, Hindu Yuva Vahini" },
+      { period: "1994-Present", role: "Mahant (Head Priest), Gorakhnath Math" }
     ],
-    familyBackground: "Mahant (Head Priest) of Gorakhnath Math.",
+    familyBackground: "Born Ajay Singh Bisht; became a monk and disciple of Mahant Avaidyanath; religious and political leader.",
     electionHistory: { electionsContested: 6, wins: 6, losses: 0, latestVoteShare: "66%", latestMargin: "1.03 Lakh Votes" },
     ideologyStances: [
-      { issue: "Law and Order", position: "Pro" },
-      { issue: "Cultural Nationalism", position: "Pro" }
+      { issue: "Hindutva & Cultural Nationalism", position: "Pro" },
+      { issue: "Law & Order (Zero Tolerance)", position: "Pro" },
+      { issue: "Cow Protection", position: "Pro" },
+      { issue: "Economic Growth through Infra", position: "Pro" }
     ],
     votingRecord: "N/A (State Executive)",
     recentNews: [
@@ -1100,23 +1208,31 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Chief Minister of Uttar Pradesh",
-    yearsInPolitics: 26,
+    currentPosition: "Deputy Chief Minister of Uttar Pradesh",
+    yearsInPolitics: 40,
     statusBadge: "Incumbent",
     disqualifications: "None",
-    pastControversies: [{ description: "Hate speech allegations", date: "2007", status: "Cleared" }],
-    careerHistory: [{ period: "2017-Present", role: "Chief Minister" }, { period: "1998-2017", role: "MP Gorakhpur" }],
-    familyBackground: "Mahant of Gorakhnath Math.",
-    electionHistory: { electionsContested: 6, wins: 6, losses: 0, latestVoteShare: "66%", latestMargin: "1 Lakh" },
-    ideologyStances: [{ issue: "Law and Order", position: "Pro" }, { issue: "Cultural Nationalism", position: "Pro" }],
-    votingRecord: "State Executive",
-    recentNews: [{ headline: "UP records heavy investments.", source: "Times of India", date: "Feb 2024", sentiment: "Positive" }],
+    careerHistory: [
+      { period: "2017-Present", role: "Deputy Chief Minister of Uttar Pradesh" },
+      { period: "2016-2017", role: "President, BJP Uttar Pradesh State Unit" },
+      { period: "2014-2017", role: "Member of Parliament (Lok Sabha - Phulpur)" },
+      { period: "2012-2014", role: "Member of Legislative Assembly (Sirathu)" }
+    ],
+    familyBackground: "Born into an agricultural family in Sirathu; early involvement in RSS and VHP; prominent OBC leader.",
+    electionHistory: { electionsContested: 4, wins: 3, losses: 1, latestVoteShare: "43%", latestMargin: "N/A" },
+    ideologyStances: [
+      { issue: "Hindutva & VHP Stance", position: "Pro" },
+      { issue: "OBC Empowerment", position: "Pro" },
+      { issue: "Rural Infrastructure", position: "Pro" }
+    ],
+    votingRecord: "Deputy CM; focuses on public works and backward class development.",
+    recentNews: [{ headline: "Inaugurates several bridge projects in rural UP.", source: "Jagran", date: "March 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "N/A (CM)", source: "Assembly", lastUpdated: "2024" },
+      attendance: { value: "Data Not Available", source: "Assembly", lastUpdated: "2024" },
       questionsAsked: { value: "N/A", source: "Assembly", lastUpdated: "2024" },
-      billsIntroduced: { value: "Multiple", source: "Assembly", lastUpdated: "2024" },
+      billsIntroduced: { value: "Multiple (Govt)", source: "Assembly", lastUpdated: "2024" },
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
-      keyAchievements: ["Expressway expansions", "Defense Corridor", "Improved Law & Order"]
+      keyAchievements: ["OBC mobilization", "Infrastructure development in rural sectors"]
     }},
   {
     id: 18,
@@ -1149,22 +1265,31 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    yearsInPolitics: 21,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2014-2024", role: "Union Cabinet Minister (HRD, Textiles, WCD)" },
+      { period: "2019-2024", role: "Member of Parliament (Lok Sabha - Amethi)" },
+      { period: "2011-2019", role: "Member of Parliament (Rajya Sabha)" },
+      { period: "1990s-2003", role: "Successful Television Actress and Producer" }
+    ],
+    familyBackground: "Self-made professional from Delhi; transition from successful media career to high-level politics.",
+    electionHistory: { electionsContested: 3, wins: 1, losses: 2, latestVoteShare: "49.7% (2019)", latestMargin: "55,000 Votes" },
+    ideologyStances: [
+      { issue: "Women & Child Welfare", position: "Pro" },
+      { issue: "Cultural Nationalism", position: "Pro" },
+      { issue: "Grassroots Development (Amethi)", position: "Pro" }
+    ],
+    votingRecord: "Cabinet Minister; defended major reforms like GST and New Education Policy in Parliament.",
+    recentNews: [{ headline: "Addresses global summit on women's empowerment.", source: "The Hindu", date: "March 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "N/A (Minister)", source: "PRS", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "PRS", lastUpdated: "2024" },
+      billsIntroduced: { value: "Multiple (Govt)", source: "PRS", lastUpdated: "2024" },
+      fundsUtilized: { value: "95%", source: "MPLADS", lastUpdated: "2024" },
+      keyAchievements: ["Implementation of One Stop Centres for women", "POSHAN Abhiyaan leader", "Development of Amethi infrastructure"]
     }},
 
   // WEST BENGAL
@@ -1199,22 +1324,30 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    yearsInPolitics: 13,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2014-Present", role: "Member of Parliament (Lok Sabha - Diamond Harbour)" },
+      { period: "2021-Present", role: "National General Secretary, All India Trinamool Congress (TMC)" },
+      { period: "2011-2021", role: "National President, Trinamool Youth Congress" }
+    ],
+    familyBackground: "Nephew of Mamata Banerjee; MBA graduate; strategist focusing on party modernization.",
+    electionHistory: { electionsContested: 3, wins: 3, losses: 0, latestVoteShare: "56%", latestMargin: "3.2 Lakh Votes" },
+    ideologyStances: [
+      { issue: "Regional Federalism", position: "Pro" },
+      { issue: "Youth Empowerment", position: "Pro" },
+      { issue: "Secular Pluralism", position: "Pro" }
+    ],
+    votingRecord: "Active in Lok Sabha; vocal critic of centralizing policies and economic decisions of the NDA.",
+    recentNews: [{ headline: "Leads 'Trinamool Nabo Jowar' outreach program.", source: "Telegraph", date: "Jan 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "12% (Poor)", source: "PRS", lastUpdated: "2024" },
+      questionsAsked: { value: "2", source: "PRS", lastUpdated: "2024" },
+      billsIntroduced: { value: "0", source: "PRS", lastUpdated: "2024" },
+      fundsUtilized: { value: "75%", source: "MPLADS", lastUpdated: "2024" },
+      keyAchievements: ["Pioneered 'Diamond Harbour Model' for pandemic management", "Digitalization of party outreach"]
     }},
   {
     id: 20,
@@ -1247,22 +1380,31 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    yearsInPolitics: 29,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2021-Present", role: "Leader of Opposition, West Bengal Legislative Assembly" },
+      { period: "2016-2020", role: "Cabinet Minister (Transport, Irrigation), West Bengal" },
+      { period: "2009-2016", role: "Member of Parliament (Lok Sabha - Tamluk)" },
+      { period: "2006-2009", role: "Member of Legislative Assembly (Contai South)" }
+    ],
+    familyBackground: "Son of veteran politician Sisir Adhikari; influential family in Purba Medinipur; former TMC strongman turned BJP leader.",
+    electionHistory: { electionsContested: 6, wins: 5, losses: 1, latestVoteShare: "48%", latestMargin: "1,956 Votes (Nandigram)" },
+    ideologyStances: [
+      { issue: "Nationalism", position: "Pro" },
+      { issue: "Anti-Corruption (TMC critique)", position: "Pro" },
+      { issue: "Rural Governance", position: "Pro" }
+    ],
+    votingRecord: "Leader of Opposition; staunchly opposes AITC policies in the state assembly.",
+    recentNews: [{ headline: "Challenges govt on rural fund utilization.", source: "ABP Ananda", date: "Feb 2024", sentiment: "Neutral" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "Data Not Available", source: "WB Assembly", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "WB Assembly", lastUpdated: "2024" },
+      billsIntroduced: { value: "0", source: "WB Assembly", lastUpdated: "2024" },
+      fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
+      keyAchievements: ["Led the Nandigram movement (2007)", "Modernization of transport during ministerial tenure"]
     }},
   {
     id: 21,
@@ -1294,23 +1436,31 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    currentPosition: "Leader of TMC in Rajya Sabha",
+    yearsInPolitics: 13,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2011-Present", role: "Member of Parliament (Rajya Sabha)" },
+      { period: "2011-Present", role: "Leader of TMC in Rajya Sabha" },
+      { period: "1980s-2011", role: "Renowned Quizmaster and Media Professional" }
+    ],
+    familyBackground: "Born into an Anglo-Indian family in Kolkata; son of Neil O'Brien; transition from media to politics.",
+    electionHistory: { electionsContested: 3, wins: 3, losses: 0, latestVoteShare: "N/A (Rajya Sabha)", latestMargin: "N/A" },
+    ideologyStances: [
+      { issue: "Parliamentary Transparency", position: "Pro" },
+      { issue: "Federal Autonomy", position: "Pro" },
+      { issue: "Secular Liberalism", position: "Pro" }
+    ],
+    votingRecord: "Vocal opposition voice in Rajya Sabha; consistently raises issues of constitutional propriety.",
+    recentNews: [{ headline: "Advocates for more parliamentary debate time.", source: "NDTV", date: "March 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "88%", source: "PRS", lastUpdated: "2024" },
+      questionsAsked: { value: "650", source: "PRS", lastUpdated: "2024" },
+      billsIntroduced: { value: "5", source: "PRS", lastUpdated: "2024" },
+      fundsUtilized: { value: "95%", source: "MPLADS", lastUpdated: "2024" },
+      keyAchievements: ["Influential parliamentary debater", "Authored multiple books on Indian politics"]
     }},
   {
     id: 22,
@@ -1342,23 +1492,30 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    currentPosition: "Member of Parliament (Basirhat)",
+    yearsInPolitics: 5,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2019-Present", role: "Member of Parliament (Lok Sabha - Basirhat)" },
+      { period: "2010-Present", role: "Successful Film Actress and Model" }
+    ],
+    familyBackground: "Prominent figure in Bengali cinema; joined politics in 2019 under TMC.",
+    electionHistory: { electionsContested: 1, wins: 1, losses: 0, latestVoteShare: "54%", latestMargin: "3.5 Lakh Votes" },
+    ideologyStances: [
+      { issue: "Secularism & Inclusivity", position: "Pro" },
+      { issue: "Women Empowerment", position: "Pro" },
+      { issue: "Cultural Identity", position: "Pro" }
+    ],
+    votingRecord: "Voted with TMC on major social and state-specific bills in Lok Sabha.",
+    recentNews: [{ headline: "Focuses on local development projects in Basirhat.", source: "Sangbad Pratidin", date: "Jan 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "Data Not Available", source: "PRS", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "PRS", lastUpdated: "2024" },
+      billsIntroduced: { value: "0", source: "PRS", lastUpdated: "2024" },
+      fundsUtilized: { value: "85%", source: "MPLADS", lastUpdated: "2024" },
+      keyAchievements: ["Promoted local handicrafts and tourism", "Women's welfare initiatives in constituency"]
     }},
 
   // MAHARASHTRA
@@ -1393,7 +1550,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Chief Minister of Maharashtra",
-    yearsInPolitics: 25,
+    yearsInPolitics: 44,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [
@@ -1401,13 +1558,16 @@ export const CANDIDATES: Candidate[] = [
     ],
     careerHistory: [
       { period: "2022-Present", role: "Chief Minister of Maharashtra" },
-      { period: "2014-2019", role: "Cabinet Minister (PWD)" }
+      { period: "2014-2022", role: "Cabinet Minister (PWD, Public Health), Maharashtra" },
+      { period: "2004-Present", role: "Member of Legislative Assembly (Kopri-Pachpakhadi)" },
+      { period: "1980s-2004", role: "Grassroots worker for Shiv Sena in Thane; became a key protege of Anand Dighe" }
     ],
-    familyBackground: "Started as an auto-rickshaw driver in Thane before entering politics.",
+    familyBackground: "Born in Satara; moved to Thane; started career in grassroots labor movements and party work.",
     electionHistory: { electionsContested: 4, wins: 4, losses: 0, latestVoteShare: "65%", latestMargin: "89,000 Votes" },
     ideologyStances: [
-      { issue: "Infrastructure", position: "Pro" },
-      { issue: "Hindutva", position: "Pro" }
+      { issue: "Hindutva (Balasaheb's Legacy)", position: "Pro" },
+      { issue: "Infrastructure Development", position: "Pro" },
+      { issue: "Marathi Manoos Rights", position: "Pro" }
     ],
     votingRecord: "N/A (State Executive)",
     recentNews: [
@@ -1451,23 +1611,32 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    currentPosition: "Deputy Chief Minister of Maharashtra",
+    yearsInPolitics: 30,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2022-Present", role: "Deputy Chief Minister of Maharashtra" },
+      { period: "2019-2022", role: "Leader of Opposition, Maharashtra Assembly" },
+      { period: "2014-2019", role: "Chief Minister of Maharashtra" },
+      { period: "1997-1998", role: "Mayor of Nagpur (Youngest at the time)" }
+    ],
+    familyBackground: "Born into a political family in Nagpur; father Gangadhar Rao was an MLC.",
+    electionHistory: { electionsContested: 5, wins: 5, losses: 0, latestVoteShare: "52%", latestMargin: "49,000 Votes" },
+    ideologyStances: [
+      { issue: "Urban Governance", position: "Pro" },
+      { issue: "Infrastructure (Metro, Jalyukt Shivar)", position: "Pro" },
+      { issue: "Nationalism", position: "Pro" }
+    ],
+    votingRecord: "State Executive; focuses on administrative reforms and industrial growth.",
+    recentNews: [{ headline: "Spearheads major FDI initiatives in MH.", source: "Mint", date: "Feb 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "Data Not Available", source: "Assembly", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "Assembly", lastUpdated: "2024" },
+      billsIntroduced: { value: "Multiple (Govt)", source: "Assembly", lastUpdated: "2024" },
+      fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
+      keyAchievements: ["Mumbai Metro expansion", "Jalyukt Shivar water conservation", "Samruddhi Mahamarg planning"]
     }},
   {
     id: 25,
@@ -1499,23 +1668,32 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    currentPosition: "Deputy Chief Minister of Maharashtra",
+    yearsInPolitics: 33,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2023-Present", role: "Deputy Chief Minister of Maharashtra" },
+      { period: "2019-2023", role: "Deputy Chief Minister (Multiple short tenures)" },
+      { period: "1991-Present", role: "Member of Legislative Assembly (Baramati)" },
+      { period: "1991", role: "Member of Parliament (Lok Sabha)" }
+    ],
+    familyBackground: "Nephew of Sharad Pawar; prominent figure in the cooperative and sugar industry of Maharashtra.",
+    electionHistory: { electionsContested: 7, wins: 7, losses: 0, latestVoteShare: "68%", latestMargin: "1.65 Lakh Votes" },
+    ideologyStances: [
+      { issue: "Pragmatic Development", position: "Pro" },
+      { issue: "Cooperative Sector Reforms", position: "Pro" },
+      { issue: "Agrarian Welfare", position: "Pro" }
+    ],
+    votingRecord: "State Executive; known for administrative efficiency and firm grip on state finance.",
+    recentNews: [{ headline: "Allocates record budget for agriculture.", source: "Lokmat", date: "March 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "Data Not Available", source: "Assembly", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "Assembly", lastUpdated: "2024" },
+      billsIntroduced: { value: "Multiple (Govt)", source: "Assembly", lastUpdated: "2024" },
+      fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
+      keyAchievements: ["Administrative overhaul", "Water management projects in Baramati"]
     }},
   {
     id: 26,
@@ -1547,23 +1725,32 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
-    statusBadge: "Incumbent",
+    currentPosition: "President, Shiv Sena (UBT) / MLC",
+    yearsInPolitics: 25,
+    statusBadge: "Challenger",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2022-Present", role: "President, Shiv Sena (UBT)" },
+      { period: "2019-2022", role: "Chief Minister of Maharashtra" },
+      { period: "2003-2012", role: "Executive President, Shiv Sena" },
+      { period: "1990s-2003", role: "Professional Wildlife Photographer and Editor (Saamana)" }
+    ],
+    familyBackground: "Son of Shiv Sena founder Bal Thackeray; carries forward the legacy of the Thackeray family.",
+    electionHistory: { electionsContested: 1, wins: 1, losses: 0, latestVoteShare: "N/A (MLC)", latestMargin: "N/A" },
+    ideologyStances: [
+      { issue: "Marathi Manoos Rights", position: "Pro" },
+      { issue: "Secular Alliance (MVA)", position: "Pro" },
+      { issue: "Environmental Protection", position: "Pro" }
+    ],
+    votingRecord: "Party Leader; focuses on balancing regional identity with progressive governance.",
+    recentNews: [{ headline: "Addresses large gathering at Shivaji Park.", source: "Sakal", date: "March 2024", sentiment: "Positive" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "Data Not Available", source: "Assembly", lastUpdated: "2024" },
+      questionsAsked: { value: "N/A", source: "Assembly", lastUpdated: "2024" },
+      billsIntroduced: { value: "Multiple (Past Govt)", source: "Assembly", lastUpdated: "2024" },
+      fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
+      keyAchievements: ["Handled COVID-19 pandemic in Maharashtra", "Shiv Bhojan Thali scheme"]
     }},
   {
     id: 27,
@@ -1595,23 +1782,32 @@ export const CANDIDATES: Candidate[] = [
     movableAssetsBreakdown: [],
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
-    currentPosition: "Elected Representative",
-    yearsInPolitics: 15,
+    currentPosition: "Member of Parliament (Rajya Sabha)",
+    yearsInPolitics: 55,
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
-    careerHistory: [{ period: "2019-Present", role: "Elected Representative" }],
-    familyBackground: "Political/Social Service background.",
-    electionHistory: { electionsContested: 3, wins: 2, losses: 1, latestVoteShare: "45%", latestMargin: "50k Votes" },
-    ideologyStances: [{ issue: "Local Development", position: "Pro" }],
-    votingRecord: "Votes with party line",
-    recentNews: [{ headline: "Conducts rallies in home constituency.", source: "Local News", date: "March 2024", sentiment: "Neutral" }],
+    careerHistory: [
+      { period: "2014-Present", role: "Member of Parliament (Rajya Sabha)" },
+      { period: "1999-2023", role: "President, Nationalist Congress Party (NCP)" },
+      { period: "2004-2014", role: "Union Minister of Agriculture & Food Processing" },
+      { period: "1978-1999", role: "Chief Minister of Maharashtra (Multiple terms)" }
+    ],
+    familyBackground: "Born into an agricultural family in Baramati; over 50 years of active political service.",
+    electionHistory: { electionsContested: 14, wins: 14, losses: 0, latestVoteShare: "N/A (RS)", latestMargin: "N/A" },
+    ideologyStances: [
+      { issue: "Agrarian Reforms", position: "Pro" },
+      { issue: "Regional Empowerment", position: "Pro" },
+      { issue: "Secular Politics", position: "Pro" }
+    ],
+    votingRecord: "Veteran leader; instrumental in national level agrarian policies and coalition building.",
+    recentNews: [{ headline: "Consulted by various parties on national alliance strategy.", source: "NDTV", date: "Feb 2024", sentiment: "Neutral" }],
     performanceMetrics: {
-      attendance: { value: "78%", source: "PRS", lastUpdated: "2024" },
-      questionsAsked: { value: "112", source: "PRS", lastUpdated: "2024" },
-      billsIntroduced: { value: "1", source: "PRS", lastUpdated: "2024" },
-      fundsUtilized: { value: "88%", source: "MPLADS", lastUpdated: "2024" },
-      keyAchievements: ["Local infrastructure development", "Constituency grievance redressal"]
+      attendance: { value: "82%", source: "PRS", lastUpdated: "2024" },
+      questionsAsked: { value: "450", source: "PRS", lastUpdated: "2024" },
+      billsIntroduced: { value: "2", source: "PRS", lastUpdated: "2024" },
+      fundsUtilized: { value: "98%", source: "MPLADS", lastUpdated: "2024" },
+      keyAchievements: ["National level agrarian reforms", "Instrumental in major coalition building"]
     }},
   {
     id: 28,
@@ -1655,12 +1851,20 @@ export const CANDIDATES: Candidate[] = [
     statusBadge: "Challenger",
     disqualifications: "None",
     pastControversies: [{ description: "Income Tax raids at residence", date: "2020", status: "Cleared" }],
-    careerHistory: [{ period: "2024-Present", role: "President, TVK" }, { period: "1992-Present", role: "Actor" }],
-    familyBackground: "Son of film director S. A. Chandrasekhar.",
+    careerHistory: [
+      { period: "2024-Present", role: "President, Tamilaga Vettri Kazhagam (TVK)" },
+      { period: "1992-Present", role: "Leading Actor in Tamil Cinema (Over 65 films)" },
+      { period: "2009-2024", role: "Founder, Vijay Makkal Iyakkam (Social Welfare Organization)" }
+    ],
+    familyBackground: "Son of veteran film director S. A. Chandrasekhar and singer Shoba Chandrasekhar.",
     electionHistory: { electionsContested: 0, wins: 0, losses: 0, latestVoteShare: "N/A", latestMargin: "N/A" },
-    ideologyStances: [{ issue: "Anti-Corruption", position: "Pro" }, { issue: "Youth Empowerment", position: "Pro" }],
-    votingRecord: "N/A",
-    recentNews: [{ headline: "Launches new political party TVK.", source: "The Hindu", date: "Feb 2024", sentiment: "Positive" }],
+    ideologyStances: [
+      { issue: "Social Justice & Equality", position: "Pro" },
+      { issue: "Anti-Corruption", position: "Pro" },
+      { issue: "Secular Regionalism", position: "Pro" }
+    ],
+    votingRecord: "N/A; focuses on state-level issues and youth empowerment through TVK.",
+    recentNews: [{ headline: "Launches Tamilaga Vettri Kazhagam (TVK) with a focus on 2026 elections.", source: "The Hindu", date: "Feb 2024", sentiment: "Positive" }],
     performanceMetrics: {
       attendance: { value: "N/A", source: "N/A", lastUpdated: "2024" },
       questionsAsked: { value: "N/A", source: "N/A", lastUpdated: "2024" },

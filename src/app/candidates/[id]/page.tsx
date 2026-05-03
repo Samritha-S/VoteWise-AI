@@ -73,19 +73,26 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
     liabilitiesBreakdown: safeParse(dbCandidate.liabilityBreakdown, []),
     criminalCasesBreakdown: safeParse(dbCandidate.caseDetails, []),
     pastControversies: safeParse(dbCandidate.scamsOrControversies, []),
-    careerHistory: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).careerHistory || []) : [],
-    ideologyStances: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).ideologyStances || []) : [],
+    careerHistory: safeParse(dbCandidate.careerHistory, []),
+    ideologyStances: safeParse(dbCandidate.ideologyStances, []),
     recentNews: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).recentNews || []) : [],
     assetDetails: {
       movable: dbCandidate.totalAssets,
       immovable: "See Breakdown"
     },
     currentPosition: dbCandidate.profession,
-    statusBadge: "Candidate",
-    yearsInPolitics: 0,
-    votingRecord: "Data Not Available",
-    educationDetails: dbCandidate.education,
-    familyBackground: "Data Not Available"
+    statusBadge: dbCandidate.statusBadge || "Candidate",
+    disqualifications: dbCandidate.disqualifications || "None",
+    yearsInPolitics: dbCandidate.yearsInPolitics || 0,
+    votingRecord: dbCandidate.votingRecord || "Data Not Available",
+    educationDetails: dbCandidate.educationDetails || dbCandidate.education,
+    familyBackground: dbCandidate.familyBackground || "Data Not Available",
+    spouseProfession: dbCandidate.spouseProfession || "Data Not Available",
+    totalIncomeDeclared: dbCandidate.totalIncomeDeclared || "Data Not Available",
+    panGiven: dbCandidate.panGiven,
+    itrFiled: dbCandidate.itrFiled,
+    incomeSources: dbCandidate.incomeSources || "Data Not Available",
+    govtContracts: dbCandidate.govtContracts || "Data Not Available"
   };
 
 
@@ -177,29 +184,53 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
 
         {/* Quick Stats Grid */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50">
-            <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><Landmark className="w-3.5 h-3.5" /> Total Assets</p>
-            <p className="text-2xl font-bold text-foreground">{candidate.assets}</p>
+          <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50 flex flex-col justify-between">
+            <div>
+              <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><Landmark className="w-3.5 h-3.5" /> Total Assets</p>
+              <p className="text-2xl font-bold text-foreground">{candidate.assets}</p>
+            </div>
+            <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+              Source: Myneta/ECI<br/>
+              (Updated: 2024)
+            </div>
           </div>
-          <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50">
-            <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><AlertCircle className="w-3.5 h-3.5" /> Liabilities</p>
-            <p className="text-2xl font-bold text-amber-600">{candidate.liabilities}</p>
+          <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50 flex flex-col justify-between">
+            <div>
+              <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><AlertCircle className="w-3.5 h-3.5" /> Liabilities</p>
+              <p className="text-2xl font-bold text-amber-600">{candidate.liabilities}</p>
+            </div>
+            <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+              Source: Myneta/ECI<br/>
+              (Updated: 2024)
+            </div>
           </div>
-          <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50">
-            <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><Scale className="w-3.5 h-3.5" /> Criminal Cases</p>
-            <p className={`text-2xl font-bold ${candidate.cases > 0 ? "text-red-500" : "text-green-500"}`}>
-              {candidate.cases}
-            </p>
+          <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50 flex flex-col justify-between">
+            <div>
+              <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><Scale className="w-3.5 h-3.5" /> Criminal Cases</p>
+              <p className={`text-2xl font-bold ${candidate.cases > 0 ? "text-red-500" : "text-green-500"}`}>
+                {candidate.cases}
+              </p>
+            </div>
+            <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+              Source: Myneta/ADR<br/>
+              (Updated: 2024)
+            </div>
           </div>
-          <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50">
-            <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> Data Verified</p>
-            <p className="text-lg font-bold text-foreground mt-1">
-              {new Date(candidate.lastUpdated).toLocaleDateString("en-US", {
-                month: "short",
-                year: "numeric",
-                timeZone: "UTC"
-              })}
-            </p>
+          <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50 flex flex-col justify-between">
+            <div>
+              <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> Data Verified</p>
+              <p className="text-lg font-bold text-foreground mt-1">
+                {new Date(candidate.lastUpdated).toLocaleDateString("en-US", {
+                  month: "short",
+                  year: "numeric",
+                  timeZone: "UTC"
+                })}
+              </p>
+            </div>
+            <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+              Source: ECI/ADR<br/>
+              (Latest Report)
+            </div>
           </div>
         </section>
 
@@ -327,6 +358,9 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
                   <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold">Margin of Victory/Loss</p>
                   <p className="text-lg font-bold">{candidate.electionHistory.latestMargin}</p>
                 </div>
+                <div className="mt-2 pt-2 border-t border-border/30 text-[10px] text-muted-foreground uppercase font-medium">
+                  Source: Election Commission of India (ECI)
+                </div>
               </div>
             </div>
           </section>
@@ -363,6 +397,9 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
                 <p className="font-medium text-sm leading-relaxed p-3 bg-secondary/30 rounded-lg border border-border/50">
                   {candidate.votingRecord}
                 </p>
+                <div className="mt-2 text-[10px] text-muted-foreground uppercase font-medium">
+                  Source: Parliament Records / Official Stances
+                </div>
               </div>
             </div>
           </section>
@@ -510,10 +547,20 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
                   </div>
                 </div>
                 <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm space-y-3">
-                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold">Family Background</p>
-                  <p className="font-medium text-sm leading-relaxed p-3 bg-secondary/30 rounded-lg border border-border/50">
-                    {candidate.familyBackground}
-                  </p>
+                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold">Family & Spouse Details</p>
+                  <div className="p-3 bg-secondary/30 rounded-lg border border-border/50 space-y-3">
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase font-bold mb-1">Spouse Profession</p>
+                      <p className="text-sm font-medium">{candidate.spouseProfession || "Data Not Available"}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase font-bold mb-1">Family Background</p>
+                      <p className="text-sm font-medium">{candidate.familyBackground || "Data Not Available"}</p>
+                    </div>
+                  </div>
+                  <div className="mt-1 text-[10px] text-muted-foreground uppercase font-medium">
+                    Source: Wikipedia / Official Biographies
+                  </div>
                 </div>
               </div>
             </div>

@@ -69,10 +69,11 @@ Instructions:
 
     return NextResponse.json({ response: responseText });
 
-  } catch (error: unknown) {
-    console.error("Gemini API Error:", error instanceof Error ? error.message : error);
+  } catch (error: any) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error("Gemini API Error:", errorMessage);
     return NextResponse.json(
-      { error: "Failed to generate response. Check API key or try again." },
+      { error: `Failed to generate response: ${errorMessage}` },
       { status: 500 }
     );
   }

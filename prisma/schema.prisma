@@ -31,6 +31,22 @@ model Candidate {
   electionHistory      String?  
   scamsOrControversies String?  
   
+  // Background & Income
+  familyBackground     String?
+  spouseProfession     String?
+  totalIncomeDeclared  String?
+  panGiven             Boolean  @default(false)
+  itrFiled             Boolean  @default(false)
+  incomeSources        String?
+  govtContracts        String?
+  educationDetails     String?
+  careerHistory        String?  // JSON
+  ideologyStances      String?  // JSON
+  disqualifications    String?
+  statusBadge          String?  // Incumbent or Candidate
+  votingRecord         String?
+  yearsInPolitics      Int      @default(0)
+
   sourceUrl            String
   confidence           String
 
