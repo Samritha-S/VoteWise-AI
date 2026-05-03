@@ -45,7 +45,7 @@ model Candidate {
   disqualifications    String?
   statusBadge          String?  // Incumbent or Candidate
   votingRecord         String?
-  yearsInPolitics      Int      @default(0)
+  yearsInPolitics      String?
 
   sourceUrl            String
   confidence           String

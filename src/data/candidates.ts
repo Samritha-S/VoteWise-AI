@@ -96,7 +96,7 @@ export interface Candidate {
 
   // ENHANCED FIELDS
   currentPosition: string;
-  yearsInPolitics: number;
+  yearsInPolitics: string;
   statusBadge: "Incumbent" | "Challenger";
   
   pastControversies: Controversy[];
@@ -118,8 +118,8 @@ export interface Candidate {
 // Helper to generate default empty enhanced data for brevity
 
 export const CANDIDATES: Candidate[] = [
-  {
-    id: 1,
+
+    {id: 1,
     name: "Narendra Modi",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Varanasi",
@@ -155,7 +155,7 @@ export const CANDIDATES: Candidate[] = [
     liabilitiesBreakdown: [],
     // ENHANCED DATA
     currentPosition: "Prime Minister of India, MP Varanasi",
-    yearsInPolitics: 53,
+    yearsInPolitics: "53 yrs",
     statusBadge: "Incumbent",
     pastControversies: [
       { description: "Allegations regarding the 2002 Gujarat riots. Cleared by Supreme Court SIT.", date: "2002", status: "Cleared" }
@@ -194,8 +194,7 @@ export const CANDIDATES: Candidate[] = [
       { headline: "Opposition criticizes economic policies.", source: "Indian Express", date: "March 2024", sentiment: "Negative" }
     ]
   },
-  {
-    id: 2,
+    {id: 2,
     name: "Rahul Gandhi",
     party: "Indian National Congress (INC)",
     constituency: "Raebareli",
@@ -243,7 +242,7 @@ export const CANDIDATES: Candidate[] = [
     ],
     // ENHANCED DATA
     currentPosition: "Member of Parliament",
-    yearsInPolitics: 20,
+    yearsInPolitics: "20 yrs",
     statusBadge: "Incumbent",
     pastControversies: [
       { description: "Convicted in a defamation case over a 2019 remark. Conviction stayed by Supreme Court.", date: "2023", status: "Stayed" }
@@ -284,8 +283,7 @@ export const CANDIDATES: Candidate[] = [
       { headline: "BJP criticizes recent remarks on EVMs.", source: "Times of India", date: "April 2024", sentiment: "Negative" }
     ]
   },
-  {
-    id: 3,
+    {id: 3,
     name: "Arvind Kejriwal",
     party: "Aam Aadmi Party (AAP)",
     constituency: "New Delhi",
@@ -326,7 +324,7 @@ export const CANDIDATES: Candidate[] = [
     liabilitiesBreakdown: [],
     // ENHANCED DATA
     currentPosition: "Chief Minister of Delhi",
-    yearsInPolitics: 12,
+    yearsInPolitics: "12 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Various defamation suits.", date: "2016", status: "Settled" }],
@@ -354,8 +352,7 @@ export const CANDIDATES: Candidate[] = [
       billDetails: []
     }
   },
-  {
-    id: 4,
+    {id: 4,
     name: "Mamata Banerjee",
     party: "All India Trinamool Congress (AITC)",
     constituency: "Bhabanipur",
@@ -387,7 +384,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Chief Minister of West Bengal",
-    yearsInPolitics: 45,
+    yearsInPolitics: "45 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -416,8 +413,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Kanyashree Prakalpa", "Duare Sarkar"]
     }
   },
-  {
-    id: 5,
+    {id: 5,
     name: "Amit Shah",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Gandhinagar",
@@ -459,7 +455,7 @@ export const CANDIDATES: Candidate[] = [
       { type: "Loans from Banks (Home Loan)", value: "₹15,00,000" }
     ],
     currentPosition: "Minister of Home Affairs",
-    yearsInPolitics: 42,
+    yearsInPolitics: "42 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Sohrabuddin case", date: "2010", status: "Discharged by Court" }],
@@ -485,8 +481,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "100%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Abrogation of Article 370", "Bhartiya Nyaya Sanhita"]
     }},
-  {
-    id: 6,
+    {id: 6,
     name: "Akhilesh Yadav",
     party: "Samajwadi Party (SP)",
     constituency: "Kannauj",
@@ -522,7 +517,7 @@ export const CANDIDATES: Candidate[] = [
       { type: "Personal Loans", value: "₹2,00,00,000" }
     ],
     currentPosition: "Leader of Opposition, UP",
-    yearsInPolitics: 24,
+    yearsInPolitics: "24 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Mining scam allegations", date: "2019", status: "Pending Enquiry" }],
@@ -548,8 +543,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "90%", source: "State Records", lastUpdated: "2024" },
       keyAchievements: ["Agra-Lucknow Expressway", "Laptop distribution scheme"]
     }},
-  {
-    id: 7,
+    {id: 7,
     name: "Shashi Tharoor",
     party: "Indian National Congress (INC)",
     constituency: "Thiruvananthapuram",
@@ -589,7 +583,7 @@ export const CANDIDATES: Candidate[] = [
     ],
     liabilitiesBreakdown: [],
     currentPosition: "Member of Parliament",
-    yearsInPolitics: 15,
+    yearsInPolitics: "15 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Sunanda Pushkar case", date: "2014", status: "Discharged by Court" }],
@@ -619,8 +613,7 @@ export const CANDIDATES: Candidate[] = [
         "The Protection of Traditional Knowledge Bill, 2022"
       ]
     }},
-  {
-    id: 8,
+    {id: 8,
     name: "Asaduddin Owaisi",
     party: "All India Majlis-e-Ittehadul Muslimeen (AIMIM)",
     constituency: "Hyderabad",
@@ -662,7 +655,7 @@ export const CANDIDATES: Candidate[] = [
       { type: "Bank Loans", value: "₹5,00,00,000" }
     ],
     currentPosition: "Member of Parliament",
-    yearsInPolitics: 30,
+    yearsInPolitics: "30 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Hate speech accusations", date: "2012", status: "Acquitted" }],
@@ -691,8 +684,7 @@ export const CANDIDATES: Candidate[] = [
         "The Minorities (Protection and Welfare) Bill, 2022"
       ]
     }},
-  {
-    id: 9,
+    {id: 9,
     name: "Nitin Gadkari",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Nagpur",
@@ -734,7 +726,7 @@ export const CANDIDATES: Candidate[] = [
       { type: "Housing Loan", value: "₹1,35,00,000" }
     ],
     currentPosition: "Elected Representative",
-    yearsInPolitics: 44,
+    yearsInPolitics: "44 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -760,8 +752,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "98%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Revolutionized National Highway network", "Mumbai-Pune Expressway", "Zojila Tunnel project"]
     }},
-  {
-    id: 10,
+    {id: 10,
     name: "Tejasvi Surya",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Bangalore South",
@@ -799,7 +790,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Member of Parliament",
-    yearsInPolitics: 16,
+    yearsInPolitics: "16 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [{ description: "Bed allocation scam claims", date: "2021", status: "Resolved" }],
@@ -825,8 +816,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Advocated for Namma Metro expansion", "Active in youth mobilization"]
     }},
   // TAMIL NADU
-  {
-    id: 11,
+    {id: 11,
     name: "M. K. Stalin",
     party: "Dravida Munnetra Kazhagam (DMK)",
     constituency: "Kolathur",
@@ -856,7 +846,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Chief Minister of Tamil Nadu",
-    yearsInPolitics: 58,
+    yearsInPolitics: "58 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [
@@ -889,8 +879,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Pudhumai Penn Scheme", "Makkalai Thedi Maruthuvam"]
     }
   },
-  {
-    id: 12,
+    {id: 12,
     name: "Udhayanidhi Stalin",
     party: "Dravida Munnetra Kazhagam (DMK)",
     constituency: "Chepauk-Thiruvallikeni",
@@ -920,7 +909,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Minister for Youth Welfare and Sports Development, Tamil Nadu",
-    yearsInPolitics: 10,
+    yearsInPolitics: "10 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     careerHistory: [
@@ -938,6 +927,7 @@ export const CANDIDATES: Candidate[] = [
     ],
     votingRecord: "State Cabinet Minister; focus on sports infrastructure and youth empowerment.",
     recentNews: [{ headline: "Organizes major international sports events in Chennai.", source: "The Hindu", date: "Jan 2024", sentiment: "Positive" }],
+    pastControversies: [],
     performanceMetrics: {
       attendance: { value: "Data Not Available", source: "Assembly", lastUpdated: "2024" },
       questionsAsked: { value: "N/A", source: "Assembly", lastUpdated: "2024" },
@@ -945,8 +935,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Revitalization of sports infrastructure", "Women's rights advocacy"]
     }},
-  {
-    id: 13,
+    {id: 13,
     name: "K. Annamalai",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Coimbatore",
@@ -976,7 +965,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "President, BJP Tamil Nadu",
-    yearsInPolitics: 4,
+    yearsInPolitics: "4 yrs",
     statusBadge: "Challenger",
     disqualifications: "None",
     pastControversies: [],
@@ -1001,8 +990,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "N/A", source: "N/A", lastUpdated: "2024" },
       keyAchievements: ["Rapid expansion of BJP in Tamil Nadu", "High-impact 'En Mann En Makkal' padayatra", "Corruption exposes through 'DMK Files'"]
     }},
-  {
-    id: 14,
+    {id: 14,
     name: "Kanimozhi Karunanidhi",
     party: "Dravida Munnetra Kazhagam (DMK)",
     constituency: "Thoothukkudi",
@@ -1032,7 +1020,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Member of Parliament (Thoothukkudi)",
-    yearsInPolitics: 17,
+    yearsInPolitics: "17 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1059,8 +1047,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "92%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Promoted Thoothukkudi industrial corridor", "Advocated for women's reservation bill"]
     }},
-  {
-    id: 15,
+    {id: 15,
     name: "Edappadi K. Palaniswami",
     party: "All India Anna Dravida Munnetra Kazhagam (AIADMK)",
     constituency: "Edappadi",
@@ -1090,7 +1077,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Leader of Opposition, Tamil Nadu",
-    yearsInPolitics: 50,
+    yearsInPolitics: "50 yrs",
     statusBadge: "Challenger",
     disqualifications: "None",
     pastControversies: [],
@@ -1115,8 +1102,7 @@ export const CANDIDATES: Candidate[] = [
     }},
   
   // UTTAR PRADESH
-  {
-    id: 16,
+    {id: 16,
     name: "Yogi Adityanath",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Gorakhpur Urban",
@@ -1146,7 +1132,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Chief Minister of Uttar Pradesh",
-    yearsInPolitics: 26,
+    yearsInPolitics: "26 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [
@@ -1178,8 +1164,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Expressway expansions", "Defense Corridor"]
     }
   },
-  {
-    id: 17,
+    {id: 17,
     name: "Keshav Prasad Maurya",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Sirathu",
@@ -1209,7 +1194,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Deputy Chief Minister of Uttar Pradesh",
-    yearsInPolitics: 40,
+    yearsInPolitics: "40 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     careerHistory: [
@@ -1227,6 +1212,7 @@ export const CANDIDATES: Candidate[] = [
     ],
     votingRecord: "Deputy CM; focuses on public works and backward class development.",
     recentNews: [{ headline: "Inaugurates several bridge projects in rural UP.", source: "Jagran", date: "March 2024", sentiment: "Positive" }],
+    pastControversies: [],
     performanceMetrics: {
       attendance: { value: "Data Not Available", source: "Assembly", lastUpdated: "2024" },
       questionsAsked: { value: "N/A", source: "Assembly", lastUpdated: "2024" },
@@ -1234,8 +1220,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["OBC mobilization", "Infrastructure development in rural sectors"]
     }},
-  {
-    id: 18,
+    {id: 18,
     name: "Smriti Irani",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Amethi",
@@ -1265,7 +1250,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Elected Representative",
-    yearsInPolitics: 21,
+    yearsInPolitics: "21 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1293,8 +1278,7 @@ export const CANDIDATES: Candidate[] = [
     }},
 
   // WEST BENGAL
-  {
-    id: 19,
+    {id: 19,
     name: "Abhishek Banerjee",
     party: "All India Trinamool Congress (AITC)",
     constituency: "Diamond Harbour",
@@ -1324,7 +1308,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Elected Representative",
-    yearsInPolitics: 13,
+    yearsInPolitics: "13 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1349,8 +1333,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "75%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Pioneered 'Diamond Harbour Model' for pandemic management", "Digitalization of party outreach"]
     }},
-  {
-    id: 20,
+    {id: 20,
     name: "Suvendu Adhikari",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Nandigram",
@@ -1380,7 +1363,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Elected Representative",
-    yearsInPolitics: 29,
+    yearsInPolitics: "29 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1406,8 +1389,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Led the Nandigram movement (2007)", "Modernization of transport during ministerial tenure"]
     }},
-  {
-    id: 21,
+    {id: 21,
     name: "Derek O'Brien",
     party: "All India Trinamool Congress (AITC)",
     constituency: "Rajya Sabha",
@@ -1437,7 +1419,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Leader of TMC in Rajya Sabha",
-    yearsInPolitics: 13,
+    yearsInPolitics: "13 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1462,8 +1444,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "95%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Influential parliamentary debater", "Authored multiple books on Indian politics"]
     }},
-  {
-    id: 22,
+    {id: 22,
     name: "Nusrat Jahan",
     party: "All India Trinamool Congress (AITC)",
     constituency: "Basirhat",
@@ -1493,7 +1474,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Member of Parliament (Basirhat)",
-    yearsInPolitics: 5,
+    yearsInPolitics: "5 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1519,8 +1500,7 @@ export const CANDIDATES: Candidate[] = [
     }},
 
   // MAHARASHTRA
-  {
-    id: 23,
+    {id: 23,
     name: "Eknath Shinde",
     party: "Shiv Sena",
     constituency: "Kopri-Pachpakhadi",
@@ -1550,7 +1530,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Chief Minister of Maharashtra",
-    yearsInPolitics: 44,
+    yearsInPolitics: "44 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [
@@ -1581,8 +1561,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Mumbai Coastal Road push", "Samruddhi Mahamarg completion phase"]
     }
   },
-  {
-    id: 24,
+    {id: 24,
     name: "Devendra Fadnavis",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Nagpur South West",
@@ -1612,7 +1591,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Deputy Chief Minister of Maharashtra",
-    yearsInPolitics: 30,
+    yearsInPolitics: "30 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1638,8 +1617,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Mumbai Metro expansion", "Jalyukt Shivar water conservation", "Samruddhi Mahamarg planning"]
     }},
-  {
-    id: 25,
+    {id: 25,
     name: "Ajit Pawar",
     party: "Nationalist Congress Party (NCP)",
     constituency: "Baramati",
@@ -1669,7 +1647,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Deputy Chief Minister of Maharashtra",
-    yearsInPolitics: 33,
+    yearsInPolitics: "33 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1695,8 +1673,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Administrative overhaul", "Water management projects in Baramati"]
     }},
-  {
-    id: 26,
+    {id: 26,
     name: "Uddhav Thackeray",
     party: "Shiv Sena (UBT)",
     constituency: "MLC",
@@ -1726,7 +1703,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "President, Shiv Sena (UBT) / MLC",
-    yearsInPolitics: 25,
+    yearsInPolitics: "25 yrs",
     statusBadge: "Challenger",
     disqualifications: "None",
     pastControversies: [],
@@ -1752,8 +1729,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Handled COVID-19 pandemic in Maharashtra", "Shiv Bhojan Thali scheme"]
     }},
-  {
-    id: 27,
+    {id: 27,
     name: "Sharad Pawar",
     party: "Nationalist Congress Party (NCP - SP)",
     constituency: "Rajya Sabha",
@@ -1783,7 +1759,7 @@ export const CANDIDATES: Candidate[] = [
     immovableAssetsBreakdown: [],
     liabilitiesBreakdown: [],
     currentPosition: "Member of Parliament (Rajya Sabha)",
-    yearsInPolitics: 55,
+    yearsInPolitics: "55 yrs",
     statusBadge: "Incumbent",
     disqualifications: "None",
     pastControversies: [],
@@ -1809,8 +1785,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "98%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["National level agrarian reforms", "Instrumental in major coalition building"]
     }},
-  {
-    id: 28,
+    {id: 28,
     name: "Joseph Vijay",
     party: "Tamilaga Vettri Kazhagam (TVK)",
     constituency: "Data Not Available",
@@ -1847,7 +1822,7 @@ export const CANDIDATES: Candidate[] = [
       { type: "Loans from Banks/Financial Institutions", value: "₹7 Crores" }
     ],
     currentPosition: "Party President",
-    yearsInPolitics: 1,
+    yearsInPolitics: "1 yrs",
     statusBadge: "Challenger",
     disqualifications: "None",
     pastControversies: [{ description: "Income Tax raids at residence", date: "2020", status: "Cleared" }],

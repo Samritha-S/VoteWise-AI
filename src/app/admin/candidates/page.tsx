@@ -15,11 +15,16 @@ interface Candidate {
 }
 
 export default function CandidatesData() {
-  const [candidates, setCandidates] = useState<Candidate[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [editingCandidate, setEditingCandidate] = useState<Candidate | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
+    fetchCandidates();
+  }, []);
+
+  const fetchCandidates = () => {
+    setLoading(true);
     fetch('/api/candidates')
       .then(res => res.json())
       .then(data => {
@@ -36,7 +41,57 @@ export default function CandidatesData() {
         setCandidates([]);
         setLoading(false);
       });
-  }, []);
+  };
+
+  const handleEdit = (candidate: Candidate) => {
+    setEditingCandidate({ ...candidate });
+    setIsEditModalOpen(true);
+  };
+
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingCandidate) return;
+
+    setIsSaving(true);
+    try {
+      const res = await fetch(`/api/candidates/${editingCandidate.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editingCandidate),
+      });
+
+      if (res.ok) {
+        setIsEditModalOpen(false);
+        fetchCandidates();
+      } else {
+        const error = await res.json();
+        alert(`Error: ${error.error}`);
+      }
+    } catch (err) {
+      console.error("Save error:", err);
+      alert("Failed to save changes.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this candidate?")) return;
+
+    try {
+      const res = await fetch(`/api/candidates/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        fetchCandidates();
+      } else {
+        alert("Failed to delete candidate.");
+      }
+    } catch (err) {
+      console.error("Delete error:", err);
+    }
+  };
 
   const filtered = Array.isArray(candidates) 
     ? candidates.filter(c => 
@@ -120,10 +175,16 @@ export default function CandidatesData() {
                     <td className="px-6 py-4 text-muted-foreground">{c.totalAssets}</td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <button className="p-2 text-muted-foreground hover:text-primary rounded-lg hover:bg-secondary transition-colors">
+                        <button 
+                          onClick={() => handleEdit(c)}
+                          className="p-2 text-muted-foreground hover:text-primary rounded-lg hover:bg-secondary transition-colors"
+                        >
                           <Edit className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-muted-foreground hover:text-destructive rounded-lg hover:bg-destructive/10 transition-colors">
+                        <button 
+                          onClick={() => handleDelete(c.id)}
+                          className="p-2 text-muted-foreground hover:text-destructive rounded-lg hover:bg-destructive/10 transition-colors"
+                        >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -135,6 +196,108 @@ export default function CandidatesData() {
           </table>
         </div>
       </div>
+
+      {/* Edit Modal */}
+      {isEditModalOpen && editingCandidate && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-card border border-border rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-bold">Edit Candidate</h2>
+              <button 
+                onClick={() => setIsEditModalOpen(false)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                &times;
+              </button>
+            </div>
+            
+            <form onSubmit={handleSave} className="p-6 space-y-4 overflow-y-auto">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Name</label>
+                <input 
+                  type="text" 
+                  value={editingCandidate.name} 
+                  onChange={e => setEditingCandidate({...editingCandidate, name: e.target.value})}
+                  className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:ring-1 focus:ring-primary focus:outline-none"
+                  required
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Party</label>
+                  <input 
+                    type="text" 
+                    value={editingCandidate.party} 
+                    onChange={e => setEditingCandidate({...editingCandidate, party: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:ring-1 focus:ring-primary focus:outline-none"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Constituency</label>
+                  <input 
+                    type="text" 
+                    value={editingCandidate.constituency} 
+                    onChange={e => setEditingCandidate({...editingCandidate, constituency: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:ring-1 focus:ring-primary focus:outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">State</label>
+                  <input 
+                    type="text" 
+                    value={editingCandidate.state} 
+                    onChange={e => setEditingCandidate({...editingCandidate, state: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:ring-1 focus:ring-primary focus:outline-none"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Total Assets</label>
+                  <input 
+                    type="text" 
+                    value={editingCandidate.totalAssets} 
+                    onChange={e => setEditingCandidate({...editingCandidate, totalAssets: e.target.value})}
+                    className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:ring-1 focus:ring-primary focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Photo URL</label>
+                <input 
+                  type="text" 
+                  value={editingCandidate.photo} 
+                  onChange={e => setEditingCandidate({...editingCandidate, photo: e.target.value})}
+                  className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:ring-1 focus:ring-primary focus:outline-none"
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-4 border-t border-border mt-4">
+                <button 
+                  type="button"
+                  onClick={() => setIsEditModalOpen(false)}
+                  className="px-4 py-2 rounded-lg border border-border hover:bg-muted font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  disabled={isSaving}
+                  className="px-6 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 font-medium transition-colors flex items-center gap-2"
+                >
+                  {isSaving ? "Saving..." : "Save Changes"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

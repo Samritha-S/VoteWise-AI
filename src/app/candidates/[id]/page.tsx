@@ -171,16 +171,7 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
           </div>
         </div>
 
-        {/* Disqualification Alert */}
-        {candidate.disqualifications !== "None" && (
-          <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl flex gap-3 shadow-sm">
-            <AlertCircle className="w-6 h-6 text-red-600 shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-semibold text-red-800">Verified Disqualification / Suspension</h3>
-              <p className="text-red-700 text-sm mt-1 leading-relaxed">{candidate.disqualifications}</p>
-            </div>
-          </div>
-        )}
+        {/* Disqualification Alert Removed */}
 
         {/* Quick Stats Grid */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4">

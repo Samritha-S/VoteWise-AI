@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { CANDIDATES } from "../src/data/candidates.ts";
+import { CANDIDATES } from "../src/data/candidates";
 
 const prisma = new PrismaClient();
 
@@ -43,7 +43,7 @@ async function main() {
         disqualifications: c.disqualifications || "None",
         statusBadge: c.statusBadge || "Candidate",
         votingRecord: c.votingRecord || "Data Not Available",
-        yearsInPolitics: c.yearsInPolitics || 0
+        yearsInPolitics: c.yearsInPolitics || "0 yrs"
       },
       create: {
         id: c.id.toString(),
@@ -80,7 +80,7 @@ async function main() {
         disqualifications: c.disqualifications || "None",
         statusBadge: c.statusBadge || "Candidate",
         votingRecord: c.votingRecord || "Data Not Available",
-        yearsInPolitics: c.yearsInPolitics || 0
+        yearsInPolitics: c.yearsInPolitics || "0 yrs"
       }
     });
   }
