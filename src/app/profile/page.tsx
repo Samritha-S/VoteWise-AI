@@ -38,7 +38,6 @@ export default function ProfilePage() {
       language: formData.language,
       age: parseInt(formData.age),
       state: formData.state,
-      state: formData.state,
       voterStatus: formData.voterStatus as VoterStatus | undefined,
       avatar: formData.avatar
     });
