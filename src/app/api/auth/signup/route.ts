@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcrypt";
 
 export async function POST(request: Request) {
   try {
@@ -25,19 +26,19 @@ export async function POST(request: Request) {
       );
     }
 
-    // Note: In a real production app, password MUST be hashed (e.g. bcrypt).
-    // For this hackathon prototype, we are storing it securely within Prisma locally
-    // but in plain text for demonstration simplicity.
+    // Securely hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await prisma.user.create({
       data: {
         name,
         phone: phone || null,
         email,
-        password, // TODO: Hash password
+        password: hashedPassword,
         address: address || null,
         state: state || null,
         pincode: pincode || null,
-        age: age ? parseInt(age) : null,
+        age: age ? parseInt(age.toString()) : null,
         voterStatus: voterStatus || "Not Registered",
       },
     });
