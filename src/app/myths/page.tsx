@@ -95,7 +95,7 @@ export default function MythBusterPage() {
   }, []);
 
   const allMyths = [
-    ...MYTHS,
+    ...(t.myths.mythList || []),
     ...liveMyths.map(m => ({
       id: m.id,
       myth: m.claim,
@@ -145,15 +145,15 @@ export default function MythBusterPage() {
                 <div className="w-16 h-16 bg-muted/50 text-muted-foreground rounded-2xl flex items-center justify-center mx-auto mb-2 border border-border/50">
                   <Search className="w-8 h-8 opacity-50" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground tracking-tight">No fact-checks found</h3>
-                <p className="text-muted-foreground text-lg max-w-md mx-auto">We couldn't find anything matching "<span className="font-medium text-foreground">{searchTerm}</span>".</p>
+                <h3 className="text-2xl font-bold text-foreground tracking-tight">{t.myths.noResults}</h3>
+                <p className="text-muted-foreground text-lg max-w-md mx-auto">{t.myths.noResultsDesc} "<span className="font-medium text-foreground">{searchTerm}</span>".</p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
                   <a 
                     href={`/assistant?q=${encodeURIComponent(searchTerm)}`} 
                     className="px-6 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:scale-105 hover:bg-primary/90 transition-all shadow-md shadow-primary/20 w-full sm:w-auto flex items-center justify-center gap-2"
                   >
-                    Ask AI Assistant <ExternalLink className="w-4 h-4" />
+                    {t.myths.askAssistant} <ExternalLink className="w-4 h-4" />
                   </a>
                   <button 
                     onClick={() => {
@@ -162,18 +162,18 @@ export default function MythBusterPage() {
                     }} 
                     className="px-6 py-3 bg-secondary text-foreground font-medium rounded-xl hover:bg-secondary/80 transition-colors w-full sm:w-auto border border-border flex items-center justify-center gap-2"
                   >
-                    Send to Fact-Check Team
+                    {t.myths.sendTeam}
                   </button>
                 </div>
               </>
             ) : (
               <div className="text-left space-y-4 max-w-lg mx-auto">
-                <h3 className="text-xl font-bold">Request a Fact-Check</h3>
-                <p className="text-muted-foreground text-sm">Send this question to our research team. We'll verify it and get back to you.</p>
+                <h3 className="text-xl font-bold">{t.myths.requestFactCheck}</h3>
+                <p className="text-muted-foreground text-sm">{t.myths.requestDesc}</p>
                 
                 <div className="space-y-3">
                   <div>
-                    <label className="text-sm font-medium mb-1 block">Your Question or Claim</label>
+                    <label className="text-sm font-medium mb-1 block">{t.myths.yourQuestion}</label>
                     <textarea 
                       value={reportQuestion}
                       onChange={(e) => setReportQuestion(e.target.value)}
@@ -181,10 +181,10 @@ export default function MythBusterPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-1 block">Contact Details</label>
+                    <label className="text-sm font-medium mb-1 block">{t.myths.contactDetails}</label>
                     <input 
                       type="text"
-                      placeholder="Email or phone to get back to you"
+                      placeholder={t.myths.contactPlaceholder}
                       value={reportDetails}
                       onChange={(e) => setReportDetails(e.target.value)}
                       className="w-full p-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary outline-none"
@@ -194,7 +194,7 @@ export default function MythBusterPage() {
 
                 <div className="flex justify-end gap-3 pt-2">
                   <button onClick={() => setIsReporting(false)} className="px-4 py-2 text-muted-foreground hover:bg-secondary rounded-lg font-medium transition-colors">
-                    Cancel
+                    {t.myths.cancel}
                   </button>
                   <button 
                     onClick={async () => {
@@ -219,7 +219,7 @@ export default function MythBusterPage() {
                     }}
                     className="px-6 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
                   >
-                    Submit Request
+                    {t.myths.submit}
                   </button>
                 </div>
               </div>

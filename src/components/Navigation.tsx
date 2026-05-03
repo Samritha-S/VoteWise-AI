@@ -111,12 +111,12 @@ export default function Navigation() {
             <>
               <div className="text-sm font-medium text-foreground mb-1 flex items-center gap-2">
                 <span className="text-xl">{userData.avatar}</span>
-                <span className="truncate">{userData.name || "User"}</span>
+                <span className="truncate">{userData.name || (userData.language === "English" ? "User" : "उपयोगकर्ता")}</span>
               </div>
               <div className="text-xs text-muted-foreground flex items-center justify-between mt-2">
                 <span className="flex items-center gap-1.5">
                   <div className="w-2 h-2 rounded-full bg-green-500" />
-                  {t.sidebar.ready || "Ready to vote"}
+                  {t.sidebar.ready}
                 </span>
                 <button 
                   onClick={() => {
@@ -125,7 +125,7 @@ export default function Navigation() {
                   }} 
                   className="text-primary hover:underline"
                 >
-                  Sign out
+                  {t.common?.signOut}
                 </button>
               </div>
             </>

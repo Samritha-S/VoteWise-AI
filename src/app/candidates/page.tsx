@@ -38,11 +38,17 @@ export default function CandidatesPage() {
     fetch('/api/candidates')
       .then(res => res.json())
       .then(data => {
-        setCandidates(data);
+        if (Array.isArray(data)) {
+          setCandidates(data);
+        } else {
+          console.error("API did not return an array:", data);
+          setCandidates([]);
+        }
         setLoading(false);
       })
       .catch(err => {
         console.error("Failed to fetch candidates from DB:", err);
+        setCandidates([]);
         setLoading(false);
       });
   }, []);
@@ -128,8 +134,8 @@ export default function CandidatesPage() {
                 <div className="p-6 flex flex-col md:flex-row md:items-center gap-6 justify-between">
                   <div className="flex items-center gap-5">
                     <Image 
-                      src={candidate.photo} 
-                      alt={candidate.name} 
+                      src={candidate.photo || "/candidates/default.jpg"} 
+                      alt={candidate.name || "Candidate"} 
                       width={80}
                       height={80}
                       className="w-16 h-16 md:w-20 md:h-20 rounded-xl object-cover border border-border/50 bg-muted shrink-0"

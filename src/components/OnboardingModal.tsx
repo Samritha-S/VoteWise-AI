@@ -28,6 +28,8 @@ export default function OnboardingModal() {
     rememberDevice: false
   });
 
+  const t = useTranslation(formData.language);
+
   if (!isLoaded || userData.onboardingComplete) return null;
 
   const handleNext = () => {
@@ -59,10 +61,10 @@ export default function OnboardingModal() {
       >
         <div className="p-6 bg-secondary/30 border-b border-border/50">
           <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-400">
-            Welcome to VoteWise AI
+            {t.onboarding.welcome}
           </h2>
           <p className="text-muted-foreground mt-1 text-sm">
-            Let's personalize your election journey.
+            {t.onboarding.personalize}
           </p>
           
           {/* Progress bar */}
@@ -86,23 +88,23 @@ export default function OnboardingModal() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-6"
               >
-                <h3 className="text-lg font-semibold">Let's get to know you</h3>
+                <h3 className="text-lg font-semibold">{t.onboarding.getKnowYou}</h3>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1.5">
-                      Full Name
+                      {t.onboarding.fullName}
                     </label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                       className="w-full p-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
-                      placeholder="Enter your name"
+                      placeholder={t.onboarding.enterName}
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1.5">
-                      Phone Number
+                      {t.onboarding.phoneNumber}
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground font-medium text-sm">
@@ -130,19 +132,19 @@ export default function OnboardingModal() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-4"
               >
-                <h3 className="text-lg font-semibold">Select your preferred language</h3>
+                <h3 className="text-lg font-semibold">{t.onboarding.selectLang}</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {languages.map(lang => (
                     <button
-                      key={lang}
-                      onClick={() => setFormData({...formData, language: lang})}
+                      key={lang.id}
+                      onClick={() => setFormData({...formData, language: lang.id})}
                       className={`p-3 rounded-xl border text-left transition-all ${
-                        formData.language === lang 
+                        formData.language === lang.id 
                           ? 'border-primary bg-primary/10 text-primary font-medium' 
                           : 'border-border hover:border-primary/50'
                       }`}
                     >
-                      {lang}
+                      {lang.name}
                     </button>
                   ))}
                 </div>
@@ -157,8 +159,8 @@ export default function OnboardingModal() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-4"
               >
-                <h3 className="text-lg font-semibold">How old are you?</h3>
-                <p className="text-sm text-muted-foreground">This helps us check your eligibility.</p>
+                <h3 className="text-lg font-semibold">{t.onboarding.howOld}</h3>
+                <p className="text-sm text-muted-foreground">{t.onboarding.eligibilityCheck}</p>
                 <input 
                   type="number"
                   value={formData.age}
@@ -177,7 +179,7 @@ export default function OnboardingModal() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-4"
               >
-                <h3 className="text-lg font-semibold">Which state do you live in?</h3>
+                <h3 className="text-lg font-semibold">{t.onboarding.whichState}</h3>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-4 text-muted-foreground w-5 h-5" />
                   <select
@@ -185,7 +187,7 @@ export default function OnboardingModal() {
                     onChange={(e) => setFormData({...formData, state: e.target.value})}
                     className="w-full p-4 pl-10 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:outline-none appearance-none"
                   >
-                    <option value="" disabled>Select a state</option>
+                    <option value="" disabled>{t.onboarding.selectState}</option>
                     {states.map(state => (
                       <option key={state} value={state}>{state}</option>
                     ))}
@@ -193,12 +195,12 @@ export default function OnboardingModal() {
                 </div>
                 <div className="mt-4">
                   <label className="block text-sm font-medium text-foreground mb-1.5">
-                    Full Residential Address
+                    {t.onboarding.fullAddress}
                   </label>
                   <textarea
                     value={formData.address}
                     onChange={(e) => setFormData({...formData, address: e.target.value})}
-                    placeholder="House No, Street, Locality"
+                    placeholder={t.onboarding.addressPlaceholder}
                     rows={2}
                     className="w-full p-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:outline-none resize-none"
                   />
@@ -214,7 +216,7 @@ export default function OnboardingModal() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-4"
               >
-                <h3 className="text-lg font-semibold">What is your voter status?</h3>
+                <h3 className="text-lg font-semibold">{t.onboarding.voterStatus}</h3>
                 <div className="space-y-3">
                   {(["Registered", "Not Registered", "Unsure"] as VoterStatus[]).map(status => (
                     <button
@@ -228,7 +230,7 @@ export default function OnboardingModal() {
                     >
                       <span className="flex items-center gap-3">
                         <ShieldCheck className={`w-5 h-5 ${formData.voterStatus === status ? 'text-primary' : 'text-muted-foreground'}`} />
-                        {status}
+                        {status === "Registered" ? t.profile.registered : status === "Not Registered" ? t.profile.notRegistered : t.profile.unsure}
                       </span>
                       {formData.voterStatus === status && <div className="w-2 h-2 rounded-full bg-primary" />}
                     </button>
@@ -242,9 +244,9 @@ export default function OnboardingModal() {
                       onChange={(e) => setFormData({...formData, rememberDevice: e.target.checked})}
                       className="w-5 h-5 rounded border-border text-primary focus:ring-primary"
                     />
-                    <span className="text-sm font-medium">Remember me on this device</span>
+                    <span className="text-sm font-medium">{t.onboarding.rememberMe}</span>
                   </label>
-                  <p className="text-xs text-muted-foreground mt-1 ml-8">If unchecked, you will be prompted to setup again next time.</p>
+                  <p className="text-xs text-muted-foreground mt-1 ml-8">{t.onboarding.rememberMeDesc}</p>
                 </div>
               </motion.div>
             )}
@@ -262,7 +264,7 @@ export default function OnboardingModal() {
             }
             className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {step === 5 ? "Complete Setup" : "Next"}
+            {step === 5 ? t.onboarding.complete : t.onboarding.next}
             {step < 5 && <ChevronRight className="w-4 h-4" />}
           </button>
         </div>

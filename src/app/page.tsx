@@ -11,19 +11,14 @@ import {
   MapPin,
   Clock,
   ShieldAlert,
-  ShieldCheck
+  ShieldCheck,
+  Vote,
+  Calendar
 } from "lucide-react";
 import { useAppContext } from "@/context/AppContext";
 import { useTranslation } from "@/lib/i18n";
 import OnboardingModal from "@/components/OnboardingModal";
 import Link from "next/link";
-
-const JOURNEY_STEPS = [
-  { id: "eligibility", title: "Eligibility Check", desc: "Verify if you can vote" },
-  { id: "registration", title: "Registration", desc: "Get on the voter list" },
-  { id: "documents", title: "Documents Ready", desc: "Gather required IDs" },
-  { id: "polling", title: "Polling Booth", desc: "Know where and when" }
-];
 
 import AuthPage from "./auth/page";
 
@@ -38,22 +33,22 @@ export default function Dashboard() {
 
   // "What Should I Do Next?" Engine Logic
   const nextAction = useMemo(() => {
-    if (!userData.onboardingComplete) return { text: "Complete your profile to get started", link: "#", type: "info" };
+    if (!userData.onboardingComplete) return { text: t.journey.statusMessages.completeProfile, link: "#", type: "info" };
     
     if (userData.age && userData.age < 18) {
-      return { text: "You are not yet eligible to vote. Learn about future registration.", link: "/assistant", type: "warning" };
+      return { text: t.journey.statusMessages.notEligible, link: "/assistant", type: "warning" };
     }
 
     if (userData.voterStatus === "Not Registered" || userData.voterStatus === "Unsure") {
-      return { text: "Your highest priority: Register to vote.", link: "/assistant", type: "alert" };
+      return { text: t.journey.statusMessages.registerPriority, link: "/assistant", type: "alert" };
     }
 
     if (userData.voterStatus === "Registered") {
-      return { text: "Polling is TOMORROW! Double check your booth location and carry your Voter ID.", link: "/deadlines", type: "urgent" };
+      return { text: `${t.journey.pollingTomorrow}! ${t.journey.boothAlert}`, link: "/deadlines", type: "urgent" };
     }
 
-    return { text: "Explore the AI assistant for guidance.", link: "/assistant", type: "info" };
-  }, [userData]);
+    return { text: t.journey.statusMessages.exploreAI, link: "/assistant", type: "info" };
+  }, [userData, t]);
 
   // Determine progress based on logic
   const progressSteps = useMemo(() => {
@@ -107,37 +102,43 @@ export default function Dashboard() {
         </motion.p>
       </header>
 
-      {/* Polling Tomorrow Banner */}
+      {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15 }}
-        className="relative group overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-indigo-600 p-8 text-white shadow-xl"
+        className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary via-indigo-600 to-indigo-700 text-white shadow-2xl shadow-primary/20"
       >
-        <div className="absolute top-0 right-0 -mt-8 -mr-8 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute bottom-0 left-0 -mb-8 -ml-8 h-48 w-48 rounded-full bg-primary-foreground/10 blur-3xl" />
+        <div className="absolute top-0 right-0 p-8 opacity-10">
+          <Vote className="w-64 h-64 rotate-12" />
+        </div>
         
-        <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider">
-              <Clock className="w-3 h-3" /> Election Countdown
+        <div className="relative p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="space-y-6 text-center md:text-left max-w-xl">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-medium">
+              <Calendar className="w-4 h-4" /> {t.journey.countdown}
             </div>
-            <h2 className="text-3xl md:text-4xl font-black">POLLING TOMORROW</h2>
-            <p className="text-primary-foreground/80 font-medium">May 4, 2026 • 7:00 AM - 6:00 PM</p>
+            <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.1]">
+              {t.journey.pollingTomorrow}
+            </h1>
+            <p className="text-indigo-100 text-lg font-medium opacity-90">
+              May 4, 2026 • 7:00 AM - 6:00 PM
+            </p>
           </div>
           
-          <div className="flex items-center gap-4">
-            <div className="flex flex-col items-center justify-center h-20 w-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
-               <span className="text-3xl font-bold">1</span>
-               <span className="text-[10px] font-bold uppercase opacity-60">Day Left</span>
+          <div className="flex items-center gap-6">
+            <div className="flex flex-col items-center">
+              <div className="w-20 h-24 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl flex flex-col items-center justify-center">
+                <span className="text-4xl font-black">1</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">{t.journey.dayLeft}</span>
+              </div>
             </div>
             <a 
-              href="https://electoralsearch.eci.gov.in/"
-              target="_blank"
+              href="https://electoralsearch.eci.gov.in/" 
+              target="_blank" 
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-white text-primary rounded-2xl font-bold hover:bg-primary-foreground transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+              className="px-8 py-4 bg-white text-primary font-bold rounded-2xl hover:bg-indigo-50 transition-all hover:scale-105 hover:shadow-lg shadow-white/10"
             >
-              Check Booth Info
+              {t.journey.checkBooth}
             </a>
           </div>
         </div>

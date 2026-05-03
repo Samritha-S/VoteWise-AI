@@ -11,6 +11,26 @@ export const translations: Record<string, any> = {
       ready: "Ready",
       incomplete: "Profile Incomplete"
     },
+    onboarding: {
+      welcome: "Welcome to VoteWise AI",
+      personalize: "Let's personalize your election journey.",
+      getKnowYou: "Let's get to know you",
+      fullName: "Full Name",
+      enterName: "Enter your name",
+      phoneNumber: "Phone Number",
+      selectLang: "Select your preferred language",
+      howOld: "How old are you?",
+      eligibilityCheck: "This helps us check your eligibility.",
+      whichState: "Which state do you live in?",
+      selectState: "Select a state",
+      fullAddress: "Full Residential Address",
+      addressPlaceholder: "House No, Street, Locality",
+      voterStatus: "What is your voter status?",
+      rememberMe: "Remember me on this device",
+      rememberMeDesc: "If unchecked, you will be prompted to setup again next time.",
+      complete: "Complete Setup",
+      next: "Next"
+    },
     profile: {
       langTitle: "Language & Regional",
       langDesc: "Choose the language for the AI Assistant and interface.",
@@ -19,8 +39,10 @@ export const translations: Record<string, any> = {
       personalDetails: "Personal Details",
       editProfile: "Edit Profile",
       save: "Save",
+      avatarDesign: "Select Avatar Design",
       age: "Age",
       state: "State",
+      fullAddress: "Full Address",
       voterStatus: "Voter Status",
       notSet: "Not set",
       registered: "Registered",
@@ -40,7 +62,14 @@ export const translations: Record<string, any> = {
     },
     assistant: {
       greeting: "Hello! I'm VoteWise AI. Based on your profile ({state}), how can I help you today?",
-      placeholder: "Ask me anything about voting..."
+      placeholder: "Ask me anything about voting...",
+      thinking: "Thinking...",
+      suggestions: [
+        "Am I eligible to vote?",
+        "How do I register?",
+        "What documents do I need?",
+        "Find my polling booth"
+      ]
     },
     journey: {
       title: "Welcome to",
@@ -49,6 +78,17 @@ export const translations: Record<string, any> = {
       yourProgress: "Your Progress",
       getHelp: "Get Help",
       quickLinks: "Quick Links",
+      countdown: "Election Countdown",
+      pollingTomorrow: "POLLING TOMORROW",
+      boothAlert: "Double check your booth location and carry your Voter ID.",
+      dayLeft: "Day Left",
+      checkBooth: "Check Booth Info",
+      statusMessages: {
+        completeProfile: "Complete your profile to get started",
+        notEligible: "You are not yet eligible to vote. Learn about future registration.",
+        registerPriority: "Your highest priority: Register to vote.",
+        exploreAI: "Explore the AI assistant for guidance."
+      },
       steps: [
         { title: "Eligibility Check", desc: "Verify if you can vote" },
         { title: "Registration", desc: "Get on the voter list" },
@@ -97,7 +137,79 @@ export const translations: Record<string, any> = {
       desc: "Fact-checking election misinformation and rumors.",
       reportMyth: "Report a Rumor",
       reportMythDesc: "Heard something suspicious? Let us verify it.",
-      recentChecks: "Recent Fact Checks"
+      recentChecks: "Recent Fact Checks",
+      searchPlaceholder: "Search myths...",
+      claim: "CLAIM",
+      fact: "FACT",
+      source: "SOURCE:",
+      verifySource: "Verify Source",
+      noResults: "No fact-checks found",
+      noResultsDesc: "We couldn't find anything matching your search.",
+      askAssistant: "Ask AI Assistant",
+      sendTeam: "Send to Fact-Check Team",
+      requestFactCheck: "Request a Fact-Check",
+      requestDesc: "Send this question to our research team. We'll verify it and get back to you.",
+      yourQuestion: "Your Question or Claim",
+      contactDetails: "Contact Details",
+      contactPlaceholder: "Email or phone to get back to you",
+      cancel: "Cancel",
+      submit: "Submit Request",
+      mythList: [
+        { myth: "You can vote online in India from home.", fact: "No, online voting is not permitted in India for general citizens. You must visit your designated polling booth to cast your vote using an EVM. However, certain eligible individuals (like disabled voters above 40% and seniors above 85) can opt for home voting via postal ballot under specific rules.", source: "Election Commission of India (ECI)" },
+        { myth: "If I have an Aadhaar Card, I don't need to be registered on the voter list.", fact: "False. Having an Aadhaar card or any ID is not enough. Your name MUST be registered in the Electoral Roll (voter list) of your constituency to vote. You can use your Aadhaar as an ID proof at the booth ONLY IF your name is on the list.", source: "Representation of the People Act, 1950" },
+        { myth: "EVMs can be hacked via Bluetooth or Wi-Fi.", fact: "EVMs used in Indian elections are standalone machines. They do not have any radio frequency receiver or data decoder, and cannot be connected to any network, Wi-Fi, or Bluetooth.", source: "ECI EVM Manual" }
+      ]
+    },
+    deadlines: {
+      title: "Deadlines Checklist",
+      desc: "Stay on top of critical election dates. Track your progress to ensure you're fully prepared for polling day.",
+      back: "Back to Dashboard",
+      items: [
+        { title: "Voter Registration Deadline", date: "April 15, 2026", desc: "Last day to register to vote or update your address in the electoral roll." },
+        { title: "Postal Ballot Application", date: "May 5, 2026", desc: "Deadline to apply for postal voting if you are a senior citizen (85+) or PwD." },
+        { title: "Polling Day", date: "Tomorrow (May 4, 2026)", desc: "Cast your vote at your designated polling booth from 7:00 AM to 6:00 PM." },
+        { title: "Election Results Day", date: "May 7, 2026", desc: "Counting of votes and declaration of final election results." }
+      ]
+    },
+    documents: {
+      title: "Documents Checklist",
+      desc: "You must carry at least ONE of these documents to the polling booth to cast your vote.",
+      back: "Back to Dashboard",
+      readyTitle: "You're All Set!",
+      readyDesc: "You have at least one valid document ready. Remember to carry it with you on polling day.",
+      actionTitle: "Documents Required",
+      actionDesc: "Please ensure you have at least one of these documents ready for polling day.",
+      types: { primary: "Primary", alternative: "Alternative" },
+      items: [
+        { id: "epic", title: "Voter ID Card (EPIC)", type: "Primary", desc: "The Electoral Photo Identity Card issued by the Election Commission of India. This is the most widely accepted document." },
+        { id: "aadhaar", title: "Aadhaar Card", type: "Alternative", desc: "Your 12-digit unique identity number issued by UIDAI. Must contain your photograph." },
+        { id: "pan", title: "PAN Card", type: "Alternative", desc: "Permanent Account Number card issued by the Income Tax Department." },
+        { id: "driving", title: "Driving License", type: "Alternative", desc: "A valid driving license issued by the RTO containing your photograph." },
+        { id: "passport", title: "Indian Passport", type: "Alternative", desc: "Your official Indian Passport issued by the Ministry of External Affairs." },
+        { id: "bank", title: "Bank/Post Office Passbook", type: "Alternative", desc: "Passbook with your photograph, issued by a recognized Bank or Post Office." }
+      ]
+    },
+    auth: {
+      loginTitle: "Welcome back",
+      signupTitle: "Create your account",
+      signIn: "Sign in",
+      signUp: "Create Account",
+      alreadyHaveAccount: "Already have an account? ",
+      noAccount: "Or ",
+      createAccount: "create a new account",
+      signInAccount: "sign in to your account",
+      fullName: "Full Name",
+      phone: "Phone Number",
+      email: "Email address",
+      password: "Password",
+      votingDetails: "Voting Details",
+      rememberMe: "Remember me",
+      forgotPassword: "Forgot your password?",
+      terms: "By creating an account, you agree to our Terms of Service.",
+      wait: "Please wait..."
+    },
+    common: {
+      signOut: "Sign out"
     }
   },
   Hindi: {
@@ -105,11 +217,31 @@ export const translations: Record<string, any> = {
       journey: "यात्रा",
       assistant: "एआई सहायक",
       candidates: "उम्मीदवार",
-      mythBuster: "तथ्य जांच",
+      mythBuster: "तथ्य जाँच",
       profile: "प्रोफ़ाइल",
       status: "स्थिति",
       ready: "तैयार",
-      incomplete: "अपूर्ण प्रोफ़ाइल"
+      incomplete: "प्रोफ़ाइल अधूरी"
+    },
+    onboarding: {
+      welcome: "वोटवाइज़ एआई में आपका स्वागत है",
+      personalize: "आइए आपकी चुनाव यात्रा को व्यक्तिगत बनाएं।",
+      getKnowYou: "आइए आपके बारे में जानें",
+      fullName: "पूरा नाम",
+      enterName: "अपना नाम दर्ज करें",
+      phoneNumber: "फ़ोन नंबर",
+      selectLang: "अपनी पसंदीदा भाषा चुनें",
+      howOld: "आपकी उम्र क्या है?",
+      eligibilityCheck: "यह हमें आपकी पात्रता जांचने में मदद करता है।",
+      whichState: "आप किस राज्य में रहते हैं?",
+      selectState: "राज्य चुनें",
+      fullAddress: "पूरा आवासीय पता",
+      addressPlaceholder: "मकान नंबर, सड़क, इलाका",
+      voterStatus: "आपकी मतदाता स्थिति क्या है?",
+      rememberMe: "मुझे इस डिवाइस पर याद रखें",
+      rememberMeDesc: "यदि अनचेक किया गया है, तो आपको अगली बार फिर से सेटअप करने के लिए कहा जाएगा।",
+      complete: "सेटअप पूरा करें",
+      next: "अगला"
     },
     profile: {
       langTitle: "भाषा और क्षेत्रीय",
@@ -117,14 +249,16 @@ export const translations: Record<string, any> = {
       headerTitle: "आपकी प्रोफ़ाइल",
       headerDesc: "अपना संदर्भ और ऐप सेटिंग्स प्रबंधित करें।",
       personalDetails: "व्यक्तिगत विवरण",
-      editProfile: "संपादित करें",
+      editProfile: "प्रोफ़ाइल संपादित करें",
       save: "सहेजें",
+      avatarDesign: "अवतार डिजाइन चुनें",
       age: "आयु",
       state: "राज्य",
+      fullAddress: "पूरा पता",
       voterStatus: "मतदाता स्थिति",
       notSet: "सेट नहीं है",
       registered: "पंजीकृत",
-      notRegistered: "पंजीकृत नहीं है",
+      notRegistered: "पंजीकृत नहीं",
       unsure: "अनिश्चित",
       notifications: "सूचनाएं",
       deadlinesAlerts: "समय सीमा अलर्ट",
@@ -134,38 +268,56 @@ export const translations: Record<string, any> = {
       screenReader: "स्क्रीन रीडर मोड",
       voiceOutput: "वॉयस आउटपुट",
       offlineMode: "ऑफ़लाइन मोड",
-      offlineDesc: "मतदान के दिन ऑफ़लाइन पहुँच के लिए आवश्यक डेटा सहेजें।",
+      offlineDesc: "मतदान के दिन ऑफ़लाइन पहुंच के लिए आवश्यक डेटा सहेजें।",
       downloadPack: "ऑफ़लाइन पैक डाउनलोड करें",
       resetProfile: "प्रोफ़ाइल रीसेट करें"
     },
     assistant: {
-      greeting: "नमस्ते! मैं वोटवाइज़ एआई हूँ। आपकी प्रोफ़ाइल ({state}) के आधार पर, मैं आपकी कैसे मदद कर सकता हूँ?",
-      placeholder: "वोटिंग के बारे में कुछ भी पूछें..."
+      greeting: "नमस्ते! मैं वोटवाइज़ एआई हूँ। आपकी प्रोफ़ाइल ({state}) के आधार पर, मैं आज आपकी कैसे मदद कर सकता हूँ?",
+      placeholder: "वोटिंग के बारे में कुछ भी पूछें...",
+      thinking: "सोच रहा हूँ...",
+      suggestions: [
+        "क्या मैं वोट देने के लिए पात्र हूँ?",
+        "मैं पंजीकरण कैसे करूँ?",
+        "मुझे किन दस्तावेजों की आवश्यकता है?",
+        "मेरा मतदान केंद्र खोजें"
+      ]
     },
     journey: {
       title: "वोटवाइज़ में आपका स्वागत है",
       desc: "मतपेटी तक आपकी व्यक्तिगत यात्रा।",
       nextAction: "मुझे आगे क्या करना चाहिए?",
       yourProgress: "आपकी प्रगति",
-      getHelp: "मदद प्राप्त करें",
+      getHelp: "मदद लें",
       quickLinks: "त्वरित लिंक",
+      countdown: "चुनाव उलटी गिनती",
+      pollingTomorrow: "मतदान कल है",
+      boothAlert: "अपने बूथ स्थान की दोबारा जांच करें और अपना मतदाता पहचान पत्र साथ रखें।",
+      dayLeft: "दिन शेष",
+      checkBooth: "बूथ की जानकारी जांचें",
+      statusMessages: {
+        completeProfile: "शुरू करने के लिए अपनी प्रोफ़ाइल पूरी करें",
+        notEligible: "आप अभी तक वोट देने के पात्र नहीं हैं। भविष्य के पंजीकरण के बारे में जानें।",
+        registerPriority: "आपकी सर्वोच्च प्राथमिकता: वोट देने के लिए पंजीकरण करें।",
+        exploreAI: "मार्गदर्शन के लिए एआई सहायक का उपयोग करें।"
+      },
       steps: [
-        { title: "पात्रता जांच", desc: "सत्यापित करें कि क्या आप वोट दे सकते हैं" },
+        { title: "पात्रता जाँच", desc: "सत्यापित करें कि क्या आप वोट दे सकते हैं" },
         { title: "पंजीकरण", desc: "मतदाता सूची में अपना नाम शामिल करवाएं" },
-        { title: "दस्तावेज़ तैयार करें", desc: "आवश्यक आईडी इकट्ठा करें" },
+        { title: "दस्तावेज़ तैयार", desc: "आवश्यक आईडी इकट्ठा करें" },
         { title: "मतदान केंद्र", desc: "जानें कहां और कब" }
       ],
       quickLinkCards: {
         documents: { title: "दस्तावेज़ जांचें", desc: "क्या ले जाना है" },
         booth: { title: "बूथ खोजें", desc: "अपना मतदान केंद्र खोजें" },
         deadlines: { title: "समय सीमा", desc: "चुनाव की तारीखों को ट्रैक करें" },
-        mythBuster: { title: "तथ्य जांच", desc: "चुनावी दावों की तथ्य-जांच करें" }
+        mythBuster: { title: "तथ्य जाँच", desc: "चुनावी दावों की तथ्य-जांच करें" }
       }
     },
     survey: {
       title: "सामुदायिक सत्यापन पोल",
       step1Title: "आपके स्थानीय ज्ञान के आधार पर, क्या इस उम्मीदवार के लिए प्रस्तुत जानकारी सटीक है?",
-      yes: "हां, सटीक है",
+      yes: "हाँ, सटीक है",
       partially: "आंशिक रूप से सटीक",
       no: "नहीं, गलत है",
       step2Title: "कौन से विशिष्ट अनुभाग गलत लगते हैं?",
@@ -185,7 +337,7 @@ export const translations: Record<string, any> = {
       searchPlaceholder: "नाम, पार्टी या निर्वाचन क्षेत्र से उम्मीदवार खोजें...",
       filter: "फ़िल्टर",
       totalAssets: "कुल संपत्ति",
-      criminalCases: "आपराधिक मामले",
+      criminalCases: "अपराधिक मामले",
       dataNotAvailable: "डेटा उपलब्ध नहीं है",
       searchTitle: "डेटाबेस खोजें",
       searchDesc: "उम्मीदवारों के सत्यापित वित्तीय हलफनामे, कानूनी रिकॉर्ड और विधायी प्रदर्शन देखने के लिए नाम, राजनीतिक दल या निर्वाचन क्षेत्र दर्ज करें।",
@@ -193,11 +345,83 @@ export const translations: Record<string, any> = {
       noCandidates: "आपके मानदंडों से मेल खाने वाला कोई उम्मीदवार नहीं मिला।"
     },
     myths: {
-      title: "तथ्य जांच (Myth Buster)",
+      title: "तथ्य जाँच (Myth Buster)",
       desc: "चुनाव की गलत सूचना और अफवाहों की तथ्य-जांच।",
       reportMyth: "अफवाह की रिपोर्ट करें",
       reportMythDesc: "कुछ संदिग्ध सुना? हमें सत्यापित करने दें।",
-      recentChecks: "हाल की तथ्य जांच"
+      recentChecks: "हाल की तथ्य जाँच",
+      searchPlaceholder: "भ्रम खोजें...",
+      claim: "दावा",
+      fact: "तथ्य",
+      source: "स्रोत:",
+      verifySource: "स्रोत सत्यापित करें",
+      noResults: "कोई तथ्य-जांच नहीं मिली",
+      noResultsDesc: "हमें आपकी खोज से मेल खाने वाला कुछ भी नहीं मिला।",
+      askAssistant: "एआई सहायक से पूछें",
+      sendTeam: "तथ्य-जांच टीम को भेजें",
+      requestFactCheck: "तथ्य-जांच का अनुरोध करें",
+      requestDesc: "यह प्रश्न हमारी शोध टीम को भेजें। हम इसे सत्यापित करेंगे और आपसे संपर्क करेंगे।",
+      yourQuestion: "आपका प्रश्न या दावा",
+      contactDetails: "संपर्क विवरण",
+      contactPlaceholder: "आपसे संपर्क करने के लिए ईमेल या फोन",
+      cancel: "रद्द करें",
+      submit: "अनुरोध सबमिट करें",
+      mythList: [
+        { myth: "आप भारत में घर बैठे ऑनलाइन वोट डाल सकते हैं।", fact: "नहीं, आम नागरिकों के लिए भारत में ऑनलाइन वोटिंग की अनुमति नहीं है। आपको ईवीएम का उपयोग करके अपना वोट डालने के लिए अपने निर्दिष्ट मतदान केंद्र पर जाना होगा। हालांकि, कुछ पात्र व्यक्ति (जैसे 40% से अधिक विकलांग मतदाता और 85 वर्ष से अधिक उम्र के वरिष्ठ नागरिक) विशिष्ट नियमों के तहत डाक मतपत्र के माध्यम से घर से मतदान का विकल्प चुन सकते हैं।", source: "भारत निर्वाचन आयोग (ECI)" },
+        { myth: "अगर मेरे पास आधार कार्ड है, तो मुझे मतदाता सूची में पंजीकृत होने की आवश्यकता नहीं है।", fact: "गलत। केवल आधार कार्ड या कोई भी आईडी होना पर्याप्त नहीं है। वोट देने के लिए आपका नाम आपके निर्वाचन क्षेत्र की निर्वाचक नामावली (मतदाता सूची) में पंजीकृत होना अनिवार्य है। आप बूथ पर पहचान प्रमाण के रूप में अपने आधार का उपयोग केवल तभी कर सकते हैं जब आपका नाम सूची में हो।", source: "लोक प्रतिनिधित्व अधिनियम, 1950" },
+        { myth: "ईवीएम को ब्लूटूथ या वाई-फाई के जरिए हैक किया जा सकता है।", fact: "भारतीय चुनावों में उपयोग की जाने वाली ईवीएम स्टैंडअलोन मशीनें हैं। उनमें कोई रेडियो फ्रीक्वेंसी रिसीवर या डेटा डिकोडर नहीं होता है, और उन्हें किसी भी नेटवर्क, वाई-फाई या ब्लूटूथ से नहीं जोड़ा जा सकता है।", source: "ईसीआई ईवीएम मैनुअल" }
+      ]
+    },
+    deadlines: {
+      title: "समय सीमा चेकलिस्ट",
+      desc: "चुनाव की महत्वपूर्ण तारीखों से अपडेट रहें। यह सुनिश्चित करने के लिए अपनी प्रगति ट्रैक करें कि आप मतदान के दिन के लिए पूरी तरह तैयार हैं।",
+      back: "डैशबोर्ड पर वापस जाएं",
+      items: [
+        { title: "मतदाता पंजीकरण की समय सीमा", date: "15 अप्रैल, 2026", desc: "मतदाता सूची में पंजीकरण करने या अपना पता अपडेट करने का अंतिम दिन।" },
+        { title: "डाक मतपत्र आवेदन", date: "5 मई, 2026", desc: "यदि आप वरिष्ठ नागरिक (85+) या दिव्यांग हैं तो डाक मतदान के लिए आवेदन करने की समय सीमा।" },
+        { title: "मतदान का दिन", date: "कल (4 मई, 2026)", desc: "अपने निर्दिष्ट मतदान केंद्र पर सुबह 7:00 बजे से शाम 6:00 बजे तक अपना वोट डालें।" },
+        { title: "चुनाव परिणाम का दिन", date: "7 मई, 2026", desc: "वोटों की गिनती और अंतिम चुनाव परिणामों की घोषणा।" }
+      ]
+    },
+    documents: {
+      title: "दस्तावेज़ चेकलिस्ट",
+      desc: "अपना वोट डालने के लिए आपको इनमें से कम से कम एक दस्तावेज़ मतदान केंद्र पर ले जाना होगा।",
+      back: "डैशबोर्ड पर वापस जाएं",
+      readyTitle: "आप पूरी तरह तैयार हैं!",
+      readyDesc: "आपके पास कम से कम एक वैध दस्तावेज़ तैयार है। मतदान के दिन इसे अपने साथ ले जाना याद रखें।",
+      actionTitle: "दस्तावेज़ आवश्यक",
+      actionDesc: "कृपया सुनिश्चित करें कि आपके पास मतदान के दिन के लिए इनमें से कम से कम एक दस्तावेज़ तैयार है।",
+      types: { primary: "प्राथमिक", alternative: "वैकल्पिक" },
+      items: [
+        { id: "epic", title: "मतदाता पहचान पत्र (EPIC)", type: "Primary", desc: "भारत निर्वाचन आयोग द्वारा जारी चुनावी फोटो पहचान पत्र। यह सबसे व्यापक रूप से स्वीकृत दस्तावेज़ है।" },
+        { id: "aadhaar", title: "आधार कार्ड", type: "Alternative", desc: "UIDAI द्वारा जारी आपका 12-अंकीय विशिष्ट पहचान नंबर। इसमें आपकी तस्वीर होनी चाहिए।" },
+        { id: "pan", title: "पैन कार्ड", type: "Alternative", desc: "आयकर विभाग द्वारा जारी स्थायी खाता संख्या कार्ड।" },
+        { id: "driving", title: "ड्राइविंग लाइसेंस", type: "Alternative", desc: "RTO द्वारा जारी एक वैध ड्राइविंग लाइसेंस जिसमें आपकी तस्वीर हो।" },
+        { id: "passport", title: "भारतीय पासपोर्ट", type: "Alternative", desc: "विदेश मंत्रालय द्वारा जारी आपका आधिकारिक भारतीय पासपोर्ट।" },
+        { id: "bank", title: "बैंक/डाकघर पासबुक", type: "Alternative", desc: "आपकी तस्वीर वाली पासबुक, जो किसी मान्यता प्राप्त बैंक या डाकघर द्वारा जारी की गई हो।" }
+      ]
+    },
+    auth: {
+      loginTitle: "वापसी पर स्वागत है",
+      signupTitle: "अपना खाता बनाएँ",
+      signIn: "साइन इन करें",
+      signUp: "खाता बनाएँ",
+      alreadyHaveAccount: "पहले से ही खाता है? ",
+      noAccount: "या ",
+      createAccount: "एक नया खाता बनाएँ",
+      signInAccount: "अपने खाते में साइन इन करें",
+      fullName: "पूरा नाम",
+      phone: "फ़ोन नंबर",
+      email: "ईमेल पता",
+      password: "पासवर्ड",
+      votingDetails: "मतदान विवरण",
+      rememberMe: "मुझे याद रखें",
+      forgotPassword: "पासवर्ड भूल गए?",
+      terms: "खाता बनाकर, आप हमारी सेवा की शर्तों से सहमत होते हैं।",
+      wait: "कृपया प्रतीक्षा करें..."
+    },
+    common: {
+      signOut: "साइन आउट"
     }
   },
   Marathi: {
@@ -206,21 +430,43 @@ export const translations: Record<string, any> = {
       assistant: "एआय सहाय्यक",
       candidates: "उमेदवार",
       mythBuster: "तथ्य तपासणी",
-      profile: "प्रोफाइल",
+      profile: "प्रोफाईल",
       status: "स्थिती",
       ready: "तयार",
-      incomplete: "अपूर्ण प्रोफाइल"
+      incomplete: "अपूर्ण प्रोफाईल"
+    },
+    onboarding: {
+      welcome: "व्होटवाईज एआय मध्ये आपले स्वागत आहे",
+      personalize: "चला तुमचा निवडणूक प्रवास वैयक्तिक बनवूया.",
+      getKnowYou: "चला तुमच्याबद्दल जाणून घेऊया",
+      fullName: "पूर्ण नाव",
+      enterName: "तुमचे नाव प्रविष्ट करा",
+      phoneNumber: "फोन नंबर",
+      selectLang: "तुमची आवडती भाषा निवडा",
+      howOld: "तुमचे वय काय आहे?",
+      eligibilityCheck: "हे आम्हाला तुमची पात्रता तपासण्यास मदत करते.",
+      whichState: "तुम्ही कोणत्या राज्यात राहता?",
+      selectState: "राज्य निवडा",
+      fullAddress: "पूर्ण निवासी पत्ता",
+      addressPlaceholder: "घर क्रमांक, रस्ता, परिसर",
+      voterStatus: "तुमची मतदार स्थिती काय आहे?",
+      rememberMe: "या डिव्हाइसवर माझी आठवण ठेवा",
+      rememberMeDesc: "अनचेक केल्यास, तुम्हाला पुढच्या वेळी पुन्हा सेटअप करण्यास सांगितले जाईल.",
+      complete: "सेटअप पूर्ण करा",
+      next: "पुढील"
     },
     profile: {
       langTitle: "भाषा आणि प्रादेशिक",
       langDesc: "एआय सहाय्यक आणि इंटरफेससाठी भाषा निवडा.",
-      headerTitle: "तुमची प्रोफाइल",
-      headerDesc: "तुमचा संदर्भ आणि अॅप सेटिंग्ज व्यवस्थापित करा.",
+      headerTitle: "तुमची प्रोफाईल",
+      headerDesc: "तुमचा संदर्भ आणि ॲप सेटिंग्स व्यवस्थापित करा.",
       personalDetails: "वैयक्तिक तपशील",
       editProfile: "संपादित करा",
       save: "जतन करा",
+      avatarDesign: "अवतार डिझाइन निवडा",
       age: "वय",
       state: "राज्य",
+      fullAddress: "पूर्ण पत्ता",
       voterStatus: "मतदार स्थिती",
       notSet: "सेट केलेले नाही",
       registered: "नोंदणीकृत",
@@ -229,26 +475,44 @@ export const translations: Record<string, any> = {
       notifications: "अधिसूचना",
       deadlinesAlerts: "अंतिम मुदत अलर्ट",
       pollingReminders: "मतदान दिवस स्मरणपत्रे",
-      accessibility: "अॅक्सेसिबिलिटी",
+      accessibility: "ॲक्सेसिबिलिटी",
       highContrast: "उच्च कॉन्ट्रास्ट",
       screenReader: "स्क्रीन रीडर मोड",
       voiceOutput: "व्हॉइस आउटपुट",
       offlineMode: "ऑफलाइन मोड",
       offlineDesc: "मतदानाच्या दिवशी ऑफलाइन प्रवेशासाठी आवश्यक डेटा जतन करा.",
       downloadPack: "ऑफलाइन पॅक डाउनलोड करा",
-      resetProfile: "प्रोफाइल रीसेट करा"
+      resetProfile: "प्रोफाईल रीसेट करा"
     },
     assistant: {
       greeting: "नमस्कार! मी व्होटवाईज एआय आहे. तुमच्या प्रोफाईल ({state}) वर आधारित, मी तुम्हाला कशी मदत करू शकतो?",
-      placeholder: "मतदानाबद्दल काहीही विचारा..."
+      placeholder: "मतदानाबद्दल काहीही विचारा...",
+      thinking: "विचार करत आहे...",
+      suggestions: [
+        "मी मतदानासाठी पात्र आहे का?",
+        "मी नोंदणी कशी करू?",
+        "मला कोणती कागदपत्रे हवी आहेत?",
+        "माझे मतदान केंद्र शोधा"
+      ]
     },
     journey: {
       title: "व्होटवाईज मध्ये आपले स्वागत आहे",
       desc: "मतदान केंद्रापर्यंतचा तुमचा वैयक्तिक प्रवास.",
       nextAction: "मी पुढे काय करावे?",
       yourProgress: "तुमची प्रगती",
-      getHelp: "मदत मिळवा",
+      getHelp: "मदद मिळवा",
       quickLinks: "द्रुत दुवे",
+      countdown: "निवडणूक काउंटडाउन",
+      pollingTomorrow: "मतदान उद्या आहे",
+      boothAlert: "तुमच्या बूथच्या ठिकाणाची पुन्हा एकदा खात्री करा आणि तुमचे मतदार ओळखपत्र सोबत ठेवा.",
+      dayLeft: "दिवस शिल्लक",
+      checkBooth: "बूथ माहिती तपासा",
+      statusMessages: {
+        completeProfile: "सुरू करण्यासाठी तुमची प्रोफाईल पूर्ण करा",
+        notEligible: "तुम्ही अद्याप मतदानासाठी पात्र नाही आहात. भविष्यातील नोंदणीबद्दल जाणून घ्या.",
+        registerPriority: "तुमचे सर्वोच्च प्राधान्य: मतदानासाठी नोंदणी करा.",
+        exploreAI: "मार्गदर्शनासाठी एआय सहाय्यकाचा वापर करा."
+      },
       steps: [
         { title: "पात्रता तपासणी", desc: "तुम्ही मतदान करू शकता की नाही ते तपासा" },
         { title: "नोंदणी", desc: "मतदार यादीत नाव नोंदवा" },
@@ -277,7 +541,7 @@ export const translations: Record<string, any> = {
       submitting: "सबमिट करत आहे...",
       submit: "अहवाल सबमिट करा",
       thanksTitle: "सहभागी झाल्याबद्दल धन्यवाद!",
-      thanksDesc: "तुमचा अभिप्राय वोटवाईज मॉडरेशन टीमकडे सुरक्षितपणे पाठवला गेला आहे. सामुदायिक सतर्कता लोकशाही पारदर्शक ठेवते."
+      thanksDesc: "तुमचा अभिप्राय व्होटवाईज मॉडरेशन टीमकडे सुरक्षितपणे पाठवला गेला आहे. सामुदायिक सतर्कता लोकशाही पारदर्शक ठेवते."
     },
     candidates_page: {
       title: "निवडणूक उमेदवार",
@@ -289,15 +553,87 @@ export const translations: Record<string, any> = {
       dataNotAvailable: "डेटा उपलब्ध नाही",
       searchTitle: "डेटाबेस शोधा",
       searchDesc: "उमेदवाराची पडताळणी केलेली आर्थिक प्रतिज्ञापत्रे, कायदेशीर नोंदी आणि कायदेविषयक कामगिरी पाहण्यासाठी नाव, राजकीय पक्ष किंवा मतदारसंघ प्रविष्ट करा.",
-      fetching: "डेटाबेसमधून उमेदवार आणत आहे...",
-      noCandidates: "तुमच्या निकषांशी जुळणारे कोणतेही उमेदवार आढळले नाहीत."
+      fetching: "आणत आहे...",
+      noCandidates: "निकषांशी जुळणारे कोणतेही उमेदवार आढळले नाहीत."
     },
     myths: {
       title: "तथ्य तपासणी",
       desc: "निवडणुकीतील चुकीची माहिती आणि अफवांची तथ्य-तपासणी.",
       reportMyth: "अफवेची तक्रार करा",
       reportMythDesc: "काही संशयास्पद ऐकले? आम्हाला ते तपासू द्या.",
-      recentChecks: "अलीकडील तथ्य तपासणी"
+      recentChecks: "अलीकडील तथ्य तपासणी",
+      searchPlaceholder: "अफवा शोधा...",
+      claim: "दावा",
+      fact: "तथ्य",
+      source: "स्रोत:",
+      verifySource: "स्रोत तपासा",
+      noResults: "कोणतीही तथ्य-तपासणी आढळली नाही",
+      noResultsDesc: "आम्हाला तुमच्या शोधाशी जुळणारे काहीही आढळले नाही.",
+      askAssistant: "एआय सहाय्यकाला विचारा",
+      sendTeam: "तथ्य-तपासणी टीमला पाठवा",
+      requestFactCheck: "तथ्य-तपासणीची विनंती करा",
+      requestDesc: "हा प्रश्न आमच्या संशोधन टीमला पाठवा. आम्ही त्याची पडताळणी करू आणि तुमच्याशी संपर्क साधू.",
+      yourQuestion: "तुमचा प्रश्न किंवा दावा",
+      contactDetails: "संपर्क तपशील",
+      contactPlaceholder: "तुमच्याशी संपर्क साधण्यासाठी ईमेल किंवा फोन",
+      cancel: "रद्द करा",
+      submit: "विनंती सबमिट करा",
+      mythList: [
+        { myth: "तुम्ही भारतात घरबसल्या ऑनलाइन मतदान करू शकता.", fact: "नाही, भारतात सर्वसामान्य नागरिकांसाठी ऑनलाइन मतदानाची सोय नाही. ईव्हीएम वापरून मतदान करण्यासाठी तुम्हाला तुमच्या नियुक्त मतदान केंद्रावर जावे लागेल. तथापि, काही पात्र व्यक्ती (जसे की ४०% पेक्षा जास्त अपंगत्व असलेले मतदार आणि ८५ वर्षांवरील ज्येष्ठ नागरिक) विशिष्ट नियमांनुसार पोस्टल बॅलेटद्वारे घरून मतदानाचा पर्याय निवडू शकतात.", source: "भारतीय निवडणूक आयोग (ECI)" },
+        { myth: "जर माझ्याकडे आधार कार्ड असेल, तर मला मतदार यादीत नोंदणी करण्याची गरज नाही.", fact: "चूक. केवळ आधार कार्ड किंवा कोणतेही ओळखपत्र असणे पुरेसे नाही. मतदान करण्यासाठी तुमचे नाव तुमच्या मतदारसंघाच्या मतदार यादीत नोंदणीकृत असणे आवश्यक आहे. तुमचे नाव यादीत असेल तरच तुम्ही मतदान केंद्रावर ओळखपत्र म्हणून आधारचा वापर करू शकता.", source: "लोकप्रतिनिधी कायदा, १९५०" },
+        { myth: "ईव्हीएम ब्लूटूथ किंवा वाय-फाय द्वारे हॅक केल्या जाऊ शकतात.", fact: "भारतीय निवडणुकांमध्ये वापरल्या जाणाऱ्या ईव्हीएम स्टँडअलोन मशिन्स आहेत. त्यांच्यात कोणताही रेडिओ फ्रिक्वेन्सी रिसीव्हर किंवा डेटा डिकोडर नसतो आणि त्या कोणत्याही नेटवर्क, वाय-फाय किंवा ब्लूटूथशी कनेक्ट केल्या जाऊ शकत नाहीत.", source: "ईसीआय ईव्हीएम मॅन्युअल" }
+      ]
+    },
+    deadlines: {
+      title: "मुदत चेकलिस्ट",
+      desc: "निवडणुकीच्या महत्त्वाच्या तारखांची माहिती ठेवा. तुम्ही मतदानाच्या दिवसासाठी पूर्णपणे तयार आहात याची खात्री करण्यासाठी तुमची प्रगती ट्रॅक करा.",
+      back: "डॅशबोर्डवर परत जा",
+      items: [
+        { title: "मतदार नोंदणीची मुदत", date: "१५ एप्रिल, २०२६", desc: "मतदार यादीत नोंदणी करण्याचा किंवा पत्ता अपडेट करण्याचा शेवटचा दिवस." },
+        { title: "टपाली मतदानासाठी अर्ज", date: "५ मे, २०२६", desc: "जर तुम्ही ज्येष्ठ नागरिक (८५+) किंवा दिव्यांग असाल तर टपाली मतदानासाठी अर्ज करण्याची मुदत." },
+        { title: "मतदान दिवस", date: "उद्या (४ मे, २०२६)", desc: "तुमच्या नियुक्त मतदान केंद्रावर सकाळी ७:०० ते संध्याकाळी ६:०० या वेळेत मतदान करा." },
+        { title: "निवडणूक निकाल दिवस", date: "७ मे, २०२६", desc: "मतांची मोजणी आणि अंतिम निवडणूक निकालांची घोषणा." }
+      ]
+    },
+    documents: {
+      title: "कागदपत्रे चेकलिस्ट",
+      desc: "मतदान करण्यासाठी तुम्हाला यापैकी किमान एक कागदपत्र मतदान केंद्रावर सोबत नेणे आवश्यक आहे.",
+      back: "डॅशबोर्डवर परत जा",
+      readyTitle: "तुम्ही पूर्णपणे तयार आहात!",
+      readyDesc: "तुमच्याकडे किमान एक वैध कागदपत्र तयार आहे. मतदानाच्या दिवशी ते सोबत नेण्याचे लक्षात ठेवा.",
+      actionTitle: "कागदपत्रे आवश्यक",
+      actionDesc: "कृपया खात्री करा की तुमच्याकडे मतदानाच्या दिवसासाठी यापैकी किमान एक कागदपत्र तयार आहे.",
+      types: { primary: "प्राथमिक", alternative: "पर्यायी" },
+      items: [
+        { id: "epic", title: "मतदार ओळखपत्र (EPIC)", type: "Primary", desc: "भारतीय निवडणूक आयोगाद्वारे जारी केलेले मतदार फोटो ओळखपत्र. हे सर्वात व्यापकपणे स्वीकारले जाणारे कागदपत्र आहे." },
+        { id: "aadhaar", title: "आधार कार्ड", type: "Alternative", desc: "UIDAI द्वारे जारी केलेला तुमचा १२-अंकी विशिष्ट ओळख क्रमांक. यामध्ये तुमचे छायाचित्र असणे आवश्यक आहे." },
+        { id: "pan", title: "पॅन कार्ड", type: "Alternative", desc: "आयकर विभागाद्वारे जारी केलेले स्थायी खाते क्रमांक कार्ड." },
+        { id: "driving", title: "ड्रायव्हिंग लायसन्स", type: "Alternative", desc: "तुमचे छायाचित्र असलेले RTO द्वारे जारी केलेले वैध ड्रायव्हिंग लायसन्स." },
+        { id: "passport", title: "भारतीय पासपोर्ट", type: "Alternative", desc: "परराष्ट्र मंत्रालयाद्वारे जारी केलेला तुमचा अधिकृत भारतीय पासपोर्ट." },
+        { id: "bank", title: "बँक/पोस्ट ऑफिस पासबुक", type: "Alternative", desc: "मान्यताप्राप्त बँक किंवा पोस्ट ऑफिसद्वारे जारी केलेले तुमच्या छायाचित्रासह पासबुक." }
+      ]
+    },
+    auth: {
+      loginTitle: "पुन्हा स्वागत आहे",
+      signupTitle: "तुमचे खाते तयार करा",
+      signIn: "साइन इन करा",
+      signUp: "खाते तयार करा",
+      alreadyHaveAccount: "आधीच खाते आहे? ",
+      noAccount: "किंवा ",
+      createAccount: "नवीन खाते तयार करा",
+      signInAccount: "तुमच्या खात्यात साइन इन करा",
+      fullName: "पूर्ण नाव",
+      phone: "फोन नंबर",
+      email: "ईमेल पत्ता",
+      password: "पासवर्ड",
+      votingDetails: "मतदान तपशील",
+      rememberMe: "मला लक्षात ठेवा",
+      forgotPassword: "पासवर्ड विसरलात?",
+      terms: "खाते तयार करून, तुम्ही आमच्या सेवा अटींशी सहमत होता.",
+      wait: "कृपया प्रतीक्षा करा..."
+    },
+    common: {
+      signOut: "साइन आउट"
     }
   },
   Tamil: {
@@ -311,6 +647,26 @@ export const translations: Record<string, any> = {
       ready: "தயார்",
       incomplete: "முழுமையற்ற சுயவிவரம்"
     },
+    onboarding: {
+      welcome: "VoteWise AI க்கு வரவேற்கிறோம்",
+      personalize: "உங்கள் தேர்தல் பயணத்தைத் தனிப்பயனாக்குவோம்.",
+      getKnowYou: "உங்களைப் பற்றி தெரிந்து கொள்வோம்",
+      fullName: "முழு பெயர்",
+      enterName: "உங்கள் பெயரை உள்ளிடவும்",
+      phoneNumber: "தொலைபேசி எண்",
+      selectLang: "உங்களுக்கு விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்",
+      howOld: "உங்கள் வயது என்ன?",
+      eligibilityCheck: "இது உங்கள் தகுதியைச் சரிபார்க்க உதவுகிறது.",
+      whichState: "நீங்கள் எந்த மாநிலத்தில் வசிக்கிறீர்கள்?",
+      selectState: "மாநிலத்தைத் தேர்ந்தெடுக்கவும்",
+      fullAddress: "முழு வீட்டு முகவரி",
+      addressPlaceholder: "வீட்டு எண், தெரு, பகுதி",
+      voterStatus: "உங்கள் வாக்காளர் நிலை என்ன?",
+      rememberMe: "இந்த சாதனத்தில் என்னை நினைவில் கொள்க",
+      rememberMeDesc: "தேர்வு செய்யப்படாவிட்டால், அடுத்த முறை மீண்டும் அமைக்க தூண்டப்படுவீர்கள்.",
+      complete: "அமைப்பை முடிக்கவும்",
+      next: "அடுத்து"
+    },
     profile: {
       langTitle: "மொழி மற்றும் பிராந்திய",
       langDesc: "AI உதவியாளர் மற்றும் இடைமுகத்திற்கான மொழியைத் தேர்ந்தெடுக்கவும்.",
@@ -319,8 +675,10 @@ export const translations: Record<string, any> = {
       personalDetails: "தனிப்பட்ட விவரங்கள்",
       editProfile: "திருத்து",
       save: "சேமி",
+      avatarDesign: "அவதார வடிவமைப்பைத் தேர்ந்தெடுக்கவும்",
       age: "வயது",
       state: "மாநிலம்",
+      fullAddress: "முழு முகவரி",
       voterStatus: "வாக்காளர் நிலை",
       notSet: "அமைக்கப்படவில்லை",
       registered: "பதிவுசெய்யப்பட்டது",
@@ -334,13 +692,20 @@ export const translations: Record<string, any> = {
       screenReader: "ஸ்கிரீன் ரீடர் பயன்முறை",
       voiceOutput: "குரல் வெளியீடு",
       offlineMode: "ஆஃப்லைன் பயன்முறை",
-      offlineDesc: "வாக்குப்பதிவு நாளில் ஆஃப்லைன் அணுகலுக்கு தேவையான தரவை சேமிக்கவும்.",
+      offlineDesc: "வாக்குப்பதிவு நாளில் ஆஃப்லைன் அணுகலுக்குத் தேவையான தரவைச் சேமிக்கவும்.",
       downloadPack: "ஆஃப்லைன் பேக்கைப் பதிவிறக்கவும்",
       resetProfile: "சுயவிவரத்தை மீட்டமை"
     },
     assistant: {
       greeting: "வணக்கம்! நான் VoteWise AI. உங்கள் சுயவிவரத்தின் ({state}) அடிப்படையில், நான் உங்களுக்கு எவ்வாறு உதவ முடியும்?",
-      placeholder: "வாக்களிப்பது பற்றி எதையும் கேளுங்கள்..."
+      placeholder: "வாக்களிப்பது பற்றி எதையும் கேளுங்கள்...",
+      thinking: "யோசிக்கிறேன்...",
+      suggestions: [
+        "நான் வாக்களிக்க தகுதியானவனா?",
+        "நான் எப்படி பதிவு செய்வது?",
+        "எனக்கு என்ன ஆவணங்கள் தேவை?",
+        "எனது வாக்குச்சாவடியைக் கண்டறியவும்"
+      ]
     },
     journey: {
       title: "VoteWise க்கு வரவேற்கிறோம்",
@@ -349,6 +714,17 @@ export const translations: Record<string, any> = {
       yourProgress: "உங்கள் முன்னேற்றம்",
       getHelp: "உதவி பெறுங்கள்",
       quickLinks: "விரைவான இணைப்புகள்",
+      countdown: "தேர்தல் கவுண்டவுன்",
+      pollingTomorrow: "நாளை வாக்குப்பதிவு",
+      boothAlert: "உங்கள் சாவடி இருப்பிடத்தை மீண்டும் சரிபார்த்து, உங்கள் வாக்காளர் அடையாள அட்டையை எடுத்துச் செல்லுங்கள்.",
+      dayLeft: "நாள் மீதம்",
+      checkBooth: "சாவடி தகவலைச் சரிபார்க்கவும்",
+      statusMessages: {
+        completeProfile: "தொடங்குவதற்கு உங்கள் சுயவிவரத்தை முடிக்கவும்",
+        notEligible: "நீங்கள் இன்னும் வாக்களிக்க தகுதியற்றவர். எதிர்கால பதிவு பற்றி அறிக.",
+        registerPriority: "உங்கள் அதிகப்படியான முன்னுரிமை: வாக்களிக்க பதிவு செய்யுங்கள்.",
+        exploreAI: "வழிகாட்டுதலுக்கு AI உதவியாளரை ஆராயுங்கள்."
+      },
       steps: [
         { title: "தகுதி சரிபார்ப்பு", desc: "நீங்கள் வாக்களிக்க முடியுமா என சரிபார்க்கவும்" },
         { title: "பதிவு", desc: "வாக்காளர் பட்டியலில் சேரவும்" },
@@ -356,10 +732,10 @@ export const translations: Record<string, any> = {
         { title: "வாக்குச்சாவடி", desc: "எங்கு, எப்போது என்பதை அறியவும்" }
       ],
       quickLinkCards: {
-        documents: { title: "ஆவணங்களை சரிபார்க்கவும்", desc: "என்ன எடுத்துச் செல்ல வேண்டும்" },
+        documents: { title: "ஆவணங்களைச் சரிபார்க்கவும்", desc: "என்ன எடுத்துச் செல்ல வேண்டும்" },
         booth: { title: "சாவடியைக் கண்டறியவும்", desc: "உங்கள் வாக்குச்சாவடியைக் கண்டறியவும்" },
         deadlines: { title: "காலக்கெடு", desc: "தேர்தல் தேதிகளைக் கண்காணிக்கவும்" },
-        mythBuster: { title: "உண்மை சோதனை", desc: "தேர்தல் உரிமைகோரல்களை உண்மை சரிபார்க்கவும்" }
+        mythBuster: { title: "உண்மை சோதனை", desc: "தேர்தல் உரிமைகோல்களை உண்மை சரிபார்க்கவும்" }
       }
     },
     survey: {
@@ -369,15 +745,15 @@ export const translations: Record<string, any> = {
       partially: "பகுதி சரியானது",
       no: "இல்லை, தவறானது",
       step2Title: "எந்த குறிப்பிட்ட பிரிவுகள் தவறானதாகத் தெரிகிறது?",
-      back: "பின்னால்",
+      back: "பின்னல்",
       continue: "தொடரவும்",
-      step3Title: "ஏதேனும் ஆதாரம் அல்லது கூடுதல் கருத்துகள்?",
-      step3Desc: "உண்மைகளைச் சரிபார்க்க உங்கள் உள்ளூர் சூழல் எங்கள் மதிப்பீட்டுக் குழுவுக்கு உதவுகிறது.",
+      step3Title: "ஏதேனும் ஆதாரம் அல்லது கூடுதல் கருத்துக்கள்?",
+      step3Desc: "உண்மைகளைச் சரிபார்க்க உங்கள் உள்ளூர் சூழல் எங்கள் மதிப்பீட்டுக் குழுவிற்கு உதவுகிறது.",
       placeholder: "விருப்பமானது: விவரங்கள், செய்தி இணைப்புகள் அல்லது சூழலை வழங்கவும்...",
       submitting: "சமர்ப்பிக்கிறது...",
       submit: "அறிக்கையைச் சமர்ப்பிக்கவும்",
       thanksTitle: "பங்கேற்றமைக்கு நன்றி!",
-      thanksDesc: "உங்கள் கருத்து VoteWise மதிப்பீட்டுக் குழுவுக்குப் பாதுகாப்பாக அனுப்பப்பட்டுள்ளது. சமூக விழிப்புணர்வு ஜனநாயகத்தை வெளிப்படையாக வைத்திருக்கிறது."
+      thanksDesc: "உங்கள் கருத்து VoteWise மதிப்பீட்டுக் குழுவிற்குப் பாதுகாப்பாக அனுப்பப்பட்டுள்ளது. சமூக விழிப்புணர்வு ஜனநாயகத்தை வெளிப்படையாக வைத்திருக்கிறது."
     },
     candidates_page: {
       title: "தேர்தல் வேட்பாளர்கள்",
@@ -388,8 +764,8 @@ export const translations: Record<string, any> = {
       criminalCases: "குற்ற வழக்குகள்",
       dataNotAvailable: "தரவு இல்லை",
       searchTitle: "தரவுத்தளத்தைத் தேடுங்கள்",
-      searchDesc: "வேட்பாளரின் சரிபார்க்கப்பட்ட நிதி பிரமாணப் பத்திரங்கள், சட்ட பதிவுகள் மற்றும் சட்டமன்ற செயல்திறன் ஆகியவற்றைப் பார்க்க பெயர், அரசியல் கட்சி அல்லது தொகுதியை உள்ளிடவும்.",
-      fetching: "தரவுத்தளத்திலிருந்து வேட்பாளர்களைப் பெறுகிறது...",
+      searchDesc: "வேட்பாளரின் சரிபார்க்கப்பட்ட நிதி பிரமாணப் பத்திரங்கள், சட்டப் பதிவுகள் மற்றும் சட்டமன்றச் செயல்பாட்டைப் பார்க்க பெயர், அரசியல் கட்சி அல்லது தொகுதியை உள்ளிடவும்.",
+      fetching: "பெறுகிறது...",
       noCandidates: "உங்கள் அளவுகோல்களுடன் பொருந்தக்கூடிய வேட்பாளர்கள் யாரும் கிடைக்கவில்லை."
     },
     myths: {
@@ -397,7 +773,79 @@ export const translations: Record<string, any> = {
       desc: "தேர்தல் தவறான தகவல் மற்றும் வதந்திகளை உண்மை சரிபார்த்தல்.",
       reportMyth: "வதந்தியைப் புகாரளிக்கவும்",
       reportMythDesc: "சந்தேகத்திற்குரிய ஒன்றைக் கேள்விப்பட்டீர்களா? அதைச் சரிபார்க்க எங்களை அனுமதியுங்கள்.",
-      recentChecks: "சமீபத்திய உண்மை சோதனைகள்"
+      recentChecks: "சமீபத்திய உண்மை சோதனைகள்",
+      searchPlaceholder: "வதந்திகளைத் தேடுங்கள்...",
+      claim: "உரிமைகோரல்",
+      fact: "உண்மை",
+      source: "ஆதாரம்:",
+      verifySource: "ஆதாரத்தை சரிபார்க்கவும்",
+      noResults: "உண்மை சோதனைகள் எதுவும் காணப்படவில்லை",
+      noResultsDesc: "உங்கள் தேடலுடன் பொருந்தக்கூடிய எதையும் எங்களால் கண்டுபிடிக்க முடியவில்லை.",
+      askAssistant: "AI உதவியாளரிடம் கேளுங்கள்",
+      sendTeam: "உண்மை சோதனை குழுவிற்கு அனுப்பவும்",
+      requestFactCheck: "உண்மை சோதனையைக் கோரவும்",
+      requestDesc: "இந்தக் கேள்வியை எங்கள் ஆய்வுக் குழுவிற்கு அனுப்பவும். நாங்கள் அதைச் சரிபார்த்து உங்களைத் தொடர்பு கொள்வோம்.",
+      yourQuestion: "உங்கள் கேள்வி அல்லது உரிமைகோரல்",
+      contactDetails: "தொடர்பு விவரங்கள்",
+      contactPlaceholder: "உங்களைத் தொடர்பு கொள்ள மின்னஞ்சல் அல்லது தொலைபேசி",
+      cancel: "ரத்து செய்",
+      submit: "கோரிக்கையை சமர்ப்பிக்கவும்",
+      mythList: [
+        { myth: "இந்தியாவில் நீங்கள் வீட்டிலிருந்தே ஆன்லைனில் வாக்களிக்கலாம்.", fact: "இல்லை, இந்தியாவில் பொது மக்களுக்கு ஆன்லைன் வாக்களிப்பு அனுமதி இல்லை. வாக்குப்பதிவு செய்ய நீங்கள் குறிப்பிட்ட வாக்குச்சாவடிக்குச் சென்று மின்னணு வாக்குப்பதிவு இயந்திரத்தைப் (EVM) பயன்படுத்த வேண்டும். எனினும், மாற்றுத்திறனாளிகள் மற்றும் முதியவர்கள் போன்ற குறிப்பிட்ட தகுதியுடையவர்கள் சில விதிகளின் கீழ் தபால் வாக்கு மூலம் வீட்டிலிருந்தே வாக்களிக்கலாம்.", source: "இந்திய தேர்தல் ஆணையம் (ECI)" },
+        { myth: "என்னிடம் ஆதார் அட்டை இருந்தால், நான் வாக்காளர் பட்டியலில் பதிவு செய்யத் தேவையில்லை.", fact: "தவறு. ஆதார் அட்டை அல்லது வேறு அடையாள அட்டை இருப்பது மட்டும் போதாது. வாக்களிக்க உங்கள் பெயர் உங்கள் தொகுதியின் வாக்காளர் பட்டியலில் கண்டிப்பாக இருக்க வேண்டும். பட்டியலில் உங்கள் பெயர் இருந்தால் மட்டுமே ஆதார் அட்டையை அடையாளச் சான்றாகப் பயன்படுத்த முடியும்.", source: "மக்கள் பிரதிநிதித்துவ சட்டம், 1950" },
+        { myth: "ப்ளூடூத் அல்லது வைஃபை மூலம் EVMகளை ஹேக் செய்ய முடியும்.", fact: "இந்தியத் தேர்தல்களில் பயன்படுத்தப்படும் EVMகள் தனித்த இயந்திரங்கள். அவற்றில் ரேடியோ அலைவரிசை பெறுதல் அல்லது தரவு குறிவிலக்கி இல்லை, மேலும் அவற்றை எந்த நெட்வொர்க், வைஃபை அல்லது புளூடூத்துடனும் இணைக்க முடியாது.", source: "ECI EVM கையேடு" }
+      ]
+    },
+    deadlines: {
+      title: "காலக்கெடு சரிபார்ப்புப் பட்டியல்",
+      desc: "முக்கியமான தேர்தல் தேதிகளைத் தெரிந்து கொள்ளுங்கள். வாக்குப்பதிவு நாளுக்கு நீங்கள் முழுமையாகத் தயாராக இருப்பதை உறுதிசெய்ய உங்கள் முன்னேற்றத்தைக் கண்காணிக்கவும்.",
+      back: "டாஷ்போர்டுக்குத் திரும்பு",
+      items: [
+        { title: "வாக்காளர் பதிவு காலக்கெடு", date: "ஏப்ரல் 15, 2026", desc: "வாக்காளர் பட்டியலில் பதிவு செய்ய அல்லது உங்கள் முகவரியைப் புதுப்பிக்க கடைசி நாள்." },
+        { title: "தபால் வாக்கு விண்ணப்பம்", date: "மே 5, 2026", desc: "நீங்கள் மூத்த குடிமகனாகவோ (85+) அல்லது மாற்றுத்திறனாளியாகவோ இருந்தால் தபால் வாக்குக்கு விண்ணப்பிப்பதற்கான காலக்கெடு." },
+        { title: "வாக்குப்பதிவு நாள்", date: "நாளை (மே 4, 2026)", desc: "காலை 7:00 மணி முதல் மாலை 6:00 மணி வரை உங்கள் குறிப்பிட்ட வாக்குச்சாவடியில் வாக்களியுங்கள்." },
+        { title: "தேர்தல் முடிவுகள் நாள்", date: "மே 7, 2026", desc: "வாக்கு எண்ணிக்கை மற்றும் இறுதி தேர்தல் முடிவுகள் அறிவிப்பு." }
+      ]
+    },
+    documents: {
+      title: "ஆவணங்கள் சரிபார்ப்புப் பட்டியல்",
+      desc: "வாக்களிக்க நீங்கள் இந்த ஆவணங்களில் ஒன்றையாவது வாக்குச்சாவடிக்கு எடுத்துச் செல்ல வேண்டும்.",
+      back: "டாஷ்போர்டுக்குத் திரும்பு",
+      readyTitle: "நீங்கள் தயாராகிவிட்டீர்கள்!",
+      readyDesc: "உங்களிடம் குறைந்தது ஒரு செல்லுபடியாகும் ஆவணமாவது தயாராக உள்ளது. வாக்குப்பதிவு நாளில் அதை உங்களுடன் எடுத்துச் செல்ல நினைவில் கொள்ளுங்கள்.",
+      actionTitle: "ஆவணங்கள் தேவை",
+      actionDesc: "வாக்குப்பதிவு நாளுக்காக இந்த ஆவணங்களில் ஒன்றையாவது தயாராக வைத்திருப்பதை உறுதி செய்யவும்.",
+      types: { primary: "முதன்மை", alternative: "மாற்று" },
+      items: [
+        { id: "epic", title: "வாக்காளர் அடையாள அட்டை (EPIC)", type: "Primary", desc: "இந்திய தேர்தல் ஆணையத்தால் வழங்கப்பட்ட வாக்காளர் புகைப்பட அடையாள அட்டை. இது மிகவும் பரவலாக ஏற்றுக்கொள்ளப்பட்ட ஆவணமாகும்." },
+        { id: "aadhaar", title: "ஆதார் அட்டை", type: "Alternative", desc: "UIDAI ஆல் வழங்கப்பட்ட உங்களின் 12 இலக்க தனிப்பட்ட அடையாள எண். உங்கள் புகைப்படம் இருக்க வேண்டும்." },
+        { id: "pan", title: "பான் கார்டு", type: "Alternative", desc: "வருமான வரித்துறையால் வழங்கப்பட்ட நிரந்தர கணக்கு எண் அட்டை." },
+        { id: "driving", title: "ஓட்டுநர் உரிமம்", type: "Alternative", desc: "உங்கள் புகைப்படத்தைக் கொண்டுள்ள RTO ஆல் வழங்கப்பட்ட செல்லுபடியாகும் ஓட்டுநர் உரிமம்." },
+        { id: "passport", title: "இந்திய பாஸ்போர்ட்", type: "Alternative", desc: "வெளியுறவு அமைச்சகத்தால் வழங்கப்பட்ட உங்களின் அதிகாரப்பூர்வ இந்திய பாஸ்போர்ட்." },
+        { id: "bank", title: "வங்கி/தபால் நிலைய கணக்கு புத்தகம்", type: "Alternative", desc: "அங்கீகரிக்கப்பட்ட வங்கி அல்லது தபால் நிலையத்தால் வழங்கப்பட்ட உங்கள் புகைப்படத்துடன் கூடிய கணக்கு புத்தகம்." }
+      ]
+    },
+    auth: {
+      loginTitle: "மீண்டும் வருக",
+      signupTitle: "உங்கள் கணக்கை உருவாக்கவும்",
+      signIn: "உள்நுழைய",
+      signUp: "கணக்கை உருவாக்கு",
+      alreadyHaveAccount: "ஏற்கனவே கணக்கு உள்ளதா? ",
+      noAccount: "அல்லது ",
+      createAccount: "புதிய கணக்கை உருவாக்கு",
+      signInAccount: "உங்கள் கணக்கில் உள்நுழையவும்",
+      fullName: "முழு பெயர்",
+      phone: "தொலைபேசி எண்",
+      email: "மின்னஞ்சல் முகவரி",
+      password: "கடவுச்சொல்",
+      votingDetails: "வாக்களிப்பு விவரங்கள்",
+      rememberMe: "என்னை நினவு வைத்துக்கொள்",
+      forgotPassword: "கடவுச்சொல்லை மறந்துவிட்டீர்களா?",
+      terms: "கணக்கை உருவாக்குவதன் மூலம், எங்கள் சேவை விதிமுறைகளை ஏற்கிறீர்கள்.",
+      wait: "தயவுசெய்து காத்திருங்கள்..."
+    },
+    common: {
+      signOut: "வெளியேறு"
     }
   },
   Telugu: {
@@ -408,8 +856,28 @@ export const translations: Record<string, any> = {
       mythBuster: "నిజ నిర్ధారణ",
       profile: "ప్రొఫైల్",
       status: "స్థితి",
-      ready: "సిద్ధంగా ఉంది",
+      ready: "సిద్ధం",
       incomplete: "అసంపూర్ణ ప్రొఫైల్"
+    },
+    onboarding: {
+      welcome: "ఓటువైజ్ AI కి స్వాగతం",
+      personalize: "మీ ఎన్నికల ప్రయాణాన్ని వ్యక్తిగతీకరించుకుందాం.",
+      getKnowYou: "మీ గురించి తెలుసుకుందాం",
+      fullName: "పూర్తి పేరు",
+      enterName: "మీ పేరును నమోదు చేయండి",
+      phoneNumber: "ఫోన్ నంబర్",
+      selectLang: "మీకు నచ్చిన భాషను ఎంచుకోండి",
+      howOld: "మీ వయస్సు ఎంత?",
+      eligibilityCheck: "ఇది మీ అర్హతను తనిఖీ చేయడానికి మాకు సహాయపడుతుంది.",
+      whichState: "మీరు ఏ రాష్ట్రంలో నివసిస్తున్నారు?",
+      selectState: "రాష్ట్రాన్ని ఎంచుకోండి",
+      fullAddress: "పూర్తి నివాస చిరునామా",
+      addressPlaceholder: "ఇంటి నంబర్, వీధి, ప్రాంతం",
+      voterStatus: "మీ ఓటరు స్థితి ఏమిటి?",
+      rememberMe: "ఈ పరికరంలో నన్ను గుర్తుంచుకో",
+      rememberMeDesc: "గుర్తు పెట్టకపోతే, తదుపరిసారి మళ్ళీ సెటప్ చేయమని అడుగుతుంది.",
+      complete: "సెటప్ పూర్తి చేయండి",
+      next: "తదుపరి"
     },
     profile: {
       langTitle: "భాష & ప్రాంతీయ",
@@ -419,16 +887,18 @@ export const translations: Record<string, any> = {
       personalDetails: "వ్యక్తిగత వివరాలు",
       editProfile: "సవరించండి",
       save: "సేవ్ చేయండి",
+      avatarDesign: "అవతార్ డిజైన్‌ను ఎంచుకోండి",
       age: "వయస్సు",
       state: "రాష్ట్రం",
+      fullAddress: "పూర్తి చిరునామా",
       voterStatus: "ఓటరు స్థితి",
       notSet: "సెట్ చేయబడలేదు",
       registered: "నమోదు చేయబడింది",
       notRegistered: "నమోదు కాలేదు",
       unsure: "ఖచ్చితంగా తెలియదు",
-      notifications: "నోటిఫికేషన్‌లు",
+      notifications: "నోటిఫికేషన్లు",
       deadlinesAlerts: "గడువు హెచ్చరికలు",
-      pollingReminders: "పోలింగ్ రోజు రిమైండర్‌లు",
+      pollingReminders: "పోలింగ్ రోజు రిమైండర్లు",
       accessibility: "ప్రాప్యత",
       highContrast: "అధిక కాంట్రాస్ట్",
       screenReader: "స్క్రీన్ రీడర్ మోడ్",
@@ -439,16 +909,34 @@ export const translations: Record<string, any> = {
       resetProfile: "ప్రొఫైల్‌ని రీసెట్ చేయండి"
     },
     assistant: {
-      greeting: "నమస్తే! నేను వోట్‌వైజ్ AIని. మీ ప్రొఫైల్ ({state}) ఆధారంగా, నేను మీకు ఎలా సహాయపడగలను?",
-      placeholder: "ఓటింగ్ గురించి ఏదైనా అడగండి..."
+      greeting: "నమస్తే! నేను ఓటువైజ్ AIని. మీ ప్రొఫైల్ ({state}) ఆధారంగా, నేను మీకు ఎలా సహాయపడగలను?",
+      placeholder: "ఓటింగ్ గురించి ఏదైనా అడగండి...",
+      thinking: "ఆలోచిస్తున్నాను...",
+      suggestions: [
+        "నేను ఓటు వేయడానికి అర్హుడినా?",
+        "నేను ఎలా నమోదు చేసుకోవాలి?",
+        "నాకు ఏ పత్రాలు అవసరం?",
+        "నా పోలింగ్ బూత్‌ను కనుగొనండి"
+      ]
     },
     journey: {
-      title: "VoteWise కి స్వాగతం",
+      title: "ఓటువైజ్‌కి స్వాగతం",
       desc: "బ్యాలెట్ బాక్స్ కు మీ వ్యక్తిగతీకరించిన ప్రయాణం.",
-      nextAction: "నేను తరువాత ఏమి చేయాలి?",
+      nextAction: "నేను తర్వాత ఏమి చేయాలి?",
       yourProgress: "మీ పురోగతి",
       getHelp: "సహాయం పొందండి",
-      quickLinks: "శీఘ్ర లింక్‌లు",
+      quickLinks: "శీఘ్ర లింకులు",
+      countdown: "ఎన్నికల కౌంట్ డౌన్",
+      pollingTomorrow: "రేపు పోలింగ్",
+      boothAlert: "మీ బూత్ స్థానాన్ని మళ్లీ తనిఖీ చేయండి మరియు మీ ఓటరు IDని వెంట తీసుకెళ్లండి.",
+      dayLeft: "రోజు మిగిలి ఉంది",
+      checkBooth: "బూత్ సమాచారాన్ని తనిఖీ చేయండి",
+      statusMessages: {
+        completeProfile: "ప్రారంభించడానికి మీ ప్రొఫైల్‌ను పూర్తి చేయండి",
+        notEligible: "మీరు ఇంకా ఓటు వేయడానికి అర్హులు కారు. భవిష్యత్తు నమోదు గురించి తెలుసుకోండి.",
+        registerPriority: "మీ అత్యున్నత ప్రాధాన్యత: ఓటు వేయడానికి నమోదు చేసుకోండి.",
+        exploreAI: "మార్గదర్శకత్వం కోసం AI అసిస్టెంట్‌ని అన్వేషించండి."
+      },
       steps: [
         { title: "అర్హత తనిఖీ", desc: "మీరు ఓటు వేయగలరో లేదో ధృవీకరించండి" },
         { title: "నమోదు", desc: "ఓటరు జాబితాలో చేరండి" },
@@ -456,10 +944,10 @@ export const translations: Record<string, any> = {
         { title: "పోలింగ్ బూత్", desc: "ఎక్కడ మరియు ఎప్పుడు తెలుసుకోండి" }
       ],
       quickLinkCards: {
-        documents: { title: "పత్రాలను తనిఖీ చేయండి", desc: "ఏమి తీసుకువెళ్ళాలి" },
+        documents: { title: "పత్రాలను తనిఖీ చేయండి", desc: "ఏమి తీసుకువెళ్లాలి" },
         booth: { title: "బూత్‌ను కనుగొనండి", desc: "మీ పోలింగ్ స్టేషన్‌ను గుర్తించండి" },
         deadlines: { title: "గడువులు", desc: "ఎన్నికల తేదీలను ట్రాక్ చేయండి" },
-        mythBuster: { title: "నిజ నిర్ధారణ", desc: "ఎన్నికల వాదనలను ఫాక్ట్-చెక్ చేయండి" }
+        mythBuster: { title: "నిజ నిర్ధారణ", desc: "ఎన్నికల వాదనలను ఫ్యాక్ట్-చెక్ చేయండి" }
       }
     },
     survey: {
@@ -467,17 +955,17 @@ export const translations: Record<string, any> = {
       step1Title: "మీ స్థానిక జ్ఞానం ఆధారంగా, ఈ అభ్యర్థి కోసం అందించిన సమాచారం ఖచ్చితమైనదేనా?",
       yes: "అవును, ఖచ్చితమైనది",
       partially: "పాక్షికంగా ఖచ్చితమైనది",
-      no: "కాదు, సరికానిది",
-      step2Title: "ఏ నిర్దిష్ట విభాగాలు సరికానివిగా అనిపిస్తున్నాయి?",
+      no: "కాదు, సరికాదు",
+      step2Title: "ఏ నిర్దిష్ట విభాగాలు సరికావని అనిపిస్తున్నాయి?",
       back: "వెనుకకు",
       continue: "కొనసాగించు",
       step3Title: "ఏదైనా రుజువు లేదా అదనపు వ్యాఖ్యలు?",
       step3Desc: "నిజాలను ధృవీకరించడానికి మీ స్థానిక సందర్భం మా నియంత్రణ బృందానికి సహాయపడుతుంది.",
-      placeholder: "ఐచ్ఛికం: వివరాలు, వార్తల లింక్‌లు లేదా సందర్భాన్ని అందించండి...",
+      placeholder: "ఐచ్ఛికం: వివరాలు, వార్తల లింకులు లేదా సందర్భాన్ని అందించండి...",
       submitting: "సమర్పిస్తోంది...",
       submit: "నివేదికను సమర్పించండి",
       thanksTitle: "పాల్గొన్నందుకు ధన్యవాదాలు!",
-      thanksDesc: "మీ అభిప్రాయం VoteWise నియంత్రణ బృందానికి సురక్షితంగా ప్రసారం చేయబడింది. కమ్యూనిటీ అప్రమత్తత ప్రజాస్వామ్యాన్ని పారదర్శకంగా ఉంచుతుంది."
+      thanksDesc: "మీ అభిప్రాయం ఓటువైజ్ నియంత్రణ బృందానికి సురక్షితంగా ప్రసారం చేయబడింది. కమ్యూనిటీ అప్రమత్తత ప్రజాస్వామ్యాన్ని పారదర్శకంగా ఉంచుతుంది."
     },
     candidates_page: {
       title: "ఎన్నికల అభ్యర్థులు",
@@ -488,16 +976,88 @@ export const translations: Record<string, any> = {
       criminalCases: "క్రిమినల్ కేసులు",
       dataNotAvailable: "డేటా అందుబాటులో లేదు",
       searchTitle: "డేటాబేస్ శోధించండి",
-      searchDesc: "అభ్యర్థి ధృవీకరించబడిన ఆర్థిక అఫిడవిట్‌లు, చట్టపరమైన రికార్డులు మరియు శాసన పనితీరును వీక్షించడానికి పేరు, రాజకీయ పార్టీ లేదా నియోజకవర్గాన్ని నమోదు చేయండి.",
-      fetching: "డేటాబేస్ నుండి అభ్యర్థులను తీసుకువస్తోంది...",
+      searchDesc: "అభ్యర్థి ధృవీకరించబడిన ఆర్థిక అఫిడవిట్లు, చట్టపరమైన రికార్డులు మరియు శాసన పనితీరును వీక్షించడానికి పేరు, రాజకీయ పార్టీ లేదా నియోజకవర్గాన్ని నమోదు చేయండి.",
+      fetching: "తీసుకువస్తోంది...",
       noCandidates: "మీ ప్రమాణాలకు సరిపోలే అభ్యర్థులు ఎవరూ కనుగొనబడలేదు."
     },
     myths: {
       title: "నిజ నిర్ధారణ",
-      desc: "ఎన్నికల తప్పుడు సమాచారం మరియు వదంతులను ఫాక్ట్-చెక్ చేయడం.",
+      desc: "ఎన్నికల తప్పుడు సమాచారం మరియు వదంతులను ఫ్యాక్ట్-చెక్ చేయడం.",
       reportMyth: "వదంతిని నివేదించండి",
       reportMythDesc: "అనుమానాస్పదంగా ఏదైనా విన్నారా? మమ్మల్ని ధృవీకరించనివ్వండి.",
-      recentChecks: "ఇటీవలి ఫాక్ట్ చెక్స్"
+      recentChecks: "ఇటీవలి ఫ్యాక్ట్ చెక్స్",
+      searchPlaceholder: "వదంతులను శోధించండి...",
+      claim: "వాదన",
+      fact: "నిజం",
+      source: "మూలం:",
+      verifySource: "మూలాన్ని ధృవీకరించండి",
+      noResults: "నిజ నిర్ధారణలు ఏవీ కనుగొనబడలేదు",
+      noResultsDesc: "మీ శోధనకు సరిపోలే ఏమీ మాకు కనుగొనబడలేదు.",
+      askAssistant: "AI అసిస్టెంట్‌ని అడగండి",
+      sendTeam: "నిజ నిర్ధారణ బృందానికి పంపండి",
+      requestFactCheck: "నిజ నిర్ధారణను అభ్యర్థించండి",
+      requestDesc: "ఈ ప్రశ్నను మా పరిశోధనా బృందానికి పంపండి. మేము దానిని ధృవీకరిస్తాము మరియు మిమ్మల్ని సంప్రదిస్తాము.",
+      yourQuestion: "మీ ప్రశ్న లేదా వాదన",
+      contactDetails: "సంప్రదింపు వివరాలు",
+      contactPlaceholder: "మిమ్మల్ని సంప్రదించడానికి ఇమెయిల్ లేదా ఫోన్",
+      cancel: "రద్దు చేయి",
+      submit: "అభ్యర్థనను సమర్పించండి",
+      mythList: [
+        { myth: "మీరు భారతదేశంలో ఇంటి నుండే ఆన్‌లైన్‌లో ఓటు వేయవచ్చు.", fact: "లేదు, భారతదేశంలో సాధారణ పౌరులకు ఆన్‌లైన్ ఓటింగ్ అనుమతి లేదు. ఓటు వేయడానికి మీరు నిర్దేశించిన పోలింగ్ బూత్‌కు వెళ్లి EVMని ఉపయోగించాలి. అయితే, వికలాంగులు మరియు వృద్ధులు వంటి కొంతమంది అర్హులు కొన్ని నిబంధనల ప్రకారం పోస్టల్ బ్యాలెట్ ద్వారా ఇంటి నుండి ఓటు వేయవచ్చు.", source: "భారత ఎన్నికల సంఘం (ECI)" },
+        { myth: "నా దగ్గర ఆధార్ కార్డు ఉంటే, నేను ఓటరు జాబితాలో నమోదు చేసుకోవాల్సిన అవసరం లేదు.", fact: "తప్పు. ఆధార్ కార్డు లేదా ఏదైనా ID ఉండటం సరిపోదు. ఓటు వేయడానికి మీ పేరు మీ నియోజకవర్గ ఓటరు జాబితాలో ఖచ్చితంగా ఉండాలి. జాబితాలో మీ పేరు ఉంటేనే ఆధార్ కార్డును గుర్తింపు కార్డుగా ఉపయోగించవచ్చు.", source: "ప్రజా ప్రాతినిధ్య చట్టం, 1950" },
+        { myth: "బ్లూటూత్ లేదా వై-ఫై ద్వారా EVMలను హ్యాక్ చేయవచ్చు.", fact: "భారత ఎన్నికల్లో ఉపయోగించే EVMలు స్వతంత్ర యంత్రాలు. వాటిలో ఎటువంటి రేడియో ఫ్రీక్వెన్సీ రిసీవర్ లేదా డేటా డీకోడర్ ఉండదు మరియు వాటిని ఏ నెట్‌వర్క్, వై-ఫై లేదా బ్లూటూత్‌కు కనెక్ట్ చేయలేము.", source: "ECI EVM మాన్యువల్" }
+      ]
+    },
+    deadlines: {
+      title: "గడువుల చెక్ లిస్ట్",
+      desc: "ముఖ్యమైన ఎన్నికల తేదీల గురించి తెలుసుకోండి. పోలింగ్ రోజు కోసం మీరు పూర్తిగా సిద్ధంగా ఉన్నారని నిర్ధారించుకోవడానికి మీ పురోగతిని ట్రాక్ చేయండి.",
+      back: "డాష్‌బోర్డ్‌కు తిరిగి వెళ్లండి",
+      items: [
+        { title: "ఓటరు నమోదు గడువు", date: "ఏప్రిల్ 15, 2026", desc: "ఓటరు జాబితాలో నమోదు చేసుకోవడానికి లేదా మీ చిరునామాను అప్‌డేట్ చేయడానికి చివరి రోజు." },
+        { title: "పోస్టల్ బ్యాలెట్ దరఖాస్తు", date: "మే 5, 2026", desc: "మీరు సీనియర్ సిటిజన్ (85+) లేదా దివ్యాంగులైతే పోస్టల్ ఓటింగ్ కోసం దరఖాస్తు చేసుకోవడానికి గడువు." },
+        { title: "పోలింగ్ రోజు", date: "రేపు (మే 4, 2026)", desc: "ఉదయం 7:00 నుండి సాయంత్రం 6:00 గంటల వరకు మీ నిర్దేశిత పోలింగ్ బూత్‌లో ఓటు వేయండి." },
+        { title: "ఎన్నికల ఫలితాల రోజు", date: "మే 7, 2026", desc: "ఓట్ల లెక్కింపు మరియు తుది ఎన్నికల ఫలితాల ప్రకటన." }
+      ]
+    },
+    documents: {
+      title: "పత్రాల చెక్ లిస్ట్",
+      desc: "ఓటు వేయడానికి మీరు ఈ పత్రాలలో కనీసం ఒకదానిని పోలింగ్ బూత్‌కు తీసుకువెళ్లాలి.",
+      back: "డాష్‌బోర్డ్‌కు తిరిగి వెళ్లండి",
+      readyTitle: "మీరు సిద్ధంగా ఉన్నారు!",
+      readyDesc: "మీ దగ్గర కనీసం ఒక చెల్లుబాటు అయ్యే పత్రం సిద్ధంగా ఉంది. పోలింగ్ రోజున దానిని మీతో తీసుకెళ్లడం మర్చిపోవద్దు.",
+      actionTitle: "పత్రాలు అవసరం",
+      actionDesc: "దయచేసి పోలింగ్ రోజు కోసం ఈ పత్రాలలో కనీసం ఒకటి సిద్ధంగా ఉందని నిర్ధారించుకోండి.",
+      types: { primary: "ప్రాథమిక", alternative: "ప్రత్యామ్నాయ" },
+      items: [
+        { id: "epic", title: "ఓటరు గుర్తింపు కార్డు (EPIC)", type: "Primary", desc: "భారత ఎన్నికల సంఘం జారీ చేసిన ఓటరు ఫోటో గుర్తింపు కార్డు. ఇది అత్యంత విస్తృతంగా ఆమోదించబడిన పత్రం." },
+        { id: "aadhaar", title: "ఆధార్ కార్డు", type: "Alternative", desc: "UIDAI జారీ చేసిన మీ 12-అంకెల విశిష్ట గుర్తింపు సంఖ్య. ఇందులో మీ ఫోటో ఉండాలి." },
+        { id: "pan", title: "పాన్ కార్డు", type: "Alternative", desc: "ఆదాయపు పన్ను శాఖ జారీ చేసిన పర్మనెంట్ అకౌంట్ నంబర్ కార్డు." },
+        { id: "driving", title: "డ్రైవింగ్ లైసెన్స్", type: "Alternative", desc: "మీ ఫోటోను కలిగి ఉన్న RTO జారీ చేసిన చెల్లుబాటు అయ్యే డ్రైవింగ్ లైసెన్స్." },
+        { id: "passport", title: "భారతీయ పాస్‌పోర్ట్", type: "Alternative", desc: "విదేశీ వ్యవహారాల మంత్రిత్వ శాఖ జారీ చేసిన మీ అధికారిక భారతీయ పాస్‌పోర్ట్." },
+        { id: "bank", title: "బ్యాంక్/పోస్ట్ ఆఫీస్ పాస్‌బుక్", type: "Alternative", desc: "గుర్తింపు పొందిన బ్యాంక్ లేదా పోస్ట్ ఆఫీస్ జారీ చేసిన మీ ఫోటోతో కూడిన పాస్‌బుక్." }
+      ]
+    },
+    auth: {
+      loginTitle: "తిరిగి వచ్చినందుకు స్వాగతం",
+      signupTitle: "మీ ఖాతాను సృష్టించండి",
+      signIn: "సైన్ ఇన్",
+      signUp: "ఖాతాను సృష్టించండి",
+      alreadyHaveAccount: "ఇప్పటికే ఖాతా ఉందా? ",
+      noAccount: "లేదా ",
+      createAccount: "కొత్త ఖాతాను సృష్టించండి",
+      signInAccount: "మీ ఖాతాలోకి సైన్ ఇన్ చేయండి",
+      fullName: "పూర్తి పేరు",
+      phone: "ఫోన్ నంబర్",
+      email: "ఈమెయిల్ చిరునామా",
+      password: "పాస్ వర్డ్",
+      votingDetails: "ఓటింగ్ వివరాలు",
+      rememberMe: "నన్ను గుర్తుంచుకో",
+      forgotPassword: "పాస్ వర్డ్ మరిచిపోయారా?",
+      terms: "ఖాతాను సృష్టించడం ద్వారా, మీరు మా సేవా నిబంధనలను అంగీకరిస్తారు.",
+      wait: "దయచేసి వేచి ఉండండి..."
+    },
+    common: {
+      signOut: "సిబ్బంది నిష్క్రమణ"
     }
   },
   Bengali: {
@@ -511,16 +1071,38 @@ export const translations: Record<string, any> = {
       ready: "প্রস্তুত",
       incomplete: "অসম্পূর্ণ প্রোফাইল"
     },
+    onboarding: {
+      welcome: "ভোটওয়াইজ এআই-তে স্বাগতম",
+      personalize: "চলুন আপনার নির্বাচনী যাত্রাকে ব্যক্তিগতকৃত করি।",
+      getKnowYou: "চলুন আপনার সম্পর্কে জানি",
+      fullName: "পুরো নাম",
+      enterName: "আপনার নাম লিখুন",
+      phoneNumber: "ফোন নম্বর",
+      selectLang: "আপনার পছন্দের ভাষা নির্বাচন করুন",
+      howOld: "আপনার বয়স কত?",
+      eligibilityCheck: "এটি আমাদের আপনার যোগ্যতা যাচাই করতে সাহায্য করে।",
+      whichState: "আপনি কোন রাজ্যে থাকেন?",
+      selectState: "একটি রাজ্য নির্বাচন করুন",
+      fullAddress: "সম্পূর্ণ আবাসিক ঠিকানা",
+      addressPlaceholder: "বাড়ি নম্বর, রাস্তা, এলাকা",
+      voterStatus: "আপনার ভোটার স্থিতি কী?",
+      rememberMe: "এই ডিভাইসে আমাকে মনে রাখুন",
+      rememberMeDesc: "আনচেক করা থাকলে, আপনাকে পরের বার আবার সেটআপ করতে বলা হবে।",
+      complete: "সেটআপ সম্পন্ন করুন",
+      next: "পরবর্তী"
+    },
     profile: {
       langTitle: "ভাষা এবং আঞ্চলিক",
-      langDesc: "এআই সহকারী এবং ইন্টারফেসের জন্য ভাষা চয়ন করুন।",
+      langDesc: "এআই সহকারী এবং ইন্টারফেসের জন্য ভাষা চয়ন করুন।",
       headerTitle: "আপনার প্রোফাইল",
       headerDesc: "আপনার প্রসঙ্গ এবং অ্যাপ্লিকেশন সেটিংস পরিচালনা করুন।",
       personalDetails: "ব্যক্তিগত বিবরণ",
       editProfile: "সম্পাদনা করুন",
       save: "সংরক্ষণ করুন",
+      avatarDesign: "অবতার ডিজাইন নির্বাচন করুন",
       age: "বয়স",
       state: "রাজ্য",
+      fullAddress: "সম্পূর্ণ ঠিকানা",
       voterStatus: "ভোটার স্থিতি",
       notSet: "সেট করা হয়নি",
       registered: "নিবন্ধিত",
@@ -531,7 +1113,7 @@ export const translations: Record<string, any> = {
       pollingReminders: "ভোটগ্রহণের দিন অনুস্মারক",
       accessibility: "অ্যাক্সেসযোগ্যতা",
       highContrast: "উচ্চ বৈসাদৃশ্য",
-      screenReader: "স্ক্রিন রিডার মোড",
+      screenReader: "স্কিন রিডার মোড",
       voiceOutput: "ভয়েস আউটপুট",
       offlineMode: "অফলাইন মোড",
       offlineDesc: "ভোটের দিন অফলাইন অ্যাক্সেসের জন্য প্রয়োজনীয় ডেটা সংরক্ষণ করুন।",
@@ -540,15 +1122,33 @@ export const translations: Record<string, any> = {
     },
     assistant: {
       greeting: "নমস্কার! আমি ভোটওয়াইজ এআই। আপনার প্রোফাইলের ({state}) উপর ভিত্তি করে, আমি আপনাকে কীভাবে সাহায্য করতে পারি?",
-      placeholder: "ভোটদান সম্পর্কে যেকোনো কিছু জিজ্ঞাসা করুন..."
+      placeholder: "ভোটদান সম্পর্কে যেকোনো কিছু জিজ্ঞাসা করুন...",
+      thinking: "চিন্তা করছি...",
+      suggestions: [
+        "আমি কি ভোট দেওয়ার যোগ্য?",
+        "আমি কীভাবে নিবন্ধন করব?",
+        "আমার কী কী নথিপত্র প্রয়োজন?",
+        "আমার ভোটকেন্দ্র খুঁজুন"
+      ]
     },
     journey: {
-      title: "VoteWise এ স্বাগতম",
-      desc: "ব্যালট বাক্সে আপনার ব্যক্তিগতকৃত যাত্রা।",
+      title: "ভোটওয়াইজে স্বাগতম",
+      desc: "ব্যালট বক্স পর্যন্ত আপনার ব্যক্তিগতকৃত যাত্রা।",
       nextAction: "আমার পরবর্তী কী করা উচিত?",
       yourProgress: "আপনার অগ্রগতি",
       getHelp: "সাহায্য নিন",
       quickLinks: "দ্রুত লিঙ্ক",
+      countdown: "নির্বাচন কাউন্টডাউন",
+      pollingTomorrow: "ভোটগ্রহণ আগামীকাল",
+      boothAlert: "আপনার বুথের অবস্থান আবার যাচাই করুন এবং আপনার ভোটার আইডি সাথে রাখুন।",
+      dayLeft: "দিন বাকি",
+      checkBooth: "বুথের তথ্য যাচাই করুন",
+      statusMessages: {
+        completeProfile: "শুরু করতে আপনার প্রোফাইল সম্পূর্ণ করুন",
+        notEligible: "আপনি এখনও ভোট দেওয়ার যোগ্য নন। ভবিষ্যতের নিবন্ধন সম্পর্কে জানুন।",
+        registerPriority: "আপনার সর্বোচ্চ অগ্রাধিকার: ভোট দেওয়ার জন্য নিবন্ধন করুন।",
+        exploreAI: "নির্দেশনার জন্য এআই সহকারী ব্যবহার করুন।"
+      },
       steps: [
         { title: "যোগ্যতা যাচাই", desc: "আপনি ভোট দিতে পারবেন কিনা যাচাই করুন" },
         { title: "নিবন্ধন", desc: "ভোটার তালিকায় যুক্ত হোন" },
@@ -557,7 +1157,7 @@ export const translations: Record<string, any> = {
       ],
       quickLinkCards: {
         documents: { title: "নথিপত্র চেক করুন", desc: "কী বহন করতে হবে" },
-        booth: { title: "বুথ খুঁজুন", desc: "আপনার ভোটকেন্দ্র সনাক্ত করুন" },
+        booth: { title: "বুথ খুঁজুন", desc: "আপনার ভোটকেন্দ্র শনাক্ত করুন" },
         deadlines: { title: "সময়সীমা", desc: "নির্বাচনের তারিখ ট্র্যাক করুন" },
         mythBuster: { title: "তথ্য যাচাই", desc: "নির্বাচনী দাবির তথ্য-যাচাই করুন" }
       }
@@ -569,7 +1169,7 @@ export const translations: Record<string, any> = {
       partially: "আংশিক সঠিক",
       no: "না, ভুল",
       step2Title: "কোন নির্দিষ্ট বিভাগগুলি ভুল বলে মনে হচ্ছে?",
-      back: "পিছনে",
+      back: "পেছনে",
       continue: "চালিয়ে যান",
       step3Title: "কোনো প্রমাণ বা অতিরিক্ত মন্তব্য?",
       step3Desc: "আপনার স্থানীয় প্রসঙ্গ আমাদের মডারেশন টিমকে সত্য যাচাই করতে সাহায্য করে।",
@@ -577,7 +1177,7 @@ export const translations: Record<string, any> = {
       submitting: "জমা দেওয়া হচ্ছে...",
       submit: "রিপোর্ট জমা দিন",
       thanksTitle: "অংশগ্রহণের জন্য ধন্যবাদ!",
-      thanksDesc: "আপনার মতামত VoteWise মডারেশন টিমের কাছে নিরাপদে প্রেরণ করা হয়েছে। সম্প্রদায়ের সতর্কতা গণতন্ত্রকে স্বচ্ছ রাখে।"
+      thanksDesc: "আপনার মতামত ভোটওয়াইজ মডারেশন টিমের কাছে নিরাপদে পাঠানো হয়েছে। সম্প্রদায়ের সতর্কতা গণতন্ত্রকে স্বচ্ছ রাখে।"
     },
     candidates_page: {
       title: "নির্বাচনী প্রার্থী",
@@ -587,9 +1187,9 @@ export const translations: Record<string, any> = {
       totalAssets: "মোট সম্পদ",
       criminalCases: "ফৌজদারি মামলা",
       dataNotAvailable: "তথ্য উপলব্ধ নয়",
-      searchTitle: "ডাটাবেস অনুসন্ধান করুন",
-      searchDesc: "প্রার্থীর যাচাইকৃত আর্থিক হলফনামা, আইনি রেকর্ড এবং আইন প্রণয়নের কর্মক্ষমতা দেখতে নাম, রাজনৈতিক দল বা নির্বাচনী এলাকা লিখুন।",
-      fetching: "ডাটাবেস থেকে প্রার্থীদের আনা হচ্ছে...",
+      searchTitle: "ডেটাবেস অনুসন্ধান করুন",
+      searchDesc: "প্রার্থীর যাচাইকৃত আর্থিক হলফনামা, আইনি রেকর্ড এবং আইন প্রণয়নের সক্ষমতা দেখতে নাম, রাজনৈতিক দল বা নির্বাচনী এলাকা লিখুন।",
+      fetching: "আনা হচ্ছে...",
       noCandidates: "আপনার মানদণ্ডের সাথে মেলে এমন কোনো প্রার্থী পাওয়া যায়নি।"
     },
     myths: {
@@ -597,7 +1197,79 @@ export const translations: Record<string, any> = {
       desc: "নির্বাচনী ভুল তথ্য এবং গুজবের তথ্য-যাচাই।",
       reportMyth: "গুজব রিপোর্ট করুন",
       reportMythDesc: "সন্দেহজনক কিছু শুনেছেন? আমাদের যাচাই করতে দিন।",
-      recentChecks: "সাম্প্রতিক তথ্য যাচাই"
+      recentChecks: "সাম্প্রতিক তথ্য যাচাই",
+      searchPlaceholder: "গুজব খুঁজুন...",
+      claim: "দাবি",
+      fact: "তথ্য",
+      source: "উৎস:",
+      verifySource: "উৎস যাচাই করুন",
+      noResults: "কোনো তথ্য যাচাই পাওয়া যায়নি",
+      noResultsDesc: "আমরা আপনার অনুসন্ধানের সাথে মিলে এমন কিছুই খুঁজে পাইনি।",
+      askAssistant: "এআই সহকারীকে জিজ্ঞাসা করুন",
+      sendTeam: "তথ্য যাচাই দলের কাছে পাঠান",
+      requestFactCheck: "তথ্য যাচাইয়ের অনুরোধ করুন",
+      requestDesc: "এই প্রশ্নটি আমাদের গবেষণা দলের কাছে পাঠান। আমরা এটি যাচাই করব এবং আপনার সাথে যোগাযোগ করব।",
+      yourQuestion: "আপনার প্রশ্ন বা দাবি",
+      contactDetails: "যোগাযোগের বিবরণ",
+      contactPlaceholder: "আপনার সাথে যোগাযোগ করার জন্য ইমেল বা ফোন",
+      cancel: "বাতিল করুন",
+      submit: "অনুরোধ জমা দিন",
+      mythList: [
+        { myth: "আপনি ভারতে ঘরে বসে অনলাইনে ভোট দিতে পারেন।", fact: "না, ভারতে সাধারণ নাগরিকদের জন্য অনলাইন ভোটিং অনুমোদিত নয়। ভোট দেওয়ার জন্য আপনাকে নির্দিষ্ট ভোটকেন্দ্রে গিয়ে ইভিএম ব্যবহার করতে হবে। তবে, নির্দিষ্ট যোগ্যতাসম্পন্ন ব্যক্তিরা (যেমন প্রতিবন্ধী ভোটার এবং প্রবীণ নাগরিক) কিছু নিয়মের অধীনে পোস্টাল ব্যালটের মাধ্যমে ঘর থেকে ভোট দিতে পারেন।", source: "ভারতের নির্বাচন কমিশন (ECI)" },
+        { myth: "আমার কাছে আধার কার্ড থাকলে, আমার ভোটার তালিকায় নিবন্ধিত হওয়ার প্রয়োজন নেই।", fact: "ভুল। আধার কার্ড বা অন্য আইডি থাকা যথেষ্ট নয়। ভোট দেওয়ার জন্য আপনার নাম আপনার নির্বাচনী এলাকার ভোটার তালিকায় অবশ্যই থাকতে হবে। তালিকায় আপনার নাম থাকলে তবেই আধার কার্ডকে পরিচয়পত্র হিসেবে ব্যবহার করা যাবে।", source: "জনপ্রতিনিধিত্ব আইন, ১৯৫০" },
+        { myth: "ব্লুটুথ বা ওয়াই-ফাইয়ের মাধ্যমে EVM হ্যাক করা যায়।", fact: "ভারতীয় নির্বাচনে ব্যবহৃত EVMগুলি একক যন্ত্র। এগুলিতে কোনও রেডিও ফ্রিকোয়েন্সি রিসিভার বা ডেটা ডিকোডার নেই এবং এগুলি কোনও নেটওয়ার্ক, ওয়াই-ফাই বা ব্লুটুথের সাথে সংযুক্ত করা যায় না।", source: "ECI EVM ম্যানুয়াল" }
+      ]
+    },
+    deadlines: {
+      title: "সময়সীমা তালিকা",
+      desc: "গুরুত্বপূর্ণ নির্বাচনের তারিখগুলি সম্পর্কে অবগত থাকুন। ভোটের দিনের জন্য আপনি সম্পূর্ণ প্রস্তুত কিনা তা নিশ্চিত করতে আপনার অগ্রগতি ট্র্যাক করুন।",
+      back: "ড্যাশবোর্ডে ফিরে যান",
+      items: [
+        { title: "ভোটার নিবন্ধনের সময়সীমা", date: "১৫ এপ্রিল, ২০২৬", desc: "ভোটার তালিকায় নিবন্ধন করার বা আপনার ঠিকানা আপডেট করার শেষ দিন।" },
+        { title: "ডাক ব্যালট আবেদন", date: "৫ মে, ২০২৬", desc: "আপনি যদি প্রবীণ নাগরিক (৮৫+) বা প্রতিবন্ধী হন তবে ডাক ভোটের জন্য আবেদন করার সময়সীমা।" },
+        { title: "ভোটগ্রহণের দিন", date: "আগামীকাল (৪ মে, ২০২৬)", desc: "আপনার নির্দিষ্ট ভোটকেন্দ্রে সকাল ৭:০০ টা থেকে সন্ধ্যা ६:০০ টা পর্যন্ত ভোট দিন।" },
+        { title: "নির্বাচনের ফলাফলের দিন", date: "৭ মে, ২০২৬", desc: "ভোট গণনা এবং চূড়ান্ত নির্বাচনী ফলাফল ঘোষণা।" }
+      ]
+    },
+    documents: {
+      title: "নথিপত্র তালিকা",
+      desc: "ভোট দেওয়ার জন্য আপনাকে এই নথিগুলির মধ্যে অন্তত একটি ভোটকেন্দ্রে সাথে নিয়ে যেতে হবে।",
+      back: "ড্যাশবোর্ডে ফিরে যান",
+      readyTitle: "আপনি সম্পূর্ণ প্রস্তুত!",
+      readyDesc: "আপনার কাছে অন্তত একটি বৈধ নথি প্রস্তুত আছে। ভোটের দিন এটি আপনার সাথে নিতে ভুলবেন না।",
+      actionTitle: "নথিপত্র প্রয়োজন",
+      actionDesc: "ভোটের দিনের জন্য আপনার কাছে এই নথিগুলির মধ্যে অন্তত একটি প্রস্তুত আছে কিনা তা নিশ্চিত করুন।",
+      types: { primary: "প্রাথমিক", alternative: "বিকল্প" },
+      items: [
+        { id: "epic", title: "ভোটার আইডি কার্ড (EPIC)", type: "Primary", desc: "ভারতের নির্বাচন কমিশন দ্বারা জারি করা নির্বাচনী ফটো পরিচয়পত্র। এটি সবচেয়ে ব্যাপকভাবে স্বীকৃত নথি।" },
+        { id: "aadhaar", title: "আধার কার্ড", type: "Alternative", desc: "UIDAI দ্বারা জারি করা আপনার ১২-সংখ্যার অনন্য পরিচয় নম্বর। এতে আপনার ছবি থাকতে হবে।" },
+        { id: "pan", title: "প্যান কার্ড", type: "Alternative", desc: "আয়কর বিভাগ দ্বারা জারি করা স্থায়ী অ্যাকাউন্ট নম্বর কার্ড।" },
+        { id: "driving", title: "ড্রাইভিং লাইসেন্স", type: "Alternative", desc: "আপনার ছবি সহ RTO দ্বারা জারি করা একটি বৈধ ড্রাইভিং লাইসেন্স।" },
+        { id: "passport", title: "ভারতীয় পাসপোর্ট", type: "Alternative", desc: "বিদেশ মন্ত্রক দ্বারা জারি করা আপনার অফিসিয়াল ভারতীয় পাসপোর্ট।" },
+        { id: "bank", title: "ব্যাংক/পোস্ট অফিস পাসবুক", type: "Alternative", desc: "স্বীকৃত ব্যাংক বা পোস্ট অফিস দ্বারা জারি করা আপনার ছবি সহ পাসবুক।" }
+      ]
+    },
+    auth: {
+      loginTitle: "ফিরে আসার জন্য স্বাগতম",
+      signupTitle: "আপনার অ্যাকাউন্ট তৈরি করুন",
+      signIn: "সাইন ইন করুন",
+      signUp: "অ্যাকাউন্ট তৈরি করুন",
+      alreadyHaveAccount: "ইতিমধ্যে অ্যাকাউন্ট আছে? ",
+      noAccount: "অথবা ",
+      createAccount: "নতুন অ্যাকাউন্ট তৈরি করুন",
+      signInAccount: "আপনার অ্যাকাউন্টে সাইন ইন করুন",
+      fullName: "পুরো নাম",
+      phone: "ফোন নম্বর",
+      email: "ইমেল ঠিকানা",
+      password: "পাসওয়ার্ড",
+      votingDetails: "ভোটের বিবরণ",
+      rememberMe: "আমাকে মনে রাখুন",
+      forgotPassword: "পাসওয়ার্ড ভুলে গেছেন?",
+      terms: "অ্যাকাউন্ট তৈরি করে, আপনি আমাদের পরিষেবার শর্তাবলীতে সম্মত হন।",
+      wait: "দয়া করে অপেক্ষা করুন..."
+    },
+    common: {
+      signOut: "সাইন আউট"
     }
   }
 };

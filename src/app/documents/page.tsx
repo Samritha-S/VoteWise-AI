@@ -4,51 +4,15 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FileText, CheckCircle2, Circle, ArrowRight, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-
-const DOCUMENTS_DATA = [
-  {
-    id: "epic",
-    title: "Voter ID Card (EPIC)",
-    type: "Primary",
-    desc: "The Electoral Photo Identity Card issued by the Election Commission of India. This is the most widely accepted document.",
-  },
-  {
-    id: "aadhaar",
-    title: "Aadhaar Card",
-    type: "Alternative",
-    desc: "Your 12-digit unique identity number issued by UIDAI. Must contain your photograph.",
-  },
-  {
-    id: "pan",
-    title: "PAN Card",
-    type: "Alternative",
-    desc: "Permanent Account Number card issued by the Income Tax Department.",
-  },
-  {
-    id: "driving",
-    title: "Driving License",
-    type: "Alternative",
-    desc: "A valid driving license issued by the RTO containing your photograph.",
-  },
-  {
-    id: "passport",
-    title: "Indian Passport",
-    type: "Alternative",
-    desc: "Your official Indian Passport issued by the Ministry of External Affairs.",
-  },
-  {
-    id: "bank",
-    title: "Bank/Post Office Passbook",
-    type: "Alternative",
-    desc: "Passbook with your photograph, issued by a recognized Bank or Post Office.",
-  }
-];
-
 import { useAppContext } from "@/context/AppContext";
+import { useTranslation } from "@/lib/i18n";
 
 export default function DocumentsChecklistPage() {
   const { userData, updateUserData } = useAppContext();
+  const t = useTranslation(userData.language);
   const [completedDocs, setCompletedDocs] = useState<Record<string, boolean>>({});
+
+  const DOCUMENTS_DATA = t.documents.items;
 
   const toggleDoc = (id: string) => {
     const newState = {
@@ -70,11 +34,11 @@ export default function DocumentsChecklistPage() {
         <div className="flex items-center gap-3 text-primary mb-2">
           <FileText className="w-8 h-8" />
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            Documents Checklist
+            {t.documents.title}
           </h1>
         </div>
         <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-          You must carry at least ONE valid photo ID to the polling booth. Check off the document you plan to bring.
+          {t.documents.desc}
         </p>
       </header>
 
@@ -83,16 +47,16 @@ export default function DocumentsChecklistPage() {
         <div className="p-4 bg-green-50 border border-green-200 rounded-xl flex items-start gap-3">
           <ShieldCheck className="w-5 h-5 text-green-600 mt-0.5 shrink-0" />
           <div>
-            <p className="font-bold text-green-800">You are ready to vote!</p>
-            <p className="text-green-700 text-sm">You only need to carry one of these documents to the polling booth.</p>
+            <p className="font-bold text-green-800">{t.documents.readyTitle}</p>
+            <p className="text-green-700 text-sm">{t.documents.readyDesc}</p>
           </div>
         </div>
       ) : (
         <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-3">
           <ShieldCheck className="w-5 h-5 text-amber-600 mt-0.5 shrink-0" />
           <div>
-            <p className="font-bold text-amber-800">Action Required</p>
-            <p className="text-amber-700 text-sm">Please secure at least one of the following documents before Polling Day.</p>
+            <p className="font-bold text-amber-800">{t.documents.actionTitle}</p>
+            <p className="text-amber-700 text-sm">{t.documents.actionDesc}</p>
           </div>
         </div>
       )}
@@ -128,7 +92,7 @@ export default function DocumentsChecklistPage() {
                     {doc.title}
                   </h3>
                   <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full ${doc.type === 'Primary' ? 'bg-primary/10 text-primary' : 'bg-secondary text-muted-foreground'}`}>
-                    {doc.type}
+                    {doc.type === 'Primary' ? t.documents.types.primary : t.documents.types.alternative}
                   </span>
                 </div>
                 <p className="text-muted-foreground text-sm">
@@ -142,7 +106,7 @@ export default function DocumentsChecklistPage() {
       
       <div className="pt-8 text-center">
          <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-medium">
-            <ArrowRight className="w-4 h-4 rotate-180" /> Back to Dashboard
+            <ArrowRight className="w-4 h-4 rotate-180" /> {t.documents.back}
          </Link>
       </div>
     </div>

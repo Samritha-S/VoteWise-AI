@@ -22,12 +22,7 @@ export default function AssistantPage() {
       id: "1",
       role: "assistant",
       content: t.assistant.greeting.replace("{state}", userData.state || "India").replace("{status}", userData.voterStatus || ""),
-      options: [
-        "Am I eligible to vote?",
-        "How do I register?",
-        "What documents do I need?",
-        "Find my polling booth"
-      ]
+      options: t.assistant.suggestions
     }
   ]);
   const [input, setInput] = useState("");
@@ -99,7 +94,7 @@ export default function AssistantPage() {
           <h1 className="text-xl font-bold flex items-center gap-2">
             VoteWise Assistant <Sparkles className="w-4 h-4 text-yellow-500" />
           </h1>
-          <p className="text-sm text-muted-foreground">Your personalized civic guide.</p>
+          <p className="text-sm text-muted-foreground">{t.sidebar.assistant === "AI Assistant" ? "Your personalized civic guide." : t.assistant.placeholder}</p>
         </div>
       </div>
 
@@ -155,7 +150,7 @@ export default function AssistantPage() {
               </div>
               <div className="p-4 rounded-2xl bg-card border border-border rounded-tl-sm shadow-sm flex items-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
-                <span className="text-muted-foreground text-sm font-medium">Thinking...</span>
+                <span className="text-muted-foreground text-sm font-medium">{t.assistant.thinking}</span>
               </div>
             </motion.div>
           )}

@@ -40,6 +40,16 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
     );
   }
 
+  const safeParse = (str: string | null | undefined, fallback: any = []) => {
+    if (!str) return fallback;
+    try {
+      return JSON.parse(str);
+    } catch (e) {
+      console.error(`Error parsing candidate field:`, e);
+      return fallback;
+    }
+  };
+
   // Map DB candidate to frontend interface
   const candidate = {
     ...dbCandidate,
@@ -48,24 +58,24 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
     liabilities: dbCandidate.totalLiabilities,
     cases: dbCandidate.criminalCases,
     lastUpdated: dbCandidate.updatedAt.toISOString(),
-    performanceMetrics: dbCandidate.performance ? JSON.parse(dbCandidate.performance) : {
+    performanceMetrics: safeParse(dbCandidate.performance, {
       attendance: { value: "Data Not Available", source: "N/A", lastUpdated: "N/A" },
       questionsAsked: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
       billsIntroduced: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
       fundsUtilized: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
       keyAchievements: []
-    },
-    electionHistory: dbCandidate.electionHistory ? JSON.parse(dbCandidate.electionHistory) : {
+    }),
+    electionHistory: safeParse(dbCandidate.electionHistory, {
       electionsContested: 0, wins: 0, losses: 0, latestVoteShare: "N/A", latestMargin: "N/A"
-    },
-    movableAssetsBreakdown: JSON.parse(dbCandidate.assetBreakdown || "[]"),
-    immovableAssetsBreakdown: [], // SQLite schema doesn't have separate immovable field in the check, but it might be in assetBreakdown
-    liabilitiesBreakdown: JSON.parse(dbCandidate.liabilityBreakdown || "[]"),
-    criminalCasesBreakdown: JSON.parse(dbCandidate.caseDetails || "[]"),
-    pastControversies: dbCandidate.scamsOrControversies ? JSON.parse(dbCandidate.scamsOrControversies) : [],
-    careerHistory: dbCandidate.performance ? (JSON.parse(dbCandidate.performance).careerHistory || []) : [],
-    ideologyStances: dbCandidate.performance ? (JSON.parse(dbCandidate.performance).ideologyStances || []) : [],
-    recentNews: dbCandidate.performance ? (JSON.parse(dbCandidate.performance).recentNews || []) : [],
+    }),
+    movableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, []),
+    immovableAssetsBreakdown: [], // SQLite schema doesn't have separate immovable field
+    liabilitiesBreakdown: safeParse(dbCandidate.liabilityBreakdown, []),
+    criminalCasesBreakdown: safeParse(dbCandidate.caseDetails, []),
+    pastControversies: safeParse(dbCandidate.scamsOrControversies, []),
+    careerHistory: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).careerHistory || []) : [],
+    ideologyStances: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).ideologyStances || []) : [],
+    recentNews: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).recentNews || []) : [],
     assetDetails: {
       movable: dbCandidate.totalAssets,
       immovable: "See Breakdown"
@@ -94,8 +104,8 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
         <div className="bg-card rounded-2xl p-8 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-border/50">
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
             <Image 
-              src={candidate.photo} 
-              alt={candidate.name} 
+              src={candidate.photo || "/candidates/default.jpg"} 
+              alt={candidate.name || "Candidate"} 
               width={160}
               height={160}
               className="w-40 h-40 rounded-xl object-cover shadow-sm bg-muted shrink-0"
