@@ -5,8 +5,7 @@ import Navigation from "@/components/Navigation";
 import ScreenReaderAnnouncer from "@/components/ScreenReaderAnnouncer";
 import { AppProvider } from "@/context/AppContext";
 import OnboardingModal from "@/components/OnboardingModal";
-import { usePathname } from "next/navigation";
-import AuthPage from "./auth/page";
+import AuthWall from "@/components/AuthWall";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,19 +37,5 @@ export default function RootLayout({
        </body>
      </html>
    );
- }
- 
- function AuthWall({ children }: { children: React.ReactNode }) {
-   const { userData, isLoaded } = useAppContext();
-   const pathname = usePathname();
-   
-   if (!isLoaded) return null; // Or a loading spinner
-   
-   // If not authenticated and not already on /auth, show AuthPage
-   if (!userData.isAuthenticated && pathname !== '/auth' && !pathname.startsWith('/admin')) {
-     return <AuthPage />;
-   }
-   
-   return <>{children}</>;
  }
 
