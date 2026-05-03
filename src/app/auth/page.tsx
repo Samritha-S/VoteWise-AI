@@ -8,7 +8,7 @@ import { Mail, Lock, User, MapPin, Building, Calendar, ArrowRight, ShieldCheck, 
 export default function AuthPage() {
   const router = useRouter();
   const { userData, updateUserData } = useAppContext();
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   const [formData, setFormData] = useState({
     name: userData.name || "",

@@ -15,7 +15,7 @@ const states = [
 ];
 
 export default function OnboardingModal() {
-  const { userData, updateUserData } = useAppContext();
+  const { userData, isLoaded, updateUserData } = useAppContext();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     language: "English",
@@ -25,7 +25,7 @@ export default function OnboardingModal() {
     rememberDevice: false
   });
 
-  if (userData.onboardingComplete) return null;
+  if (!isLoaded || userData.onboardingComplete) return null;
 
   const handleNext = () => {
     if (step < 4) setStep(step + 1);

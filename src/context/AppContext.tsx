@@ -31,6 +31,7 @@ export interface UserContextData {
 
 interface AppContextType {
   userData: UserContextData;
+  isLoaded: boolean;
   updateUserData: (data: Partial<UserContextData>) => void;
   resetUser: () => void;
 }
@@ -118,7 +119,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AppContext.Provider value={{ userData, updateUserData, resetUser }}>
+    <AppContext.Provider value={{ userData, isLoaded, updateUserData, resetUser }}>
       {children}
     </AppContext.Provider>
   );
