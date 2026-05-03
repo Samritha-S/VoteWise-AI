@@ -1,4 +1,5 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
+RUN apk add --no-cache openssl
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -22,6 +23,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Generate prisma client if needed
 RUN npx prisma generate
 
+ENV DATABASE_URL="file:./dev.db"
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -43,6 +45,7 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 
 USER nextjs
 

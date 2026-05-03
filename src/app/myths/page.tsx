@@ -80,7 +80,32 @@ export default function MythBusterPage() {
   const [reportDetails, setReportDetails] = useState("");
   const [reportQuestion, setReportQuestion] = useState("");
 
-  const filteredMyths = MYTHS.filter(m => 
+  const [liveMyths, setLiveMyths] = useState<any[]>([]);
+
+  React.useEffect(() => {
+    fetch("/api/myths")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          // Only show published ones on the frontend
+          setLiveMyths(data.filter(m => m.status === "PUBLISHED"));
+        }
+      })
+      .catch(e => console.error(e));
+  }, []);
+
+  const allMyths = [
+    ...MYTHS,
+    ...liveMyths.map(m => ({
+      id: m.id,
+      myth: m.claim,
+      fact: m.fact || "",
+      source: m.source || "Official Verification",
+      link: m.link || "#"
+    }))
+  ];
+
+  const filteredMyths = allMyths.filter(m => 
     m.myth.toLowerCase().includes(searchTerm.toLowerCase()) || 
     m.fact.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -175,14 +200,12 @@ export default function MythBusterPage() {
                     onClick={async () => {
                       if (!reportQuestion) return;
                       try {
-                        await fetch('/api/feedback', {
+                        await fetch('/api/myths', {
                           method: 'POST',
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify({
-                            candidateId: "MYTH_QUERY",
-                            isAccurate: "Fact Check Request",
-                            inaccurateFields: reportDetails || "No contact info",
-                            comments: reportQuestion
+                            claim: reportQuestion,
+                            userId: reportDetails || (userData.email ? userData.email : "Anonymous")
                           })
                         });
                         alert("Fact-check request sent to the team!");

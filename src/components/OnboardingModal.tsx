@@ -57,6 +57,11 @@ export default function OnboardingModal() {
           <p className="text-muted-foreground mt-1 text-sm">
             Let's personalize your election journey.
           </p>
+          <div className="mt-3">
+            <a href="/auth" className="text-primary text-sm font-medium hover:underline flex items-center gap-1">
+              Already have an account? Sign in <ChevronRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
           
           {/* Progress bar */}
           <div className="flex gap-2 mt-6">

@@ -9,7 +9,9 @@ interface Candidate {
   name: string;
   party: string;
   constituency: string;
-  photoUrl: string;
+  state: string;
+  photo: string;
+  totalAssets: string;
 }
 
 export default function CandidatesData() {

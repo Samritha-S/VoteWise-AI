@@ -46,3 +46,30 @@ model CandidateFeedback {
   comments         String?
   createdAt        DateTime @default(now())
 }
+
+model User {
+  id          String   @id @default(uuid())
+  name        String
+  email       String   @unique
+  password    String
+  address     String?
+  state       String?
+  pincode     String?
+  age         Int?
+  voterStatus String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Myth {
+  id        String   @id @default(uuid())
+  claim     String
+  fact      String?
+  source    String?
+  link      String?
+  status    String   @default("PENDING") // PENDING or PUBLISHED
+  views     Int      @default(0)
+  userId    String?  // Optional reference to who submitted it
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

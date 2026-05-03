@@ -38,7 +38,7 @@ const adminNavItems = [
 export default function Navigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const { userData } = useAppContext();
+  const { userData, resetUser } = useAppContext();
   const t = useTranslation(userData.language);
 
   return (
@@ -105,11 +105,40 @@ export default function Navigation() {
 
         {!pathname.startsWith('/admin') && (
           <div className="p-4 m-4 rounded-xl bg-secondary/50 border border-border/50 backdrop-blur-md">
-            <div className="text-sm font-medium text-foreground mb-1">{t.sidebar.status}</div>
-            <div className="text-xs text-muted-foreground flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full ${userData.onboardingComplete ? "bg-green-500" : "bg-yellow-500"}`} />
-              {userData.onboardingComplete ? t.sidebar.ready : t.sidebar.incomplete}
-            </div>
+            {userData.isAuthenticated ? (
+              <>
+                <div className="text-sm font-medium text-foreground mb-1 flex items-center gap-2">
+                  <span className="text-xl">{userData.avatar}</span>
+                  <span className="truncate">{userData.name || "User"}</span>
+                </div>
+                <div className="text-xs text-muted-foreground flex items-center justify-between mt-2">
+                  <span className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                    {t.sidebar.ready || "Ready to vote"}
+                  </span>
+                  <button 
+                    onClick={() => {
+                      resetUser();
+                      setIsOpen(false);
+                    }} 
+                    className="text-primary hover:underline"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="text-sm font-medium text-foreground mb-2">Welcome to VoteWise</div>
+                <Link
+                  href="/auth"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors"
+                >
+                  Sign in / Sign up
+                </Link>
+              </>
+            )}
           </div>
         )}
       </motion.div>

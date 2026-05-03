@@ -5,18 +5,26 @@ import { UserCircle, Search, Download, Filter } from "lucide-react";
 
 export default function UsersData() {
   const [search, setSearch] = useState("");
+  const [users, setUsers] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Mock data for user base
-  const users = [
-    { id: "USR-001", state: "Maharashtra", age: 24, status: "Registered", language: "English", lastActive: "2 hours ago" },
-    { id: "USR-002", state: "Karnataka", age: 19, status: "Not Registered", language: "Kannada", lastActive: "5 hours ago" },
-    { id: "USR-003", state: "Delhi", age: 34, status: "Registered", language: "Hindi", lastActive: "1 day ago" },
-    { id: "USR-004", state: "Tamil Nadu", age: 17, status: "Ineligible", language: "Tamil", lastActive: "2 days ago" },
-    { id: "USR-005", state: "Gujarat", age: 45, status: "Unsure", language: "Gujarati", lastActive: "Just now" },
-    { id: "USR-006", state: "Maharashtra", age: 28, status: "Registered", language: "Marathi", lastActive: "1 week ago" },
-  ];
+  React.useEffect(() => {
+    fetch("/api/users")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setUsers(data);
+        }
+      })
+      .catch(err => console.error("Error fetching users:", err))
+      .finally(() => setIsLoading(false));
+  }, []);
 
-  const filtered = users.filter(u => u.state.toLowerCase().includes(search.toLowerCase()) || u.id.toLowerCase().includes(search.toLowerCase()));
+  const filtered = users.filter(u => 
+    (u.state || "").toLowerCase().includes(search.toLowerCase()) || 
+    (u.email || "").toLowerCase().includes(search.toLowerCase()) ||
+    (u.name || "").toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-background p-6 md:p-12 max-w-6xl mx-auto space-y-8 text-foreground">
@@ -36,19 +44,25 @@ export default function UsersData() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-card border border-border p-4 rounded-xl shadow-sm text-center">
           <p className="text-muted-foreground text-sm font-medium">Total Users</p>
-          <p className="text-2xl font-bold mt-1">145,280</p>
+          <p className="text-2xl font-bold mt-1">{users.length}</p>
         </div>
         <div className="bg-card border border-border p-4 rounded-xl shadow-sm text-center">
           <p className="text-muted-foreground text-sm font-medium">Registered Voters</p>
-          <p className="text-2xl font-bold mt-1 text-green-500">89,430</p>
+          <p className="text-2xl font-bold mt-1 text-green-500">
+            {users.filter(u => u.voterStatus === 'Registered').length}
+          </p>
         </div>
         <div className="bg-card border border-border p-4 rounded-xl shadow-sm text-center">
           <p className="text-muted-foreground text-sm font-medium">Unregistered (Eligible)</p>
-          <p className="text-2xl font-bold mt-1 text-yellow-500">42,100</p>
+          <p className="text-2xl font-bold mt-1 text-yellow-500">
+            {users.filter(u => u.voterStatus === 'Not Registered' && (u.age || 0) >= 18).length}
+          </p>
         </div>
         <div className="bg-card border border-border p-4 rounded-xl shadow-sm text-center">
           <p className="text-muted-foreground text-sm font-medium">Ineligible (Under 18)</p>
-          <p className="text-2xl font-bold mt-1 text-orange-500">13,750</p>
+          <p className="text-2xl font-bold mt-1 text-orange-500">
+            {users.filter(u => (u.age || 18) < 18).length}
+          </p>
         </div>
       </div>
 
@@ -73,31 +87,36 @@ export default function UsersData() {
           <table className="w-full text-left text-sm">
             <thead className="bg-muted text-muted-foreground border-b border-border">
               <tr>
-                <th className="px-6 py-4 font-medium">User ID</th>
+                <th className="px-6 py-4 font-medium">Name</th>
+                <th className="px-6 py-4 font-medium">Email</th>
                 <th className="px-6 py-4 font-medium">State</th>
                 <th className="px-6 py-4 font-medium">Age</th>
                 <th className="px-6 py-4 font-medium">Status</th>
-                <th className="px-6 py-4 font-medium">Language</th>
-                <th className="px-6 py-4 font-medium text-right">Last Active</th>
+                <th className="px-6 py-4 font-medium text-right">Joined</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {filtered.map((u, i) => (
+              {isLoading ? (
+                <tr><td colSpan={6} className="text-center py-8">Loading users...</td></tr>
+              ) : filtered.length === 0 ? (
+                <tr><td colSpan={6} className="text-center py-8">No users found.</td></tr>
+              ) : filtered.map((u, i) => (
                 <tr key={i} className="hover:bg-muted/30 transition-colors">
-                  <td className="px-6 py-4 font-medium font-mono text-xs">{u.id}</td>
-                  <td className="px-6 py-4">{u.state}</td>
-                  <td className="px-6 py-4">{u.age}</td>
+                  <td className="px-6 py-4 font-medium text-sm">{u.name}</td>
+                  <td className="px-6 py-4 text-muted-foreground">{u.email}</td>
+                  <td className="px-6 py-4">{u.state || "N/A"}</td>
+                  <td className="px-6 py-4">{u.age || "-"}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      u.status === 'Registered' ? 'bg-green-500/10 text-green-500' :
-                      u.status === 'Ineligible' ? 'bg-orange-500/10 text-orange-500' :
+                      u.voterStatus === 'Registered' ? 'bg-green-500/10 text-green-500' :
                       'bg-yellow-500/10 text-yellow-500'
                     }`}>
-                      {u.status}
+                      {u.voterStatus || "Unknown"}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-muted-foreground">{u.language}</td>
-                  <td className="px-6 py-4 text-right text-muted-foreground">{u.lastActive}</td>
+                  <td className="px-6 py-4 text-right text-muted-foreground">
+                    {new Date(u.createdAt).toLocaleDateString()}
+                  </td>
                 </tr>
               ))}
             </tbody>

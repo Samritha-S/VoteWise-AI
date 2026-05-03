@@ -19,8 +19,9 @@ interface Candidate {
   party: string;
   state: string;
   constituency: string;
-  photoUrl: string;
-  verificationStatus: string;
+  photo: string;
+  totalAssets: string;
+  confidence: string;
   criminalCases: number;
 }
 import { useAppContext } from "@/context/AppContext";
@@ -154,13 +155,13 @@ export default function CandidatesPage() {
                     <div className="hidden md:flex gap-8 text-sm">
                       <div className="space-y-1 text-right">
                         <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold">{t.candidates_page.totalAssets}</p>
-                        <p className="font-bold text-foreground text-base">{candidate.assets}</p>
+                        <p className="font-bold text-foreground text-base">{candidate.totalAssets}</p>
                       </div>
                       <div className="space-y-1 text-right">
                         <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold">{t.candidates_page.criminalCases}</p>
-                        <p className={`font-bold flex items-center justify-end gap-1 text-base ${candidate.cases > 0 ? 'text-amber-600/90' : 'text-foreground'}`}>
-                          {candidate.cases > 0 && <AlertCircle className="w-3.5 h-3.5" />}
-                          {candidate.cases}
+                        <p className={`font-bold flex items-center justify-end gap-1 text-base ${candidate.criminalCases > 0 ? 'text-amber-600/90' : 'text-foreground'}`}>
+                          {candidate.criminalCases > 0 && <AlertCircle className="w-3.5 h-3.5" />}
+                          {candidate.criminalCases}
                         </p>
                       </div>
                     </div>

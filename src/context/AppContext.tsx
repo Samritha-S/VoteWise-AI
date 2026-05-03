@@ -13,11 +13,16 @@ export interface UserPreferences {
 }
 
 export interface UserContextData {
+  name: string;
+  email: string;
+  address: string;
+  pincode: string;
   age: number | null;
   state: string;
   voterStatus: VoterStatus;
   language: string;
   onboardingComplete: boolean;
+  isAuthenticated: boolean;
   avatar: string;
   rememberDevice: boolean;
   preferences: UserPreferences;
@@ -30,11 +35,16 @@ interface AppContextType {
 }
 
 const defaultUserData: UserContextData = {
+  name: "",
+  email: "",
+  address: "",
+  pincode: "",
   age: null,
   state: "",
   voterStatus: "",
   language: "English",
   onboardingComplete: false,
+  isAuthenticated: false,
   avatar: "🐅",
   rememberDevice: false,
   preferences: {

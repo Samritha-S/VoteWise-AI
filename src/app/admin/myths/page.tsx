@@ -6,18 +6,60 @@ import { ShieldAlert, Check, X, Search, MessageCircleQuestion } from "lucide-rea
 export default function MythsData() {
   const [activeTab, setActiveTab] = useState<"incoming" | "published">("incoming");
 
-  // Mock data for myths
-  const incoming = [
-    { id: 1, user: "USR-042", query: "Can I vote with an expired passport?", time: "10 mins ago" },
-    { id: 2, user: "USR-811", query: "Is EVM hacking real? I read on WhatsApp that EVMs can be controlled via Bluetooth.", time: "1 hour ago" },
-    { id: 3, user: "USR-293", query: "Do I have to pay tax to be able to vote?", time: "3 hours ago" },
-  ];
+  const [myths, setMyths] = useState<any[]>([]);
+  const [draftingMyth, setDraftingMyth] = useState<any>(null);
+  const [draftFact, setDraftFact] = useState("");
+  const [draftSource, setDraftSource] = useState("");
+  const [draftLink, setDraftLink] = useState("");
 
-  const published = [
-    { id: 101, title: "Can NRIs vote online?", status: "Active", views: "12.4k" },
-    { id: 102, title: "Do EVMs have Bluetooth/Wi-Fi?", status: "Active", views: "89.2k" },
-    { id: 103, title: "Can I vote if I lost my voter slip?", status: "Active", views: "45.1k" },
-  ];
+  const fetchMyths = () => {
+    fetch("/api/myths")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setMyths(data);
+      })
+      .catch(console.error);
+  };
+
+  React.useEffect(() => {
+    fetchMyths();
+  }, []);
+
+  const incoming = myths.filter(m => m.status === "PENDING");
+  const published = myths.filter(m => m.status === "PUBLISHED");
+
+  const handlePublish = async () => {
+    if (!draftingMyth || !draftFact) return;
+    try {
+      await fetch(`/api/myths/${draftingMyth.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fact: draftFact,
+          source: draftSource,
+          link: draftLink,
+          status: "PUBLISHED"
+        })
+      });
+      setDraftingMyth(null);
+      setDraftFact("");
+      setDraftSource("");
+      setDraftLink("");
+      fetchMyths();
+    } catch (e) {
+      console.error(e);
+      alert("Failed to publish");
+    }
+  };
+
+  const handleReject = async (id: string) => {
+    try {
+      await fetch(`/api/myths/${id}`, { method: "DELETE" });
+      fetchMyths();
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background p-6 md:p-12 max-w-6xl mx-auto space-y-8 text-foreground">
@@ -58,17 +100,28 @@ export default function MythsData() {
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-1">
-                      <span className="font-mono text-xs font-medium bg-muted px-2 py-1 rounded">{q.user}</span>
-                      <span className="text-xs text-muted-foreground">{q.time}</span>
+                      <span className="font-mono text-xs font-medium bg-muted px-2 py-1 rounded">{q.userId || "Anonymous"}</span>
+                      <span className="text-xs text-muted-foreground">{new Date(q.createdAt).toLocaleDateString()}</span>
                     </div>
-                    <p className="text-lg font-medium">{q.query}</p>
+                    <p className="text-lg font-medium">{q.claim}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90">
+                  <button 
+                    onClick={() => {
+                      setDraftingMyth(q);
+                      setDraftFact(q.fact || "");
+                      setDraftSource(q.source || "");
+                      setDraftLink(q.link || "");
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90"
+                  >
                     <Check className="w-4 h-4" /> Draft Answer
                   </button>
-                  <button className="p-2 border border-border rounded-lg text-muted-foreground hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-colors">
+                  <button 
+                    onClick={() => handleReject(q.id)}
+                    className="p-2 border border-border rounded-lg text-muted-foreground hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-colors"
+                  >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
@@ -97,13 +150,23 @@ export default function MythsData() {
               <tbody className="divide-y divide-border">
                 {published.map(p => (
                   <tr key={p.id} className="hover:bg-muted/30 transition-colors">
-                    <td className="px-6 py-4 font-medium">{p.title}</td>
+                    <td className="px-6 py-4 font-medium max-w-[300px] truncate">{p.claim}</td>
                     <td className="px-6 py-4">
                       <span className="bg-green-500/10 text-green-500 px-2 py-1 rounded text-xs font-medium">{p.status}</span>
                     </td>
-                    <td className="px-6 py-4 text-muted-foreground">{p.views}</td>
+                    <td className="px-6 py-4 text-muted-foreground">{p.views || 0}</td>
                     <td className="px-6 py-4 text-right">
-                      <button className="text-primary hover:underline text-sm font-medium">Edit</button>
+                      <button 
+                        onClick={() => {
+                          setDraftingMyth(p);
+                          setDraftFact(p.fact || "");
+                          setDraftSource(p.source || "");
+                          setDraftLink(p.link || "");
+                        }}
+                        className="text-primary hover:underline text-sm font-medium"
+                      >
+                        Edit
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -112,6 +175,66 @@ export default function MythsData() {
           </div>
         )}
       </div>
+
+      {draftingMyth && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-card border border-border w-full max-w-lg rounded-2xl shadow-xl p-6 space-y-6">
+            <h2 className="text-xl font-bold">Draft Official Fact-Check</h2>
+            <div>
+              <p className="text-sm font-medium text-muted-foreground mb-1">User Claim/Query</p>
+              <p className="bg-muted/50 p-3 rounded-lg text-sm">{draftingMyth.claim}</p>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-medium block mb-1">Official Fact / Answer</label>
+                <textarea 
+                  value={draftFact} 
+                  onChange={e => setDraftFact(e.target.value)}
+                  className="w-full p-3 rounded-xl border bg-background"
+                  rows={4}
+                  placeholder="Provide the verified answer..."
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium block mb-1">Source Name</label>
+                  <input 
+                    value={draftSource} 
+                    onChange={e => setDraftSource(e.target.value)}
+                    className="w-full p-3 rounded-xl border bg-background"
+                    placeholder="e.g. ECI"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium block mb-1">Source URL</label>
+                  <input 
+                    value={draftLink} 
+                    onChange={e => setDraftLink(e.target.value)}
+                    className="w-full p-3 rounded-xl border bg-background"
+                    placeholder="https://..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3 pt-2">
+              <button 
+                onClick={() => setDraftingMyth(null)}
+                className="px-4 py-2 hover:bg-secondary rounded-lg font-medium"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handlePublish}
+                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium"
+              >
+                Publish Fact-Check
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
