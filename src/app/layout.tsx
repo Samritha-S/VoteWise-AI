@@ -23,16 +23,14 @@ export default function RootLayout({
      <html lang="en" className="light h-full antialiased">
        <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground`}>
          <AppProvider>
-           <AuthWall>
-             <div className="flex h-screen overflow-hidden">
-               <ScreenReaderAnnouncer />
-               <OnboardingModal />
-               <Navigation />
-               <main className="flex-1 overflow-y-auto bg-background">
-                 {children}
-               </main>
-             </div>
-           </AuthWall>
+           <div className="flex h-screen overflow-hidden">
+             <ScreenReaderAnnouncer />
+             <OnboardingModal />
+             <Navigation />
+             <main className="flex-1 overflow-y-auto bg-background">
+               {children}
+             </main>
+           </div>
          </AppProvider>
        </body>
      </html>
