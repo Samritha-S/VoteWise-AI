@@ -21,24 +21,6 @@ import {
 import { prisma } from "@/lib/prisma";
 import CandidateSurvey from "@/components/CandidateSurvey";
 
-export default async function CandidateDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const unwrappedParams = await params;
-  const id = unwrappedParams.id;
-  
-  const dbCandidate = await prisma.candidate.findUnique({
-    where: { id }
-  });
-
-  if (!dbCandidate) {
-    return (
-      <div className="min-h-screen bg-background p-6 md:p-10 max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-semibold text-foreground mb-4">Candidate Not Found</h1>
-        <Link href="/candidates" className="text-primary hover:text-primary/80 font-medium transition-colors">
-          &larr; Return to Transparency Hub
-        </Link>
-      </div>
-    );
-  }
 
 interface CandidateDetail {
   id: string;

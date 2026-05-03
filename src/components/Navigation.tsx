@@ -130,6 +130,8 @@ export default function Navigation() {
                 </button>
               </div>
             </>
+          </div>
+        )}
         <div className="p-4 mt-auto border-t border-border/30">
           {!userData.isAuthenticated && (
             <button 
