@@ -1,39 +1,48 @@
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import { successResponse, errorResponse, unauthorizedResponse, badRequestResponse } from "@/lib/api-utils";
-import { loginSchema } from "@/lib/validations";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const result = loginSchema.safeParse(body);
+    const data = await request.json();
+    const { email, password } = data;
 
-    if (!result.success) {
-      return badRequestResponse(result.error.errors[0].message);
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: "Email and password are required" },
+        { status: 400 }
+      );
     }
-
-    const { email, password } = result.data;
 
     const user = await prisma.user.findUnique({
       where: { email },
     });
 
     if (!user) {
-      return unauthorizedResponse("Invalid email or password");
+      return NextResponse.json(
+        { error: "Invalid email or password" },
+        { status: 401 }
+      );
     }
 
     // Securely compare the provided password with the hashed version in the DB
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-      return unauthorizedResponse("Invalid email or password");
+      return NextResponse.json(
+        { error: "Invalid email or password" },
+        { status: 401 }
+      );
     }
 
     const { password: _, ...userWithoutPassword } = user;
 
-    return successResponse({ user: userWithoutPassword });
+    return NextResponse.json({ user: userWithoutPassword }, { status: 200 });
   } catch (error) {
     console.error("Login error:", error);
-    return errorResponse("Something went wrong during login");
+    return NextResponse.json(
+      { error: "Something went wrong during login" },
+      { status: 500 }
+    );
   }
 }

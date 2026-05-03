@@ -36,36 +36,19 @@ export const translations: Record<string, any> = {
       offlineMode: "Offline Mode",
       offlineDesc: "Save essential data (booth address, documents checklist) for offline access on polling day.",
       downloadPack: "Download Offline Pack",
-      resetProfile: "Reset Profile",
-      signOut: "Sign Out",
-      boothInfo: "Check Booth Info"
+      resetProfile: "Reset Profile"
     },
     assistant: {
       greeting: "Hello! I'm VoteWise AI. Based on your profile ({state}), how can I help you today?",
-      placeholder: "Ask me anything about voting...",
-      options: {
-        eligibility: "Am I eligible to vote?",
-        registration: "How do I register?",
-        documents: "What documents do I need?",
-        booth: "Find my polling booth"
-      }
+      placeholder: "Ask me anything about voting..."
     },
     journey: {
       title: "Welcome to",
       desc: "Your personalized journey to the ballot box.",
-      banner: {
-        countdown: "Election Countdown",
-        title: "POLLING TOMORROW",
-        date: "May 4, 2026 • 7:00 AM - 6:00 PM",
-        dayLeft: "Day Left",
-        daysLeft: "Days Left",
-        checkBooth: "Check Booth Info"
-      },
       nextAction: "What Should I Do Next?",
       yourProgress: "Your Progress",
       getHelp: "Get Help",
       quickLinks: "Quick Links",
-      startStep: "Start this step",
       steps: [
         { title: "Eligibility Check", desc: "Verify if you can vote" },
         { title: "Registration", desc: "Get on the voter list" },
@@ -114,62 +97,7 @@ export const translations: Record<string, any> = {
       desc: "Fact-checking election misinformation and rumors.",
       reportMyth: "Report a Rumor",
       reportMythDesc: "Heard something suspicious? Let us verify it.",
-      recentChecks: "Recent Fact Checks",
-      claim: "CLAIM",
-      fact: "FACT",
-      source: "Source:",
-      verifySource: "Verify Source",
-      searchPlaceholder: "Search myths...",
-      list: [
-        {
-          id: 1,
-          myth: "You can vote online in India from home.",
-          fact: "No, online voting is not permitted in India for general citizens. You must visit your designated polling booth to cast your vote using an EVM. However, certain eligible individuals (like disabled voters above 40% and seniors above 85) can opt for home voting via postal ballot under specific rules.",
-          source: "Election Commission of India (ECI)"
-        },
-        {
-          id: 2,
-          myth: "If I have an Aadhaar Card, I don't need to be registered on the voter list.",
-          fact: "False. Having an Aadhaar card or any ID is not enough. Your name MUST be registered in the Electoral Roll (voter list) of your constituency to vote. You can use your Aadhaar as an ID proof at the booth ONLY IF your name is on the list.",
-          source: "Representation of the People Act, 1950"
-        },
-        {
-          id: 3,
-          myth: "EVMs can be hacked via Bluetooth or Wi-Fi.",
-          fact: "EVMs used in Indian elections are standalone machines. They do not have any radio frequency receiver or data decoder, and cannot be connected to any network, Wi-Fi, or Bluetooth. They are mathematically and physically secure.",
-          source: "ECI EVM Manual"
-        },
-        {
-          id: 4,
-          myth: "If my Voter ID is lost, I cannot vote.",
-          fact: "You can still vote if your name is on the voter list. You can show one of the 12 alternative photo identity documents approved by the ECI, such as Passport, Driving License, PAN Card, or MGNREGA Job Card.",
-          source: "ECI Guidelines"
-        },
-        {
-          id: 5,
-          myth: "If NOTA gets the majority of votes, a re-election is held and all candidates are disqualified.",
-          fact: "False. While NOTA allows voters to express dissatisfaction, it currently has no legal power to force a re-election. Even if NOTA secures the highest number of votes, the candidate with the second-highest votes is legally declared the winner.",
-          source: "Supreme Court Clarification on NOTA"
-        },
-        {
-          id: 6,
-          myth: "Non-Resident Indians (NRIs) can vote online or at their local Indian embassy.",
-          fact: "False. NRIs cannot vote online or at embassies. They must register as 'Overseas Electors' using Form 6A and must be physically present at their designated polling booth in India on election day to cast their vote.",
-          source: "ECI Overseas Voter Guidelines"
-        },
-        {
-          id: 7,
-          myth: "If there's a spelling mistake in my name on the Voter ID, I will be turned away.",
-          fact: "False. Minor clerical errors like spelling mistakes in your name, age, or parent's name are generally ignored. As long as your identity can be verified through your photo or other alternative IDs, you will be allowed to vote.",
-          source: "ECI Polling Officials Manual"
-        },
-        {
-          id: 8,
-          myth: "You can use your phone to take a picture of your VVPAT slip as proof of voting.",
-          fact: "Absolutely False. Mobile phones, cameras, and all recording devices are strictly prohibited inside the voting compartment. Photographing an EVM or VVPAT slip violates the secrecy of the ballot and is a punishable offense.",
-          source: "Conduct of Elections Rules, 1961"
-        }
-      ]
+      recentChecks: "Recent Fact Checks"
     }
   },
   Hindi: {
@@ -208,36 +136,19 @@ export const translations: Record<string, any> = {
       offlineMode: "ऑफ़लाइन मोड",
       offlineDesc: "मतदान के दिन ऑफ़लाइन पहुँच के लिए आवश्यक डेटा सहेजें।",
       downloadPack: "ऑफ़लाइन पैक डाउनलोड करें",
-      resetProfile: "प्रोफ़ाइल रीसेट करें",
-      signOut: "साइन आउट",
-      boothInfo: "बूथ की जानकारी जांचें"
+      resetProfile: "प्रोफ़ाइल रीसेट करें"
     },
     assistant: {
       greeting: "नमस्ते! मैं वोटवाइज़ एआई हूँ। आपकी प्रोफ़ाइल ({state}) के आधार पर, मैं आपकी कैसे मदद कर सकता हूँ?",
-      placeholder: "वोटिंग के बारे में कुछ भी पूछें...",
-      options: {
-        eligibility: "क्या मैं वोट देने के लिए पात्र हूँ?",
-        registration: "मैं पंजीकरण कैसे करूँ?",
-        documents: "मुझे किन दस्तावेजों की आवश्यकता है?",
-        booth: "मेरा मतदान केंद्र खोजें"
-      }
+      placeholder: "वोटिंग के बारे में कुछ भी पूछें..."
     },
     journey: {
       title: "वोटवाइज़ में आपका स्वागत है",
       desc: "मतपेटी तक आपकी व्यक्तिगत यात्रा।",
-      banner: {
-        countdown: "चुनाव उलटी गिनती",
-        title: "कल मतदान है",
-        date: "4 मई, 2026 • सुबह 7:00 बजे - शाम 6:00 बजे",
-        dayLeft: "दिन शेष",
-        daysLeft: "दिन शेष",
-        checkBooth: "बूथ जानकारी जांचें"
-      },
       nextAction: "मुझे आगे क्या करना चाहिए?",
       yourProgress: "आपकी प्रगति",
       getHelp: "मदद प्राप्त करें",
       quickLinks: "त्वरित लिंक",
-      startStep: "यह चरण शुरू करें",
       steps: [
         { title: "पात्रता जांच", desc: "सत्यापित करें कि क्या आप वोट दे सकते हैं" },
         { title: "पंजीकरण", desc: "मतदाता सूची में अपना नाम शामिल करवाएं" },
@@ -286,62 +197,7 @@ export const translations: Record<string, any> = {
       desc: "चुनाव की गलत सूचना और अफवाहों की तथ्य-जांच।",
       reportMyth: "अफवाह की रिपोर्ट करें",
       reportMythDesc: "कुछ संदिग्ध सुना? हमें सत्यापित करने दें।",
-      recentChecks: "हाल की तथ्य जांच",
-      claim: "दावा",
-      fact: "तथ्य",
-      source: "स्रोत:",
-      verifySource: "स्रोत सत्यापित करें",
-      searchPlaceholder: "मिथकों को खोजें...",
-      list: [
-        {
-          id: 1,
-          myth: "आप घर बैठे भारत में ऑनलाइन वोट डाल सकते हैं।",
-          fact: "नहीं, सामान्य नागरिकों के लिए भारत में ऑनलाइन मतदान की अनुमति नहीं है। आपको ईवीएम का उपयोग करके अपना वोट डालने के लिए अपने निर्धारित मतदान केंद्र पर जाना होगा। हालांकि, कुछ पात्र व्यक्ति (जैसे 40% से अधिक विकलांग मतदाता और 85 वर्ष से अधिक उम्र के वरिष्ठ नागरिक) विशिष्ट नियमों के तहत डाक मतपत्र के माध्यम से घर बैठे मतदान का विकल्प चुन सकते हैं।",
-          source: "भारत निर्वाचन आयोग (ECI)"
-        },
-        {
-          id: 2,
-          myth: "यदि मेरे पास आधार कार्ड है, तो मुझे मतदाता सूची में पंजीकृत होने की आवश्यकता नहीं है।",
-          fact: "गलत। केवल आधार कार्ड या कोई अन्य आईडी होना पर्याप्त नहीं है। वोट देने के लिए आपका नाम आपके निर्वाचन क्षेत्र की मतदाता सूची (इलेक्टोरल रोल) में पंजीकृत होना अनिवार्य है। यदि आपका नाम सूची में है, तो ही आप बूथ पर आईडी प्रमाण के रूप में अपने आधार का उपयोग कर सकते हैं।",
-          source: "लोक प्रतिनिधित्व अधिनियम, 1950"
-        },
-        {
-          id: 3,
-          myth: "ईवीएम को ब्लूटूथ या वाई-फाई के जरिए हैक किया जा सकता है।",
-          fact: "भारतीय चुनावों में उपयोग की जाने वाली ईवीएम स्टैंडअलोन मशीनें हैं। इनमें कोई रेडियो फ्रीक्वेंसी रिसीवर या डेटा डिकोडर नहीं होता है, और इन्हें किसी भी नेटवर्क, वाई-फाई या ब्लूटूथ से नहीं जोड़ा जा सकता है। वे गणितीय और भौतिक रूप से सुरक्षित हैं।",
-          source: "ईसीआई ईवीएम मैनुअल"
-        },
-        {
-          id: 4,
-          myth: "यदि मेरा वोटर आईडी खो जाता है, तो मैं वोट नहीं दे सकता।",
-          fact: "यदि आपका नाम मतदाता सूची में है, तो आप अभी भी वोट दे सकते हैं। आप ईसीआई द्वारा अनुमोदित 12 वैकल्पिक फोटो पहचान दस्तावेजों में से एक दिखा सकते हैं, जैसे पासपोर्ट, ड्राइविंग लाइसेंस, पैन कार्ड, या मनरेगा जॉब कार्ड।",
-          source: "ईसीआई दिशानिर्देश"
-        },
-        {
-          id: 5,
-          myth: "यदि नोटा (NOTA) को बहुमत मिलता है, तो पुनर्मतदान कराया जाता है और सभी उम्मीदवार अयोग्य घोषित कर दिए जाते हैं।",
-          fact: "गलत। जबकि नोटा मतदाताओं को असंतोष व्यक्त करने की अनुमति देता है, वर्तमान में इसके पास पुनर्मतदान कराने की कोई कानूनी शक्ति नहीं है। भले ही नोटा को सबसे अधिक वोट मिले हों, फिर भी दूसरे सबसे अधिक वोट पाने वाले उम्मीदवार को कानूनी रूप से विजेता घोषित किया जाता है।",
-          source: "नोटा पर सुप्रीम कोर्ट का स्पष्टीकरण"
-        },
-        {
-          id: 6,
-          myth: "अनिवासी भारतीय (NRIs) ऑनलाइन या अपने स्थानीय भारतीय दूतावास में वोट दे सकते हैं।",
-          fact: "गलत। एनआरआई ऑनलाइन या दूतावासों में वोट नहीं दे सकते। उन्हें फॉर्म 6ए का उपयोग करके 'प्रवासी निर्वाचक' के रूप में पंजीकरण करना होगा और मतदान के दिन भारत में अपने निर्धारित मतदान केंद्र पर शारीरिक रूप से उपस्थित होना होगा।",
-          source: "ईसीआई प्रवासी मतदाता दिशानिर्देश"
-        },
-        {
-          id: 7,
-          myth: "यदि वोटर आईडी पर मेरे नाम की स्पेलिंग में कोई गलती है, तो मुझे वापस भेज दिया जाएगा।",
-          fact: "गलत। नाम, उम्र या माता-पिता के नाम की स्पेलिंग में मामूली लिपिकीय त्रुटियों को आम तौर पर नजरअंदाज कर दिया जाता है। जब तक आपकी पहचान आपकी फोटो या अन्य वैकल्पिक आईडी के माध्यम से सत्यापित की जा सकती है, आपको वोट देने की अनुमति दी जाएगी।",
-          source: "ईसीआई मतदान अधिकारी मैनुअल"
-        },
-        {
-          id: 8,
-          myth: "आप वोट देने के प्रमाण के रूप में अपनी वीवीपीएटी (VVPAT) पर्ची की तस्वीर लेने के लिए अपने फोन का उपयोग कर सकते हैं।",
-          fact: "बिल्कुल गलत। वोटिंग कंपार्टमेंट के अंदर मोबाइल फोन, कैमरा और सभी रिकॉर्डिंग डिवाइस सख्त वर्जित हैं। ईवीएम या वीवीपीएटी पर्ची की फोटो खींचना मतदान की गोपनीयता का उल्लंघन है और यह एक दंडनीय अपराध है।",
-          source: "चुनाव संचालन नियम, 1961"
-        }
-      ]
+      recentChecks: "हाल की तथ्य जांच"
     }
   },
   Marathi: {
@@ -380,36 +236,19 @@ export const translations: Record<string, any> = {
       offlineMode: "ऑफलाइन मोड",
       offlineDesc: "मतदानाच्या दिवशी ऑफलाइन प्रवेशासाठी आवश्यक डेटा जतन करा.",
       downloadPack: "ऑफलाइन पॅक डाउनलोड करा",
-      resetProfile: "प्रोफाइल रीसेट करा",
-      signOut: "साइन आउट",
-      boothInfo: "बूथ माहिती तपासा"
+      resetProfile: "प्रोफाइल रीसेट करा"
     },
     assistant: {
       greeting: "नमस्कार! मी व्होटवाईज एआय आहे. तुमच्या प्रोफाईल ({state}) वर आधारित, मी तुम्हाला कशी मदत करू शकतो?",
-      placeholder: "मतदानाबद्दल काहीही विचारा...",
-      options: {
-        eligibility: "मी मतदान करण्यास पात्र आहे का?",
-        registration: "मी नोंदणी कशी करू?",
-        documents: "मला कोणत्या कागदपत्रांची आवश्यकता आहे?",
-        booth: "माझे मतदान केंद्र शोधा"
-      }
+      placeholder: "मतदानाबद्दल काहीही विचारा..."
     },
     journey: {
       title: "व्होटवाईज मध्ये आपले स्वागत आहे",
       desc: "मतदान केंद्रापर्यंतचा तुमचा वैयक्तिक प्रवास.",
-      banner: {
-        countdown: "निवडणूक काउंटडाउन",
-        title: "उद्या मतदान",
-        date: "४ मे, २०२६ • सकाळी ७:०० - संध्याकाळी ६:००",
-        dayLeft: "दिवस शिल्लक",
-        daysLeft: "दिवस शिल्लक",
-        checkBooth: "बूथ माहिती तपासा"
-      },
       nextAction: "मी पुढे काय करावे?",
       yourProgress: "तुमची प्रगती",
       getHelp: "मदत मिळवा",
       quickLinks: "द्रुत दुवे",
-      startStep: "हे पाऊल सुरू करा",
       steps: [
         { title: "पात्रता तपासणी", desc: "तुम्ही मतदान करू शकता की नाही ते तपासा" },
         { title: "नोंदणी", desc: "मतदार यादीत नाव नोंदवा" },
@@ -458,62 +297,7 @@ export const translations: Record<string, any> = {
       desc: "निवडणुकीतील चुकीची माहिती आणि अफवांची तथ्य-तपासणी.",
       reportMyth: "अफवेची तक्रार करा",
       reportMythDesc: "काही संशयास्पद ऐकले? आम्हाला ते तपासू द्या.",
-      recentChecks: "अलीकडील तथ्य तपासणी",
-      claim: "दावा",
-      fact: "तथ्य",
-      source: "स्रोत:",
-      verifySource: "स्रोत सत्यापित करा",
-      searchPlaceholder: "अफवा शोधा...",
-      list: [
-        {
-          id: 1,
-          myth: "तुम्ही भारतात घरबसल्या ऑनलाइन मतदान करू शकता.",
-          fact: "नाही, सामान्य नागरिकांसाठी भारतात ऑनलाइन मतदानाची परवानगी नाही. ईव्हीएम वापरून तुमचे मत देण्यासाठी तुम्हाला तुमच्या नियुक्त मतदान केंद्रावर जावे लागेल. तथापि, विशिष्ट पात्र व्यक्ती (जसे की ४०% पेक्षा जास्त अपंग मतदार आणि ८५ वर्षांवरील ज्येष्ठ नागरिक) विशिष्ट नियमांनुसार टपाल मतपत्रिकेद्वारे घरून मतदानाचा पर्याय निवडू शकतात.",
-          source: "भारतीय निवडणूक आयोग (ECI)"
-        },
-        {
-          id: 2,
-          myth: "जर माझ्याकडे आधार कार्ड असेल तर मला मतदार यादीत नाव नोंदवण्याची गरज नाही.",
-          fact: "चूक. केवळ आधार कार्ड किंवा कोणतेही ओळखपत्र असणे पुरेसे नाही. मतदान करण्यासाठी तुमचे नाव तुमच्या मतदारसंघाच्या मतदार यादीत नोंदणीकृत असणे आवश्यक आहे. तुमचे नाव यादीत असेल तरच तुम्ही बूथवर ओळखपत्र म्हणून आधार कार्ड वापरू शकता.",
-          source: "लोकप्रतिनिधी कायदा, १९५०"
-        },
-        {
-          id: 3,
-          myth: "ब्लूटूथ किंवा वाय-फाय द्वारे ईव्हीएम हॅक केले जाऊ शकतात.",
-          fact: "भारतीय निवडणुकांमध्ये वापरली जाणारी ईव्हीएम ही स्वतंत्र मशीन आहेत. त्यांच्याकडे कोणताही रेडिओ फ्रिक्वेन्सी रिसीव्हर किंवा डेटा डिकोडर नाही आणि ते कोणत्याही नेटवर्क, वाय-फाय किंवा ब्लूटूथशी जोडले जाऊ शकत नाहीत. ते गणितीय आणि भौतिकदृष्ट्या सुरक्षित आहेत.",
-          source: "ईसीआई ईव्हीएम मॅन्युअल"
-        },
-        {
-          id: 4,
-          myth: "माझे मतदार ओळखपत्र हरवले तर मी मतदान करू शकत नाही.",
-          fact: "तुमचे नाव मतदार यादीत असेल तर तुम्ही तरीही मतदान करू शकता. तुम्ही ईसीआयने मंजूर केलेल्या १२ पर्यायी फोटो ओळखपत्रांपैकी एक दाखवू शकता, जसे की पासपोर्ट, ड्रायव्हिंग लायसन्स, पॅन कार्ड किंवा मनरेगा जॉब कार्ड.",
-          source: "ईसीआय मार्गदर्शक तत्त्वे"
-        },
-        {
-          id: 5,
-          myth: "जर नोटाला (NOTA) बहुमत मिळाले, तर पुन्हा निवडणूक घेतली जाते आणि सर्व उमेदवार बाद केले जातात.",
-          fact: "चूक. नोटा मतदारांना असंतोष व्यक्त करण्याची परवानगी देते, तरीही पुन्हा निवडणूक घेण्यास भाग पाडण्याची कोणतीही कायदेशीर शक्ती सध्या त्याच्याकडे नाही. जरी नोटाला सर्वाधिक मते मिळाली तरीही, दुसऱ्या क्रमांकाची मते मिळविणाऱ्या उमेदवाराला कायदेशीररित्या विजयी घोषित केले जाते.",
-          source: "नोटावरील सर्वोच्च न्यायालयाचे स्पष्टीकरण"
-        },
-        {
-          id: 6,
-          myth: "अनिवासी भारतीय (NRIs) ऑनलाइन किंवा त्यांच्या स्थानिक भारतीय दूतावासामध्ये मतदान करू शकतात.",
-          fact: "चूक. एनआरआय ऑनलाइन किंवा दूतावासात मतदान करू शकत नाहीत. त्यांनी फॉर्म ६ए वापरून 'परदेशातील मतदार' म्हणून नोंदणी करणे आवश्यक आहे आणि मतदानाच्या दिवशी भारतातील त्यांच्या नियुक्त मतदान केंद्रावर प्रत्यक्ष उपस्थित राहणे आवश्यक आहे.",
-          source: "ईसीआय परदेशातील मतदार मार्गदर्शक तत्त्वे"
-        },
-        {
-          id: 7,
-          myth: "जर मतदार ओळखपत्रावर माझ्या नावाच्या स्पेलिंगमध्ये चूक असेल तर मला परत पाठवले जाईल.",
-          fact: "चूक. नाव, वय किंवा पालकांच्या नावातील स्पेलिंगमधील किरकोळ चुकांकडे सहसा दुर्लक्ष केले जाते. जोपर्यंत तुमची ओळख तुमच्या फोटो किंवा इतर पर्यायी ओळखपत्रांद्वारे सत्यापित केली जाऊ शकते, तोपर्यंत तुम्हाला मतदान करण्याची परवानगी दिली जाईल.",
-          source: "ईसीआय मतदान अधिकारी मॅन्युअल"
-        },
-        {
-          id: 8,
-          myth: "मतदानाचा पुरावा म्हणून तुम्ही तुमच्या व्हीव्हीपॅट (VVPAT) स्लिपचा फोटो काढण्यासाठी तुमचा फोन वापरू शकता.",
-          fact: "पूर्णपणे चूक. मतदान कक्षाच्या आत मोबाईल फोन, कॅमेरे आणि सर्व रेकॉर्डिंग उपकरणे सक्त मनाई आहे. ईव्हीएम किंवा व्हीव्हीपॅट स्लिपचा फोटो काढणे मतदानाच्या गोपनीयतेचा भंग आहे आणि तो दंडनीय अपराध आहे.",
-          source: "निवडणूक नियमन, १९६१"
-        }
-      ]
+      recentChecks: "अलीकडील तथ्य तपासणी"
     }
   },
   Tamil: {
@@ -552,36 +336,19 @@ export const translations: Record<string, any> = {
       offlineMode: "ஆஃப்லைன் பயன்முறை",
       offlineDesc: "வாக்குப்பதிவு நாளில் ஆஃப்லைன் அணுகலுக்கு தேவையான தரவை சேமிக்கவும்.",
       downloadPack: "ஆஃப்லைன் பேக்கைப் பதிவிறக்கவும்",
-      resetProfile: "சுயவிவரத்தை மீட்டமை",
-      signOut: "வெளியேறு",
-      boothInfo: "சாவடி தகவலைச் சரிபார்க்கவும்"
+      resetProfile: "சுயவிவரத்தை மீட்டமை"
     },
     assistant: {
       greeting: "வணக்கம்! நான் VoteWise AI. உங்கள் சுயவிவரத்தின் ({state}) அடிப்படையில், நான் உங்களுக்கு எவ்வாறு உதவ முடியும்?",
-      placeholder: "வாக்களிப்பது பற்றி எதையும் கேளுங்கள்...",
-      options: {
-        eligibility: "நான் வாக்களிக்கத் தகுதியானவனா?",
-        registration: "நான் எப்படி பதிவு செய்வது?",
-        documents: "எனக்கு என்ன ஆவணங்கள் தேவை?",
-        booth: "எனது வாக்குச்சாவடியைக் கண்டறியவும்"
-      }
+      placeholder: "வாக்களிப்பது பற்றி எதையும் கேளுங்கள்..."
     },
     journey: {
       title: "VoteWise க்கு வரவேற்கிறோம்",
       desc: "வாக்குப்பெட்டிக்கான உங்கள் தனிப்பயனாக்கப்பட்ட பயணம்.",
-      banner: {
-        countdown: "தேர்தல் கவுண்ட்டவுன்",
-        title: "நாளை வாக்குப்பதிவு",
-        date: "மே 4, 2026 • காலை 7:00 - மாலை 6:00",
-        dayLeft: "நாள் மீதமுள்ளது",
-        daysLeft: "நாட்கள் மீதமுள்ளன",
-        checkBooth: "சாவடி தகவலைச் சரிபார்க்கவும்"
-      },
       nextAction: "நான் அடுத்து என்ன செய்ய வேண்டும்?",
       yourProgress: "உங்கள் முன்னேற்றம்",
       getHelp: "உதவி பெறுங்கள்",
       quickLinks: "விரைவான இணைப்புகள்",
-      startStep: "இந்த படிநிலையைத் தொடங்கவும்",
       steps: [
         { title: "தகுதி சரிபார்ப்பு", desc: "நீங்கள் வாக்களிக்க முடியுமா என சரிபார்க்கவும்" },
         { title: "பதிவு", desc: "வாக்காளர் பட்டியலில் சேரவும்" },
@@ -669,36 +436,19 @@ export const translations: Record<string, any> = {
       offlineMode: "ఆఫ్‌లైన్ మోడ్",
       offlineDesc: "పోలింగ్ రోజున ఆఫ్‌లైన్ యాక్సెస్ కోసం అవసరమైన డేటాను సేవ్ చేయండి.",
       downloadPack: "ఆఫ్‌లైన్ ప్యాక్‌ని డౌన్‌లోడ్ చేయండి",
-      resetProfile: "ప్రొఫైల్‌ని రీసెట్ చేయండి",
-      signOut: "సైన్ అవుట్",
-      boothInfo: "బూత్ సమాచారాన్ని తనిఖీ చేయండి"
+      resetProfile: "ప్రొఫైల్‌ని రీసెట్ చేయండి"
     },
     assistant: {
       greeting: "నమస్తే! నేను వోట్‌వైజ్ AIని. మీ ప్రొఫైల్ ({state}) ఆధారంగా, నేను మీకు ఎలా సహాయపడగలను?",
-      placeholder: "ఓటింగ్ గురించి ఏదైనా అడగండి...",
-      options: {
-        eligibility: "నేను ఓటు వేయడానికి అర్హుడినా?",
-        registration: "నేను ఎలా నమోదు చేసుకోవాలి?",
-        documents: "నాకు ఏ పత్రాలు అవసరం?",
-        booth: "నా పోలింగ్ బూత్‌ను కనుగొనండి"
-      }
+      placeholder: "ఓటింగ్ గురించి ఏదైనా అడగండి..."
     },
     journey: {
       title: "VoteWise కి స్వాగతం",
       desc: "బ్యాలెట్ బాక్స్ కు మీ వ్యక్తిగతీకరించిన ప్రయాణం.",
-      banner: {
-        countdown: "ఎన్నికల కౌంట్‌డౌన్",
-        title: "రేపు పోలింగ్",
-        date: "మే 4, 2026 • ఉదయం 7:00 - సాయంత్రం 6:00",
-        dayLeft: "రోజు మిగిలి ఉంది",
-        daysLeft: "రోజులు మిగిలి ఉన్నాయి",
-        checkBooth: "బూత్ సమాచారాన్ని తనిఖీ చేయండి"
-      },
       nextAction: "నేను తరువాత ఏమి చేయాలి?",
       yourProgress: "మీ పురోగతి",
       getHelp: "సహాయం పొందండి",
       quickLinks: "శీఘ్ర లింక్‌లు",
-      startStep: "ఈ దశను ప్రారంభించండి",
       steps: [
         { title: "అర్హత తనిఖీ", desc: "మీరు ఓటు వేయగలరో లేదో ధృవీకరించండి" },
         { title: "నమోదు", desc: "ఓటరు జాబితాలో చేరండి" },
@@ -786,36 +536,19 @@ export const translations: Record<string, any> = {
       offlineMode: "অফলাইন মোড",
       offlineDesc: "ভোটের দিন অফলাইন অ্যাক্সেসের জন্য প্রয়োজনীয় ডেটা সংরক্ষণ করুন।",
       downloadPack: "অফলাইন প্যাক ডাউনলোড করুন",
-      resetProfile: "প্রোফাইল রিসেট করুন",
-      signOut: "সাইন আউট",
-      boothInfo: "বুথের তথ্য চেক করুন"
+      resetProfile: "প্রোফাইল রিসেট করুন"
     },
     assistant: {
       greeting: "নমস্কার! আমি ভোটওয়াইজ এআই। আপনার প্রোফাইলের ({state}) উপর ভিত্তি করে, আমি আপনাকে কীভাবে সাহায্য করতে পারি?",
-      placeholder: "ভোটদান সম্পর্কে যেকোনো কিছু জিজ্ঞাসা করুন...",
-      options: {
-        eligibility: "আমি কি ভোট দেওয়ার যোগ্য?",
-        registration: "আমি কিভাবে নিবন্ধন করব?",
-        documents: "আমার কী কী নথিপত্র প্রয়োজন?",
-        booth: "আমার ভোট কেন্দ্র খুঁজুন"
-      }
+      placeholder: "ভোটদান সম্পর্কে যেকোনো কিছু জিজ্ঞাসা করুন..."
     },
     journey: {
       title: "VoteWise এ স্বাগতম",
       desc: "ব্যালট বাক্সে আপনার ব্যক্তিগতকৃত যাত্রা।",
-      banner: {
-        countdown: "নির্বাচন কাউন্টডাউন",
-        title: "কাল ভোটদান",
-        date: "৪ মে, ২০২৬ • সকাল ৭:০০ - সন্ধ্যা ৬:০০",
-        dayLeft: "দিন বাকি",
-        daysLeft: "দিন বাকি",
-        checkBooth: "বুথের তথ্য চেক করুন"
-      },
       nextAction: "আমার পরবর্তী কী করা উচিত?",
       yourProgress: "আপনার অগ্রগতি",
       getHelp: "সাহায্য নিন",
       quickLinks: "দ্রুত লিঙ্ক",
-      startStep: "এই ধাপটি শুরু করুন",
       steps: [
         { title: "যোগ্যতা যাচাই", desc: "আপনি ভোট দিতে পারবেন কিনা যাচাই করুন" },
         { title: "নিবন্ধন", desc: "ভোটার তালিকায় যুক্ত হোন" },

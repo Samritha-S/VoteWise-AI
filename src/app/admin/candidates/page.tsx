@@ -18,78 +18,17 @@ export default function CandidatesData() {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [isAdding, setIsAdding] = useState(false);
-  const [scrapingUrl, setScrapingUrl] = useState("");
-  const [isScraping, setIsScraping] = useState(false);
-  const [formData, setFormData] = useState<any>({
-    name: "",
-    party: "",
-    constituency: "",
-    state: "",
-    totalAssets: "₹0",
-    totalLiabilities: "₹0",
-    criminalCases: 0,
-    seriousCriminalCases: 0,
-    education: "",
-    profession: "",
-    photo: "/candidates/placeholder.jpg",
-    age: 40,
-    confidence: "High",
-    sourceUrl: ""
-  });
 
   useEffect(() => {
     fetch('/api/candidates')
       .then(res => res.json())
       .then(data => {
-        if (data.success) {
-          setCandidates(data.data);
-        } else {
-          setCandidates(Array.isArray(data) ? data : []);
-        }
+        setCandidates(data);
         setLoading(false);
       });
   }, []);
 
-  const handleScrape = async () => {
-    setIsScraping(true);
-    setTimeout(() => {
-      setFormData({
-        ...formData,
-        name: "Auto Scraped Candidate",
-        party: "Independent",
-        constituency: "Varanasi",
-        state: "Uttar Pradesh",
-        sourceUrl: scrapingUrl
-      });
-      setIsScraping(false);
-      alert("AI successfully parsed candidate details from the provided URL.");
-    }, 2000);
-  };
-
-  const handleSave = async () => {
-    try {
-      const res = await fetch('/api/candidates', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      if (res.ok) {
-        setIsAdding(false);
-        fetch('/api/candidates').then(res => res.json()).then(data => {
-          if (data.success) setCandidates(data.data);
-          else setCandidates(Array.isArray(data) ? data : []);
-        });
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const filtered = candidates.filter(c => 
-    (c.name || "").toLowerCase().includes(search.toLowerCase()) || 
-    (c.party || "").toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = candidates.filter(c => c.name.toLowerCase().includes(search.toLowerCase()) || c.party.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <div className="min-h-screen bg-background p-6 md:p-12 max-w-6xl mx-auto space-y-8 text-foreground">
@@ -104,102 +43,11 @@ export default function CandidatesData() {
           <button className="flex items-center gap-2 px-4 py-2 bg-secondary text-foreground rounded-lg font-medium hover:bg-secondary/80">
             <Upload className="w-4 h-4" /> Import CSV
           </button>
-          <button 
-            onClick={() => setIsAdding(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90"
-          >
+          <button className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90">
             <Plus className="w-4 h-4" /> Add Record
           </button>
         </div>
       </header>
-
-      {isAdding && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-card border border-border w-full max-w-2xl rounded-2xl shadow-xl p-8 space-y-6 max-h-[90vh] overflow-auto">
-            <h2 className="text-2xl font-bold">Add New Candidate</h2>
-            
-            <div className="bg-primary/5 p-4 rounded-xl border border-primary/20 space-y-3">
-              <label className="text-sm font-bold text-primary flex items-center gap-2">
-                <Upload className="w-4 h-4" /> Smart Scraper (MyNeta / ECI URL)
-              </label>
-              <div className="flex gap-2">
-                <input 
-                  type="text" 
-                  placeholder="https://myneta.info/..." 
-                  value={scrapingUrl}
-                  onChange={(e) => setScrapingUrl(e.target.value)}
-                  className="flex-1 p-2 rounded-lg border bg-background text-sm"
-                />
-                <button 
-                  onClick={handleScrape}
-                  disabled={isScraping || !scrapingUrl}
-                  className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold disabled:opacity-50"
-                >
-                  {isScraping ? "Scraping..." : "Scrape"}
-                </button>
-              </div>
-              <p className="text-[10px] text-muted-foreground italic">Powered by VoteWise AI Scraper Agent</p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="text-xs font-bold uppercase text-muted-foreground">Candidate Name</label>
-                <input 
-                  value={formData.name} 
-                  onChange={e => setFormData({...formData, name: e.target.value})}
-                  className="w-full p-2.5 rounded-lg border bg-background mt-1"
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold uppercase text-muted-foreground">Party</label>
-                <input 
-                  value={formData.party} 
-                  onChange={e => setFormData({...formData, party: e.target.value})}
-                  className="w-full p-2.5 rounded-lg border bg-background mt-1"
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold uppercase text-muted-foreground">Constituency</label>
-                <input 
-                  value={formData.constituency} 
-                  onChange={e => setFormData({...formData, constituency: e.target.value})}
-                  className="w-full p-2.5 rounded-lg border bg-background mt-1"
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold uppercase text-muted-foreground">State</label>
-                <input 
-                  value={formData.state} 
-                  onChange={e => setFormData({...formData, state: e.target.value})}
-                  className="w-full p-2.5 rounded-lg border bg-background mt-1"
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold uppercase text-muted-foreground">Total Assets</label>
-                <input 
-                  value={formData.totalAssets} 
-                  onChange={e => setFormData({...formData, totalAssets: e.target.value})}
-                  className="w-full p-2.5 rounded-lg border bg-background mt-1"
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold uppercase text-muted-foreground">Criminal Cases</label>
-                <input 
-                  type="number"
-                  value={formData.criminalCases} 
-                  onChange={e => setFormData({...formData, criminalCases: parseInt(e.target.value)})}
-                  className="w-full p-2.5 rounded-lg border bg-background mt-1"
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-end gap-3 pt-4">
-              <button onClick={() => setIsAdding(false)} className="px-6 py-2.5 hover:bg-secondary rounded-xl font-bold">Cancel</button>
-              <button onClick={handleSave} className="px-8 py-2.5 bg-primary text-primary-foreground rounded-xl font-bold shadow-lg shadow-primary/20">Save Record</button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <div className="bg-card border border-border rounded-2xl shadow-sm overflow-hidden">
         <div className="p-4 border-b border-border flex items-center justify-between bg-muted/30">

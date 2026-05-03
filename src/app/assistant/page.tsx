@@ -13,8 +13,6 @@ type Message = {
   options?: string[];
 };
 
-import { postRequest } from "@/lib/client-api";
-
 export default function AssistantPage() {
   const { userData } = useAppContext();
   const t = useTranslation(userData.language);
@@ -25,10 +23,10 @@ export default function AssistantPage() {
       role: "assistant",
       content: t.assistant.greeting.replace("{state}", userData.state || "India").replace("{status}", userData.voterStatus || ""),
       options: [
-        t.assistant.options.eligibility,
-        t.assistant.options.registration,
-        t.assistant.options.documents,
-        t.assistant.options.booth
+        "Am I eligible to vote?",
+        "How do I register?",
+        "What documents do I need?",
+        "Find my polling booth"
       ]
     }
   ]);
@@ -55,11 +53,21 @@ export default function AssistantPage() {
     // Call real Gemini API
     const runAI = async () => {
       try {
-        const data = await postRequest<{ response: string }>("/api/chat", {
-          message: text,
-          history: messages.slice(1), // Exclude initial greeting from formal history to save tokens
-          context: userData
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: text,
+            history: messages.slice(1), // Exclude initial greeting from formal history to save tokens
+            context: userData
+          })
         });
+
+        const data = await res.json();
+        
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to fetch response");
+        }
 
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
@@ -71,7 +79,7 @@ export default function AssistantPage() {
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
           role: "assistant",
-          content: `Oops! Something went wrong: ${error.message}. Please check your connection or try again later.`
+          content: `Oops! Something went wrong: ${error.message}. Please make sure you have added GEMINI_API_KEY to your .env.local file!`
         }]);
       } finally {
         setIsTyping(false);

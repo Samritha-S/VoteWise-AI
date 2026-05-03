@@ -1,5 +1,5 @@
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { successResponse, errorResponse, badRequestResponse } from "@/lib/api-utils";
 
 export const dynamic = 'force-dynamic';
 
@@ -8,10 +8,10 @@ export async function GET() {
     const myths = await prisma.myth.findMany({
       orderBy: { createdAt: "desc" },
     });
-    return successResponse(myths);
+    return NextResponse.json(myths);
   } catch (error) {
     console.error("Failed to fetch myths:", error);
-    return errorResponse("Failed to fetch myths");
+    return NextResponse.json({ error: "Failed to fetch myths" }, { status: 500 });
   }
 }
 
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     const { claim, userId } = data;
 
     if (!claim) {
-      return badRequestResponse("Claim is required");
+      return NextResponse.json({ error: "Claim is required" }, { status: 400 });
     }
 
     const myth = await prisma.myth.create({
@@ -32,9 +32,9 @@ export async function POST(request: Request) {
       },
     });
 
-    return successResponse(myth, 201);
+    return NextResponse.json(myth, { status: 201 });
   } catch (error) {
     console.error("Failed to submit myth:", error);
-    return errorResponse("Failed to submit myth");
+    return NextResponse.json({ error: "Failed to submit myth" }, { status: 500 });
   }
 }

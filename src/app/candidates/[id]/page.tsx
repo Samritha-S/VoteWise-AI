@@ -18,14 +18,18 @@ import {
   BookOpen,
   Info
 } from "lucide-react";
-import { CANDIDATES } from "@/data/candidates";
+import { prisma } from "@/lib/prisma";
 import CandidateSurvey from "@/components/CandidateSurvey";
 
 export default async function CandidateDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = await params;
-  const candidate = CANDIDATES.find(c => c.id === parseInt(unwrappedParams.id));
+  const id = unwrappedParams.id;
   
-  if (!candidate) {
+  const dbCandidate = await prisma.candidate.findUnique({
+    where: { id }
+  });
+
+  if (!dbCandidate) {
     return (
       <div className="min-h-screen bg-background p-6 md:p-10 max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
         <h1 className="text-3xl font-semibold text-foreground mb-4">Candidate Not Found</h1>
@@ -35,6 +39,45 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
       </div>
     );
   }
+
+  // Map DB candidate to frontend interface
+  const candidate = {
+    ...dbCandidate,
+    id: dbCandidate.id,
+    assets: dbCandidate.totalAssets,
+    liabilities: dbCandidate.totalLiabilities,
+    cases: dbCandidate.criminalCases,
+    lastUpdated: dbCandidate.updatedAt.toISOString(),
+    performanceMetrics: dbCandidate.performance ? JSON.parse(dbCandidate.performance) : {
+      attendance: { value: "Data Not Available", source: "N/A", lastUpdated: "N/A" },
+      questionsAsked: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
+      billsIntroduced: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
+      fundsUtilized: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
+      keyAchievements: []
+    },
+    electionHistory: dbCandidate.electionHistory ? JSON.parse(dbCandidate.electionHistory) : {
+      electionsContested: 0, wins: 0, losses: 0, latestVoteShare: "N/A", latestMargin: "N/A"
+    },
+    movableAssetsBreakdown: JSON.parse(dbCandidate.assetBreakdown || "[]"),
+    immovableAssetsBreakdown: [], // SQLite schema doesn't have separate immovable field in the check, but it might be in assetBreakdown
+    liabilitiesBreakdown: JSON.parse(dbCandidate.liabilityBreakdown || "[]"),
+    criminalCasesBreakdown: JSON.parse(dbCandidate.caseDetails || "[]"),
+    pastControversies: dbCandidate.scamsOrControversies ? JSON.parse(dbCandidate.scamsOrControversies) : [],
+    careerHistory: dbCandidate.performance ? (JSON.parse(dbCandidate.performance).careerHistory || []) : [],
+    ideologyStances: dbCandidate.performance ? (JSON.parse(dbCandidate.performance).ideologyStances || []) : [],
+    recentNews: dbCandidate.performance ? (JSON.parse(dbCandidate.performance).recentNews || []) : [],
+    assetDetails: {
+      movable: dbCandidate.totalAssets,
+      immovable: "See Breakdown"
+    },
+    currentPosition: dbCandidate.profession,
+    statusBadge: "Candidate",
+    yearsInPolitics: 0,
+    votingRecord: "Data Not Available",
+    educationDetails: dbCandidate.education,
+    familyBackground: "Data Not Available"
+  };
+
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary">

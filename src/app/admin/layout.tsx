@@ -1,17 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { 
-  Lock, 
-  ShieldAlert, 
-  LayoutDashboard, 
-  Users, 
-  Database, 
-  ShieldCheck, 
-  FileText, 
-  MessageSquare,
-  LogOut
-} from "lucide-react";
+import { Lock, ShieldAlert } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -79,58 +69,5 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  const navItems = [
-    { name: "Overview", icon: LayoutDashboard, href: "/admin" },
-    { name: "User Database", icon: Users, href: "/admin/users" },
-    { name: "Candidate Database", icon: Database, href: "/admin/candidates" },
-    { name: "Security Layer", icon: ShieldCheck, href: "/admin/security" },
-    { name: "Myth Addressal", icon: FileText, href: "/admin/myths" },
-    { name: "Reports & Queries", icon: MessageSquare, href: "/admin/feedback" },
-  ];
-
-  return (
-    <div className="min-h-screen bg-background flex flex-col md:flex-row">
-      {/* Sidebar */}
-      <aside className="w-full md:w-64 bg-card border-b md:border-b-0 md:border-r border-border p-4 md:p-6 space-y-8">
-        <div className="flex items-center gap-3 px-2">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-black">V</div>
-          <span className="font-black text-xl tracking-tight">AdminPanel</span>
-        </div>
-
-        <nav className="space-y-1">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <a
-                key={item.name}
-                href={item.href}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-all"
-              >
-                <Icon className="w-5 h-5 opacity-70" />
-                {item.name}
-              </a>
-            );
-          })}
-        </nav>
-
-        <div className="pt-10 mt-auto">
-          <button 
-            onClick={() => {
-              localStorage.removeItem("admin_security_token");
-              window.location.reload();
-            }}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-destructive hover:bg-destructive/10 transition-all"
-          >
-            <LogOut className="w-5 h-5" />
-            Sign Out
-          </button>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto">
-        {children}
-      </main>
-    </div>
-  );
+  return <>{children}</>;
 }

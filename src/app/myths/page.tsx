@@ -72,8 +72,6 @@ const MYTHS = [
   }
 ];
 
-import { fetcher, postRequest } from "@/lib/client-api";
-
 export default function MythBusterPage() {
   const { userData } = useAppContext();
   const t = useTranslation(userData.language);
@@ -85,7 +83,8 @@ export default function MythBusterPage() {
   const [liveMyths, setLiveMyths] = useState<any[]>([]);
 
   React.useEffect(() => {
-    fetcher<any[]>("/api/myths")
+    fetch("/api/myths")
+      .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
           // Only show published ones on the frontend
@@ -96,7 +95,7 @@ export default function MythBusterPage() {
   }, []);
 
   const allMyths = [
-    ...(t.myths.list || MYTHS),
+    ...MYTHS,
     ...liveMyths.map(m => ({
       id: m.id,
       myth: m.claim,
@@ -107,8 +106,8 @@ export default function MythBusterPage() {
   ];
 
   const filteredMyths = allMyths.filter(m => 
-    (m.myth || "").toLowerCase().includes(searchTerm.toLowerCase()) || 
-    (m.fact || "").toLowerCase().includes(searchTerm.toLowerCase())
+    m.myth.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    m.fact.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -201,9 +200,13 @@ export default function MythBusterPage() {
                     onClick={async () => {
                       if (!reportQuestion) return;
                       try {
-                        await postRequest('/api/myths', {
-                          claim: reportQuestion,
-                          userId: reportDetails || (userData.email ? userData.email : "Anonymous")
+                        await fetch('/api/myths', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            claim: reportQuestion,
+                            userId: reportDetails || (userData.email ? userData.email : "Anonymous")
+                          })
                         });
                         alert("Fact-check request sent to the team!");
                         setIsReporting(false);

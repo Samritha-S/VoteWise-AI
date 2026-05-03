@@ -13,48 +13,13 @@ import {
 } from "lucide-react";
 
 export default function AdminDashboard() {
-  const [data, setData] = useState({
-    candidates: "0",
-    users: "0",
-    myths: "0",
-    load: "24%"
-  });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/admin/stats')
-      .then(res => res.json())
-      .then(res => {
-        if (res.success) {
-          setData({
-            candidates: res.data.candidates.toLocaleString(),
-            users: res.data.users.toLocaleString(),
-            myths: res.data.myths.toLocaleString(),
-            load: res.data.load
-          });
-        }
-        setLoading(false);
-      })
-      .catch(e => {
-        console.error(e);
-        setLoading(false);
-      });
-  }, []);
-
+  // Mock data for visualizations since user tracking isn't fully in DB yet
   const stats = [
-    { label: "Total Candidates", value: data.candidates, trend: "+12%", up: true, icon: Database, color: "text-blue-500", bg: "bg-blue-500/10" },
-    { label: "Active Users", value: data.users, trend: "+24%", up: true, icon: Users, color: "text-green-500", bg: "bg-green-500/10" },
-    { label: "Myths Busted", value: data.myths, trend: "+4%", up: true, icon: ShieldAlert, color: "text-purple-500", bg: "bg-purple-500/10" },
-    { label: "System Load", value: data.load, trend: "-2%", up: false, icon: Activity, color: "text-orange-500", bg: "bg-orange-500/10" },
+    { label: "Total Candidates", value: "2,845", trend: "+12%", up: true, icon: Database, color: "text-blue-500", bg: "bg-blue-500/10" },
+    { label: "Active Users", value: "145.2K", trend: "+24%", up: true, icon: Users, color: "text-green-500", bg: "bg-green-500/10" },
+    { label: "Myths Busted", value: "842", trend: "+4%", up: true, icon: ShieldAlert, color: "text-purple-500", bg: "bg-purple-500/10" },
+    { label: "System Load", value: "24%", trend: "-2%", up: false, icon: Activity, color: "text-orange-500", bg: "bg-orange-500/10" },
   ];
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background p-6 md:p-12 max-w-6xl mx-auto space-y-10 text-foreground">

@@ -24,7 +24,6 @@ export interface UserContextData {
   language: string;
   onboardingComplete: boolean;
   isAuthenticated: boolean;
-  documentsReady: boolean;
   avatar: string;
   rememberDevice: boolean;
   preferences: UserPreferences;
@@ -49,7 +48,6 @@ const defaultUserData: UserContextData = {
   language: "English",
   onboardingComplete: false,
   isAuthenticated: false,
-  documentsReady: false,
   avatar: "🐅",
   rememberDevice: false,
   preferences: {

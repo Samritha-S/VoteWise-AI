@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
+const languages = ["English", "Hindi", "Marathi", "Tamil", "Telugu", "Bengali"];
+
 export default function ProfilePage() {
   const { userData, updateUserData, resetUser } = useAppContext();
   const t = useTranslation(userData.language);
@@ -198,24 +200,17 @@ export default function ProfilePage() {
             <div className="space-y-4">
               <p className="text-sm text-muted-foreground">{t.profile.langDesc}</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {[
-                  { name: "English", display: "English" },
-                  { name: "Hindi", display: "हिंदी" },
-                  { name: "Marathi", display: "मराठी" },
-                  { name: "Tamil", display: "தமிழ்" },
-                  { name: "Telugu", display: "తెలుగు" },
-                  { name: "Bengali", display: "বাংলা" }
-                ].map(lang => (
+                {languages.map(lang => (
                   <button
-                    key={lang.name}
-                    onClick={() => updateUserData({ language: lang.name })}
+                    key={lang}
+                    onClick={() => updateUserData({ language: lang })}
                     className={`p-3 rounded-xl border text-center transition-all ${
-                      userData.language === lang.name 
+                      userData.language === lang 
                         ? 'border-primary bg-primary/10 text-primary font-medium' 
                         : 'border-border hover:border-primary/50'
                     }`}
                   >
-                    {lang.display}
+                    {lang}
                   </button>
                 ))}
               </div>
@@ -225,9 +220,9 @@ export default function ProfilePage() {
 
         <div className="space-y-6">
           <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-4">
-            <h3 className="font-bold flex items-center gap-2"><Bell className="w-4 h-4" /> {t.profile.notifications}</h3>
+            <h3 className="font-bold flex items-center gap-2"><Bell className="w-4 h-4" /> Notifications</h3>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">{t.profile.deadlinesAlerts}</span>
+              <span className="text-sm font-medium text-muted-foreground">Deadlines Alerts</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.deadlinesAlerts ?? true} 
@@ -236,7 +231,7 @@ export default function ProfilePage() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">{t.profile.pollingReminders}</span>
+              <span className="text-sm font-medium text-muted-foreground">Polling Day Reminders</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.pollingReminders ?? true} 
@@ -247,9 +242,9 @@ export default function ProfilePage() {
           </div>
 
           <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-4">
-            <h3 className="font-bold flex items-center gap-2"><Accessibility className="w-4 h-4" /> {t.profile.accessibility}</h3>
+            <h3 className="font-bold flex items-center gap-2"><Accessibility className="w-4 h-4" /> Accessibility</h3>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">{t.profile.highContrast}</span>
+              <span className="text-sm font-medium text-muted-foreground">High Contrast</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.highContrast ?? false} 
@@ -258,7 +253,7 @@ export default function ProfilePage() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">{t.profile.screenReader}</span>
+              <span className="text-sm font-medium text-muted-foreground">Screen Reader Mode</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.screenReaderMode ?? false} 
@@ -267,7 +262,7 @@ export default function ProfilePage() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-muted-foreground">{t.profile.voiceOutput}</span>
+              <span className="text-sm font-medium text-muted-foreground">Voice Output</span>
               <input 
                 type="checkbox" 
                 checked={userData.preferences?.voiceOutput ?? true} 
@@ -294,7 +289,7 @@ export default function ProfilePage() {
             onClick={() => { resetUser(); window.location.href = "/"; }}
             className="w-full py-3 bg-destructive/10 text-destructive rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-destructive/20 transition-colors"
           >
-            <LogOut className="w-4 h-4" /> {t.profile.signOut}
+            <LogOut className="w-4 h-4" /> Sign Out
           </button>
         </div>
       </div>
