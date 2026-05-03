@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { 
   LayoutDashboard, 
@@ -37,6 +37,7 @@ const adminNavItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const { userData, isLoaded, resetUser } = useAppContext();
   
@@ -122,6 +123,7 @@ export default function Navigation() {
                   onClick={() => {
                     resetUser();
                     setIsOpen(false);
+                    router.push("/auth");
                   }} 
                   className="text-primary hover:underline"
                 >

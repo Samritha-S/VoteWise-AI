@@ -27,7 +27,7 @@ export default function OnboardingModal() {
     rememberDevice: false
   });
 
-  if (!isLoaded || userData.onboardingComplete) return null;
+  if (!isLoaded || !userData.isAuthenticated || userData.onboardingComplete) return null;
 
   const handleNext = () => {
     if (step < 5) setStep(step + 1);
