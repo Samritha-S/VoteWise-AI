@@ -27,6 +27,8 @@ interface Candidate {
 import { useAppContext } from "@/context/AppContext";
 import { useTranslation } from "@/lib/i18n";
 
+import { fetcher } from "@/lib/client-api";
+
 export default function CandidatesPage() {
   const { userData } = useAppContext();
   const t = useTranslation(userData.language);
@@ -35,8 +37,7 @@ export default function CandidatesPage() {
   const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
-    fetch('/api/candidates')
-      .then(res => res.json())
+    fetcher<Candidate[]>('/api/candidates')
       .then(data => {
         setCandidates(data);
         setLoading(false);

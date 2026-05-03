@@ -72,6 +72,8 @@ const MYTHS = [
   }
 ];
 
+import { fetcher, postRequest } from "@/lib/client-api";
+
 export default function MythBusterPage() {
   const { userData } = useAppContext();
   const t = useTranslation(userData.language);
@@ -83,8 +85,7 @@ export default function MythBusterPage() {
   const [liveMyths, setLiveMyths] = useState<any[]>([]);
 
   React.useEffect(() => {
-    fetch("/api/myths")
-      .then(res => res.json())
+    fetcher<any[]>("/api/myths")
       .then(data => {
         if (Array.isArray(data)) {
           // Only show published ones on the frontend
@@ -200,13 +201,9 @@ export default function MythBusterPage() {
                     onClick={async () => {
                       if (!reportQuestion) return;
                       try {
-                        await fetch('/api/myths', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({
-                            claim: reportQuestion,
-                            userId: reportDetails || (userData.email ? userData.email : "Anonymous")
-                          })
+                        await postRequest('/api/myths', {
+                          claim: reportQuestion,
+                          userId: reportDetails || (userData.email ? userData.email : "Anonymous")
                         });
                         alert("Fact-check request sent to the team!");
                         setIsReporting(false);

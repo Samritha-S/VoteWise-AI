@@ -13,6 +13,8 @@ type Message = {
   options?: string[];
 };
 
+import { postRequest } from "@/lib/client-api";
+
 export default function AssistantPage() {
   const { userData } = useAppContext();
   const t = useTranslation(userData.language);
@@ -53,21 +55,11 @@ export default function AssistantPage() {
     // Call real Gemini API
     const runAI = async () => {
       try {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: text,
-            history: messages.slice(1), // Exclude initial greeting from formal history to save tokens
-            context: userData
-          })
+        const data = await postRequest<{ response: string }>("/api/chat", {
+          message: text,
+          history: messages.slice(1), // Exclude initial greeting from formal history to save tokens
+          context: userData
         });
-
-        const data = await res.json();
-        
-        if (!res.ok) {
-          throw new Error(data.error || "Failed to fetch response");
-        }
 
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
@@ -79,7 +71,7 @@ export default function AssistantPage() {
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
           role: "assistant",
-          content: `Oops! Something went wrong: ${error.message}. Please make sure you have added GEMINI_API_KEY to your .env.local file!`
+          content: `Oops! Something went wrong: ${error.message}. Please check your connection or try again later.`
         }]);
       } finally {
         setIsTyping(false);

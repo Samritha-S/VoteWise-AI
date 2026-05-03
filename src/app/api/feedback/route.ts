@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { feedbackSchema } from "@/lib/validations";
+import { successResponse, errorResponse, badRequestResponse } from "@/lib/api-utils";
 
 export async function POST(req: Request) {
   try {
@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const parsed = feedbackSchema.safeParse(body);
     
     if (!parsed.success) {
-      return NextResponse.json({ error: "Invalid data format", details: parsed.error.issues }, { status: 400 });
+      return badRequestResponse(parsed.error.errors[0].message);
     }
 
     const feedback = await prisma.candidateFeedback.create({
@@ -19,19 +19,19 @@ export async function POST(req: Request) {
         comments: parsed.data.comments || ""
       }
     });
-    return NextResponse.json(feedback);
+    return successResponse(feedback);
   } catch (error: unknown) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 });
+    return errorResponse(error instanceof Error ? error.message : String(error));
   }
 }
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const feedback = await prisma.candidateFeedback.findMany({
       orderBy: { createdAt: 'desc' }
     });
-    return NextResponse.json(feedback);
+    return successResponse(feedback);
   } catch (error: unknown) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 });
+    return errorResponse(error instanceof Error ? error.message : String(error));
   }
 }
