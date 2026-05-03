@@ -12,6 +12,7 @@ export default function AuthPage() {
 
   const [formData, setFormData] = useState({
     name: userData.name || "",
+    phone: userData.phone || "",
     email: userData.email || "",
     password: "",
     address: userData.address || "",
@@ -52,6 +53,7 @@ export default function AuthPage() {
       // Update global context with database data
       updateUserData({
         name: data.user.name,
+        phone: data.user.phone || "",
         email: data.user.email,
         address: data.user.address || "",
         pincode: data.user.pincode || "",
@@ -118,24 +120,23 @@ export default function AuthPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="age">
-                    Age
+                  <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="phone">
+                    Phone Number
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground font-medium">
+                      +91
                     </div>
                     <input
-                      id="age"
-                      name="age"
-                      type="number"
+                      id="phone"
+                      name="phone"
+                      type="tel"
                       required
-                      min="18"
-                      max="120"
-                      value={formData.age}
+                      pattern="[0-9]{10}"
+                      value={formData.phone}
                       onChange={handleInputChange}
-                      className="block w-full pl-10 pr-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
-                      placeholder="18"
+                      className="block w-full pl-12 pr-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
+                      placeholder="9876543210"
                     />
                   </div>
                 </div>
@@ -254,22 +255,42 @@ export default function AuthPage() {
                       </div>
                     </div>
                     
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="voterStatus">
-                        Current Voter Status
-                      </label>
-                      <select
-                        id="voterStatus"
-                        name="voterStatus"
-                        required
-                        value={formData.voterStatus}
-                        onChange={handleInputChange}
-                        className="block w-full px-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
-                      >
-                        <option value="Registered">Registered to Vote</option>
-                        <option value="Not Registered">Not Registered</option>
-                        <option value="Unsure">Unsure / Need Help</option>
-                      </select>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="age">
+                          Age
+                        </label>
+                        <input
+                          id="age"
+                          name="age"
+                          type="number"
+                          required
+                          min="18"
+                          max="120"
+                          value={formData.age}
+                          onChange={handleInputChange}
+                          className="block w-full px-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
+                          placeholder="18"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="voterStatus">
+                          Current Voter Status
+                        </label>
+                        <select
+                          id="voterStatus"
+                          name="voterStatus"
+                          required
+                          value={formData.voterStatus}
+                          onChange={handleInputChange}
+                          className="block w-full px-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
+                        >
+                          <option value="Registered">Registered to Vote</option>
+                          <option value="Not Registered">Not Registered</option>
+                          <option value="Unsure">Unsure / Need Help</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>

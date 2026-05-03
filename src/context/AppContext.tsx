@@ -14,6 +14,7 @@ export interface UserPreferences {
 
 export interface UserContextData {
   name: string;
+  phone: string;
   email: string;
   address: string;
   pincode: string;
@@ -36,6 +37,7 @@ interface AppContextType {
 
 const defaultUserData: UserContextData = {
   name: "",
+  phone: "",
   email: "",
   address: "",
   pincode: "",
