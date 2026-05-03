@@ -5,22 +5,32 @@ import bcrypt from "bcrypt";
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { email, password } = data;
+    const { email, phone, name, password } = data;
 
-    if (!email || !password) {
+    if (!password || (!email && (!phone || !name))) {
       return NextResponse.json(
-        { error: "Email and password are required" },
+        { error: "Password and (Email or Phone+Name) are required" },
         { status: 400 }
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    let user;
+    if (email) {
+      user = await prisma.user.findUnique({
+        where: { email },
+      });
+    } else if (phone && name) {
+      user = await prisma.user.findFirst({
+        where: { 
+          phone: phone,
+          name: { equals: name, mode: 'insensitive' }
+        },
+      });
+    }
 
     if (!user) {
       return NextResponse.json(
-        { error: "Invalid email or password" },
+        { error: "Invalid credentials" },
         { status: 401 }
       );
     }
@@ -30,7 +40,7 @@ export async function POST(request: Request) {
 
     if (!isPasswordCorrect) {
       return NextResponse.json(
-        { error: "Invalid email or password" },
+        { error: "Invalid credentials" },
         { status: 401 }
       );
     }

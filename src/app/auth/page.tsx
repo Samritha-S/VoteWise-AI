@@ -8,7 +8,8 @@ import { Mail, Lock, User, MapPin, Building, Calendar, ArrowRight, ShieldCheck, 
 export default function AuthPage() {
   const router = useRouter();
   const { userData, updateUserData } = useAppContext();
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
+  const [loginMethod, setLoginMethod] = useState<"email" | "phone">("email");
 
   const [formData, setFormData] = useState({
     name: userData.name || "",
@@ -20,14 +21,16 @@ export default function AuthPage() {
     state: userData.state || "",
     age: userData.age?.toString() || "",
     voterStatus: userData.voterStatus || "Not Registered",
+    rememberDevice: false, 
   });
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+    const val = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+    setFormData((prev) => ({ ...prev, [name]: val }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,10 +41,14 @@ export default function AuthPage() {
     try {
       const endpoint = isLogin ? "/api/auth/login" : "/api/auth/signup";
       
+      const payload = isLogin && loginMethod === "phone" 
+        ? { phone: formData.phone, name: formData.name, password: formData.password }
+        : formData;
+
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -62,6 +69,7 @@ export default function AuthPage() {
         voterStatus: data.user.voterStatus as VoterStatus,
         isAuthenticated: true,
         onboardingComplete: true,
+        rememberDevice: formData.rememberDevice
       });
 
       router.push("/");
@@ -94,11 +102,29 @@ export default function AuthPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
         <div className="bg-card py-8 px-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] sm:rounded-2xl sm:px-10 border border-border/50">
+          
+          {isLogin && (
+            <div className="flex bg-secondary/30 p-1 rounded-xl mb-6">
+              <button 
+                onClick={() => setLoginMethod("email")}
+                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${loginMethod === 'email' ? 'bg-background text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                Email Login
+              </button>
+              <button 
+                onClick={() => setLoginMethod("phone")}
+                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${loginMethod === 'phone' ? 'bg-background text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                Phone Login
+              </button>
+            </div>
+          )}
+
           <form className="space-y-6" onSubmit={handleSubmit}>
             
-            {!isLogin && (
+            {(!isLogin || (isLogin && loginMethod === "phone")) && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+                <div className={isLogin ? "md:col-span-2" : ""}>
                   <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="name">
                     Full Name
                   </label>
@@ -119,7 +145,7 @@ export default function AuthPage() {
                   </div>
                 </div>
 
-                <div>
+                <div className={isLogin ? "md:col-span-2" : ""}>
                   <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="phone">
                     Phone Number
                   </label>
@@ -141,50 +167,54 @@ export default function AuthPage() {
                   </div>
                 </div>
 
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="address">
-                    Full Residential Address
-                  </label>
-                  <div className="relative">
-                    <div className="absolute top-3 left-3 pointer-events-none">
-                      <MapPin className="h-4 w-4 text-muted-foreground" />
+                {!isLogin && (
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="address">
+                      Full Residential Address
+                    </label>
+                    <div className="relative">
+                      <div className="absolute top-3 left-3 pointer-events-none">
+                        <MapPin className="h-4 w-4 text-muted-foreground" />
+                      </div>
+                      <textarea
+                        id="address"
+                        name="address"
+                        required
+                        value={formData.address}
+                        onChange={handleInputChange}
+                        rows={2}
+                        className="block w-full pl-10 pr-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all resize-none"
+                        placeholder="House No, Street, Locality, City"
+                      />
                     </div>
-                    <textarea
-                      id="address"
-                      name="address"
-                      required
-                      value={formData.address}
-                      onChange={handleInputChange}
-                      rows={2}
-                      className="block w-full pl-10 pr-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all resize-none"
-                      placeholder="House No, Street, Locality, City"
-                    />
                   </div>
-                </div>
+                )}
               </div>
             )}
 
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="email">
-                Email address
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-4 w-4 text-muted-foreground" />
+            {(!isLogin || (isLogin && loginMethod === "email")) && (
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="email">
+                  Email address
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="block w-full pl-10 pr-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
+                    placeholder="voter@india.gov"
+                  />
                 </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="block w-full pl-10 pr-3 py-2 border border-border/60 rounded-xl bg-background text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all"
-                  placeholder="voter@india.gov"
-                />
               </div>
-            </div>
+            )}
 
             <div>
               <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="password">
@@ -306,13 +336,15 @@ export default function AuthPage() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
-                    id="remember-me"
-                    name="remember-me"
+                    id="rememberDevice"
+                    name="rememberDevice"
                     type="checkbox"
+                    checked={formData.rememberDevice}
+                    onChange={handleInputChange}
                     className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-foreground">
-                    Remember me
+                  <label htmlFor="rememberDevice" className="ml-2 block text-sm text-foreground">
+                    Remember me (Stay signed in)
                   </label>
                 </div>
 

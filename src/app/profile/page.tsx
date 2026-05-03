@@ -16,7 +16,14 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
-const languages = ["English", "Hindi", "Marathi", "Tamil", "Telugu", "Bengali"];
+const languages = [
+  { id: "English", name: "English" },
+  { id: "Hindi", name: "हिन्दी" },
+  { id: "Marathi", name: "मराठी" },
+  { id: "Tamil", name: "தமிழ்" },
+  { id: "Telugu", name: "తెలుగు" },
+  { id: "Bengali", name: "বাংলা" }
+];
 
 export default function ProfilePage() {
   const { userData, updateUserData, resetUser } = useAppContext();
