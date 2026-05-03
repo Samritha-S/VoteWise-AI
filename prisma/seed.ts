@@ -15,7 +15,10 @@ async function main() {
         constituency: c.constituency,
         state: c.state,
         totalAssets: c.assets,
+        totalLiabilities: c.liabilities,
         criminalCases: c.cases,
+        seriousCriminalCases: 0, // Mock for now
+        sourceUrl: c.source,
         education: c.education,
         confidence: c.confidence,
         photo: c.photo,
@@ -35,7 +38,10 @@ async function main() {
         constituency: c.constituency,
         state: c.state,
         totalAssets: c.assets,
+        totalLiabilities: c.liabilities,
         criminalCases: c.cases,
+        seriousCriminalCases: 0, // Mock for now
+        sourceUrl: c.source,
         education: c.education,
         confidence: c.confidence,
         photo: c.photo,
@@ -48,6 +54,19 @@ async function main() {
         electionHistory: JSON.stringify(c.electionHistory),
         scamsOrControversies: JSON.stringify(c.pastControversies)
       }
+    });
+  }
+
+  console.log('Seeding myths...');
+  await prisma.myth.deleteMany({ where: { status: 'PUBLISHED' } });
+  const myths = [
+    { claim: "EVMs can be hacked via Bluetooth.", fact: "EVMs are standalone machines with no wireless connectivity.", source: "ECI", status: "PUBLISHED" },
+    { claim: "Voter ID is mandatory even if name is on list.", fact: "You can use 12 alternative IDs if your name is on the list.", source: "ECI", status: "PUBLISHED" },
+  ];
+
+  for (const m of myths) {
+    await prisma.myth.create({
+      data: m
     });
   }
 
