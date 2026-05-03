@@ -10,29 +10,29 @@ const DEADLINES_DATA = [
     id: "registration",
     title: "Voter Registration Deadline",
     date: "April 15, 2026",
-    status: "upcoming", // upcoming, past, urgent
+    status: "past", // upcoming, past, urgent
     desc: "Last day to register to vote or update your address in the electoral roll.",
   },
   {
     id: "postal",
     title: "Postal Ballot Application",
     date: "May 5, 2026",
-    status: "upcoming",
+    status: "past",
     desc: "Deadline to apply for postal voting if you are a senior citizen (85+) or PwD.",
-  },
-  {
-    id: "campaign",
-    title: "Campaign Silence Period",
-    date: "May 23, 2026 (48 hours prior)",
-    status: "upcoming",
-    desc: "End of public campaigning, rallies, and political advertisements.",
   },
   {
     id: "polling",
     title: "Polling Day",
-    date: "May 25, 2026",
+    date: "Tomorrow (May 4, 2026)",
     status: "urgent",
     desc: "Cast your vote at your designated polling booth from 7:00 AM to 6:00 PM.",
+  },
+  {
+    id: "results",
+    title: "Election Results Day",
+    date: "May 7, 2026",
+    status: "upcoming",
+    desc: "Counting of votes and declaration of final election results.",
   }
 ];
 
