@@ -48,16 +48,19 @@ export default function CandidatesPage() {
   }, []);
 
   const stateCandidates = React.useMemo(() => {
-    const cleanTerm = searchTerm.trim();
-    if (!cleanTerm) return [];
-    
-    const searchRegex = new RegExp(`\\b${cleanTerm.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}`, 'i');
+    const cleanTerm = searchTerm.trim().toLowerCase();
+    if (cleanTerm.length < 2) return [];
     
     return candidates.filter(c => {
-      return searchRegex.test(c.name) || 
-             searchRegex.test(c.party) ||
-             searchRegex.test(c.constituency) ||
-             searchRegex.test(c.state);
+      const name = (c.name || "").toLowerCase();
+      const party = (c.party || "").toLowerCase();
+      const constituency = (c.constituency || "").toLowerCase();
+      const state = (c.state || "").toLowerCase();
+
+      return name.includes(cleanTerm) || 
+             party.includes(cleanTerm) ||
+             constituency.includes(cleanTerm) ||
+             state.includes(cleanTerm);
     }).sort((a, b) => {
       if (userData.state) {
         if (a.state === userData.state && b.state !== userData.state) return -1;

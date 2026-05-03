@@ -21,6 +21,7 @@ export interface UserContextData {
   age: number | null;
   state: string;
   voterStatus: VoterStatus;
+  hasDocuments: boolean;
   language: string;
   onboardingComplete: boolean;
   isAuthenticated: boolean;
@@ -45,6 +46,7 @@ const defaultUserData: UserContextData = {
   age: null,
   state: "",
   voterStatus: "",
+  hasDocuments: false,
   language: "English",
   onboardingComplete: false,
   isAuthenticated: false,

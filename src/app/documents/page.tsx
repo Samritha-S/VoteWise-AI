@@ -44,14 +44,21 @@ const DOCUMENTS_DATA = [
   }
 ];
 
+import { useAppContext } from "@/context/AppContext";
+
 export default function DocumentsChecklistPage() {
+  const { userData, updateUserData } = useAppContext();
   const [completedDocs, setCompletedDocs] = useState<Record<string, boolean>>({});
 
   const toggleDoc = (id: string) => {
-    setCompletedDocs(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
+    const newState = {
+      ...completedDocs,
+      [id]: !completedDocs[id]
+    };
+    setCompletedDocs(newState);
+    
+    const hasAtLeastOne = Object.values(newState).some(v => v);
+    updateUserData({ hasDocuments: hasAtLeastOne });
   };
 
   const completedCount = Object.values(completedDocs).filter(Boolean).length;

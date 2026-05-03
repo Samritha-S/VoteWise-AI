@@ -75,7 +75,10 @@ export default function Dashboard() {
         isComplete = userData.voterStatus === "Registered";
         isActive = userData.age ? userData.age >= 18 && !isComplete : false;
       } else if (step.id === "documents") {
-        isActive = userData.voterStatus === "Registered";
+        isComplete = userData.hasDocuments;
+        isActive = userData.voterStatus === "Registered" && !isComplete;
+      } else if (step.id === "polling") {
+        isActive = userData.hasDocuments;
       }
 
       return { ...step, isComplete, isActive };
