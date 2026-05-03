@@ -81,7 +81,7 @@ export default function Navigation() {
             return (
               <Link
                 key={item.name}
-                href={item.href}
+                href={(!userData.isAuthenticated && item.name === "Profile") ? "/auth" : item.href}
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${
                   isActive 
@@ -103,49 +103,29 @@ export default function Navigation() {
           })}
         </nav>
 
-        {!pathname.startsWith('/admin') && (
+        {!pathname.startsWith('/admin') && isLoaded && userData.isAuthenticated && (
           <div className="p-4 m-4 rounded-xl bg-secondary/50 border border-border/50 backdrop-blur-md min-h-[96px] flex flex-col justify-center">
-            {isLoaded ? (
-              userData.isAuthenticated ? (
-                <>
-                  <div className="text-sm font-medium text-foreground mb-1 flex items-center gap-2">
-                    <span className="text-xl">{userData.avatar}</span>
-                    <span className="truncate">{userData.name || "User"}</span>
-                  </div>
-                  <div className="text-xs text-muted-foreground flex items-center justify-between mt-2">
-                    <span className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-green-500" />
-                      {t.sidebar.ready || "Ready to vote"}
-                    </span>
-                    <button 
-                      onClick={() => {
-                        resetUser();
-                        setIsOpen(false);
-                      }} 
-                      className="text-primary hover:underline"
-                    >
-                      Sign out
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="text-sm font-medium text-foreground mb-2">Welcome to VoteWise</div>
-                  <Link
-                    href="/auth"
-                    onClick={() => setIsOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors"
-                  >
-                    Sign in / Sign up
-                  </Link>
-                </>
-              )
-            ) : (
-              <div className="animate-pulse flex flex-col gap-2">
-                <div className="h-4 bg-muted rounded w-2/3"></div>
-                <div className="h-8 bg-muted rounded w-full mt-2"></div>
+            <>
+              <div className="text-sm font-medium text-foreground mb-1 flex items-center gap-2">
+                <span className="text-xl">{userData.avatar}</span>
+                <span className="truncate">{userData.name || "User"}</span>
               </div>
-            )}
+              <div className="text-xs text-muted-foreground flex items-center justify-between mt-2">
+                <span className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-green-500" />
+                  {t.sidebar.ready || "Ready to vote"}
+                </span>
+                <button 
+                  onClick={() => {
+                    resetUser();
+                    setIsOpen(false);
+                  }} 
+                  className="text-primary hover:underline"
+                >
+                  Sign out
+                </button>
+              </div>
+            </>
           </div>
         )}
       </motion.div>
