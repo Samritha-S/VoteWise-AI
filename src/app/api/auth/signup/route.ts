@@ -46,10 +46,14 @@ export async function POST(request: Request) {
     const { password: _, ...userWithoutPassword } = user;
 
     return NextResponse.json({ user: userWithoutPassword }, { status: 201 });
-  } catch (error) {
-    console.error("Signup error:", error);
+  } catch (error: any) {
+    console.error("Signup error details:", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
     return NextResponse.json(
-      { error: "Something went wrong during signup" },
+      { error: `Signup failed: ${error.message || "Internal Server Error"}` },
       { status: 500 }
     );
   }
