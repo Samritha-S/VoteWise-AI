@@ -16,8 +16,6 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
-const languages = ["English", "Hindi", "Marathi", "Tamil", "Telugu", "Bengali"];
-
 export default function ProfilePage() {
   const { userData, updateUserData, resetUser } = useAppContext();
   const t = useTranslation(userData.language);
@@ -200,17 +198,24 @@ export default function ProfilePage() {
             <div className="space-y-4">
               <p className="text-sm text-muted-foreground">{t.profile.langDesc}</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {languages.map(lang => (
+                {[
+                  { name: "English", display: "English" },
+                  { name: "Hindi", display: "हिंदी" },
+                  { name: "Marathi", display: "मराठी" },
+                  { name: "Tamil", display: "தமிழ்" },
+                  { name: "Telugu", display: "తెలుగు" },
+                  { name: "Bengali", display: "বাংলা" }
+                ].map(lang => (
                   <button
-                    key={lang}
-                    onClick={() => updateUserData({ language: lang })}
+                    key={lang.name}
+                    onClick={() => updateUserData({ language: lang.name })}
                     className={`p-3 rounded-xl border text-center transition-all ${
-                      userData.language === lang 
+                      userData.language === lang.name 
                         ? 'border-primary bg-primary/10 text-primary font-medium' 
                         : 'border-border hover:border-primary/50'
                     }`}
                   >
-                    {lang}
+                    {lang.display}
                   </button>
                 ))}
               </div>
