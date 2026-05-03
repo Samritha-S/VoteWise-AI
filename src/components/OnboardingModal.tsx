@@ -18,6 +18,8 @@ export default function OnboardingModal() {
   const { userData, isLoaded, updateUserData } = useAppContext();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
     language: "English",
     age: "",
     state: "",
@@ -28,12 +30,14 @@ export default function OnboardingModal() {
   if (!isLoaded || userData.onboardingComplete) return null;
 
   const handleNext = () => {
-    if (step < 4) setStep(step + 1);
+    if (step < 5) setStep(step + 1);
     else handleComplete();
   };
 
   const handleComplete = () => {
     updateUserData({
+      name: formData.name,
+      phone: formData.phone,
       language: formData.language,
       age: parseInt(formData.age),
       state: formData.state,
@@ -65,7 +69,7 @@ export default function OnboardingModal() {
           
           {/* Progress bar */}
           <div className="flex gap-2 mt-6">
-            {[1, 2, 3, 4].map((i) => (
+            {[1, 2, 3, 4, 5].map((i) => (
               <div 
                 key={i} 
                 className={`h-1.5 flex-1 rounded-full ${i <= step ? 'bg-primary' : 'bg-muted'}`} 
@@ -79,6 +83,50 @@ export default function OnboardingModal() {
             {step === 1 && (
               <motion.div
                 key="step1"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="space-y-6"
+              >
+                <h3 className="text-lg font-semibold">Let's get to know you</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className="w-full p-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">
+                      Phone Number
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground font-medium text-sm">
+                        +91
+                      </div>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        className="w-full pl-12 p-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                        placeholder="9876543210"
+                        maxLength={10}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {step === 2 && (
+              <motion.div
+                key="step2"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
@@ -103,9 +151,9 @@ export default function OnboardingModal() {
               </motion.div>
             )}
 
-            {step === 2 && (
+            {step === 3 && (
               <motion.div
-                key="step2"
+                key="step3"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
@@ -123,9 +171,9 @@ export default function OnboardingModal() {
               </motion.div>
             )}
 
-            {step === 3 && (
+            {step === 4 && (
               <motion.div
-                key="step3"
+                key="step4"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
@@ -148,9 +196,9 @@ export default function OnboardingModal() {
               </motion.div>
             )}
 
-            {step === 4 && (
+            {step === 5 && (
               <motion.div
-                key="step4"
+                key="step5"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
@@ -197,14 +245,15 @@ export default function OnboardingModal() {
           <button
             onClick={handleNext}
             disabled={
-              (step === 2 && !formData.age) || 
-              (step === 3 && !formData.state) || 
-              (step === 4 && !formData.voterStatus)
+              (step === 1 && (!formData.name || !formData.phone)) ||
+              (step === 3 && !formData.age) || 
+              (step === 4 && !formData.state) || 
+              (step === 5 && !formData.voterStatus)
             }
             className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {step === 4 ? "Complete Setup" : "Next"}
-            {step < 4 && <ChevronRight className="w-4 h-4" />}
+            {step === 5 ? "Complete Setup" : "Next"}
+            {step < 5 && <ChevronRight className="w-4 h-4" />}
           </button>
         </div>
       </motion.div>
