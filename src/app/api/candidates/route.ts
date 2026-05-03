@@ -28,3 +28,23 @@ export async function GET() {
     return errorResponse("Failed to fetch candidates");
   }
 }
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const candidate = await prisma.candidate.create({
+      data: {
+        ...body,
+        assetBreakdown: JSON.stringify(body.assetBreakdown || []),
+        liabilityBreakdown: JSON.stringify(body.liabilityBreakdown || []),
+        caseDetails: JSON.stringify(body.caseDetails || []),
+        performance: body.performance ? JSON.stringify(body.performance) : null,
+        electionHistory: body.electionHistory ? JSON.stringify(body.electionHistory) : null,
+        scamsOrControversies: body.scamsOrControversies ? JSON.stringify(body.scamsOrControversies) : null,
+      }
+    });
+    return successResponse(candidate);
+  } catch (error) {
+    console.error("Failed to create candidate:", error);
+    return errorResponse("Failed to create candidate");
+  }
+}
