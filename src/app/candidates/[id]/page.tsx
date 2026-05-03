@@ -68,24 +68,31 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
     electionHistory: safeParse(dbCandidate.electionHistory, {
       electionsContested: 0, wins: 0, losses: 0, latestVoteShare: "N/A", latestMargin: "N/A"
     }),
-    movableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, []),
-    immovableAssetsBreakdown: [], // SQLite schema doesn't have separate immovable field
+    movableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, { movable: [], immovable: [] }).movable || [],
+    immovableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, { movable: [], immovable: [] }).immovable || [],
     liabilitiesBreakdown: safeParse(dbCandidate.liabilityBreakdown, []),
     criminalCasesBreakdown: safeParse(dbCandidate.caseDetails, []),
     pastControversies: safeParse(dbCandidate.scamsOrControversies, []),
-    careerHistory: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).careerHistory || []) : [],
-    ideologyStances: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).ideologyStances || []) : [],
-    recentNews: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).recentNews || []) : [],
+    careerHistory: safeParse(dbCandidate.performance, {}).careerHistory || [],
+    ideologyStances: safeParse(dbCandidate.performance, {}).ideologyStances || [],
+    recentNews: safeParse(dbCandidate.performance, {}).recentNews || [],
     assetDetails: {
       movable: dbCandidate.totalAssets,
       immovable: "See Breakdown"
     },
-    currentPosition: dbCandidate.profession,
-    statusBadge: "Candidate",
-    yearsInPolitics: 0,
-    votingRecord: "Data Not Available",
+    currentPosition: dbCandidate.currentPosition || dbCandidate.profession,
+    statusBadge: dbCandidate.statusBadge || "Candidate",
+    yearsInPolitics: dbCandidate.yearsInPolitics || 0,
+    votingRecord: safeParse(dbCandidate.performance, {}).votingRecord || "Data Not Available",
     educationDetails: dbCandidate.education,
-    familyBackground: "Data Not Available"
+    familyBackground: safeParse(dbCandidate.performance, {}).familyBackground || "Data Not Available",
+    disqualifications: dbCandidate.disqualifications || "None",
+    totalIncomeDeclared: dbCandidate.totalIncomeDeclared || "Data Not Available",
+    incomeSources: dbCandidate.incomeSources || "Data Not Available",
+    govtContracts: dbCandidate.govtContracts || "Data Not Available",
+    panGiven: dbCandidate.panGiven,
+    itrFiled: dbCandidate.itrFiled,
+    verified: dbCandidate.verified,
   };
 
 
@@ -227,46 +234,37 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
               <TrendingUp className="w-5 h-5 text-primary" /> Legislative Performance
             </h2>
             <div className="grid md:grid-cols-4 gap-4">
-              <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between">
-                <div>
-                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Attendance</p>
-                  <p className="text-xl font-bold text-foreground">{candidate.performanceMetrics.attendance.value}</p>
-                </div>
-                <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
-                  Source: {candidate.performanceMetrics.attendance.source}<br/>
-                  (Updated: {candidate.performanceMetrics.attendance.lastUpdated})
-                </div>
-              </div>
-              <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between">
-                <div>
-                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Questions Asked</p>
-                  <p className="text-xl font-bold text-foreground">{candidate.performanceMetrics.questionsAsked.value}</p>
-                </div>
-                <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
-                  Source: {candidate.performanceMetrics.questionsAsked.source}<br/>
-                  (Updated: {candidate.performanceMetrics.questionsAsked.lastUpdated})
-                </div>
-              </div>
-              <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between">
-                <div>
-                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Bills Introduced</p>
-                  <p className="text-xl font-bold text-foreground">{candidate.performanceMetrics.billsIntroduced.value}</p>
-                </div>
-                <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
-                  Source: {candidate.performanceMetrics.billsIntroduced.source}<br/>
-                  (Updated: {candidate.performanceMetrics.billsIntroduced.lastUpdated})
-                </div>
-              </div>
-              <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between">
-                <div>
-                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Funds Utilized</p>
-                  <p className="text-xl font-bold text-foreground">{candidate.performanceMetrics.fundsUtilized.value}</p>
-                </div>
-                <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
-                  Source: {candidate.performanceMetrics.fundsUtilized.source}<br/>
-                  (Updated: {candidate.performanceMetrics.fundsUtilized.lastUpdated})
-                </div>
-              </div>
+              {[
+                { label: "Attendance", key: "attendance", icon: Clock },
+                { label: "Questions Asked", key: "questionsAsked", icon: HelpCircle },
+                { label: "Bills Introduced", key: "billsIntroduced", icon: FileText },
+                { label: "Funds Utilized", key: "fundsUtilized", icon: Landmark }
+              ].map((metric) => {
+                const data = (candidate.performanceMetrics as any)[metric.key];
+                const match = data.value.match(/(\d+)%/);
+                const percent = match ? parseInt(match[1]) : null;
+                
+                return (
+                  <div key={metric.key} className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between group hover:border-primary/30 transition-colors">
+                    <div>
+                      <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">{metric.label}</p>
+                      <p className="text-xl font-bold text-foreground">{data.value}</p>
+                      {percent !== null && (
+                        <div className="w-full bg-muted rounded-full h-1.5 mt-2 overflow-hidden">
+                          <div 
+                            className="bg-primary h-1.5 rounded-full transition-all duration-1000 ease-out" 
+                            style={{ width: `${percent}%` }}
+                          ></div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+                      Source: {data.source}<br/>
+                      (Updated: {data.lastUpdated})
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             {candidate.performanceMetrics.keyAchievements.length > 0 && (
               <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm mt-4">
@@ -317,6 +315,20 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
                     <p className="text-xl font-bold text-red-600">{candidate.electionHistory.losses}</p>
                   </div>
                 </div>
+                {candidate.electionHistory.electionsContested > 0 && (
+                  <div className="mt-6">
+                    <div className="flex justify-between text-[10px] uppercase font-bold text-muted-foreground mb-1.5">
+                      <span>Win Ratio</span>
+                      <span>{Math.round((candidate.electionHistory.wins / candidate.electionHistory.electionsContested) * 100)}%</span>
+                    </div>
+                    <div className="w-full bg-red-100 rounded-full h-2 overflow-hidden flex">
+                      <div 
+                        className="bg-green-500 h-full transition-all duration-1000 ease-out" 
+                        style={{ width: `${(candidate.electionHistory.wins / candidate.electionHistory.electionsContested) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="bg-card border border-border/50 rounded-xl p-6 shadow-sm flex flex-col justify-center space-y-4">
                 <div className="flex justify-between items-center border-b border-border/50 pb-3">
