@@ -79,28 +79,28 @@ export default function Navigation() {
               : item.name;
 
             return (
-              <Link
-                key={item.name}
-                href={(!userData.isAuthenticated && item.name === "Profile") ? "/auth" : item.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${
-                  isActive 
-                    ? "text-primary-foreground bg-primary/90 shadow-md shadow-primary/20" 
-                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-                }`}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="active-nav-bg"
-                    className="absolute inset-0 bg-primary rounded-xl -z-10"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <Icon className={`w-5 h-5 ${isActive ? "text-primary-foreground" : "group-hover:text-primary transition-colors"}`} />
-                <span className="font-medium">
-                  {(!userData.isAuthenticated && item.name === "Profile") ? "Sign up / Login" : itemName}
-                </span>
-              </Link>
+              {(item.name !== "Profile" || userData.isAuthenticated) && (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${
+                    isActive 
+                      ? "text-primary-foreground bg-primary/90 shadow-md shadow-primary/20" 
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-nav-bg"
+                      className="absolute inset-0 bg-primary rounded-xl -z-10"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  <Icon className={`w-5 h-5 ${isActive ? "text-primary-foreground" : "group-hover:text-primary transition-colors"}`} />
+                  <span className="font-medium">{itemName}</span>
+                </Link>
+              )}
             );
           })}
         </nav>

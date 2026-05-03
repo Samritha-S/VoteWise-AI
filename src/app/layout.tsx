@@ -5,6 +5,8 @@ import Navigation from "@/components/Navigation";
 import ScreenReaderAnnouncer from "@/components/ScreenReaderAnnouncer";
 import { AppProvider } from "@/context/AppContext";
 import OnboardingModal from "@/components/OnboardingModal";
+import { usePathname } from "next/navigation";
+import AuthPage from "./auth/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,20 +20,37 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className="light h-full antialiased">
-      <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground`}>
-        <AppProvider>
-          <div className="flex h-screen overflow-hidden">
-            <ScreenReaderAnnouncer />
-            <OnboardingModal />
-            <Navigation />
-            <main className="flex-1 overflow-y-auto bg-background">
-              {children}
-            </main>
-          </div>
-        </AppProvider>
-      </body>
-    </html>
-  );
-}
+   return (
+     <html lang="en" className="light h-full antialiased">
+       <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground`}>
+         <AppProvider>
+           <AuthWall>
+             <div className="flex h-screen overflow-hidden">
+               <ScreenReaderAnnouncer />
+               <OnboardingModal />
+               <Navigation />
+               <main className="flex-1 overflow-y-auto bg-background">
+                 {children}
+               </main>
+             </div>
+           </AuthWall>
+         </AppProvider>
+       </body>
+     </html>
+   );
+ }
+ 
+ function AuthWall({ children }: { children: React.ReactNode }) {
+   const { userData, isLoaded } = useAppContext();
+   const pathname = usePathname();
+   
+   if (!isLoaded) return null; // Or a loading spinner
+   
+   // If not authenticated and not already on /auth, show AuthPage
+   if (!userData.isAuthenticated && pathname !== '/auth' && !pathname.startsWith('/admin')) {
+     return <AuthPage />;
+   }
+   
+   return <>{children}</>;
+ }
+
