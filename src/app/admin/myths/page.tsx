@@ -3,11 +3,23 @@
 import React, { useState } from "react";
 import { ShieldAlert, Check, X, Search, MessageCircleQuestion } from "lucide-react";
 
+interface Myth {
+  id: string;
+  userId: string | null;
+  claim: string;
+  fact: string | null;
+  source: string | null;
+  link: string | null;
+  status: "PENDING" | "PUBLISHED";
+  views: number;
+  createdAt: string;
+}
+
 export default function MythsData() {
   const [activeTab, setActiveTab] = useState<"incoming" | "published">("incoming");
 
-  const [myths, setMyths] = useState<any[]>([]);
-  const [draftingMyth, setDraftingMyth] = useState<any>(null);
+  const [myths, setMyths] = useState<Myth[]>([]);
+  const [draftingMyth, setDraftingMyth] = useState<Myth | null>(null);
   const [draftFact, setDraftFact] = useState("");
   const [draftSource, setDraftSource] = useState("");
   const [draftLink, setDraftLink] = useState("");

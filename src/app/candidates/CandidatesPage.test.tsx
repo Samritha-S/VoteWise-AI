@@ -22,10 +22,10 @@ describe("CandidatesPage", () => {
     );
 
     // Check if the title is rendered
-    expect(screen.getByText(/Transparency Hub/i)).toBeInTheDocument();
+    expect(screen.getByText(/Electoral Candidates/i)).toBeInTheDocument();
 
     // Type in search box
-    const searchInput = screen.getByPlaceholderText(/Search by name/i);
+    const searchInput = screen.getByPlaceholderText(/Search candidates/i);
     fireEvent.change(searchInput, { target: { value: "Candidate A" } });
 
     // Wait for the filtered results

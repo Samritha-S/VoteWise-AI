@@ -3,9 +3,19 @@
 import React, { useState } from "react";
 import { UserCircle, Search, Download, Filter } from "lucide-react";
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  state: string;
+  age: number | null;
+  voterStatus: string;
+  createdAt: string;
+}
+
 export default function UsersData() {
   const [search, setSearch] = useState("");
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {

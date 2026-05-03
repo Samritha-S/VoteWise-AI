@@ -1278,3 +1278,12 @@ export function useTranslation(language: string) {
   const t = translations[language] || translations["English"];
   return t;
 }
+
+export const languageNames: Record<string, string> = {
+  English: "English",
+  Hindi: "हिन्दी",
+  Marathi: "मराठी",
+  Tamil: "தமிழ்",
+  Telugu: "తెలుగు",
+  Bengali: "বাংলা"
+};

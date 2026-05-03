@@ -4,10 +4,10 @@ import { prisma } from "@/lib/prisma";
 // Optimal Use of Resources: Cache this heavy database query and JSON parsing for 1 hour (3600 seconds)
 export const revalidate = 3600;
 
-function safeParse(str: string | null | undefined, fallback: any = []) {
+function safeParse<T>(str: string | null | undefined, fallback: T): T {
   if (!str) return fallback;
   try {
-    return JSON.parse(str);
+    return JSON.parse(str) as T;
   } catch (e) {
     console.error("JSON parse error:", e);
     return fallback;
@@ -25,21 +25,21 @@ export async function GET() {
     // Parse JSON strings back to objects for the frontend
     const formatted = candidates.map(c => ({
       ...c,
-      assetBreakdown: safeParse(c.assetBreakdown),
-      liabilityBreakdown: safeParse(c.liabilityBreakdown),
-      caseDetails: safeParse(c.caseDetails),
+      assetBreakdown: safeParse(c.assetBreakdown, []),
+      liabilityBreakdown: safeParse(c.liabilityBreakdown, []),
+      caseDetails: safeParse(c.caseDetails, []),
       performance: safeParse(c.performance, null),
       electionHistory: safeParse(c.electionHistory, null),
       scamsOrControversies: safeParse(c.scamsOrControversies, null),
     }));
 
     return NextResponse.json(formatted);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Failed to fetch candidates:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json({ 
       error: "Failed to fetch candidates", 
-      details: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      details: message
     }, { status: 500 });
   }
 }

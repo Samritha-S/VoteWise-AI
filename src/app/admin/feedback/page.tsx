@@ -3,8 +3,17 @@
 import React, { useState, useEffect } from "react";
 import { MessageSquare, ThumbsUp, ThumbsDown, AlertTriangle } from "lucide-react";
 
+interface Feedback {
+  id: string;
+  candidateId: string;
+  isAccurate: "Yes" | "No" | "Partially";
+  inaccurateFields: string | null;
+  comments: string | null;
+  createdAt: string;
+}
+
 export default function FeedbackData() {
-  const [feedback, setFeedback] = useState<any[]>([]);
+  const [feedback, setFeedback] = useState<Feedback[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

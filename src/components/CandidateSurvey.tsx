@@ -60,6 +60,7 @@ export default function CandidateSurvey({ candidateId }: CandidateSurveyProps) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <button 
                   onClick={() => { setIsAccurate("Yes"); submitFeedback(); }}
+                  aria-label="Mark as Accurate"
                   className="flex flex-col items-center gap-3 p-6 rounded-xl border border-border hover:border-green-500 hover:bg-green-500/10 transition-colors group"
                 >
                   <ThumbsUp className="w-8 h-8 text-muted-foreground group-hover:text-green-500 transition-colors" />
@@ -67,6 +68,7 @@ export default function CandidateSurvey({ candidateId }: CandidateSurveyProps) {
                 </button>
                 <button 
                   onClick={() => { setIsAccurate("Partially"); setStep(2); }}
+                  aria-label="Mark as Partially Accurate"
                   className="flex flex-col items-center gap-3 p-6 rounded-xl border border-border hover:border-yellow-500 hover:bg-yellow-500/10 transition-colors group"
                 >
                   <AlertTriangle className="w-8 h-8 text-muted-foreground group-hover:text-yellow-500 transition-colors" />
@@ -74,6 +76,7 @@ export default function CandidateSurvey({ candidateId }: CandidateSurveyProps) {
                 </button>
                 <button 
                   onClick={() => { setIsAccurate("No"); setStep(2); }}
+                  aria-label="Mark as Inaccurate"
                   className="flex flex-col items-center gap-3 p-6 rounded-xl border border-border hover:border-destructive hover:bg-destructive/10 transition-colors group"
                 >
                   <ThumbsDown className="w-8 h-8 text-muted-foreground group-hover:text-destructive transition-colors" />
@@ -127,6 +130,8 @@ export default function CandidateSurvey({ candidateId }: CandidateSurveyProps) {
                 <button 
                   onClick={submitFeedback}
                   disabled={isSubmitting}
+                  aria-busy={isSubmitting}
+                  aria-label="Submit Feedback"
                   className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-primary/90 transition-colors"
                 >
                   {isSubmitting ? t.survey.submitting : <><Send className="w-4 h-4" /> {t.survey.submit}</>}
