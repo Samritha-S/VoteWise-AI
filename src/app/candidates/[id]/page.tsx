@@ -68,31 +68,24 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
     electionHistory: safeParse(dbCandidate.electionHistory, {
       electionsContested: 0, wins: 0, losses: 0, latestVoteShare: "N/A", latestMargin: "N/A"
     }),
-    movableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, { movable: [], immovable: [] }).movable || [],
-    immovableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, { movable: [], immovable: [] }).immovable || [],
+    movableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, []),
+    immovableAssetsBreakdown: [], // SQLite schema doesn't have separate immovable field
     liabilitiesBreakdown: safeParse(dbCandidate.liabilityBreakdown, []),
     criminalCasesBreakdown: safeParse(dbCandidate.caseDetails, []),
     pastControversies: safeParse(dbCandidate.scamsOrControversies, []),
-    careerHistory: safeParse(dbCandidate.performance, {}).careerHistory || [],
-    ideologyStances: safeParse(dbCandidate.performance, {}).ideologyStances || [],
-    recentNews: safeParse(dbCandidate.performance, {}).recentNews || [],
+    careerHistory: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).careerHistory || []) : [],
+    ideologyStances: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).ideologyStances || []) : [],
+    recentNews: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).recentNews || []) : [],
     assetDetails: {
       movable: dbCandidate.totalAssets,
       immovable: "See Breakdown"
     },
-    currentPosition: dbCandidate.currentPosition || dbCandidate.profession,
-    statusBadge: dbCandidate.statusBadge || "Candidate",
-    yearsInPolitics: dbCandidate.yearsInPolitics || 0,
-    votingRecord: safeParse(dbCandidate.performance, {}).votingRecord || "Data Not Available",
+    currentPosition: dbCandidate.profession,
+    statusBadge: "Candidate",
+    yearsInPolitics: 0,
+    votingRecord: "Data Not Available",
     educationDetails: dbCandidate.education,
-    familyBackground: safeParse(dbCandidate.performance, {}).familyBackground || "Data Not Available",
-    disqualifications: dbCandidate.disqualifications || "None",
-    totalIncomeDeclared: dbCandidate.totalIncomeDeclared || "Data Not Available",
-    incomeSources: dbCandidate.incomeSources || "Data Not Available",
-    govtContracts: dbCandidate.govtContracts || "Data Not Available",
-    panGiven: dbCandidate.panGiven,
-    itrFiled: dbCandidate.itrFiled,
-    verified: dbCandidate.verified,
+    familyBackground: "Data Not Available"
   };
 
 
@@ -234,37 +227,46 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
               <TrendingUp className="w-5 h-5 text-primary" /> Legislative Performance
             </h2>
             <div className="grid md:grid-cols-4 gap-4">
-              {[
-                { label: "Attendance", key: "attendance", icon: Clock },
-                { label: "Questions Asked", key: "questionsAsked", icon: HelpCircle },
-                { label: "Bills Introduced", key: "billsIntroduced", icon: FileText },
-                { label: "Funds Utilized", key: "fundsUtilized", icon: Landmark }
-              ].map((metric) => {
-                const data = (candidate.performanceMetrics as any)[metric.key];
-                const match = data.value.match(/(\d+)%/);
-                const percent = match ? parseInt(match[1]) : null;
-                
-                return (
-                  <div key={metric.key} className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between group hover:border-primary/30 transition-colors">
-                    <div>
-                      <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">{metric.label}</p>
-                      <p className="text-xl font-bold text-foreground">{data.value}</p>
-                      {percent !== null && (
-                        <div className="w-full bg-muted rounded-full h-1.5 mt-2 overflow-hidden">
-                          <div 
-                            className="bg-primary h-1.5 rounded-full transition-all duration-1000 ease-out" 
-                            style={{ width: `${percent}%` }}
-                          ></div>
-                        </div>
-                      )}
-                    </div>
-                    <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
-                      Source: {data.source}<br/>
-                      (Updated: {data.lastUpdated})
-                    </div>
-                  </div>
-                );
-              })}
+              <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between">
+                <div>
+                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Attendance</p>
+                  <p className="text-xl font-bold text-foreground">{candidate.performanceMetrics.attendance.value}</p>
+                </div>
+                <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+                  Source: {candidate.performanceMetrics.attendance.source}<br/>
+                  (Updated: {candidate.performanceMetrics.attendance.lastUpdated})
+                </div>
+              </div>
+              <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between">
+                <div>
+                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Questions Asked</p>
+                  <p className="text-xl font-bold text-foreground">{candidate.performanceMetrics.questionsAsked.value}</p>
+                </div>
+                <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+                  Source: {candidate.performanceMetrics.questionsAsked.source}<br/>
+                  (Updated: {candidate.performanceMetrics.questionsAsked.lastUpdated})
+                </div>
+              </div>
+              <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between">
+                <div>
+                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Bills Introduced</p>
+                  <p className="text-xl font-bold text-foreground">{candidate.performanceMetrics.billsIntroduced.value}</p>
+                </div>
+                <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+                  Source: {candidate.performanceMetrics.billsIntroduced.source}<br/>
+                  (Updated: {candidate.performanceMetrics.billsIntroduced.lastUpdated})
+                </div>
+              </div>
+              <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm text-center flex flex-col justify-between">
+                <div>
+                  <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Funds Utilized</p>
+                  <p className="text-xl font-bold text-foreground">{candidate.performanceMetrics.fundsUtilized.value}</p>
+                </div>
+                <div className="mt-3 text-[10px] text-muted-foreground uppercase font-medium">
+                  Source: {candidate.performanceMetrics.fundsUtilized.source}<br/>
+                  (Updated: {candidate.performanceMetrics.fundsUtilized.lastUpdated})
+                </div>
+              </div>
             </div>
             {candidate.performanceMetrics.keyAchievements.length > 0 && (
               <div className="bg-card border border-border/50 rounded-xl p-5 shadow-sm mt-4">
@@ -315,20 +317,6 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
                     <p className="text-xl font-bold text-red-600">{candidate.electionHistory.losses}</p>
                   </div>
                 </div>
-                {candidate.electionHistory.electionsContested > 0 && (
-                  <div className="mt-6">
-                    <div className="flex justify-between text-[10px] uppercase font-bold text-muted-foreground mb-1.5">
-                      <span>Win Ratio</span>
-                      <span>{Math.round((candidate.electionHistory.wins / candidate.electionHistory.electionsContested) * 100)}%</span>
-                    </div>
-                    <div className="w-full bg-red-100 rounded-full h-2 overflow-hidden flex">
-                      <div 
-                        className="bg-green-500 h-full transition-all duration-1000 ease-out" 
-                        style={{ width: `${(candidate.electionHistory.wins / candidate.electionHistory.electionsContested) * 100}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                )}
               </div>
               <div className="bg-card border border-border/50 rounded-xl p-6 shadow-sm flex flex-col justify-center space-y-4">
                 <div className="flex justify-between items-center border-b border-border/50 pb-3">
@@ -531,91 +519,82 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
             </div>
           </section>
 
-          {/* Financial Assets & Liabilities */}
+          {/* Assets Summaries */}
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <Landmark className="w-5 h-5 text-primary" /> Financial Portfolio
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Movable Assets */}
-              <div className="bg-card border border-border/50 rounded-2xl p-6 shadow-sm flex flex-col">
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-bold mb-1">Movable Assets</p>
-                    <p className="text-2xl font-bold text-primary">{candidate.assetDetails.movable}</p>
-                  </div>
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <TrendingUp className="w-5 h-5 text-primary" />
-                  </div>
-                </div>
-                
-                <div className="space-y-3 flex-1">
+            <details className="group bg-card border border-border/50 rounded-xl overflow-hidden shadow-sm">
+              <summary className="flex items-center justify-between cursor-pointer p-5 font-semibold hover:bg-secondary/30 transition-colors">
+                <span className="flex items-center gap-2">View Detailed Financial Assets Breakdown</span>
+                <span className="text-primary text-sm group-open:hidden">Expand</span>
+                <span className="text-primary text-sm hidden group-open:block">Collapse</span>
+              </summary>
+              <div className="p-5 pt-0 border-t border-border/50 mt-2 space-y-8">
+                <div>
+                  <p className="font-bold text-foreground mb-3 flex justify-between">Movable Assets <span className="text-primary">{candidate.assetDetails.movable}</span></p>
                   {candidate.movableAssetsBreakdown.length > 0 ? (
-                    candidate.movableAssetsBreakdown.map((asset, idx) => (
-                      <div key={idx} className="flex justify-between items-center text-sm border-b border-border/30 pb-2 last:border-0">
-                        <span className="text-muted-foreground">{asset.type}</span>
-                        <span className="font-semibold text-foreground">{asset.value}</span>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-xs text-muted-foreground italic">No detailed movable assets breakdown available.</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Immovable Assets */}
-              <div className="bg-card border border-border/50 rounded-2xl p-6 shadow-sm flex flex-col">
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <p className="text-[#9CA3AF] text-xs uppercase tracking-wider font-bold mb-1">Immovable Assets</p>
-                    <p className="text-2xl font-bold text-indigo-600">{candidate.assetDetails.immovable}</p>
-                  </div>
-                  <div className="p-2 bg-indigo-50 rounded-lg">
-                    <Landmark className="w-5 h-5 text-indigo-500" />
-                  </div>
+                    <table className="w-full text-left">
+                      <thead className="bg-muted/50 border-b border-border/50 text-xs uppercase tracking-wider text-muted-foreground">
+                        <tr>
+                          <th className="px-5 py-2 font-semibold">Asset Description</th>
+                          <th className="px-5 py-2 font-semibold text-right">Declared Value</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/30 text-sm">
+                        {candidate.movableAssetsBreakdown.map((asset, idx) => (
+                          <tr key={idx} className="hover:bg-muted/20">
+                            <td className="px-5 py-2 font-medium text-secondary-foreground">{asset.type}</td>
+                            <td className="px-5 py-2 text-right font-bold">{asset.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  ) : <p className="text-muted-foreground text-sm">No specific breakdown.</p>}
                 </div>
                 
-                <div className="space-y-3 flex-1">
+                <div>
+                  <p className="font-bold text-foreground mb-3 flex justify-between">Immovable Assets <span className="text-primary">{candidate.assetDetails.immovable}</span></p>
                   {candidate.immovableAssetsBreakdown.length > 0 ? (
-                    candidate.immovableAssetsBreakdown.map((asset, idx) => (
-                      <div key={idx} className="flex justify-between items-center text-sm border-b border-border/30 pb-2 last:border-0">
-                        <span className="text-muted-foreground">{asset.type}</span>
-                        <span className="font-semibold text-foreground">{asset.value}</span>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-xs text-muted-foreground italic">No detailed immovable assets breakdown available.</p>
-                  )}
+                    <table className="w-full text-left">
+                      <thead className="bg-muted/50 border-b border-border/50 text-xs uppercase tracking-wider text-muted-foreground">
+                        <tr>
+                          <th className="px-5 py-2 font-semibold">Property Description</th>
+                          <th className="px-5 py-2 font-semibold text-right">Market Value</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/30 text-sm">
+                        {candidate.immovableAssetsBreakdown.map((asset, idx) => (
+                          <tr key={idx} className="hover:bg-muted/20">
+                            <td className="px-5 py-2 font-medium text-secondary-foreground">{asset.type}</td>
+                            <td className="px-5 py-2 text-right font-bold">{asset.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  ) : <p className="text-muted-foreground text-sm">No specific breakdown.</p>}
+                </div>
+                
+                <div>
+                  <p className="font-bold text-foreground mb-3 flex justify-between">Liabilities <span className="text-amber-600">{candidate.liabilities}</span></p>
+                  {candidate.liabilitiesBreakdown.length > 0 ? (
+                    <table className="w-full text-left">
+                      <thead className="bg-muted/50 border-b border-border/50 text-xs uppercase tracking-wider text-muted-foreground">
+                        <tr>
+                          <th className="px-5 py-2 font-semibold">Institution / Dues</th>
+                          <th className="px-5 py-2 font-semibold text-right">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/30 text-sm">
+                        {candidate.liabilitiesBreakdown.map((liability, idx) => (
+                          <tr key={idx} className="hover:bg-muted/20">
+                            <td className="px-5 py-2 font-medium text-secondary-foreground">{liability.type}</td>
+                            <td className="px-5 py-2 text-right font-bold text-amber-600">{liability.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  ) : <p className="text-muted-foreground text-sm">No specific breakdown.</p>}
                 </div>
               </div>
-            </div>
-
-            {/* Liabilities Highlight */}
-            {candidate.liabilities !== "₹0" && (
-              <div className="bg-amber-50/50 border border-amber-200/50 rounded-xl p-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-amber-100 rounded-lg text-amber-600">
-                    <Scale className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-amber-800 uppercase tracking-tight">Total Liabilities</p>
-                    <p className="text-lg font-bold text-amber-700">{candidate.liabilities}</p>
-                  </div>
-                </div>
-                <details className="group">
-                  <summary className="text-xs font-bold text-amber-600 cursor-pointer hover:underline list-none">View Details</summary>
-                  <div className="absolute right-0 mt-2 w-64 bg-white border border-amber-200 rounded-lg p-3 shadow-xl z-10 hidden group-open:block">
-                     {candidate.liabilitiesBreakdown.map((l, i) => (
-                       <div key={i} className="flex justify-between text-[10px] mb-1">
-                         <span>{l.type}</span>
-                         <span className="font-bold">{l.value}</span>
-                       </div>
-                     ))}
-                  </div>
-                </details>
-              </div>
-            )}
+            </details>
           </section>
 
           {/* News & Sentiment */}

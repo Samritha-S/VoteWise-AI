@@ -22,29 +22,17 @@ model Candidate {
   totalLiabilities     String
   assetBreakdown       String   
   liabilityBreakdown   String   
-  totalIncomeDeclared  String?
-  incomeSources        String?
-  govtContracts        String?
-  panGiven             Boolean  @default(false)
-  itrFiled             Boolean  @default(false)
   
   criminalCases        Int
   seriousCriminalCases Int
   caseDetails          String   
-  disqualifications    String?  @default("None")
   
   performance          String?  
   electionHistory      String?  
   scamsOrControversies String?  
   
-  currentPosition      String?
-  yearsInPolitics      Int?
-  statusBadge          String?  // Incumbent / Challenger
-  
   sourceUrl            String
   confidence           String
-  verified             Boolean  @default(false)
-  lastVerifiedAt       DateTime?
 
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt

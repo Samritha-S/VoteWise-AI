@@ -22,25 +22,14 @@ async function main() {
         totalLiabilities: c.liabilities || "0",
         assetBreakdown: JSON.stringify({ movable: c.movableAssetsBreakdown, immovable: c.immovableAssetsBreakdown }),
         liabilityBreakdown: JSON.stringify(c.liabilitiesBreakdown || []),
-        totalIncomeDeclared: (c as any).totalIncomeDeclared || "Data Not Available",
-        incomeSources: (c as any).incomeSources || "Data Not Available",
-        govtContracts: (c as any).govtContracts || "Data Not Available",
-        panGiven: (c as any).panGiven || false,
-        itrFiled: (c as any).itrFiled || false,
         criminalCases: c.cases || 0,
         seriousCriminalCases: 0,
         caseDetails: JSON.stringify(c.criminalCasesBreakdown || []),
-        disqualifications: (c as any).disqualifications || "None",
         performance: c.performanceMetrics ? JSON.stringify(c.performanceMetrics) : null,
         electionHistory: c.electionHistory ? JSON.stringify(c.electionHistory) : null,
         scamsOrControversies: (c as any).pastControversies ? JSON.stringify((c as any).pastControversies) : null,
-        currentPosition: (c as any).currentPosition || c.profession,
-        yearsInPolitics: (c as any).yearsInPolitics || 0,
-        statusBadge: (c as any).statusBadge || "Candidate",
         sourceUrl: c.source || "https://affidavit.eci.gov.in/",
-        confidence: c.confidence || "Medium",
-        verified: (c as any).confidence === "High",
-        lastVerifiedAt: new Date()
+        confidence: c.confidence || "Medium"
       },
       create: {
         id: c.id.toString(),
@@ -56,25 +45,14 @@ async function main() {
         totalLiabilities: c.liabilities || "0",
         assetBreakdown: JSON.stringify({ movable: c.movableAssetsBreakdown, immovable: c.immovableAssetsBreakdown }),
         liabilityBreakdown: JSON.stringify(c.liabilitiesBreakdown || []),
-        totalIncomeDeclared: (c as any).totalIncomeDeclared || "Data Not Available",
-        incomeSources: (c as any).incomeSources || "Data Not Available",
-        govtContracts: (c as any).govtContracts || "Data Not Available",
-        panGiven: (c as any).panGiven || false,
-        itrFiled: (c as any).itrFiled || false,
         criminalCases: c.cases || 0,
         seriousCriminalCases: 0,
         caseDetails: JSON.stringify(c.criminalCasesBreakdown || []),
-        disqualifications: (c as any).disqualifications || "None",
         performance: c.performanceMetrics ? JSON.stringify(c.performanceMetrics) : null,
         electionHistory: c.electionHistory ? JSON.stringify(c.electionHistory) : null,
         scamsOrControversies: (c as any).pastControversies ? JSON.stringify((c as any).pastControversies) : null,
-        currentPosition: (c as any).currentPosition || c.profession,
-        yearsInPolitics: (c as any).yearsInPolitics || 0,
-        statusBadge: (c as any).statusBadge || "Candidate",
         sourceUrl: c.source || "https://affidavit.eci.gov.in/",
-        confidence: c.confidence || "Medium",
-        verified: (c as any).confidence === "High",
-        lastVerifiedAt: new Date()
+        confidence: c.confidence || "Medium"
       }
     });
   }
