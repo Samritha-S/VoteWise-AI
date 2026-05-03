@@ -1,9 +1,31 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
+import { z } from "zod";
+
+const chatSchema = z.object({
+  message: z.string().min(1).max(2000),
+  history: z.array(z.object({
+    role: z.enum(["user", "assistant"]),
+    content: z.string()
+  })),
+  context: z.object({
+    age: z.number().nullable().optional(),
+    state: z.string().optional(),
+    voterStatus: z.string().optional(),
+    language: z.string().optional()
+  })
+});
 
 export async function POST(req: Request) {
   try {
-    const { message, history, context } = await req.json();
+    const body = await req.json();
+    const parsed = chatSchema.safeParse(body);
+    
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid payload", details: parsed.error.issues }, { status: 400 });
+    }
+
+    const { message, history, context } = parsed.data;
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {

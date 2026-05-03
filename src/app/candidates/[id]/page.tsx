@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { 
   ArrowLeft, 
   ShieldCheck, 
@@ -49,9 +50,11 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
         {/* Profile Card */}
         <div className="bg-card rounded-2xl p-8 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-border/50">
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            <img 
+            <Image 
               src={candidate.photo} 
               alt={candidate.name} 
+              width={160}
+              height={160}
               className="w-40 h-40 rounded-xl object-cover shadow-sm bg-muted shrink-0"
               referrerPolicy="no-referrer"
             />

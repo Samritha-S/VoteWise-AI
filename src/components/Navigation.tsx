@@ -47,8 +47,10 @@ export default function Navigation() {
       <button 
         className="md:hidden fixed top-4 right-4 z-50 p-2 bg-card rounded-full shadow-lg border border-border"
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Close menu" : "Open menu"}
+        aria-expanded={isOpen}
       >
-        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {isOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
       </button>
 
       {/* Sidebar */}
@@ -66,7 +68,7 @@ export default function Navigation() {
           </Link>
         </div>
 
-        <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+        <nav aria-label="Main Navigation" className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
           {(pathname.startsWith('/admin') ? adminNavItems : userNavItems).map((item) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
@@ -99,7 +101,7 @@ export default function Navigation() {
               </Link>
             );
           })}
-        </div>
+        </nav>
 
         {!pathname.startsWith('/admin') && (
           <div className="p-4 m-4 rounded-xl bg-secondary/50 border border-border/50 backdrop-blur-md">

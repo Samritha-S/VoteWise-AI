@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { 
   Search, 
   Filter, 
@@ -83,7 +84,7 @@ export default function CandidatesPage() {
       <div className="space-y-4">
         {searchTerm.trim().length < 2 ? (
           <div className="py-24 flex flex-col items-center justify-center border border-border/50 rounded-2xl bg-card shadow-sm text-center">
-            <img src="/search_graphic.png" alt="Search Database" className="w-64 h-64 object-contain mb-6 opacity-90" />
+            <Image src="/search_graphic.png" alt="Search Database" width={256} height={256} className="w-64 h-64 object-contain mb-6 opacity-90" />
             <h2 className="text-2xl font-bold text-foreground mb-2">{t.candidates_page.searchTitle}</h2>
             <p className="text-muted-foreground text-lg max-w-md">
               {t.candidates_page.searchDesc}
@@ -108,9 +109,11 @@ export default function CandidatesPage() {
               >
                 <div className="p-6 flex flex-col md:flex-row md:items-center gap-6 justify-between">
                   <div className="flex items-center gap-5">
-                    <img 
+                    <Image 
                       src={candidate.photo} 
                       alt={candidate.name} 
+                      width={80}
+                      height={80}
                       className="w-16 h-16 md:w-20 md:h-20 rounded-xl object-cover border border-border/50 bg-muted shrink-0"
                       referrerPolicy="no-referrer"
                     />

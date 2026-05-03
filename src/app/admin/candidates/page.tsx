@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Database, Plus, Trash2, Edit, Search, Upload } from "lucide-react";
 
 export default function CandidatesData() {
@@ -79,7 +80,7 @@ export default function CandidatesData() {
                 filtered.map(c => (
                   <tr key={c.id} className="hover:bg-muted/30 transition-colors">
                     <td className="px-6 py-4 font-medium flex items-center gap-3">
-                      <img src={c.photo} alt="" className="w-8 h-8 rounded-full object-cover border border-border bg-muted" />
+                      <Image src={c.photo} alt="" width={32} height={32} className="w-8 h-8 rounded-full object-cover border border-border bg-muted" />
                       {c.name}
                     </td>
                     <td className="px-6 py-4">

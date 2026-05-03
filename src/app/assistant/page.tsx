@@ -103,7 +103,7 @@ export default function AssistantPage() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto pr-4 space-y-6">
+      <div className="flex-1 overflow-y-auto pr-4 space-y-6" aria-live="polite" role="log">
         <AnimatePresence initial={false}>
           {messages.map((msg) => (
             <motion.div
@@ -173,11 +173,13 @@ export default function AssistantPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={t.assistant.placeholder}
+            aria-label={t.assistant.placeholder}
             className="w-full p-4 pr-16 rounded-2xl border border-border bg-card shadow-sm focus:ring-2 focus:ring-primary focus:outline-none transition-shadow"
           />
           <button
             type="submit"
             disabled={!input.trim() || isTyping}
+            aria-label="Send message"
             className="absolute right-2 p-2 bg-primary text-primary-foreground rounded-xl disabled:opacity-50 transition-colors hover:bg-primary/90"
           >
             <Send className="w-5 h-5" />
