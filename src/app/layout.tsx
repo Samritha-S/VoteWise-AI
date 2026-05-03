@@ -6,6 +6,8 @@ import ScreenReaderAnnouncer from "@/components/ScreenReaderAnnouncer";
 import { AppProvider } from "@/context/AppContext";
 import OnboardingModal from "@/components/OnboardingModal";
 
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,6 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="light h-full antialiased">
       <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground`}>
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
         <AppProvider>
           <div className="flex h-screen overflow-hidden">
             <ScreenReaderAnnouncer />

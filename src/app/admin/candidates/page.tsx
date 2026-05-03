@@ -115,10 +115,16 @@ export default function CandidatesData() {
           <p className="text-muted-foreground mt-1">Manage and verify electoral candidates database.</p>
         </div>
         <div className="flex gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 bg-secondary text-foreground rounded-lg font-medium hover:bg-secondary/80">
+          <button 
+            aria-label="Import candidates from CSV"
+            className="flex items-center gap-2 px-4 py-2 bg-secondary text-foreground rounded-lg font-medium hover:bg-secondary/80"
+          >
             <Upload className="w-4 h-4" /> Import CSV
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90">
+          <button 
+            aria-label="Add new candidate record"
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90"
+          >
             <Plus className="w-4 h-4" /> Add Record
           </button>
         </div>
@@ -131,6 +137,7 @@ export default function CandidatesData() {
             <input 
               type="text" 
               placeholder="Search records..." 
+              aria-label="Search candidates"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-9 pr-4 py-2 rounded-lg border border-border bg-background focus:ring-1 focus:ring-primary focus:outline-none text-sm"

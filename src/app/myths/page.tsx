@@ -80,7 +80,16 @@ export default function MythBusterPage() {
   const [reportDetails, setReportDetails] = useState("");
   const [reportQuestion, setReportQuestion] = useState("");
 
-  const [liveMyths, setLiveMyths] = useState<any[]>([]);
+  interface Myth {
+    id: string;
+    claim: string;
+    fact: string | null;
+    source: string | null;
+    link: string | null;
+    status: string;
+  }
+
+  const [liveMyths, setLiveMyths] = useState<Myth[]>([]);
 
   React.useEffect(() => {
     fetch("/api/myths")
@@ -253,12 +262,53 @@ export default function MythBusterPage() {
                     <div className="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider mb-1">{t.myths.fact}</div>
                     <p className="text-foreground md:text-lg">{item.fact}</p>
                     
-                    <div className="mt-4 pt-4 border-t border-green-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                      <span className="text-muted-foreground">{t.myths.source} <span className="font-medium text-foreground">{item.source}</span></span>
-                      <a href={item.link} className="inline-flex items-center gap-1 text-primary hover:underline font-medium">
-                        {t.myths.verifySource} <ExternalLink className="w-3 h-3" />
-                      </a>
+                    <div className="mt-4 pt-4 border-t border-green-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm">
+                      <div className="flex flex-col gap-1">
+                        <span className="text-muted-foreground">{t.myths.source} <span className="font-medium text-foreground">{item.source}</span></span>
+                        <a href={item.link} className="inline-flex items-center gap-1 text-primary hover:underline font-medium">
+                          {t.myths.verifySource} <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                      
+                      <button 
+                        onClick={async () => {
+                          const btn = document.getElementById(`gemini-btn-${item.id}`);
+                          if (btn) btn.innerText = "Consulting Gemini...";
+                          try {
+                            const res = await fetch('/api/myths/fact-check', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ myth: item.myth, fact: item.fact })
+                            });
+                            const data = await res.json();
+                            if (data.explanation) {
+                              const expDiv = document.getElementById(`gemini-exp-${item.id}`);
+                              if (expDiv) {
+                                expDiv.innerHTML = `<div class="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-xl animate-in fade-in slide-in-from-top-2">
+                                  <div class="flex items-center gap-2 mb-2 text-primary font-bold">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                    Gemini Deep Dive
+                                  </div>
+                                  <div class="text-sm text-foreground/80 leading-relaxed">${data.explanation.replace(/\n/g, '<br/>')}</div>
+                                </div>`;
+                              }
+                            }
+                          } catch (e) {
+                            console.error(e);
+                          } finally {
+                            if (btn) btn.innerText = "Gemini Deep Dive";
+                          }
+                        }}
+                        id={`gemini-btn-${item.id}`}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary hover:text-white transition-all font-semibold"
+                      >
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        Gemini Deep Dive
+                      </button>
                     </div>
+                    <div id={`gemini-exp-${item.id}`}></div>
                   </div>
                 </div>
               </div>

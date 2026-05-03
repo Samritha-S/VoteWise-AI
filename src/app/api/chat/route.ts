@@ -14,9 +14,9 @@ export async function POST(req: Request) {
     const { message, history, context } = parsed.data;
 
     const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
+    if (!apiKey || apiKey === "YOUR_NEW_KEY_HERE") {
       return NextResponse.json(
-        { error: "GEMINI_API_KEY is not configured in .env.local" },
+        { error: "GEMINI_API_KEY is not configured. Please add a valid key from Google AI Studio to your .env.local file." },
         { status: 500 }
       );
     }

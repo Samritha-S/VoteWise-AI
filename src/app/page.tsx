@@ -18,6 +18,7 @@ import {
 import { useAppContext } from "@/context/AppContext";
 import { useTranslation } from "@/lib/i18n";
 import OnboardingModal from "@/components/OnboardingModal";
+import DocumentVerification from "@/components/DocumentVerification";
 import Link from "next/link";
 
 import AuthPage from "./auth/page";
@@ -303,6 +304,10 @@ export default function Dashboard() {
                 <div className="text-xs text-muted-foreground">{t.journey.quickLinkCards.mythBuster.desc}</div>
               </div>
             </Link>
+          </div>
+
+          <div className="mt-8">
+            <DocumentVerification />
           </div>
         </motion.div>
       </div>

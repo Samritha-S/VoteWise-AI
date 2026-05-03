@@ -40,10 +40,68 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
     );
   }
 
-  const safeParse = (str: string | null | undefined, fallback: any = []) => {
+interface CandidateDetail {
+  id: string;
+  name: string;
+  party: string;
+  constituency: string;
+  state: string;
+  photo: string;
+  age: number;
+  education: string;
+  profession: string;
+  totalAssets: string;
+  totalLiabilities: string;
+  assetBreakdown: string;
+  liabilityBreakdown: string;
+  criminalCases: number;
+  seriousCriminalCases: number;
+  caseDetails: string;
+  performance: string | null;
+  electionHistory: string | null;
+  scamsOrControversies: string | null;
+  familyBackground: string | null;
+  spouseProfession: string | null;
+  totalIncomeDeclared: string | null;
+  panGiven: boolean;
+  itrFiled: boolean;
+  incomeSources: string | null;
+  govtContracts: string | null;
+  educationDetails: string | null;
+  careerHistory: string | null;
+  ideologyStances: string | null;
+  disqualifications: string | null;
+  statusBadge: string | null;
+  votingRecord: string | null;
+  yearsInPolitics: string | null;
+  sourceUrl: string;
+  confidence: string;
+  updatedAt: Date;
+}
+
+export default async function CandidateDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const unwrappedParams = await params;
+  const id = unwrappedParams.id;
+  
+  const dbCandidate = await prisma.candidate.findUnique({
+    where: { id }
+  }) as CandidateDetail | null;
+
+  if (!dbCandidate) {
+    return (
+      <div className="min-h-screen bg-background p-6 md:p-10 max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
+        <h1 className="text-3xl font-semibold text-foreground mb-4">Candidate Not Found</h1>
+        <Link href="/candidates" className="text-primary hover:text-primary/80 font-medium transition-colors">
+          &larr; Return to Transparency Hub
+        </Link>
+      </div>
+    );
+  }
+
+  const safeParse = <T,>(str: string | null | undefined, fallback: T): T => {
     if (!str) return fallback;
     try {
-      return JSON.parse(str);
+      return JSON.parse(str) as T;
     } catch (e) {
       console.error(`Error parsing candidate field:`, e);
       return fallback;
@@ -63,19 +121,19 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
       questionsAsked: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
       billsIntroduced: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
       fundsUtilized: { value: "N/A", source: "N/A", lastUpdated: "N/A" },
-      keyAchievements: []
+      keyAchievements: [] as string[]
     }),
     electionHistory: safeParse(dbCandidate.electionHistory, {
       electionsContested: 0, wins: 0, losses: 0, latestVoteShare: "N/A", latestMargin: "N/A"
     }),
-    movableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, []),
-    immovableAssetsBreakdown: [], // SQLite schema doesn't have separate immovable field
-    liabilitiesBreakdown: safeParse(dbCandidate.liabilityBreakdown, []),
-    criminalCasesBreakdown: safeParse(dbCandidate.caseDetails, []),
-    pastControversies: safeParse(dbCandidate.scamsOrControversies, []),
-    careerHistory: safeParse(dbCandidate.careerHistory, []),
-    ideologyStances: safeParse(dbCandidate.ideologyStances, []),
-    recentNews: dbCandidate.performance ? (safeParse(dbCandidate.performance, {}).recentNews || []) : [],
+    movableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, { movable: [] as any[], immovable: [] as any[] }).movable,
+    immovableAssetsBreakdown: safeParse(dbCandidate.assetBreakdown, { movable: [] as any[], immovable: [] as any[] }).immovable,
+    liabilitiesBreakdown: safeParse(dbCandidate.liabilityBreakdown, [] as any[]),
+    criminalCasesBreakdown: safeParse(dbCandidate.caseDetails, [] as any[]),
+    pastControversies: safeParse(dbCandidate.scamsOrControversies, [] as any[]),
+    careerHistory: safeParse(dbCandidate.careerHistory, [] as any[]),
+    ideologyStances: safeParse(dbCandidate.ideologyStances, [] as any[]),
+    recentNews: dbCandidate.performance ? (safeParse(dbCandidate.performance, { recentNews: [] as any[] }).recentNews || []) : [],
     assetDetails: {
       movable: dbCandidate.totalAssets,
       immovable: "See Breakdown"
@@ -83,7 +141,7 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
     currentPosition: dbCandidate.profession,
     statusBadge: dbCandidate.statusBadge || "Candidate",
     disqualifications: dbCandidate.disqualifications || "None",
-    yearsInPolitics: dbCandidate.yearsInPolitics || 0,
+    yearsInPolitics: dbCandidate.yearsInPolitics || "0 yrs",
     votingRecord: dbCandidate.votingRecord || "Data Not Available",
     educationDetails: dbCandidate.educationDetails || dbCandidate.education,
     familyBackground: dbCandidate.familyBackground || "Data Not Available",
@@ -100,9 +158,12 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary">
       <div className="max-w-4xl mx-auto p-6 md:p-12 space-y-12">
         
-        {/* Navigation */}
-        <nav>
-          <Link href="/candidates" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium">
+        <nav aria-label="Breadcrumb">
+          <Link 
+            href="/candidates" 
+            aria-label="Back to transparency hub directory"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md outline-none"
+          >
             <ArrowLeft className="w-4 h-4" /> Back to Directory
           </Link>
         </nav>
@@ -112,9 +173,10 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
             <Image 
               src={candidate.photo || "/candidates/default.jpg"} 
-              alt={candidate.name || "Candidate"} 
+              alt={`Official photo of ${candidate.name}`} 
               width={160}
               height={160}
+              priority
               className="w-40 h-40 rounded-xl object-cover shadow-sm bg-muted shrink-0"
               referrerPolicy="no-referrer"
             />
@@ -156,15 +218,27 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2 border-t border-border/50">
-                <div className="flex flex-col mt-2">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-4 border-t border-border/50">
+                <div className="flex flex-col">
                   <span className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Party</span>
                   <span className="font-medium text-sm">{candidate.party}</span>
                 </div>
-                <div className="w-px h-8 bg-border hidden md:block mt-2"></div>
-                <div className="flex flex-col mt-2">
+                <div className="w-px h-8 bg-border hidden md:block"></div>
+                <div className="flex flex-col">
                   <span className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Constituency</span>
                   <span className="font-medium text-sm">{candidate.constituency}, {candidate.state}</span>
+                </div>
+                <div className="w-px h-8 bg-border hidden md:block"></div>
+                <div className="flex flex-col">
+                  <span className="text-[#9CA3AF] text-xs uppercase tracking-wider font-semibold mb-1">Verification</span>
+                  <a 
+                    href={`https://www.google.com/search?q=${encodeURIComponent(candidate.name + ' ' + candidate.constituency + ' affidavit 2024')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-primary hover:underline text-sm font-medium"
+                  >
+                    Google Search Affidavit <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -174,7 +248,7 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
         {/* Disqualification Alert Removed */}
 
         {/* Quick Stats Grid */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <section aria-label="Quick statistics overview" className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-card rounded-xl p-5 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)] border border-border/50 flex flex-col justify-between">
             <div>
               <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2 flex items-center gap-1.5"><Landmark className="w-3.5 h-3.5" /> Total Assets</p>
@@ -242,6 +316,49 @@ export default async function CandidateDetailPage({ params }: { params: Promise<
 
         {/* Main Sections */}
         <div className="space-y-12">
+          
+          {/* Location & Map Section */}
+        <section aria-label="Constituency Location" className="bg-card rounded-2xl p-8 shadow-sm border border-border/50">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
+              <Landmark className="w-5 h-5" />
+            </div>
+            <h2 className="text-2xl font-bold text-foreground">Constituency Geography</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="md:col-span-1 space-y-4">
+              <div className="p-4 bg-muted/30 rounded-xl border border-border/50">
+                <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-1">Constituency</p>
+                <p className="font-bold text-lg text-foreground">{candidate.constituency}</p>
+                <p className="text-muted-foreground text-sm">{candidate.state}, India</p>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Visualizing the electoral boundaries and key locations within the {candidate.constituency} constituency using Google Maps integration.
+              </p>
+            </div>
+            
+            <div className="md:col-span-2 rounded-xl overflow-hidden border border-border/50 h-[300px] shadow-inner relative group">
+              <iframe
+                title={`Map of ${candidate.constituency} constituency`}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}&q=${encodeURIComponent(candidate.constituency + ', ' + candidate.state + ', India')}&zoom=10`}
+              ></iframe>
+              {!process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY && (
+                <div className="absolute inset-0 bg-muted/80 flex items-center justify-center text-center p-6 backdrop-blur-[2px]">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Connect your <span className="text-primary font-bold">Google Maps API Key</span> in .env.local to enable interactive constituency visualization.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
           
           {/* Performance Metrics */}
           <section className="space-y-4">
