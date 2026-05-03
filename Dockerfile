@@ -19,11 +19,13 @@ COPY . .
 
 # Next.js telemetry is disabled
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV DATABASE_URL="file:./prisma/dev.db"
 
-# Generate prisma client if needed
+# Generate prisma client and initialize DB
 RUN npx prisma generate
+RUN npx prisma db push --accept-data-loss
+RUN npx prisma db seed
 
-ENV DATABASE_URL="file:./dev.db"
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -32,6 +34,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV DATABASE_URL="file:./prisma/dev.db"
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -46,6 +49,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
+
+# Ensure the database file is writable by the nextjs user
+RUN chown -R nextjs:nodejs /app/prisma
 
 USER nextjs
 

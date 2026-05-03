@@ -16,9 +16,11 @@ function safeParse(str: string | null | undefined, fallback: any = []) {
 
 export async function GET() {
   try {
+    console.log("Fetching candidates from DB...");
     const candidates = await prisma.candidate.findMany({
       orderBy: { name: 'asc' }
     });
+    console.log(`Found ${candidates.length} candidates.`);
     
     // Parse JSON strings back to objects for the frontend
     const formatted = candidates.map(c => ({
@@ -26,14 +28,18 @@ export async function GET() {
       assetBreakdown: safeParse(c.assetBreakdown),
       liabilityBreakdown: safeParse(c.liabilityBreakdown),
       caseDetails: safeParse(c.caseDetails),
-      performance: safeParse(c.performance, undefined),
-      electionHistory: safeParse(c.electionHistory, undefined),
-      scamsOrControversies: safeParse(c.scamsOrControversies, undefined),
+      performance: safeParse(c.performance, null),
+      electionHistory: safeParse(c.electionHistory, null),
+      scamsOrControversies: safeParse(c.scamsOrControversies, null),
     }));
 
     return NextResponse.json(formatted);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to fetch candidates:", error);
-    return NextResponse.json({ error: "Failed to fetch candidates" }, { status: 500 });
+    return NextResponse.json({ 
+      error: "Failed to fetch candidates", 
+      details: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    }, { status: 500 });
   }
 }

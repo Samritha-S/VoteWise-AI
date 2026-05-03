@@ -23,12 +23,32 @@ export default function CandidatesData() {
     fetch('/api/candidates')
       .then(res => res.json())
       .then(data => {
-        setCandidates(data);
+        if (Array.isArray(data)) {
+          setCandidates(data);
+        } else {
+          console.error("Data is not an array:", data);
+          setCandidates([]);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Fetch error:", err);
+        setCandidates([]);
         setLoading(false);
       });
   }, []);
 
-  const filtered = candidates.filter(c => c.name.toLowerCase().includes(search.toLowerCase()) || c.party.toLowerCase().includes(search.toLowerCase()));
+  const filtered = Array.isArray(candidates) 
+    ? candidates.filter(c => 
+        (c.name?.toLowerCase() || "").includes(search.toLowerCase()) || 
+        (c.party?.toLowerCase() || "").includes(search.toLowerCase())
+      )
+    : [];
+
+  const getPhotoUrl = (photo: string) => {
+    if (!photo || photo === "" || photo === "null") return "https://via.placeholder.com/150?text=Candidate";
+    return photo;
+  };
 
   return (
     <div className="min-h-screen bg-background p-6 md:p-12 max-w-6xl mx-auto space-y-8 text-foreground">
@@ -90,7 +110,7 @@ export default function CandidatesData() {
                 filtered.map(c => (
                   <tr key={c.id} className="hover:bg-muted/30 transition-colors">
                     <td className="px-6 py-4 font-medium flex items-center gap-3">
-                      <Image src={c.photo} alt="" width={32} height={32} className="w-8 h-8 rounded-full object-cover border border-border bg-muted" />
+                      <Image src={getPhotoUrl(c.photo)} alt="" width={32} height={32} className="w-8 h-8 rounded-full object-cover border border-border bg-muted" />
                       {c.name}
                     </td>
                     <td className="px-6 py-4">
