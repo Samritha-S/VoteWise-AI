@@ -32,6 +32,16 @@ export default function Dashboard() {
   
   const t = useTranslation(userData.language);
 
+  // Dynamic date calculation for "Tomorrow"
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const formattedDate = tomorrow.toLocaleDateString(userData.language === "English" ? "en-US" : "hi-IN", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+  const tomorrowDay = tomorrow.getDate();
+
   // "What Should I Do Next?" Engine Logic
   const nextAction = useMemo(() => {
     if (!userData.onboardingComplete) return { text: t.journey.statusMessages.completeProfile, link: "#", type: "info" };
@@ -122,14 +132,14 @@ export default function Dashboard() {
               {t.journey.pollingTomorrow}
             </h1>
             <p className="text-indigo-100 text-lg font-medium opacity-90">
-              May 4, 2026 • 7:00 AM - 6:00 PM
+              {formattedDate} • 7:00 AM - 6:00 PM
             </p>
           </div>
           
           <div className="flex items-center gap-6">
             <div className="flex flex-col items-center">
               <div className="w-20 h-24 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl flex flex-col items-center justify-center">
-                <span className="text-4xl font-black">1</span>
+                <span className="text-4xl font-black">{tomorrowDay}</span>
                 <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">{t.journey.dayLeft}</span>
               </div>
             </div>
