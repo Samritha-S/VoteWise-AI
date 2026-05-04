@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppContext, VoterStatus } from "@/context/AppContext";
 import { useTranslation } from "@/lib/i18n";
+import { usePathname } from "next/navigation";
 import { ChevronRight, ShieldCheck, MapPin } from "lucide-react";
 
 const languages = [
@@ -38,6 +39,7 @@ export default function OnboardingModal() {
 
   const t = useTranslation(formData.language);
 
+  const pathname = usePathname() || "";
   const isPublicPage = pathname.includes('/candidates') || pathname.includes('/assistant') || pathname.includes('/myths');
   
   if (!isLoaded || userData.onboardingComplete || isPublicPage) return null;
