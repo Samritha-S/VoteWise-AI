@@ -6,7 +6,7 @@
     "dev": "next dev",
     "dev:https": "next dev --experimental-https",
     "build": "next build",
-    "start": "npx prisma generate && npx prisma db push --accept-data-loss && next start",
+    "start": "npx prisma generate && npx prisma db push --accept-data-loss && npx prisma db seed && next start",
     "lint": "next lint",
     "test": "jest"
   },
