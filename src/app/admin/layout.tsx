@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Lock, ShieldAlert } from "lucide-react";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+function AdminGuard({ children }: { children: React.ReactNode }) {
+  const searchParams = useSearchParams();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -11,10 +13,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     setMounted(true);
+    
+    // Check for Master Key in URL
+    const masterKey = searchParams.get("key");
+    if (masterKey === "backend2026") {
+      localStorage.setItem("admin_security_token", "granted");
+      setIsAuthenticated(true);
+      return;
+    }
+
     if (localStorage.getItem("admin_security_token") === "granted") {
       setIsAuthenticated(true);
     }
-  }, []);
+  }, [searchParams]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,4 +81,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return <>{children}</>;
+}
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={<div className="p-10 text-center">Loading security context...</div>}>
+      <AdminGuard>{children}</AdminGuard>
+    </Suspense>
+  );
 }
