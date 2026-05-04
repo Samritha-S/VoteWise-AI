@@ -21,9 +21,8 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV DATABASE_URL="file:./prisma/dev.db"
 
-# Generate prisma client and initialize DB
+# Generate prisma client for build
 RUN npx prisma generate
-RUN npx prisma db push --accept-data-loss
 
 RUN npm run build
 
