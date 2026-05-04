@@ -1,7 +1,7 @@
-FROM node:20-alpine
+FROM node:20-slim
 
 # Install necessary system libraries for Prisma and SSL
-RUN apk add --no-cache openssl openssl1.1-compat libc6-compat
+RUN apt-get update -y && apt-get install -y openssl
 
 WORKDIR /app
 
