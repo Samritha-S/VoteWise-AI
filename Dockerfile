@@ -24,7 +24,6 @@ ENV DATABASE_URL="file:./prisma/dev.db"
 # Generate prisma client and initialize DB
 RUN npx prisma generate
 RUN npx prisma db push --accept-data-loss
-RUN npx prisma db seed
 
 RUN npm run build
 
