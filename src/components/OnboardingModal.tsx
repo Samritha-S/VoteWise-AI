@@ -38,10 +38,9 @@ export default function OnboardingModal() {
 
   const t = useTranslation(formData.language);
 
-  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
-  const isCandidatePage = pathname.includes('/candidates');
-
-  if (!isLoaded || userData.onboardingComplete || isCandidatePage) return null;
+  const isPublicPage = pathname.includes('/candidates') || pathname.includes('/assistant') || pathname.includes('/myths');
+  
+  if (!isLoaded || userData.onboardingComplete || isPublicPage) return null;
 
   const handleNext = () => {
     if (step < 5) setStep(step + 1);
