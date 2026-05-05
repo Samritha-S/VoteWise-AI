@@ -19,6 +19,7 @@ ENV DATABASE_URL="file:./prisma/dev.db"
 
 # Build
 RUN npx prisma generate
+RUN npx prisma db push --accept-data-loss
 RUN npm run build
 
 # Production Setup
