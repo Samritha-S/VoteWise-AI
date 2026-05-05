@@ -82,6 +82,7 @@ export const translations: Record<string, any> = {
       pollingTomorrow: "POLLING TOMORROW",
       boothAlert: "Double check your booth location and carry your Voter ID.",
       dayLeft: "Day Left",
+      daysLeft: "Days Left",
       checkBooth: "Check Booth Info",
       statusMessages: {
         completeProfile: "Complete your profile to get started",

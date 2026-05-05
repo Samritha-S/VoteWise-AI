@@ -32,15 +32,17 @@ export default function Dashboard() {
   
   const t = useTranslation(userData.language);
 
-  // Dynamic date calculation for "Tomorrow"
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const formattedDate = tomorrow.toLocaleDateString(userData.language === "English" ? "en-US" : "hi-IN", {
+  // Dynamic countdown calculation for May 6, 2026
+  const electionDate = new Date("2026-05-06T07:00:00");
+  const today = new Date();
+  const diffTime = electionDate.getTime() - today.getTime();
+  const daysLeft = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+  
+  const formattedDate = electionDate.toLocaleDateString(userData.language === "English" ? "en-US" : "hi-IN", {
     month: "long",
     day: "numeric",
     year: "numeric"
   });
-  const tomorrowDay = tomorrow.getDate();
 
   // "What Should I Do Next?" Engine Logic
   const nextAction = useMemo(() => {
@@ -139,8 +141,8 @@ export default function Dashboard() {
           <div className="flex items-center gap-6">
             <div className="flex flex-col items-center">
               <div className="w-20 h-24 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl flex flex-col items-center justify-center">
-                <span className="text-4xl font-black">{tomorrowDay}</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">{t.journey.dayLeft}</span>
+                <span className="text-4xl font-black">{daysLeft}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">{daysLeft === 1 ? t.journey.dayLeft : t.journey.daysLeft || "Days Left"}</span>
               </div>
             </div>
             <a 
