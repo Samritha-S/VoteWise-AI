@@ -1,14 +1,14 @@
-async function check() {
-  const apiKey = "AIzaSyDdj0BDoUH9ZM4JfKCQuXpIeqCkBg0EdUU";
-  const url = `https://generativelanguage.googleapis.com/v1/models?key=${apiKey}`;
-  
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+
+async function listModels() {
+  const genAI = new GoogleGenerativeAI('AIzaSyCmxovgzaRp7f_MujGfORnH3DMfwWKJLyY');
   try {
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log("AVAILABLE MODELS:", JSON.stringify(data, null, 2));
-  } catch (e) {
-    console.error("FETCH FAILED:", e.message);
+    const models = await genAI.listModels();
+    console.log('AVAILABLE MODELS:');
+    models.models.forEach(m => console.log(`- ${m.name}`));
+  } catch (error) {
+    console.error('FAILURE:', error.message);
   }
 }
 
-check();
+listModels();
