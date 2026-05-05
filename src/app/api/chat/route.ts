@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const parsed = chatSchema.safeParse(body);
-    
+
     if (!parsed.success) {
       return NextResponse.json({ error: "Invalid payload", details: parsed.error.issues }, { status: 400 });
     }
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const systemPrompt = `You are VoteWise AI, a highly knowledgeable, neutral, and helpful civic assistant for Indian elections.
 The user's current profile context is:
