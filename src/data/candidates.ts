@@ -119,7 +119,8 @@ export interface Candidate {
 
 export const CANDIDATES: Candidate[] = [
 
-    {id: 1,
+
+      {id: 1,
     name: "Narendra Modi",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Varanasi",
@@ -194,7 +195,7 @@ export const CANDIDATES: Candidate[] = [
       { headline: "Opposition criticizes economic policies.", source: "Indian Express", date: "March 2024", sentiment: "Negative" }
     ]
   },
-    {id: 2,
+      {id: 2,
     name: "Rahul Gandhi",
     party: "Indian National Congress (INC)",
     constituency: "Raebareli",
@@ -283,7 +284,7 @@ export const CANDIDATES: Candidate[] = [
       { headline: "BJP criticizes recent remarks on EVMs.", source: "Times of India", date: "April 2024", sentiment: "Negative" }
     ]
   },
-    {id: 3,
+      {id: 3,
     name: "Arvind Kejriwal",
     party: "Aam Aadmi Party (AAP)",
     constituency: "New Delhi",
@@ -352,7 +353,7 @@ export const CANDIDATES: Candidate[] = [
       billDetails: []
     }
   },
-    {id: 4,
+      {id: 4,
     name: "Mamata Banerjee",
     party: "All India Trinamool Congress (AITC)",
     constituency: "Bhabanipur",
@@ -413,7 +414,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Kanyashree Prakalpa", "Duare Sarkar"]
     }
   },
-    {id: 5,
+      {id: 5,
     name: "Amit Shah",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Gandhinagar",
@@ -481,7 +482,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "100%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Abrogation of Article 370", "Bhartiya Nyaya Sanhita"]
     }},
-    {id: 6,
+      {id: 6,
     name: "Akhilesh Yadav",
     party: "Samajwadi Party (SP)",
     constituency: "Kannauj",
@@ -543,7 +544,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "90%", source: "State Records", lastUpdated: "2024" },
       keyAchievements: ["Agra-Lucknow Expressway", "Laptop distribution scheme"]
     }},
-    {id: 7,
+      {id: 7,
     name: "Shashi Tharoor",
     party: "Indian National Congress (INC)",
     constituency: "Thiruvananthapuram",
@@ -613,7 +614,7 @@ export const CANDIDATES: Candidate[] = [
         "The Protection of Traditional Knowledge Bill, 2022"
       ]
     }},
-    {id: 8,
+      {id: 8,
     name: "Asaduddin Owaisi",
     party: "All India Majlis-e-Ittehadul Muslimeen (AIMIM)",
     constituency: "Hyderabad",
@@ -684,7 +685,7 @@ export const CANDIDATES: Candidate[] = [
         "The Minorities (Protection and Welfare) Bill, 2022"
       ]
     }},
-    {id: 9,
+      {id: 9,
     name: "Nitin Gadkari",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Nagpur",
@@ -752,7 +753,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "98%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Revolutionized National Highway network", "Mumbai-Pune Expressway", "Zojila Tunnel project"]
     }},
-    {id: 10,
+      {id: 10,
     name: "Tejasvi Surya",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Bangalore South",
@@ -816,7 +817,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Advocated for Namma Metro expansion", "Active in youth mobilization"]
     }},
   // TAMIL NADU
-    {id: 11,
+      {id: 11,
     name: "M. K. Stalin",
     party: "Dravida Munnetra Kazhagam (DMK)",
     constituency: "Kolathur",
@@ -879,7 +880,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Pudhumai Penn Scheme", "Makkalai Thedi Maruthuvam"]
     }
   },
-    {id: 12,
+      {id: 12,
     name: "Udhayanidhi Stalin",
     party: "Dravida Munnetra Kazhagam (DMK)",
     constituency: "Chepauk-Thiruvallikeni",
@@ -935,7 +936,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Revitalization of sports infrastructure", "Women's rights advocacy"]
     }},
-    {id: 13,
+      {id: 13,
     name: "K. Annamalai",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Coimbatore",
@@ -990,7 +991,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "N/A", source: "N/A", lastUpdated: "2024" },
       keyAchievements: ["Rapid expansion of BJP in Tamil Nadu", "High-impact 'En Mann En Makkal' padayatra", "Corruption exposes through 'DMK Files'"]
     }},
-    {id: 14,
+      {id: 14,
     name: "Kanimozhi Karunanidhi",
     party: "Dravida Munnetra Kazhagam (DMK)",
     constituency: "Thoothukkudi",
@@ -1047,7 +1048,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "92%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Promoted Thoothukkudi industrial corridor", "Advocated for women's reservation bill"]
     }},
-    {id: 15,
+      {id: 15,
     name: "Edappadi K. Palaniswami",
     party: "All India Anna Dravida Munnetra Kazhagam (AIADMK)",
     constituency: "Edappadi",
@@ -1102,7 +1103,7 @@ export const CANDIDATES: Candidate[] = [
     }},
   
   // UTTAR PRADESH
-    {id: 16,
+      {id: 16,
     name: "Yogi Adityanath",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Gorakhpur Urban",
@@ -1164,7 +1165,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Expressway expansions", "Defense Corridor"]
     }
   },
-    {id: 17,
+      {id: 17,
     name: "Keshav Prasad Maurya",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Sirathu",
@@ -1220,7 +1221,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["OBC mobilization", "Infrastructure development in rural sectors"]
     }},
-    {id: 18,
+      {id: 18,
     name: "Smriti Irani",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Amethi",
@@ -1278,7 +1279,7 @@ export const CANDIDATES: Candidate[] = [
     }},
 
   // WEST BENGAL
-    {id: 19,
+      {id: 19,
     name: "Abhishek Banerjee",
     party: "All India Trinamool Congress (AITC)",
     constituency: "Diamond Harbour",
@@ -1333,7 +1334,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "75%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Pioneered 'Diamond Harbour Model' for pandemic management", "Digitalization of party outreach"]
     }},
-    {id: 20,
+      {id: 20,
     name: "Suvendu Adhikari",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Nandigram",
@@ -1389,7 +1390,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Led the Nandigram movement (2007)", "Modernization of transport during ministerial tenure"]
     }},
-    {id: 21,
+      {id: 21,
     name: "Derek O'Brien",
     party: "All India Trinamool Congress (AITC)",
     constituency: "Rajya Sabha",
@@ -1444,7 +1445,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "95%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["Influential parliamentary debater", "Authored multiple books on Indian politics"]
     }},
-    {id: 22,
+      {id: 22,
     name: "Nusrat Jahan",
     party: "All India Trinamool Congress (AITC)",
     constituency: "Basirhat",
@@ -1500,7 +1501,7 @@ export const CANDIDATES: Candidate[] = [
     }},
 
   // MAHARASHTRA
-    {id: 23,
+      {id: 23,
     name: "Eknath Shinde",
     party: "Shiv Sena",
     constituency: "Kopri-Pachpakhadi",
@@ -1561,7 +1562,7 @@ export const CANDIDATES: Candidate[] = [
       keyAchievements: ["Mumbai Coastal Road push", "Samruddhi Mahamarg completion phase"]
     }
   },
-    {id: 24,
+      {id: 24,
     name: "Devendra Fadnavis",
     party: "Bharatiya Janata Party (BJP)",
     constituency: "Nagpur South West",
@@ -1617,7 +1618,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Mumbai Metro expansion", "Jalyukt Shivar water conservation", "Samruddhi Mahamarg planning"]
     }},
-    {id: 25,
+      {id: 25,
     name: "Ajit Pawar",
     party: "Nationalist Congress Party (NCP)",
     constituency: "Baramati",
@@ -1673,7 +1674,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Administrative overhaul", "Water management projects in Baramati"]
     }},
-    {id: 26,
+      {id: 26,
     name: "Uddhav Thackeray",
     party: "Shiv Sena (UBT)",
     constituency: "MLC",
@@ -1729,7 +1730,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "High", source: "State Budget", lastUpdated: "2024" },
       keyAchievements: ["Handled COVID-19 pandemic in Maharashtra", "Shiv Bhojan Thali scheme"]
     }},
-    {id: 27,
+      {id: 27,
     name: "Sharad Pawar",
     party: "Nationalist Congress Party (NCP - SP)",
     constituency: "Rajya Sabha",
@@ -1785,7 +1786,7 @@ export const CANDIDATES: Candidate[] = [
       fundsUtilized: { value: "98%", source: "MPLADS", lastUpdated: "2024" },
       keyAchievements: ["National level agrarian reforms", "Instrumental in major coalition building"]
     }},
-    {id: 28,
+      {id: 28,
     name: "Joseph Vijay",
     party: "Tamilaga Vettri Kazhagam (TVK)",
     constituency: "Data Not Available",
